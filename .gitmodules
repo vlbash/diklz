@@ -1,15 +1,3 @@
-[submodule "submodule/App.Core"]
-	path = submodule/App.Core
-	url = ../../dicom-hub/App.Core.git
-	branch = dev
-[submodule "submodule/css-template"]
-	path = submodule/css-template
-	url = ../../system-m/css-template.git
-	branch = dev
-[submodule "submodule/core.data"]
-	path = submodule/core.data
-	url = ../../dicom-hub/core.data.git
-        branch = dev
 [submodule "submodule/python.migrations"]
 	path = submodule/python.migrations
 	url  = ../../valBash/python.migrations.git
