@@ -1,0 +1,77 @@
+﻿@using Newtonsoft.Json
+@inject App.Core.Mvc.Helpers.SelectListHelper Sel
+@{
+    var type = ViewBag.appType;                                                 
+    ViewData["Title"] = "Протоколи засідань " + (type == "PRL" ? "(Виробництво)" : type == "IML" ? "(Імпорт)" : "(Торгівля)");
+}
+
+<div class="content-search-wrapper">
+    <partial name="_Searchform" />
+</div>
+
+<div class="results" id="results">
+
+</div>
+
+@section Scripts {
+    <script>
+        var searchFormControls = {
+            controlsConfig: [
+                {
+                    labelName: '№ протоколу',
+                    name: 'ProtocolNumber',
+                    type: 'text'
+                },
+                {
+                    labelName: 'Дата протоколу',
+                    name: 'ProtocolDate',
+                    type: 'datepicker'
+                },
+                {
+                    labelName: '№ наказу',
+                    name: 'OrderNumber',
+                    type: 'text'
+                },
+                {
+                    labelName: 'Дата наказу',
+                    name: 'OrderDate',
+                    type: 'datepicker'
+                },
+                {
+                    labelName: 'Стан протоколу',
+                    name: 'StatusName',
+                    type: 'select',
+                    selectOptions: @Html.Raw(JsonConvert.SerializeObject(Sel.Enum("ProtocolState")))
+                }
+            ]
+        };
+
+        var searchFormConfig = {
+            formConfig: {
+                formName: 'form0',
+                formDataAjaxUpdate: '#results',
+                formMethod: 'post',
+                controls: searchFormControls
+            },
+
+            presetFiltersUrl: {
+                //controllerName: '@ViewContext.RouteData.Values["Controller"].ToString()',
+                //actionName: '@ViewContext.RouteData.Values["Action"].ToString()'
+            },
+
+            mainInputConfig: {
+                labelName: 'Номер протоколу',
+                type: 'text',
+                mainInputLookUp: ['ProtocolNumber']
+            }
+        };
+
+
+        mt.createContentSearchForm(searchFormConfig);
+
+    </script>
+
+}
+
+
+

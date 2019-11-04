@@ -1,0 +1,98 @@
+src/App.WebHost/wwwroot/_template/node_modules
+src/App.WebHost/wwwroot/_template/_orig_layouts
+
+src/App.WebHost/node_modules
+src/App.WebHost/package-lock.json
+src/App.WebHost/vendor
+src/App.WebHost/wwwroot/vendor
+
+
+# Visual Studio 2015 cache/options directory
+.vs/
+# Visual Studio Code
+src/.vscode
+.vscode/
+# webStorm cache/options directory
+.idea/
+# User-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.dbmdl
+*.jfm
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+
+# Packages
+packages/
+# TestResults
+TestResults/
+
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+
+# Visual Studio cache files
+# files ending in .cache can be ignored
+*.[Cc]ache
+# but keep track of directories ending in .cache
+!*.[Cc]ache/
+
+# Typescript v1 declaration files
+
+# .NET Core
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+*_i.c
+*_p.c
+*_i.h
+*.ilk
+*.meta
+*.obj
+*.pch
+*.pdb
+*.pgc
+*.pgd
+*.rsp
+*.sbr
+*.tlb
+*.tli
+*.tlh
+*.tmp
+*.tmp_proj
+*.log
+*.vspscc
+*.vssscc
+.builds
+*.pidb
+*.svclog
+*.scc
+src/App.DB/App.DB.jfm
+/src/App.WebHost/wwwroot/img/icon-fonts/icomoon.eot
+/src/App.WebHost/wwwroot/img/icon-fonts/icomoon.svg
+/src/App.WebHost/wwwroot/img/icon-fonts/icomoon.ttf
+/src/App.WebHost/wwwroot/img/icon-fonts/icomoon.woff
+/src/App.WebHost/wwwroot/img/icons/arrow-left.svg
+/src/App.WebHost/wwwroot/img/icons/arrow-right.svg
+/src/App.WebHost/wwwroot/img/icons/icon-column-list.svg
+/src/App.WebHost/wwwroot/javascripts/main.js
+/src/App.WebHost/wwwroot/javascripts/main.min.js
+/src/App.WebHost/wwwroot/javascripts/vendor.min.js
+/src/App.WebHost/wwwroot/stylesheets/main.css
+/src/App.WebHost/wwwroot/stylesheets/main.min.css
+/src/DiklzAPI/logs/
+/src/NetWCFApp/NetWCFApp/JsonData/
+/src/NetWCFApp/NetWCFApp/JsonData/
+/src/App.WebHostBack/node_modules
+/src/App.WebHostBack/appsettings.Development.json
+/src/App.WebHost/appsettings.Development.json
+src/App\.WebHost/appsettings\.Development\.json
+/src/App.WebHostBack/appsettings.Development.json

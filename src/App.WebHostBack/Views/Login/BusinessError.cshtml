@@ -1,0 +1,19 @@
+﻿@model App.Business.Exceptions.BusinessRulesException;
+@{
+    ViewData["Title"] = "Виникла помилка доступа до данних";
+}
+
+
+<div class="content-item-holder">
+    <div class="content-item">
+        <div class="content-item-outer">
+            <div class="content-item-header">
+                <i class="icon-xlg icon-location-map-pin"></i>
+                <h2>Опис помилки</h2>
+            </div>
+            <div class="content-item-inner">
+                <p>Повідомлення помилки: @Model.Message</p>
+            </div>
+        </div>
+    </div>
+</div>

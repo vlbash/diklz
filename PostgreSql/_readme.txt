@@ -1,0 +1,2 @@
+usage: psqlConnect [DB name]
+

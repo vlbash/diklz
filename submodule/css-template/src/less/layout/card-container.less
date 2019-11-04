@@ -1,0 +1,129 @@
+.card {
+  &-wrapper {
+    display: flex;
+    position: relative;
+    flex-wrap: nowrap;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: auto;
+    min-height: 100%;
+    background-color: @bg-dark;
+  }
+
+  &-container {
+    position: relative;
+    z-index: 30;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: @card-md;
+    max-width: @card-md;
+    margin: @xxxl;
+    padding: calc(@lg*2) @lg;
+    border-radius: @border-radius;
+    background-color: @bg-light;
+    .shadow-down;
+
+    @media screen and (max-width: @screen-tablet) {
+      min-width: 80vw;
+      margin: 0;
+    }
+
+    @media screen and (max-width: @screen-mobile-big) {
+      min-width: 100vw;
+      min-height: 100vh;
+    }
+  }
+
+  &-header {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: @xxs;
+
+    h2 {
+      margin-bottom: @sm;
+      font-size: @font-size-h1;
+      font-weight: @semibold;
+    }
+
+    p {
+      margin-bottom: @sm;
+      text-align: center;
+
+      a {
+        font-size: @font-size-main;
+      }
+    }
+  }
+
+  &-form {
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 0;
+
+    .form-group {
+      margin-bottom: @sm;
+    }
+
+    .btn-holder {
+      width: 100%;
+      margin: @sm 0;
+    }
+
+    .btn {
+      width: 100%;
+      margin: 0;
+    }
+  }
+
+  &-link {
+    align-items: center;
+    justify-content: center;
+    margin-bottom: @sm;
+    color: @bg-secondary;
+
+    a {
+      display: inline-flex;
+      margin: @xxxs;
+      font-size: @font-size-small;
+      text-decoration: underline;
+    }
+  }
+
+  &-social-login {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: @sm 0;
+
+    p {
+      //font-size: @font-size-small;
+      margin-bottom: @sm;
+    }
+  }
+}
+
+.hero-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  background-color: @loader-bg;
+
+  &:before {
+    content: '';
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    opacity: .65;
+    background-image: url(../img/bg/bg-mis-1-min.jpg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    filter: blur(5px);
+  }
+}

@@ -1,0 +1,69 @@
+﻿@using App.Core.Business.Services
+@inject IUserInfoService UserIdentityInfo;
+@inject App.Core.Mvc.Helpers.SelectListHelper Sel
+
+@{
+    var userInfo = UserIdentityInfo.GetCurrentUserInfo();
+    var userName = userInfo?.LoginData.FirstOrDefault(x => x.Key == "Name").Value ?? "Ви не авторизовані";
+}
+<ul id="header-account-menu" class="header-account-menu menu-horizontal">
+    <li>
+        <div class="menu-item-wrapper">
+            <div class="menu-item">
+                <div class="menu-item-inner header-menu-user">
+                    <i class="icon icon-lg icon-user"></i>
+                    <span>@userName</span>
+                </div>
+            </div>
+            <ul class="menu-vertical">
+                <li>
+                    <div class="menu-item-wrapper" data-modal="modal-fs" data-tab-container-url=@Url.Action("ModalUser", "UserArea", new { Area = "", Id = userInfo.Id })>
+                        <div id="show-messenger" class="menu-item">
+                            <div class="menu-item-inner">
+                                <i class="icon icon-lg icon-person-edit-card"></i>
+                                <span>Кабінет користувача</span>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    @{
+                        <div class="menu-item-wrapper">
+                            <a class="menu-item" href="@Url.Action("Index", "Notification", new { Area = "NTF"})">
+                                <div class="menu-item-inner">
+                                    <i class="icon icon-lg icon-msg-envelope"></i>
+                                    <span>Сповіщення</span>
+                                </div>
+                            </a>
+                        </div>
+                    }
+                </li>
+                <li>
+                    @if (userInfo.LoginData.FirstOrDefault(x => x.Key == "Name").Value == null)
+                    {
+                        <div class="menu-item-wrapper">
+                            <a class="menu-item" href="/home/Info">
+                                <div class="menu-item-inner">
+                                    <i class="icon icon-lg icon-log-in"></i>
+                                    <span>Увійти</span>
+                                </div>
+                            </a>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="menu-item-wrapper">
+                            <a class="menu-item" href="/auth/LogOut">
+                                <div class="menu-item-inner">
+                                    <i class="icon icon-lg icon-log-out"></i>
+                                    <span>Вийти</span>
+                                </div>
+                            </a>
+                        </div>
+                    }
+
+                </li>
+            </ul>
+        </div>
+    </li>
+</ul>

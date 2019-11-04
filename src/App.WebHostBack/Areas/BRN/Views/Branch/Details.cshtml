@@ -1,0 +1,254 @@
+﻿@model App.Data.DTO.BRN.BranchDetailsDTO
+
+@{
+    ViewData["Title"] = "МПД";
+}
+
+@section Buttons{
+
+    @if (ViewBag.IsEditable)
+    {
+        <a class="content-item-btn icon-md icon-edit-line"
+           asp-action="Edit"
+           asp-route-id="@Model.Id"
+           asp-route-appId="@ViewBag.AppId"
+           data-tab-main
+           data-title="Редагувати проект"
+           data-tooltipleft='1'>
+        </a>
+    }
+}
+@section Scripts
+    {
+    <script>
+       var resultContainer = $('#content-tree'),
+            checkedItems = @Json.Serialize(Model.OperationListForm),
+            cheсkboxTemplate = @Json.Serialize(ViewBag.OperationListJson);
+
+        mt.buildContentTree(cheсkboxTemplate, checkedItems, resultContainer);
+    </script>
+}
+<div class="content-item-holder">
+    <div class="content-item">
+        <div class="content-item-header">
+            <i class="icon icon-xlg icon-building"></i>
+            <h2>Місце провадження діяльності</h2>
+        </div>
+        <div class="content-item-details">
+            <div class="content-item-inner content-details-wrapper col-2">
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.Name)</label>
+                        <p>@Html.DisplayFor(model => model.Name)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.EMail)</label>
+                        <p>@Html.DisplayFor(model => model.EMail)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.PhoneNumber)</label>
+                        <p>@Html.DisplayFor(model => model.PhoneNumber)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.FaxNumber)</label>
+                        <p>@Html.DisplayFor(model => model.FaxNumber)</p>
+                    </div>
+                </div>
+            </div>
+            <div class="content-item-inner content-details-wrapper col-2">
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.PostIndex)</label>
+                        <p>@Html.DisplayFor(model => model.PostIndex)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.Address)</label>
+                        <p>@Html.DisplayFor(model => model.Address)</p>
+                    </div>
+                </div>
+                @if (Model.AppType == "TRL")
+                {
+                    <div class="content-details">
+                        <div class="content-details-group">
+                            <label>@Html.DisplayNameFor(model => model.Lpz)</label>
+                            <p>@Html.DisplayFor(model => model.Lpz)</p>
+                        </div>
+                    </div>
+                }
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.AdressEng)</label>
+                        <p>@Html.DisplayFor(model => model.AdressEng)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.KoatuuCode)</label>
+                        <p>@Html.DisplayFor(model => model.KoatuuCode)</p>
+                    </div>
+                </div>
+            </div>
+
+            @if (Model.AppType == "PRL")
+            {
+                <div class="content-item-inner content-readonly">
+                    <div class="checkbox-group-details">
+                        <input class="checkbox" asp-for="PRLIsAvailiableProdSites" />
+                        <label readonly asp-for="PRLIsAvailiableProdSites"></label>
+                    </div>
+                    <div class="checkbox-group-details">
+                        <input class="checkbox" asp-for="PRLIsAvailiableQualityZone" />
+                        <label asp-for="PRLIsAvailiableQualityZone"></label>
+                    </div>
+                    <div class="checkbox-group-details">
+                        <input class="checkbox" asp-for="PRLIsAvailiableStorageZone" />
+                        <label asp-for="PRLIsAvailiableStorageZone"></label>
+                    </div>
+                    <div class="checkbox-group-details">
+                        <input class="checkbox" asp-for="PRLIsAvailiablePickupZone" />
+                        <label asp-for="PRLIsAvailiablePickupZone"></label>
+                    </div>
+                </div>
+                <div class="content-inner-header">
+                    Перелік лікарських форм та виробничих операцій, які заплановані до виробництва за певним місцем провадження діяльності та потребують ліцензування
+                </div>
+                <div id="content-tree" class="content-readonly content-tree"></div>
+            }
+            else if (Model.AppType == "TRL")
+            {
+                <div class="content-item-inner content-readonly content-details-wrapper col-2">
+                    <div class="content-details">
+                        <div class="content-details-group">
+                            <label>@Html.DisplayNameFor(model => model.TrlActivityTypeName)</label>
+                            <p>@Html.DisplayFor(model => model.TrlActivityTypeName)</p>
+                        </div>
+                    </div>
+                    <div class="content-details">
+                        <div class="content-details-group">
+                            <label>@Html.DisplayNameFor(model => model.BranchTypeName)</label>
+                            <p>@Html.DisplayFor(model => model.BranchTypeName)</p>
+                        </div>
+                    </div>
+                    <div class="content-details">
+
+                    </div>
+                    <div class="content-details">
+                        <div class="content-details-group">
+                            <label>@Html.DisplayNameFor(model => model.PharmacyName)</label>
+                            <p>@Html.DisplayFor(model => model.PharmacyName)</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-item-inner content-readonly content-details-wrapper col-2">
+                    <div class="content-details">
+                        <div class="content-details-group">
+                            <label>@Html.DisplayNameFor(model => model.TotalArea)</label>
+                            <p>@Html.DisplayFor(model => model.TotalArea)</p>
+                        </div>
+                    </div>
+                    <div class="content-details">
+                        <div class="content-details-group">
+                            <label>@Html.DisplayNameFor(model => model.AreaOfCommonPremises)</label>
+                            <p>@Html.DisplayFor(model => model.AreaOfCommonPremises)</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-item-inner content-readonly content-details-wrapper col-2">
+                    <div class="content-details">
+                        <div class="content-details-group">
+                            <label>@Html.DisplayNameFor(model => model.SpecialConditions)</label>
+                            <p>@Html.DisplayFor(model => model.SpecialConditions)</p>
+                        </div>
+                    </div>
+                    <div class="content-details">
+                        <div class="content-details-group">
+                            <label>@Html.DisplayNameFor(model => model.AsepticConditionsName)</label>
+                            <p>@Html.DisplayFor(model => model.AsepticConditionsName)</p>
+                        </div>
+                    </div>
+                </div>
+            }
+            else if (Model.AppType == "IML")
+            {
+                <div class="content-item-inner content-readonly">
+                    <div class="checkbox-group-details">
+                        <input class="checkbox" asp-for="IMLIsAvailiableStorageZone" />
+                        <label readonly asp-for="IMLIsAvailiableStorageZone"></label>
+                    </div>
+                    <div class="checkbox-group-details">
+                        <input class="checkbox" asp-for="IMLIsAvailiablePermitIssueZone" />
+                        <label asp-for="IMLIsAvailiablePermitIssueZone"></label>
+                    </div>
+                    <div class="checkbox-group-details">
+                        <input class="checkbox" asp-for="IMLIsAvailiableQuality" />
+                        <label asp-for="IMLIsAvailiableQuality"></label>
+                    </div>
+                </div>
+                @*<div class="content-details">
+                <div class="checkbox-group">
+                    <div class="checkbox-group-inner">
+                        <label>@Html.DisplayNameFor(model => model.IMLIsAvailiableStorageZone)</label>
+                        <input class="checkbox" value="@Html.DisplayFor(model => model.IMLIsAvailiableStorageZone)" />
+                    </div>
+                    <span class="checkbox-group-bar"></span>
+                </div>
+            </div>
+            <div class="content-details">
+                <div class="checkbox-group">
+                    <div class="checkbox-group-inner">
+                        <label>@Html.DisplayNameFor(model => model.IMLIsAvailiablePermitIssueZone)</label>
+                        <input class="checkbox" value="@Html.DisplayFor(model => model.IMLIsAvailiablePermitIssueZone)" />
+                    </div>
+                    <span class="checkbox-group-bar"></span>
+                </div>
+            </div>
+            <div class="content-details">
+                <div class="checkbox-group">
+                    <div class="checkbox-group-inner">
+                        <label>@Html.DisplayNameFor(model => model.IMLIsAvailiableQuality)</label>
+                        <input class="checkbox" value="@Html.DisplayFor(model => model.IMLIsAvailiableQuality)" />
+                    </div>
+                    <span class="checkbox-group-bar"></span>
+                </div>
+            </div>
+            <div class="content-details">
+                <div class="checkbox-group">
+                    <div class="checkbox-group-inner">
+                        <label>@Html.DisplayNameFor(model => model.IMLIsImportingFinished)</label>
+                        <input class="checkbox" value="@Html.DisplayFor(model => model.IMLIsImportingFinished)" />
+                    </div>
+                    <span class="checkbox-group-bar"></span>
+                </div>
+            </div>
+            <div class="content-details">
+                <div class="checkbox-group">
+                    <div class="checkbox-group-inner">
+                        <label>@Html.DisplayNameFor(model => model.IMLIsImportingInBulk)</label>
+                        <input class="checkbox" value="@Html.DisplayFor(model => model.IMLIsImportingInBulk)" />
+                    </div>
+                    <span class="checkbox-group-bar"></span>
+                </div>
+            </div>
+            <div class="content-details">
+                <div class="content-details-group">
+                    <label>@Html.DisplayNameFor(model => model.IMLAnotherActivity)</label>
+                    <p>@Html.DisplayFor(model => model.IMLAnotherActivity)</p>
+                </div>
+            </div>*@
+                @*<div class="content-inner-header">
+                Перелік лікарських форм та виробничих операцій, які заплановані до імпорту за певним місцем провадження діяльності та потребують ліцензування
+            </div>
+            <div id="content-tree" class="content-readonly content-tree"></div>*@
+            }
+
+        </div>
+    </div>
+</div>

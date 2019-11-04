@@ -1,0 +1,1 @@
+﻿select r.id, r.caption, r.is_active from sec_role as r

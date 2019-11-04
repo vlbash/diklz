@@ -1,0 +1,591 @@
+.icon {
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(sprite.svg);
+}
+.icon-arrow-left {
+  width: 32px;
+  height: 32px;
+  background-position: 0 0;
+}
+.icon-arrow-right {
+  width: 32px;
+  height: 32px;
+  background-position: -48px 0;
+}
+.icon-arrow-left-long {
+  width: 32px;
+  height: 32px;
+  background-position: -96px 0;
+}
+.icon-triangle-down {
+  width: 32px;
+  height: 32px;
+  background-position: -144px 0;
+}
+.icon-check {
+  width: 32px;
+  height: 32px;
+  background-position: -192px 0;
+}
+.icon-minus {
+  width: 32px;
+  height: 32px;
+  background-position: -240px 0;
+}
+.icon-add {
+  width: 32px;
+  height: 32px;
+  background-position: -288px 0;
+}
+.icon-close {
+  width: 32px;
+  height: 32px;
+  background-position: -336px 0;
+}
+.icon-trash {
+  width: 32px;
+  height: 32px;
+  background-position: -384px 0;
+}
+.icon-menu-vertical {
+  width: 32px;
+  height: 32px;
+  background-position: -432px 0;
+}
+.icon-magnifier {
+  width: 32px;
+  height: 32px;
+  background-position: -480px 0;
+}
+.icon-refresh {
+  width: 32px;
+  height: 32px;
+  background-position: -528px 0;
+}
+.icon-log-in {
+  width: 32px;
+  height: 32px;
+  background-position: -576px 0;
+}
+.icon-log-out {
+  width: 32px;
+  height: 32px;
+  background-position: -624px 0;
+}
+.icon-download {
+  width: 32px;
+  height: 32px;
+  background-position: -672px 0;
+}
+.icon-import-down {
+  width: 32px;
+  height: 32px;
+  background-position: -720px 0;
+}
+.icon-enter {
+  width: 32px;
+  height: 32px;
+  background-position: 0 -48px;
+}
+.icon-timeline {
+  width: 32px;
+  height: 32px;
+  background-position: -48px -48px;
+}
+.icon-timeline-pin {
+  width: 32px;
+  height: 32px;
+  background-position: -96px -48px;
+}
+.icon-chart-line-up {
+  width: 32px;
+  height: 32px;
+  background-position: -144px -48px;
+}
+.icon-cycle-rounded {
+  width: 32px;
+  height: 32px;
+  background-position: -192px -48px;
+}
+.icon-share {
+  width: 32px;
+  height: 32px;
+  background-position: -240px -48px;
+}
+.icon-pin {
+  width: 32px;
+  height: 32px;
+  background-position: -288px -48px;
+}
+.icon-time-pin {
+  width: 32px;
+  height: 32px;
+  background-position: -336px -48px;
+}
+.icon-location-map-pin {
+  width: 32px;
+  height: 32px;
+  background-position: -384px -48px;
+}
+.icon-map-magnifier {
+  width: 32px;
+  height: 32px;
+  background-position: -432px -48px;
+}
+.icon-map-path {
+  width: 32px;
+  height: 32px;
+  background-position: -480px -48px;
+}
+.icon-map-mark {
+  width: 32px;
+  height: 32px;
+  background-position: -528px -48px;
+}
+.icon-globe {
+  width: 32px;
+  height: 32px;
+  background-position: -576px -48px;
+}
+.icon-settings {
+  width: 32px;
+  height: 32px;
+  background-position: -624px -48px;
+}
+.icon-eye {
+  width: 32px;
+  height: 32px;
+  background-position: -672px -48px;
+}
+.icon-webcam {
+  width: 32px;
+  height: 32px;
+  background-position: -720px -48px;
+}
+.icon-network {
+  width: 32px;
+  height: 32px;
+  background-position: 0 -96px;
+}
+.icon-key-line {
+  width: 32px;
+  height: 32px;
+  background-position: -48px -96px;
+}
+.icon-key {
+  width: 32px;
+  height: 32px;
+  background-position: -96px -96px;
+}
+.icon-list {
+  width: 32px;
+  height: 32px;
+  background-position: -144px -96px;
+}
+.icon-columns {
+  width: 32px;
+  height: 32px;
+  background-position: -192px -96px;
+}
+.icon-task-check {
+  width: 32px;
+  height: 32px;
+  background-position: -240px -96px;
+}
+.icon-task-check-bold {
+  width: 32px;
+  height: 32px;
+  background-position: -288px -96px;
+}
+.icon-control-panel {
+  width: 32px;
+  height: 32px;
+  background-position: -336px -96px;
+}
+.icon-filter-panel {
+  width: 32px;
+  height: 32px;
+  background-position: -384px -96px;
+}
+.icon-filters {
+  width: 32px;
+  height: 32px;
+  background-position: -432px -96px;
+}
+.icon-filter-outline {
+  width: 32px;
+  height: 32px;
+  background-position: -480px -96px;
+}
+.icon-filter-remove-outline {
+  width: 32px;
+  height: 32px;
+  background-position: -528px -96px;
+}
+.icon-filter-remove {
+  width: 32px;
+  height: 32px;
+  background-position: -576px -96px;
+}
+.icon-edit {
+  width: 32px;
+  height: 32px;
+  background-position: -624px -96px;
+}
+.icon-edit-line {
+  width: 32px;
+  height: 32px;
+  background-position: -672px -96px;
+}
+.icon-edit-card {
+  width: 32px;
+  height: 32px;
+  background-position: -720px -96px;
+}
+.icon-edit-doc {
+  width: 32px;
+  height: 32px;
+  background-position: 0 -144px;
+}
+.icon-edit-list {
+  width: 32px;
+  height: 32px;
+  background-position: -48px -144px;
+}
+.icon-list-edit {
+  width: 32px;
+  height: 32px;
+  background-position: -96px -144px;
+}
+.icon-clipboard-data {
+  width: 32px;
+  height: 32px;
+  background-position: -144px -144px;
+}
+.icon-clipboard-time {
+  width: 32px;
+  height: 32px;
+  background-position: -192px -144px;
+}
+.icon-clipboard-file {
+  width: 32px;
+  height: 32px;
+  background-position: -240px -144px;
+}
+.icon-clipboard-chart-round {
+  width: 32px;
+  height: 32px;
+  background-position: -288px -144px;
+}
+.icon-clipboard-list {
+  width: 32px;
+  height: 32px;
+  background-position: -336px -144px;
+}
+.icon-clipboard-edit {
+  width: 32px;
+  height: 32px;
+  background-position: -384px -144px;
+}
+.icon-search-file {
+  width: 32px;
+  height: 32px;
+  background-position: -432px -144px;
+}
+.icon-refresh-file {
+  width: 32px;
+  height: 32px;
+  background-position: -480px -144px;
+}
+.icon-add-file {
+  width: 32px;
+  height: 32px;
+  background-position: -528px -144px;
+}
+.icon-list-check {
+  width: 32px;
+  height: 32px;
+  background-position: -576px -144px;
+}
+.icon-info-file {
+  width: 32px;
+  height: 32px;
+  background-position: -624px -144px;
+}
+.icon-files {
+  width: 32px;
+  height: 32px;
+  background-position: -672px -144px;
+}
+.icon-note-fill {
+  width: 32px;
+  height: 32px;
+  background-position: -720px -144px;
+}
+.icon-note {
+  width: 32px;
+  height: 32px;
+  background-position: 0 -192px;
+}
+.icon-doc-signed {
+  width: 32px;
+  height: 32px;
+  background-position: -48px -192px;
+}
+.icon-construction-map {
+  width: 32px;
+  height: 32px;
+  background-position: -96px -192px;
+}
+.icon-documents {
+  width: 32px;
+  height: 32px;
+  background-position: -144px -192px;
+}
+.icon-documents-case {
+  width: 32px;
+  height: 32px;
+  background-position: -192px -192px;
+}
+.icon-documents-archive {
+  width: 32px;
+  height: 32px;
+  background-position: -240px -192px;
+}
+.icon-documents-box {
+  width: 32px;
+  height: 32px;
+  background-position: -288px -192px;
+}
+.icon-paperclip {
+  width: 32px;
+  height: 32px;
+  background-position: -336px -192px;
+}
+.icon-box-opened {
+  width: 32px;
+  height: 32px;
+  background-position: -384px -192px;
+}
+.icon-data-cube {
+  width: 32px;
+  height: 32px;
+  background-position: -432px -192px;
+}
+.icon-list-paperclip {
+  width: 32px;
+  height: 32px;
+  background-position: -480px -192px;
+}
+.icon-lists-paperclip {
+  width: 32px;
+  height: 32px;
+  background-position: -528px -192px;
+}
+.icon-print {
+  width: 32px;
+  height: 32px;
+  background-position: -576px -192px;
+}
+.icon-save {
+  width: 32px;
+  height: 32px;
+  background-position: -624px -192px;
+}
+.icon-save-edit {
+  width: 32px;
+  height: 32px;
+  background-position: -672px -192px;
+}
+.icon-case {
+  width: 32px;
+  height: 32px;
+  background-position: -720px -192px;
+}
+.icon-case-box {
+  width: 32px;
+  height: 32px;
+  background-position: 0 -240px;
+}
+.icon-add-folder {
+  width: 32px;
+  height: 32px;
+  background-position: -48px -240px;
+}
+.icon-folder-delete {
+  width: 32px;
+  height: 32px;
+  background-position: -96px -240px;
+}
+.icon-folder-safe {
+  width: 32px;
+  height: 32px;
+  background-position: -144px -240px;
+}
+.icon-folder-search {
+  width: 32px;
+  height: 32px;
+  background-position: -192px -240px;
+}
+.icon-folder-mark {
+  width: 32px;
+  height: 32px;
+  background-position: -240px -240px;
+}
+.icon-calendar-check {
+  width: 32px;
+  height: 32px;
+  background-position: -288px -240px;
+}
+.icon-datepicker {
+  width: 32px;
+  height: 32px;
+  background-position: -336px -240px;
+}
+.icon-chart-arrow-top {
+  width: 32px;
+  height: 32px;
+  background-position: -384px -240px;
+}
+.icon-chart-round {
+  width: 32px;
+  height: 32px;
+  background-position: -432px -240px;
+}
+.icon-flip-chart-arrow {
+  width: 32px;
+  height: 32px;
+  background-position: -480px -240px;
+}
+.icon-flip-chart-list {
+  width: 32px;
+  height: 32px;
+  background-position: -528px -240px;
+}
+.icon-flip-chart-round {
+  width: 32px;
+  height: 32px;
+  background-position: -576px -240px;
+}
+.icon-user {
+  width: 32px;
+  height: 32px;
+  background-position: -624px -240px;
+}
+.icon-person-add {
+  width: 32px;
+  height: 32px;
+  background-position: -672px -240px;
+}
+.icon-pesron-rights {
+  width: 32px;
+  height: 32px;
+  background-position: -720px -240px;
+}
+.icon-persons-three {
+  width: 32px;
+  height: 32px;
+  background-position: 0 -288px;
+}
+.icon-person-edit {
+  width: 32px;
+  height: 32px;
+  background-position: -48px -288px;
+}
+.icon-person-edit-bold {
+  width: 32px;
+  height: 32px;
+  background-position: -96px -288px;
+}
+.icon-add-user {
+  width: 32px;
+  height: 32px;
+  background-position: -144px -288px;
+}
+.icon-admin {
+  width: 32px;
+  height: 32px;
+  background-position: -192px -288px;
+}
+.icon-user-table {
+  width: 32px;
+  height: 32px;
+  background-position: -240px -288px;
+}
+.icon-users {
+  width: 32px;
+  height: 32px;
+  background-position: -288px -288px;
+}
+.icon-user-security {
+  width: 32px;
+  height: 32px;
+  background-position: -336px -288px;
+}
+.icon-person-card {
+  width: 32px;
+  height: 32px;
+  background-position: -384px -288px;
+}
+.icon-person-edit-card {
+  width: 32px;
+  height: 32px;
+  background-position: -432px -288px;
+}
+.icon-person-card-check {
+  width: 32px;
+  height: 32px;
+  background-position: -480px -288px;
+}
+.icon-person-clip {
+  width: 32px;
+  height: 32px;
+  background-position: -528px -288px;
+}
+.icon-person-clip-card {
+  width: 32px;
+  height: 32px;
+  background-position: -576px -288px;
+}
+.icon-person-card-list {
+  width: 32px;
+  height: 32px;
+  background-position: -624px -288px;
+}
+.icon-card-list-box {
+  width: 32px;
+  height: 32px;
+  background-position: -672px -288px;
+}
+.icon-person-card-case {
+  width: 32px;
+  height: 32px;
+  background-position: -720px -288px;
+}
+.icon-docs-list {
+  width: 32px;
+  height: 32px;
+  background-position: 0 -336px;
+}
+.icon-doc-envelope {
+  width: 32px;
+  height: 32px;
+  background-position: -48px -336px;
+}
+.icon-msg-info {
+  width: 32px;
+  height: 32px;
+  background-position: -96px -336px;
+}
+.icon-msg-envelope {
+  width: 32px;
+  height: 32px;
+  background-position: -144px -336px;
+}
+.icon-msg-chat {
+  width: 32px;
+  height: 32px;
+  background-position: -192px -336px;
+}
+

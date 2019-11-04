@@ -1,0 +1,175 @@
+﻿@using App.Core.Business.Services.ObjectMapper
+@using App.Data.DTO.IML
+@model App.Data.DTO.IML.ImlLicenseDetailDTO
+@inject IObjectMapper objectMapper
+@{
+    ViewData["Title"] = "Лiцензiя з імпорту ЛЗ";
+    var app = new ImlAppDetailDTO();
+    Model.OrgName = !string.IsNullOrEmpty(Model.EDRPOU) ? Model.OrgDirector : Model.Name;
+    objectMapper.Map(Model, app);
+}
+
+<div class="content-item-holder">
+
+    <div class="content-item">
+        <div class="content-item-header">
+            <i class="icon icon-xlg icon-doc-signed"></i>
+            <h2>Інформація щодо ліцензії</h2>
+        </div>
+
+        <div class="content-item-details">
+            <div class="content-item-inner content-details-wrapper col-2">
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.LicenseDate)</label>
+                        <p>@Html.DisplayFor(model => model.LicenseDate)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.LicTypeName)</label>
+                        <p>@Html.DisplayFor(model => model.LicTypeName)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.LicStateName)</label>
+                        <p>@Html.DisplayFor(model => model.LicStateName)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.LicenseNumber)</label>
+                        <p>@Html.DisplayFor(model => model.LicenseNumber)</p>
+                    </div>
+                </div>
+            </div>
+            <h2>Рішення про видачу</h2>
+            <div class="content-item-inner content-details-wrapper col-2">
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.OrderNumber)</label>
+                        <p>@Html.DisplayFor(model => model.OrderNumber)</p>
+                    </div>
+                </div>
+
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.OrderDate)</label>
+                        <p>@Html.DisplayFor(model => model.OrderDate)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.AppSortEnum)</label>
+                        <p><a href="@Url.Action("Details", "Application", new {Area = "PRL", id = Model.FirstAppId})">@Html.DisplayFor(model => model.FirstAppSortName)</a></p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>Орган ліцензування</label>
+                        <p>Державна інспекція з контролю якості лікарських засобів Міністерства охорони здоров'я України</p>
+                    </div>
+                </div>
+            </div>
+            <h2>Перелік виробничих операцій</h2>
+            <div class="content-item-inner content-details-wrapper col-2">
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.MedicinalForms)</label>
+                        <p>@Html.Raw(Model.MedicinalForms)</p>
+                    </div>
+                </div>
+
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.ActiveIngredients)</label>
+                        <p>@Html.Raw(Model.ActiveIngredients)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.StorageForms)</label>
+                        <p>@Html.Raw(Model.StorageForms)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.ProdResearchDrugs)</label>
+                        <p>@Html.Raw(Model.ProdResearchDrugs)</p>
+                    </div>
+                </div>
+            </div>
+            <h2>Рішення про визнання недійсною, анулювання</h2>
+            <div class="content-item-inner content-details-wrapper col-2">
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.EndReasonText)</label>
+                        <p>@Html.DisplayFor(x => x.EndReasonText)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.EndOrderNumber)</label>
+                        <p>@Html.DisplayFor(x => x.EndOrderNumber)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.EndOrderDate)</label>
+                        <p>@Html.DisplayFor(x => x.EndOrderDate)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.EndOrderText)</label>
+                        <p>@Html.DisplayFor(x => x.EndOrderText)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @Html.Partial($"_ApplicationPartial", app)
+
+    <div class="content-item">
+        <div class="content-item-header">
+            <i class="icon icon-xlg icon-doc-envelope"></i>
+            <h2 id="imlMedicine">Інформація про лікарські засоби, що планує ввозити на територію України заявник</h2>
+        </div>
+        <div class="content-partial" id="imlMedicinePartial" data-tab-container-url="@Url.Action("LicenseMedList", "ImlMedicine", new { Area = "IML" })?ApplicationId=@Model.BaseApplicationId"></div>
+    </div>
+    
+    <div class="content-item">
+        <div class="content-item-header">
+            <i class="icon icon-xlg icon-timeline-pin"></i>
+            <h2>Місця провадження діяльності</h2>
+        </div>
+        <div class="content-partial" data-tab-container-url="@Url.Action("ListForLicense", "Branch", new {Area = "BRN"})?appId=@Model.BaseApplicationId"></div>
+    </div>
+
+    <div class="content-item">
+        <div class="content-item-header">
+            <i class="icon icon-xlg icon-admin"></i>
+            <h2>Уповноважені особи</h2>
+        </div>
+        <div class="content-partial" data-tab-container-url="@Url.Action("List", "AppAssignee", new {Area = "APP"})?appId=@Model.BaseApplicationId"></div>
+    </div>
+
+    <div class="content-item">
+        <div class="content-item-header">
+            <i class="icon icon-xlg icon-clipboard-list"></i>
+            <h2>Досьє</h2>
+        </div>
+        <div class="content-partial" data-tab-container-url="@Url.Action("List", "EDocument", new {Area = "DOC"})?appId=@Model.BaseApplicationId"></div>
+    </div>
+
+
+    <div class="content-item">
+        <div class="content-item-header">
+            <i class="icon icon-xlg icon-clipboard-list"></i>
+            <h2>Всі заяви, щодо ліцензії</h2>
+        </div>
+        @await Html.PartialAsync("LicensePartialView.cshtml", Model.ApplicationList)
+    </div>
+</div>

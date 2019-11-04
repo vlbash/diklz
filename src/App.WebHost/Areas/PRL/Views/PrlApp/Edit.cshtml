@@ -1,0 +1,397 @@
+﻿@model App.Data.DTO.PRL.PrlAppDetailDTO
+@inject App.Core.Mvc.Helpers.SelectListHelper Sel
+
+@{
+    var title = Model.AppSort == "AdditionalInfoToLicense" ? "Доповнення інформації по наявній ліцензії з" : Model.AppSort == "IncreaseToPRLApplication" ?
+        "Заява про розширення провадження виду господарської діяльності - Розширення до " : "Заява на отримання ліцензії з";
+    ViewData["Title"] = $"{title} виробництва (промислового)";
+    var isUpdateLicense = Model.AppSort == "AdditionalInfoToLicense";
+}
+
+@section Buttons {
+    <a class="content-item-btn btn-column-list icon-md icon-list" data-title="Змінити вигляд" data-tooltipleft='1'></a>
+}
+
+<div class="content-item-holder">
+    <div class="content-item">
+        <div class="content-item-header">
+
+            @if (Model.Id == Guid.Empty)
+            {<i class="icon-xlg icon-add-file"></i>
+                <h2>Створення заяви</h2>
+            }
+            else
+            { <i class="icon-xlg icon-edit-list"></i>
+                <h2>Редагування заяви</h2>
+            }
+
+        </div>
+
+        <form asp-action="Edit" class="content-item-edit">
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="OrganizationInfoId" />
+            <input type="hidden" asp-for="OrgUnitId" />
+            <input type="hidden" asp-for="AppSort" />
+            <input type="hidden" asp-for="AppType" />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="content-item-inner">
+                <div class="content-edit">
+                    <div class="input-group">
+                        <input asp-for="OrgName"
+                               class="input"
+                               autocomplete="off"
+                               readonly />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="OrgName"></label>
+                        <span asp-validation-for="OrgName"
+                              class="asp-validation"></span>
+                    </div>
+                </div>
+
+                <div class="content-edit">
+                    <div class="input-group">
+                        @if (Model.OrgType == App.Data.Enums.OrgType.Organization)
+                        {
+                            <input asp-for="EDRPOU"
+                                   class="input"
+                                   autocomplete="off"
+                                   readonly />
+                            <span class="input-group-bar"></span>
+                            <label asp-for="EDRPOU"></label>
+                            <span asp-validation-for="EDRPOU"
+                                  class="asp-validation"></span>
+                        }
+                        else
+                        {
+                            <input asp-for="INN"
+                                   class="input"
+                                   autocomplete="off"
+                                   readonly />
+                            <span class="input-group-bar"></span>
+                            <label asp-for="INN"></label>
+                            <span asp-validation-for="INN"
+                                  class="asp-validation"></span>
+                        }
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-item-inner">
+                <div class="content-edit">
+                    <div class="select-group">
+                        @if (isUpdateLicense)
+                        {
+                            <select asp-for="LegalFormType"
+                                    class="select"
+                                    asp-items='@Sel.Enum("CodeOrganizationalLegalForm")'
+                                    autocomplete="off"
+                                    readonly>
+                                <option></option><!-- добавить пустой option -->
+                            </select>
+                        }
+                        else
+                        {
+                            <select asp-for="LegalFormType"
+                                    class="select"
+                                    asp-items='@Sel.Enum("CodeOrganizationalLegalForm")'
+                                    autocomplete="off">
+                                <option></option><!-- добавить пустой option -->
+                            </select>
+                        }
+                        <label asp-for="LegalFormType"></label>
+                        <span asp-validation-for="LegalFormType" class="asp-validation"></span>
+                    </div>
+                </div>
+
+                <div class="content-edit">
+                    <div class="select-group">
+                        @if (isUpdateLicense)
+                        {
+                            <select asp-for="OwnershipType"
+                                    class="select"
+                                    asp-items='@Sel.Enum("OwnershipForm")'
+                                    autocomplete="off"
+                                    readonly>
+                                <option></option><!-- добавить пустой option -->
+                            </select>
+                        }
+                        else
+                        {
+                            <select asp-for="OwnershipType"
+                                    class="select"
+                                    asp-items='@Sel.Enum("OwnershipForm")'
+                                    autocomplete="off">
+                                <option></option><!-- добавить пустой option -->
+                            </select>
+                        }
+                        <label asp-for="OwnershipType"></label>
+                        <span asp-validation-for="OwnershipType" class="asp-validation"></span>
+                    </div>
+                </div>
+
+                @if (Model.OrgType != App.Data.Enums.OrgType.Organization)
+                {
+                    <div class="content-edit">
+                        <div class="input-group">
+                            <input asp-for="PassportSerial"
+                                   class="input"
+                                   autocomplete="off" />
+                            <span class="input-group-bar"></span>
+                            <label asp-for="PassportSerial"></label>
+                            <span asp-validation-for="PassportSerial"
+                                  class="asp-validation"></span>
+                        </div>
+                    </div>
+                    <div class="content-edit">
+                        <div class="input-group">
+                            <input asp-for="PassportNumber"
+                                   class="input"
+                                   autocomplete="off" />
+                            <span class="input-group-bar"></span>
+                            <label asp-for="PassportNumber"></label>
+                            <span asp-validation-for="PassportNumber"
+                                  class="asp-validation"></span>
+                        </div>
+                    </div>
+                }
+                @*<div class="content-edit">
+                        <div class="input-group">
+                            <input asp-for="PostIndex"
+                                   validate
+                                   validate-not-empty
+                                   class="input"
+                                   autocomplete="off" />
+                            <span class="input-group-bar"></span>
+                            <label asp-for="PostIndex"></label>
+                            <span class="js-validation"></span>
+                            <span asp-validation-for="PostIndex"
+                                  class="asp-validation"></span>
+                        </div>
+                    </div>*@
+
+
+                @if (Model.OrgType != App.Data.Enums.OrgType.Organization)
+                {
+
+                    <div class="content-edit">
+                        <div class="datepicker-group input-group">
+                            <input asp-for="PassportDate"
+                                   class="input datepicker"
+                                   autocomplete="off"
+                                   type="text" />
+                            <span class="input-group-bar"></span>
+                            <label asp-for="PassportDate"></label>
+                            <span asp-validation-for="PassportDate" class="asp-validation"></span>
+                        </div>
+                    </div>
+
+                    <div class="content-edit">
+                        <div class="input-group">
+                            <input asp-for="PassportIssueUnit"
+                                   class="input"
+                                   autocomplete="off" />
+                            <span class="input-group-bar"></span>
+                            <label asp-for="PassportIssueUnit"></label>
+                            <span asp-validation-for="PassportIssueUnit"
+                                  class="asp-validation"></span>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="content-edit">
+                        <div class="input-group">
+                            @if (isUpdateLicense)
+                            {
+                                <input asp-for="OrgDirector"
+                                       class="input"
+                                       autocomplete="off"
+                                       readonly />
+                            }
+                            else
+                            {
+                                <input asp-for="OrgDirector"
+                                       class="input"
+                                       autocomplete="off" />
+                            }
+                            <span class="input-group-bar"></span>
+                            <label asp-for="OrgDirector">Прізвище, ім’я, по батькові керівника юридичної особи</label>
+                            <span asp-validation-for="OrgDirector"
+                                  class="asp-validation"></span>
+                        </div>
+                    </div>
+                }
+                <div class="content-edit">
+                    <div class="input-group">
+                        <input asp-for="EMail"
+                               class="input"
+                               autocomplete="off" />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="EMail"></label>
+                        <span asp-validation-for="EMail"
+                              class="asp-validation"></span>
+                    </div>
+                </div>
+                <div class="content-edit">
+                    <div class="input-group">
+                        <input asp-for="PhoneNumber"
+                               class="input phone"
+                               autocomplete="nope" />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="PhoneNumber"></label>
+                        <span asp-validation-for="PhoneNumber"
+                              class="asp-validation"></span>
+                    </div>
+                </div>
+                <div class="content-edit">
+                    <div class="input-group">
+                        <input asp-for="FaxNumber"
+                               class="input phone"
+                               autocomplete="off" />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="FaxNumber"></label>
+                        <span asp-validation-for="FaxNumber"
+                              class="asp-validation"></span>
+                    </div>
+                </div>
+                <!--ATU START-->
+                <!--ATU END-->
+            </div>
+
+            <div class="content-item-inner">
+                <input type="hidden" asp-for="AddressId" />
+                <input type="hidden" id="OldCityName" />
+                <input type="hidden" id="OldStreetName" />
+                <div class="content-edit content-edit">
+                    <div class="input-group">
+                        <input class="input" id="CityName"
+                               autocomplete-allowcreate
+                               autocomplete-idinput-name="CityId"
+                               autocomplete-init-id="CityId"
+                               autocomplete-url="@Url.Action("AutoCompleteDistrictFull", "Atu", new {Area = ""})"
+                               autocomplete-params="RegionId"
+                               autocomplete-onselect="OnSelectCity(item)"
+                               value="@Model.CityFullName" />
+                        <span class="input-group-bar"></span>
+                        <input asp-for="CityId" type="hidden" />
+                        <label>Населений пункт або знайти за допомогою коду КОАТУУ</label>
+                        <span class="asp-validation"></span>
+                    </div>
+                </div>
+
+                <div class="content-edit content-edit">
+                    <div class="input-group">
+                        <input asp-for="Building"
+                               class="input"
+                               autocomplete="off" />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="Building">@Html.DisplayNameFor(p => p.Building)</label>
+                        <span class="asp-validation"></span>
+                    </div>
+                </div>
+
+                <div class="content-edit content-edit">
+                    <div class="input-group">
+                        <input class="input" asp-for="StreetName"
+                               autocomplete-allowcreate
+                               autocomplete-idinput-name="StreetId"
+                               autocomplete-init-id="StreetId"
+                               autocomplete-url="@Url.Action("AutoCompleteStreet", "Atu", new {Area = ""})"
+                               autocomplete-params="CityId"
+                               autocomplete-onselect="OnSelectStreet(item)" />
+                        <span class="input-group-bar"></span>
+                        <input asp-for="StreetId" type="hidden" />
+                        <label>Вулиця</label>
+                        <span class="asp-validation"></span>
+                    </div>
+                    <button id="btn-street"
+                            type="button"
+                            data-modal="modal-center"
+                            data-tab-container-url="@Url.Action("AtuModalStreet", "Atu", new { Area = "" })"
+                            class="btn btn-secondary btn-fill btn-square btn-tiny icon-sm icon-add"></button>
+                </div>
+
+                <div class="content-edit content-edit">
+                    <div class="input-group">
+                        <input asp-for="PostIndex"
+                               class="input"
+                               autocomplete="off" />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="PostIndex">@Html.DisplayNameFor(p => p.PostIndex)</label>
+                        <span class="asp-validation"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-item-inner">
+                <div class="content-edit">
+                    <div class="input-group">
+                        <input asp-for="NationalAccount"
+                               class="input"
+                               autocomplete="off" />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="NationalAccount"></label>
+                        <span asp-validation-for="NationalAccount"
+                              class="asp-validation"></span>
+                    </div>
+                </div>
+                <div class="content-edit">
+                    <div class="input-group">
+                        <input asp-for="NationalBankRequisites"
+                               class="input"
+                               autocomplete="off" />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="NationalBankRequisites"></label>
+                        <span asp-validation-for="NationalBankRequisites"
+                              class="asp-validation"></span>
+                    </div>
+                </div>
+                <div class="content-edit">
+                    <div class="input-group">
+                        <input asp-for="InternationalAccount"
+                               class="input"
+                               autocomplete="off" />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="InternationalAccount"></label>
+                        <span asp-validation-for="InternationalAccount"
+                              class="asp-validation"></span>
+                    </div>
+                </div>
+                <div class="content-edit">
+                    <div class="input-group">
+                        <input asp-for="InternationalBankRequisites"
+                               class="input"
+                               autocomplete="off" />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="InternationalBankRequisites"></label>
+                        <span asp-validation-for="InternationalBankRequisites"
+                              class="asp-validation"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="content-item-inner">
+                <div class="input-group">
+                    <input asp-for="Duns"
+                           class="input"
+                           autocomplete="off" />
+                    <span class="input-group-bar"></span>
+                    <label asp-for="Duns"></label>
+                    <span asp-validation-for="Duns"
+                          class="asp-validation"></span>
+                    <span class="input-desc">(ідентифікаційний номер дільниці, наприклад, номер D-U-N-S дільниці (Data Universal Numbering System - дані універсальної номерної системи) - унікальний ідентифікаційний номер, наданий Dun&Bradstreet, або дані GPS (Global Positioning System - глобальна система навігації та визначення розташування), або номер іншої системи визначення географічного розташування)</span>
+                </div>
+            </div>
+            <div class="content-submit-holder btn-holder btn-holder-right">
+                <a href="#" onclick="mt.goStepBack()" class="btn btn-text btn-danger">Відмінити</a>
+                <input type="submit" value="Зберегти" class="btn btn-secondary btn-fill" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script src="~/custom_js/atu-address.js"></script>
+}

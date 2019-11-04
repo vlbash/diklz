@@ -1,0 +1,524 @@
+#iit div, #iit span, #iit applet, #iit object, #iit iframe,
+#iit h1, #iit h2, #iit h3, #iit h4, #iit h5, #iit h6, #iit p, #iit blockquote, #iit pre,
+#iit a, #iit abbr, #iit acronym, #iit address, #iit big, #iit cite, #iit code,
+#iit del, #iit dfn, #iit em, #iit font, #iit ins, #iit kbd, #iit q, #iit s, #iit samp,
+#iit small, #iit strike, #iit strong, #iit sub, #iit sup, #iit tt, #iit var,
+#iit b, #iit u, #iit i, #iit center,
+#iit dl, #iit dt, #iit dd, #iit ol, #iit ul, #iit li,
+#iit fieldset, #iit form, #iit label, #iit legend,
+#iit caption {
+    margin: 0;
+    padding: 0;
+    font-size: 100%;
+    vertical-align: top;
+    background: transparent;
+
+}
+/*table, tbody, tfoot, thead, tr, th, td */
+    #iit input,  
+    #iit textarea,
+    #iit select{
+        border: 1px solid #ccc;
+        padding: 5px;
+    }
+    #iit html {
+        margin: 0;
+        padding: 0;
+        z-index: 0;
+        background-color: #FFFFFF;
+        height: 100%;
+        display: inline;
+    }
+
+#iit body {
+    /*font-family: Arial, Helvetica, sans-serif;*/
+    font-size: 13px;
+    margin: 0px;
+    color: rgb(0, 0, 0);
+    min-width: 680px;
+    font-size-adjust: none;
+    font-stretch: normal;
+    line-height: 12px;
+    text-decoration: none;
+    font-weight: normal;
+    text-align: center;
+}
+#iit table div{
+    display: block;
+}
+#iit a {
+    color: #062C57;
+    text-decoration: underline;
+}
+
+#iit a:hover {
+    color: #062C57;
+    text-decoration: underline;
+}
+
+#iit a:visited {
+    color: #062C57;
+    text-decoration: underline;
+}
+
+#iit a img {
+    border: none;
+}
+
+#iit input {
+    vertical-align: middle;
+    font-size-adjust: none;
+    font-stretch: normal;
+}
+
+#iit textarea {
+    vertical-align: middle;
+    font-size-adjust: none;
+    font-stretch: normal;
+}
+
+#iit select {
+    vertical-align: middle;
+    font-size-adjust: none;
+    font-stretch: normal;
+}
+
+#iit q {
+    quotes: none;
+}
+
+#iit q::before {
+    content: "";
+}
+
+#iit q::after {
+    content: "";
+}
+
+#iit ul {
+    /*list-style-image: url(../Images/ul.gif);*/
+    list-style: square; /* outside;*/
+    padding: 2px 0px 0px 15px;
+    margin: 2px 0px 2px 15px;
+    font-size: 12px;
+}
+
+#iit ul li {
+    padding: 3px 0px 0px 0px;
+    color: #0C2349;
+}
+
+#iit td.header {
+    color: #0C2349;
+    font-size: 21px;
+    font-weight: bold;
+    line-height: 25px;
+    background: url(Images/Keys.png) top left no-repeat;
+}
+
+#iit .header35 {
+    color: #0C2349;
+    font-size: 25px;
+    font-weight: bold;
+    line-height: 27px;
+}
+
+#iit .header13 {
+    color: #0C2349;
+    font-size: 19px;
+    font-weight: bold;
+    line-height: 22px;
+}
+
+#iit .header12 {
+    color: #0C2349;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 16px;
+}
+
+#iit td.footer {
+    min-height: 80px;
+    padding: 0px 0px 0px 0px;
+}
+
+#iit td.iitfooter {
+    background: #FFFFFF url(Images/iitfooter.jpg) no-repeat top left;
+    padding: 0px 0px 33px 0px;
+}
+
+#iit td.shadow {
+    background: url(Images/shadow.gif) repeat-x;
+    background-color: #FFFFFF;
+    height: 8px;
+}
+
+/*----------------------------------------------------------------------------*/
+
+#iit {
+    margin: 0 auto;
+    /*width: 680px;*/
+    width: 100%;
+    text-align: left;
+    position: relative;
+    z-index: 10;
+}
+
+#iit_background {
+	position:absolute;
+	height: 100%;
+	width: 100%;
+	min-width:680px;
+	top:128px;
+	z-index:1;
+}
+
+#iit_gradient_line1 {
+	transform-origin: 0 100%;
+	height: 360px;
+	background:linear-gradient(to right, rgba(3, 35, 74, 1), rgba(3, 67, 129, 1)) no-repeat;
+	background: -webkit-linear-gradient(left, rgba(3, 35, 74, 1), rgba(3, 67, 129, 1)) no-repeat;
+	background-size:100% 360px;
+}
+
+#iit_gradient_shadow_line1 {
+	transform-origin: 0 100%;
+	height: 360px;
+	background:linear-gradient(to bottom, rgba(255, 255, 255, 0.1), transparent) no-repeat;
+	background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.1), transparent) no-repeat;
+	background-size:100% 360px;
+}
+
+/*----------------------------------------------------------------------------*/
+
+#iit_line0 {
+    font-size: 14px;
+    text-decoration: none;
+    font-weight: normal;
+    /*width:680px;*/
+    height: 128px;
+    display: block;
+    margin: 0px;
+    top: 0px;
+    padding: 0px;
+    overflow: hidden;
+    z-index: 100;
+}
+
+/*----------------------------------------------------------------------------*/
+
+#iit_line1 {
+    font-size: 14px;
+    text-decoration: none;
+    font-weight: normal;
+    /*width:680px;*/
+    height: 100%;
+    display: block;
+    /*background-size: 100% 360px;
+    margin: 0px;
+    top: 0px;
+    padding: 0px;*/
+    overflow: hidden;
+    z-index: 100;
+    text-align: left;
+}
+
+#iit_line1 .headerwhite1 {
+	color:#333;
+	font-size:18px;
+	line-height:24px;
+	text-decoration:none;
+	text-align:left;
+    margin-bottom: 24px;
+}
+
+#iit_line1 output {
+	line-height: 16px;
+	display:inline-table;
+}
+
+#iit_line1 output ul {
+	padding-top: 0px;
+	margin: 0px;
+}
+
+#iit_line1 .styled-select1 select {
+	background: transparent;
+	width: 300px;
+	border: 0;
+	border-radius: 0;
+	-webkit-appearance: none;
+	overflow:hidden;
+}
+
+    #iit_line1 .styled-select1 {
+        width: 300px;
+        /*height: 18px;*/
+        overflow: hidden;
+        padding: 0px 0px 0px 0px;
+        border: 1px solid;
+    }
+
+div.SeparatorLine {
+    transform-origin: 0 100%;
+    height: 0px;
+    border-top: 1px solid #0C234B;
+    border-bottom: 1px solid #FFFFFF;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+div.SmoothGradient{
+	transform-origin: 0 100%;
+	height: 4px;
+	margin-bottom:10px;
+	background:linear-gradient(to bottom, rgba(255, 255, 255, 0.1), transparent);
+	background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.1), transparent);
+}
+
+href {
+	color: white;
+}
+
+.MainPageMenuBlock {
+	width:185px;
+}
+.MainPageMenuContent {
+    background-color: #FFFFFF;
+    min-width: 455px;
+    /*min-height: 800px;
+    margin: 4px 0px 0px 0px;
+	padding-left:20px;
+	padding-right:20px;*/
+}
+.SelectFile {
+	width:99%;
+}
+#MainPageHeaderTitle {
+	margin-bottom:0px;
+	z-index:100;
+}
+
+ul.MainPageMenuTabs {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+	font-size:15px;
+	font-weight:bold;
+	color:#FFFFFF;
+}
+
+ul.MainPageMenuTabs li a {
+	text-decoration: none;
+	display: block;
+	padding: 12px;
+	color:#FFFFFF;
+}
+
+.MainPageMenuTabs li.MainPageMenuTab {
+	height:49px;
+	margin:3px 0px 0px 0px;
+	background:url('Images/ButtonTab.png') no-repeat;
+	background-size:100%;
+	color:#FFFFFF;
+}
+
+.MainPageMenuTabs li.MainPageMenuTab a {
+	display:block;
+	background-size:100%;
+	text-decoration:none;
+	color:#FFFFFF;
+}
+
+.MainPageMenuTabs li.MainPageMenuTab a:hover {
+	background-size:100%;
+	text-decoration:underline;
+	color:#FFFFFF;
+}
+
+.MainPageMenuTabs li.MainPageMenuSelectedTab {
+	height:49px;
+	margin:3px 0px 0px 0px;
+	background:url('Images/ButtonTabLight.png') no-repeat;
+	background-size:100%;
+	color:#0C234B;
+}
+
+.MainPageMenuTabs li.MainPageMenuSelectedTab A {
+	display:block;
+	color:#0C234B;
+}
+
+.MainPageMenuPanel {
+	display:none;
+}
+
+.MainPageMenuPanelSelected {
+	display:block;
+}
+
+.ImageInTextImageContainer {
+	float: left;
+}
+
+.TextInTextImageContainer {
+    /*display: block;
+	vertical-align:text-top;
+	line-height:normal;
+	padding-left: 18px;
+        */
+    margin: 0 0 6px 0;
+}
+
+.SubMenuContent {
+	padding-left: 18px;
+	padding-right: 18px;
+	padding-top: 1em;
+}
+
+.TextHeaderH3 {
+	font-size:18px;
+	font-weight:bold;
+	color:#0C234B;
+	margin:0px;
+	padding:10px 0px 0px 0px;
+}
+
+.TextLabel {
+	line-height: 16px;
+    margin-bottom:6px;
+}
+
+.TextEdit {
+	width:99%;
+	margin-bottom: 1em;
+}
+
+.TextArea {
+	min-height:5em;
+	width:99%;
+	resize:vertical; 
+}
+
+.PasswordEdit {
+}
+
+.Checkbox {
+}
+
+/*----------------------------------------------------------------------------*/
+
+.FileDropZoneMessage {
+	padding: 15px 25px;
+	text-align:center;
+}
+
+.FileDropZoneBorder {
+	border: 2px dashed #0C234B;
+	border-radius: 5px;
+	color: #0C234B;
+	height: 145px;
+	margin:15px;
+}
+
+.FileDropZone {
+	margin-top: 3px;
+	border: 1px solid #0C234B;
+}
+
+/*----------------------------------------------------------------------------*/
+
+#iit_line1 #buttonitem {
+    /*pointer-events: none;*/
+    vertical-align: top;
+    text-align: center;
+    width: 100%;
+    height: 32px;
+
+    /*overflow: hidden;*/
+
+}
+
+#iit_line1 #buttonitem a {
+	display: block;
+	padding: 6px 7px 14px 5px;
+	color: #FFFFFF;
+	text-decoration:none;
+	background:url(Images/Button.png) no-repeat;
+	background-size: 100% 100%;
+}
+
+#iit_line1 #buttonitem a:hover {
+	padding: 6px 7px 14px 5px;
+	color: #FFFFFF;
+	text-decoration:none;
+	background:url(Images/ButtonHover.png) no-repeat;
+	background-size: 100% 100%;
+}
+
+#PKeyFileName {
+    cursor: pointer;
+    height: auto;
+    padding: 8px 12px;
+    margin-bottom: 32px;
+    pointer-events: none;
+}
+#PKeyPassword{
+    margin-bottom: 32px;
+}
+
+#PKeyFileInput {
+    opacity: 0;
+    visibility: hidden;
+    width: 0;
+    height: 0;
+    padding: 0;
+    margin: 0;
+}
+#PKeySelectFileButton{
+    height:100%;
+    width: 100%;
+}
+#PKeySelectPanel{
+    margin-bottom: 32px;
+}
+#PKeyReadButton,
+#SignDataButton {
+    height: 100%;
+    width: calc(100% - 4px);
+    align-self: center;
+    margin-left: 4px;
+}
+#iit1 .input-group{
+    margin: 0;
+}
+div.SeparatorLine{
+    margin-bottom: 16px;
+}
+.TextInTextImageContainer{
+    align-items:center;
+}
+#MainPageMenuPKeyPage{
+    margin-top: 16px;
+}
+#ChoosePKFileText + div.SeparatorLine{
+    margin-bottom: 24px;
+}
+#iit1 .info-item span:first-child {
+    margin-right: 6px;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+#PKeyShowCertsInfoButton,
+#PKeyShowOwnerInfoButton {
+    height: 100%;
+    width: calc(100% - 16px);
+    align-self: center;
+    margin: 0 8px;
+}
+#iit1 #status {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+/*----------------------------------------------------------------------------*/

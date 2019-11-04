@@ -1,0 +1,62 @@
+﻿@{
+    ViewData["Title"] = "Створення нової заяви щодо провадження діяльності з імпорту лікарських засобів";
+}
+
+<div class="content-item-holder">
+    <div class="content-item">
+        <div class="content-item-outer">
+            <div class="content-item-header">
+                <i class="icon-huge icon-person-clip"></i>
+                <h2>Назва організації: @ViewBag.OrgName</h2>
+                <h2>ІНН\ЄДРПОУ: @ViewBag.Number</h2>
+            </div>
+        </div>
+    </div>
+    <div class="accordion not-active">
+        <div class="accordion-item">
+            <div class="accordion-item-header">Заяви щодо провадження діяльності з імпорту лікарських засобів (крім активних фармацевтичних інгредієнтів)</div>
+            <div class="accordion-item-content">
+                <a class="accordion-content-inner accordion-content-link" href="@(ViewBag.ImlLicense != null ? "#" : Url.Action("Edit", "Application", new {Area = "Iml", orgId = ViewBag.OrgId}))">
+                    Заява про отримання ліцензії на провадження діяльності з імпорту лікарських засобів
+                    <span>Додаток 2</span>
+                </a>
+                @*<a class="accordion-content-inner accordion-content-link" href="#">
+                    Заява на переоформлення ліцензії
+                    <span>Додаток 14</span>
+                </a>*@
+                <a class="accordion-content-inner accordion-content-link" href="@(ViewBag.ImlLicense == null ? "#" : Url.Action("CreateOnOpen", "ImlAppAlt", new {Area = "IML", sort = "AddBranchApplication", orgId = ViewBag.OrgId}))">
+                    Заява на створення місць провадження діяльності
+                    <span>Додаток 13</span>
+                </a>
+                <a class="accordion-content-inner accordion-content-link" href="@(ViewBag.ImlLicense == null ? "#" : Url.Action("CreateOnOpen", "ImlAppAlt", new {Area = "IML", sort = "RemBranchApplication", orgId = ViewBag.OrgId}))">
+                    Заява на закриття місць провадження діяльності
+                    <span>Додаток 17</span>
+                </a>
+                <a class="accordion-content-inner accordion-content-link" href="@(ViewBag.ImlLicense == null ? "#" : Url.Action("CreateOnOpen", "ImlAppAlt", new {Area = "IML", sort = "ChangeAutPersonApplication", orgId = ViewBag.OrgId}))">
+                    Заява про зміну інформації у додатку до ліцензії - зміна уповноважених осіб
+                    <span>Додаток 19</span>
+                </a>
+                <a class="accordion-content-inner accordion-content-link" href="@(ViewBag.ImlLicense == null ? "#" : Url.Action("CreateOnOpen", "ImlAppAlt", new {Area = "IML", sort = "ChangeDrugList", orgId = ViewBag.OrgId}))">
+                    Заява про зміну (доповнення) переліку лікарських засобів, що імпортує ліцензіат
+                    <span>Додаток 19</span>
+                </a>
+                <a class="accordion-content-inner accordion-content-link" href="@(ViewBag.ImlLicense == null ? "#" : Url.Action("CreateOnOpen", "ImlAppAlt", new {Area = "IML", sort = "ReplacementDrugList", orgId = ViewBag.OrgId}))">
+                    Заява про заміну переліку лікарських засобів, що імпортує ліцензіат
+                    <span>Додаток 19</span>
+                </a>
+                @*<a class="accordion-content-inner accordion-content-link" href="#">
+                    Заява про звуження провадження виду господарської діяльності
+                    <span>Додаток 20</span>
+                </a>
+                <a class="accordion-content-inner accordion-content-link" href="#">
+                    Заява про розширення провадження виду господарської діяльності
+                    <span>Додаток 21</span>
+                </a>*@
+                <a class="accordion-content-inner accordion-content-link" href="@(ViewBag.ImlLicense == null ? "#" : Url.Action("CreateOnOpen", "ImlAppAlt", new {Area = "IML", sort = "CancelLicenseApplication", orgId = ViewBag.OrgId}))">
+                    Заява про анулювання ліцензії
+                    <span>Додаток 22</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,119 @@
+﻿@model IEnumerable<App.Data.DTO.PRL.PrlContractorListDTO>
+
+<div class="content-partial-header">
+    @if (ViewBag.IsAddable == true)
+    {
+    <a class="content-item-btn data-tab icon-sm icon-add"
+       data-tab
+       asp-area="PRL"
+       asp-action="Edit"
+       asp-route-sort="@ViewBag.AppSort"
+       asp-controller="PrlContractor"
+       asp-route-appId="@ViewBag.appId"
+       data-title="Додати контрактного контрагента"
+       data-tooltipleft="1">
+    </a>
+    }
+</div>
+<div class="content-list-wrapper" data-pgparams="@ViewBag.FormParamList">
+    <div class="content-list content-list-header">
+        <div class="content-list-edit"></div>
+        <div class="content-list-item grid-container">
+            <div class="grid" data-grid="1">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.DisplayNameFor(model => model.Name)
+                    </p>
+                </div>
+            </div>
+            <div class="grid" data-grid="1">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.DisplayNameFor(model => model.Address)
+                    </p>
+                </div>
+            </div>
+            <div class="grid" data-grid="1">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.DisplayNameFor(model => model.ListOfBranchsNames)
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="content-list-delete"></div>
+    </div>
+    @foreach (var item in Model)
+    {
+    <div class="content-list">
+        <div class="content-list-edit">
+            @if (item.IsEditable == true)
+                {
+            <a class="btn-link btn btn-icon btn-square icon-md icon-edit-line"
+               asp-area="PRL"
+               asp-action="Edit"
+               asp-controller="PrlContractor"
+               asp-route-sort="@ViewBag.AppSort"
+               asp-route-id="@item.Id"
+               asp-route-appId="@ViewBag.appId"
+               data-title="Редагування"
+               data-tooltipright='1'>
+            </a>
+                }
+                else
+                {
+            <a class="btn-link btn btn-icon btn-square icon-md icon-eye"
+               asp-area="PRL"
+               asp-action="Details"
+               asp-controller="PrlContractor"
+               asp-route-id="@item.Id"
+               data-title="Перегляд"
+               data-tooltipright='1'>
+            </a>
+                }
+        </div>
+        <a class="content-list-link">
+            <div class="content-list-item grid-container-nested">
+                <div class="grid">
+                    <div class="grid-inner">
+                        <p>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </p>
+                    </div>
+                </div>
+                <div class="grid">
+                    <div class="grid-inner">
+                        <p>
+                            @Html.DisplayFor(modelItem => item.Address)
+                        </p>
+                    </div>
+                </div>
+                <div class="grid">
+                    <div class="grid-inner grid-column">
+                        @{
+                                foreach (var br in item.ListOfBranchsNames)
+                                {
+                            <p>@Html.Raw(br)</p>
+                                }
+
+                        }
+                    </div>
+                </div>
+            </div>
+        </a>
+        <div class="content-list-delete">
+            @if (item.IsEditable == true)
+                {
+            <a class="btn btn-icon btn-square icon-md icon-remove"
+               asp-area="PRL"
+               asp-action="DeleteContractor"
+               asp-controller="PrlContractor"
+               data-title="Видалити"
+               data-tooltipleft='1'
+               asp-route-id="@item.Id">
+            </a>
+                }
+        </div>
+    </div>
+    }
+</div>

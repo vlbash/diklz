@@ -1,0 +1,160 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>7.3</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Binders\**" />
+    <Compile Remove="Converters\**" />
+    <Compile Remove="Entities\ATU\Ex\**" />
+    <Compile Remove="Enum\**" />
+    <EmbeddedResource Remove="Binders\**" />
+    <EmbeddedResource Remove="Converters\**" />
+    <EmbeddedResource Remove="Entities\ATU\Ex\**" />
+    <EmbeddedResource Remove="Enum\**" />
+    <None Remove="Binders\**" />
+    <None Remove="Converters\**" />
+    <None Remove="Entities\ATU\Ex\**" />
+    <None Remove="Enum\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="DTO\ATU\AtuCityListDTO.sql" />
+    <None Remove="DTO\ATU\AtuCitySelectDTO.sql" />
+    <None Remove="DTO\ATU\AtuRegionListDTO.sql" />
+    <None Remove="DTO\ATU\AtuRegionSelectDTO.sql" />
+    <None Remove="DTO\ATU\SubjectAtuAddressDTO.sql" />
+    <None Remove="DTO\Common\EnumRecordDto.sql" />
+    <None Remove="DTO\Common\ExPropertyCOTypeDTO.sql" />
+    <None Remove="DTO\Common\ExPropertyDTO.sql" />
+    <None Remove="DTO\Common\FileStoreDTO.sql" />
+    <None Remove="DTO\Common\PersonDetailDTO.sql" />
+    <None Remove="DTO\Common\PersonListDTO.sql" />
+    <None Remove="DTO\Org\OrgDepartmentDetailDTO.sql" />
+    <None Remove="DTO\Org\OrgDepartmentListDTO.sql" />
+    <None Remove="DTO\Org\OrgEmployeeDetailDTO.sql" />
+    <None Remove="DTO\Org\OrgEmployeeForLoginDTO.sql" />
+    <None Remove="DTO\Org\OrgEmployeeListDTO.sql" />
+    <None Remove="DTO\Org\OrgEmployeeMinDTO.sql" />
+    <None Remove="DTO\Org\OrgOrganizationDetailDTO.sql" />
+    <None Remove="DTO\Org\OrgOrganizationListDTO.sql" />
+    <None Remove="DTO\Org\OrgOrganizationSelectDTO.sql" />
+    <None Remove="DTO\Org\OrgPositionDetailDTO.sql" />
+    <None Remove="DTO\Org\OrgPositionListDTO.sql" />
+    <None Remove="DTO\Org\OrgUnitDetailDTO.sql" />
+    <None Remove="DTO\Org\OrgUnitListDTO.sql" />
+    <None Remove="DTO\Org\OrgUnitMinDTO.sql" />
+    <None Remove="DTO\Org\OrgUnitPositionEmployeeDetailDTO.sql" />
+    <None Remove="DTO\Org\OrgUnitPositionEmployeeSelectDTO.sql" />
+    <None Remove="DTO\Org\OrgUnitPositionListDTO.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="DTO\ATU\AtuCitySelectDTO.sql">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTO\ATU\AtuRegionSelectDTO.sql">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTO\ATU\SubjectAtuAddressDTO.sql">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTO\ATU\AtuCityListDTO.sql">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTO\ATU\AtuRegionListDTO.sql">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTO\Common\EnumRecordDto.sql" />
+    <EmbeddedResource Include="DTO\Common\ExPropertyCOTypeDTO.sql">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTO\Common\ExPropertyDTO.sql">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTO\Common\FileStoreDTO.sql">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTO\Common\PersonDetailDTO.sql">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTO\Common\PersonListDTO.sql">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTO\Org\OrgDepartmentDetailDTO.sql">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTO\Org\OrgDepartmentListDTO.sql">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTO\Org\OrgEmployeeDetailDTO.sql">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTO\Org\OrgEmployeeListDTO.sql">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTO\Org\OrgEmployeeForLoginDTO.sql">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTO\Org\OrgEmployeeMinDTO.sql">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTO\Org\OrgOrganizationSelectDTO.sql">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTO\Org\OrgOrganizationDetailDTO.sql">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTO\Org\OrgOrganizationListDTO.sql">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTO\Org\OrgPositionDetailDTO.sql" />
+    <EmbeddedResource Include="DTO\Org\OrgPositionListDTO.sql" />
+    <EmbeddedResource Include="DTO\Org\OrgUnitDetailDTO.sql">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTO\Org\OrgUnitListDTO.sql">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTO\Org\OrgUnitMinDTO.sql">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTO\Org\OrgUnitPositionEmployeeSelectDTO.sql">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTO\Org\OrgUnitPositionEmployeeDetailDTO.sql">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTO\Org\OrgUnitPositionListDTO.sql">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="8.0.0" />
+    <PackageReference Include="LinqKit.Microsoft.EntityFrameworkCore" Version="1.1.15" />
+    <PackageReference Include="Mapster" Version="3.3.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" Version="2.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.2" />
+    <PackageReference Include="Microsoft.Extensions.Caching.Redis" Version="2.2.0" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="2.2.0" />
+    <PackageReference Include="Serilog" Version="2.8.0" />
+    <PackageReference Include="Z.EntityFramework.Plus.EFCore" Version="1.8.18" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\App.Core.Base\App.Core.Base.csproj" />
+    <ProjectReference Include="..\App.Core.Common\App.Core.Common.csproj" />
+    <ProjectReference Include="..\App.Core.Security\App.Core.Security.csproj" />
+    <ProjectReference Include="..\App.Core.Utils\App.Core.Utils.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Microsoft.AspNetCore.Mvc.ViewFeatures">
+      <HintPath>C:\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.aspnetcore.mvc.viewfeatures\2.0.2\lib\netstandard2.0\Microsoft.AspNetCore.Mvc.ViewFeatures.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

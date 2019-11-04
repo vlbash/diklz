@@ -1,0 +1,135 @@
+@import "../abstracts/_bundle";
+
+.header-wrapper {
+  //position: absolute;
+  position: fixed;
+  z-index: 800;
+  top: 0;
+  right: 0;
+  left: 0;
+  width: 100%;
+  .material-shadow(1);
+
+  &.top-fixed {
+    position: fixed;
+    top: @header-height *-1;
+    .material-shadow(0);
+
+    &:after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      right: 0;
+      left: 0;
+      width: 100%;
+      height: @header-height*.1;
+    }
+  }
+}
+
+.footer-wrapper {
+  position: fixed;
+  z-index: 500;
+  right: 0;
+  bottom: @footer-height *-1;
+  left: @menu-aside-width;
+  width: calc(~"100% - "@menu-aside-width);
+  .material-transition;
+
+  &.active {
+    bottom: 0;
+  }
+}
+
+.aside {
+  &-wrapper {
+    position: fixed;
+    z-index: 600;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: @menu-aside-width;
+    height: 100%;
+    opacity: 1;
+    .material-transition;
+  }
+
+}
+
+.dialog {
+  &-wrapper {
+    position: fixed;
+    z-index: 900;
+    top: 0;
+    left: 100%;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background: @modal-wrap-bg-light;
+
+    &.open {
+      left: 0;
+      opacity: 0;
+
+      &.active {
+        transition: opacity .35s linear;
+        opacity: 1;
+      }
+    }
+  }
+
+  &-inner {
+    //position: absolute;
+    flex-direction: column;
+    justify-content: center;
+    width: 90%;
+    max-width: @dialog-width;
+    height: auto;
+    padding: @lg;
+    border-radius: @border-radius;
+    background: @bg-light;
+    .material-shadow(2);
+
+    .btn-holder {
+      display: flex;
+      justify-content: space-around;
+      width: 100%;
+    }
+  }
+
+  &-text {
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+
+    p,
+    a {
+      flex-direction: column;
+      margin-bottom: @xxxs;
+      padding-top: @xxxs;
+      text-align: center;
+    }
+
+    >p,
+    a {
+      &:last-child {
+        margin-bottom: @lg;
+      }
+    }
+  }
+
+  &.open {
+    left: 0;
+  }
+}
+
+
+.collapsed {
+  .footer-wrapper {
+    position: fixed;
+    left: @aside-switcher-width;
+    width: calc(~"100% - "@aside-switcher-width);
+  }
+}

@@ -1,0 +1,23 @@
+@import "../abstracts/_bundle";
+
+.footer {
+  display: none;
+  width: 100%;
+  height: @footer-height;
+  padding-right: @sm;
+  padding-left: @sm;
+  color: @font-light;
+  font-size: @font-size-smallest;
+
+  &-inner {
+
+    width: 100%;
+    border-top: @input-border-width solid @border-color;
+
+    &>* {
+      margin: auto; 
+      padding-right: @sm;
+      padding-left: @sm;
+    }
+  }
+}

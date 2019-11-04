@@ -1,0 +1,121 @@
+﻿@inject App.Core.Business.Services.IUserInfoService UserInfoService;
+
+@{
+    var userInfo = UserInfoService.GetCurrentUserInfo();
+    var userName = userInfo?.LoginData?.FirstOrDefault(x => x.Key == "UserLogin").Value ?? "Ви не авторизовані";
+}
+<ul id="header-account-menu" class="header-account-menu menu-horizontal">
+    <li>
+        <div class="menu-item-wrapper">
+            <div class="menu-item">
+                <div class="menu-item-inner header-menu-user">
+                    <i class="icon icon-lg icon-user"></i>
+                    <span>@userName</span>
+                </div>
+            </div>
+            <ul class="menu-vertical">
+
+                @if (string.IsNullOrEmpty(userInfo?.Id))
+                {
+                    <li>
+                        <div class="menu-item-wrapper">
+                            <a class="menu-item" href="/Login/Login">
+                                <div class="menu-item-inner">
+                                    <i class="icon icon-lg icon-log-in"></i>
+                                    <span>Увійти</span>
+                                </div>
+                            </a>
+                        </div>
+                    </li>
+                }
+                else
+                {
+                    @*
+                    <li>
+                        <div class="menu-item-wrapper">
+                            <a class="menu-item"
+                               data-modal="modal-right"
+                               data-tab-container-url="@Url.Action("PersonalCabinet", "User", new {Area=""})">
+                                <div class="menu-item-inner">
+                                    <i class="icon icon-lg icon-person-card"></i>
+                                    <span>Особистий кабінет right</span>
+                                </div>
+                            </a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="menu-item-wrapper">
+                            <a class="menu-item"
+                               data-modal="modal-center"
+                               data-tab-container-url="@Url.Action("PersonalCabinet", "User", new {Area=""})">
+                                <div class="menu-item-inner">
+                                    <i class="icon icon-lg icon-person-card"></i>
+                                    <span>Особистий кабінет center</span>
+                                </div>
+                            </a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="menu-item-wrapper">
+                            <a class="menu-item"
+                               data-modal="modal-left"
+                               data-tab-container-url="@Url.Action("PersonalCabinet", "User", new {Area=""})">
+                                <div class="menu-item-inner">
+                                    <i class="icon icon-lg icon-person-card"></i>
+                                    <span>Особистий кабінет left</span>
+                                </div>
+                            </a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="menu-item-wrapper">
+                            <a class="menu-item"
+                               data-modal="modal-top"
+                               data-tab-container-url="@Url.Action("PersonalCabinet", "User", new {Area=""})">
+                                <div class="menu-item-inner">
+                                    <i class="icon icon-lg icon-person-card"></i>
+                                    <span>Особистий кабінет top</span>
+                                </div>
+                            </a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="menu-item-wrapper">
+                            <a class="menu-item"
+                               data-modal="modal-bottom"
+                               data-tab-container-url="@Url.Action("PersonalCabinet", "User", new {Area=""})">
+                                <div class="menu-item-inner">
+                                    <i class="icon icon-lg icon-person-card"></i>
+                                    <span>Особистий кабінет bottom</span>
+                                </div>
+                            </a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="menu-item-wrapper">
+                            <a class="menu-item"
+                               data-modal="modal-fs"
+                               data-tab-container-url="@Url.Action("PersonalCabinet", "User", new {Area=""})">
+                                <div class="menu-item-inner">
+                                    <i class="icon icon-lg icon-person-card"></i>
+                                    <span>Особистий кабінет fullscreen</span>
+                                </div>
+                            </a>
+                        </div>
+                    </li>
+                        *@
+                    <li>
+                        <div class="menu-item-wrapper">
+                            <a class="menu-item" href="/Login/Logout">
+                                <div class="menu-item-inner">
+                                    <i class="icon icon-lg icon-log-out"></i>
+                                    <span>Вийти</span>
+                                </div>
+                            </a>
+                        </div>
+                    </li>
+                }
+            </ul>
+        </div>
+    </li>
+</ul>

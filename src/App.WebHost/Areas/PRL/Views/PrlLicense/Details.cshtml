@@ -1,0 +1,96 @@
+﻿@using App.Core.Business.Services.ObjectMapper
+@using App.Data.DTO.PRL
+@model App.Data.DTO.PRL.PrlLicenseDetailDTO
+@inject IObjectMapper objectMapper
+@{
+    ViewData["Title"] = "Лiцензiя з виробництва ЛЗ";
+    var app = new PrlAppDetailDTO();
+    objectMapper.Map(Model, app);
+}
+<div class="content-item-holder">
+
+    <div class="content-item">
+        <div class="content-item-header">
+            <i class="icon icon-xlg icon-doc-signed"></i>
+            <h2>Інформація щодо ліцензії</h2>
+        </div>
+
+        <div class="content-item-details">
+            <div class="content-item-inner content-details-wrapper col-2">
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.LicenseDate)</label>
+                        <p>@Html.DisplayFor(model => model.LicenseDate)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.LicTypeName)</label>
+                        <p>@Html.DisplayFor(model => model.LicTypeName)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.LicStateName)</label>
+                        <p>@Html.DisplayFor(model => model.LicStateName)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.LicenseNumber)</label>
+                        <p>@Html.DisplayFor(model => model.LicenseNumber)</p>
+                    </div>
+                </div>
+            </div>
+            <div class="content-item-inner content-details-wrapper col-2">
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.OrderDate)</label>
+                        <p>@Html.DisplayFor(model => model.OrderDate)</p>
+                    </div>
+                </div>
+
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.OrderNumber)</label>
+                        <p>@Html.DisplayFor(model => model.OrderNumber)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @Html.Partial($"_ApplicationPartial", app)
+
+    <div class="content-item">
+        <div class="content-item-header">
+            <i class="icon icon-xlg icon-timeline-pin"></i>
+            <h2>Місця провадження діяльності</h2>
+        </div>
+        <div class="content-partial" data-tab-container-url="@Url.Action("ListForLicense", "Branch", new {Area = "BRN"})?appId=@Model.BaseApplicationId"></div>
+    </div>
+
+    <div class="content-item">
+        <div class="content-item-header">
+            <i class="icon icon-xlg icon-users"></i>
+            <h2>Контрактні контрагенти</h2>
+        </div>
+        <div class="content-partial" data-tab-container-url="@Url.Action("List", "PrlContractor", new {Area = "PRL"})?appId=@Model.BaseApplicationId"></div>
+    </div>
+
+    <div class="content-item">
+        <div class="content-item-header">
+            <i class="icon icon-xlg icon-admin"></i>
+            <h2>Уповноважені особи</h2>
+        </div>
+        <div class="content-partial" data-tab-container-url="@Url.Action("List", "AppAssignee", new {Area = "APP"})?appId=@Model.BaseApplicationId"></div>
+    </div>
+
+    <div class="content-item">
+        <div class="content-item-header">
+            <i class="icon icon-xlg icon-clipboard-list"></i>
+            <h2>Досьє</h2>
+        </div>
+        <div class="content-partial" data-tab-container-url="@Url.Action("List", "EDocument", new {Area = "DOC"})?appId=@Model.BaseApplicationId"></div>
+    </div>
+</div>

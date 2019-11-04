@@ -1,0 +1,143 @@
+﻿@using ReflectionIT.Mvc.Paging
+@model ReflectionIT.Mvc.Paging.PagingList<App.Data.DTO.MSG.MessageListDTO>
+@inject App.Core.Mvc.Helpers.SelectListHelper Sel
+@addTagHelper *, ReflectionIT.Mvc.Paging
+
+
+<div class="content-list-wrapper" data-pgparams="@ViewBag.FormParamList">
+    <div class="content-list content-list-header">
+        <div class="content-list-edit"></div>
+        <div class="content-list-item grid-container">
+            <div class="grid" data-grid="1">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.SortableHeaderFor(model => model.CreatedOn)
+                    </p>
+                </div>
+            </div>
+            <div class="grid" data-grid="2">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.SortableHeaderFor(model => model.MessageTypeName)
+                    </p>
+                </div>
+            </div>
+
+            <div class="grid" data-grid="1">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.SortableHeaderFor(model => model.LicenseTypes)
+                    </p>
+                </div>
+            </div>
+
+            <div class="grid" data-grid="2">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.SortableHeaderFor(model => model.SenderName)
+                    </p>
+                </div>
+            </div>
+
+            <div class="grid" data-grid="1">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.SortableHeaderFor(model => model.MessageState)
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="content-list-delete"></div>
+    </div>
+
+    @{
+        Model.ForEach(p =>
+        {
+            p.LicenseTypes = string.Join(", ", p.LicenseTypes.Split(',').Where(d => !string.IsNullOrEmpty(d)));
+            p.MessageState = p.MessageState == "Зареєстровано" ? "Подано" : p.MessageState;
+        });
+    }
+
+    @foreach (var item in Model)
+    {
+        <div class="content-list">
+            <div class="content-list-edit">
+                <a asp-area="Msg" asp-controller="MessageTypes" asp-action="Details" class="btn-link btn btn-icon btn-square icon-md icon-eye"
+                   asp-route-id="@item.Id">
+                </a>
+            </div>
+            <a class="content-list-link">
+                <div class="content-list-item grid-container-nested">
+                    <div class="grid">
+                        <div class="grid-inner">
+                            <p>@Html.DisplayFor(modelItem => item.CreatedOn)</p>
+                        </div>
+                    </div>
+                    <div class="grid">
+                        <div class="grid-inner">
+                            <p>@Html.DisplayFor(modelItem => item.MessageTypeName)</p>
+                        </div>
+                    </div>
+                    <div class="grid">
+                        <div class="grid-inner">
+                            <p>@Html.DisplayFor(modelItem => item.LicenseTypes)</p>
+                        </div>
+                    </div>
+                    <div class="grid">
+                        <div class="grid-inner">
+                            <p>@Html.DisplayFor(modelItem => item.SenderName)</p>
+                        </div>
+                    </div>
+                    <div class="grid">
+                        <div class="grid-inner grid-column">
+                            @if (!string.IsNullOrEmpty(item.StatePrlEnum))
+                            {
+                                <p @if (item.StatePrlEnum == "Accepted") { @: style="color:limegreen"
+                                   } else if (item.StatePrlEnum == "Rejected") { @: style="color:red"
+                                   }>Виробництво: @Html.DisplayFor(modelItem => item.StatePrl)</p>
+                            }
+                            else if (item.IsPrlLicense)
+                            {
+                                <p>@Html.DisplayFor(modelItem => item.MessageState)</p>
+                            }
+                            @if (!string.IsNullOrEmpty(item.StateImlEnum))
+                            {
+                                <p @if (item.StateImlEnum == "Accepted") { @: style="color:limegreen"
+                                   } else if (item.StateImlEnum == "Rejected") { @: style="color:red"
+                                   }>Імпорт: @Html.DisplayFor(modelItem => item.StateIml)</p>
+                            }
+                            else if (item.IsImlLicense)
+                            {
+                                <p>@Html.DisplayFor(modelItem => item.MessageState)</p>
+                            }
+                            @if (!string.IsNullOrEmpty(item.StateTrlEnum))
+                            {
+                                <p @if (item.StateTrlEnum == "Accepted") { @: style="color:limegreen"
+                                   } else if (item.StateTrlEnum == "Rejected") { @: style="color:red"
+                                   }>Торгівля: @Html.DisplayFor(modelItem => item.StateTrl)</p>
+                            }
+                            else if (item.IsTrlLicense)
+                            {
+                                <p>@Html.DisplayFor(modelItem => item.MessageState)</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            @if (item.MessageStateEnum == "Project")
+            {
+                <div class="content-list-delete">
+                    <a asp-area="Msg" asp-controller="MessageTypes" asp-action="Delete" asp-route-id="@item.Id"
+                       class="btn btn-icon btn-square icon-md icon-remove">
+                    </a>
+                </div>
+            }
+        </div>
+    }
+
+</div>
+
+<nav>
+    <vc:pager paging-list="@Model" />
+</nav>

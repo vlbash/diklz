@@ -1,0 +1,210 @@
+@import "../abstracts/_bundle";
+@import "./buttons";
+
+.jsgrid {
+  position: relative;
+  flex-direction: column;
+  overflow: hidden;
+
+  &-grid {
+    &-header {
+      flex-shrink: 0;
+    }
+
+    &-body {
+      margin-bottom: @lg;
+    }
+  }
+
+  &-cell {
+    min-height: @input-height;
+    padding-right: @sm;
+    padding-left: @sm;
+    border-left: @input-border-width solid @border-color;
+
+    &:first-of-type {
+      border-left: none;
+    }
+  }
+
+  &-group {
+    flex-direction: column;
+    width: 100%;
+
+    label {
+      min-height: @input-height;
+      padding-right: @sm;
+      padding-left: @sm;
+    }
+  }
+
+  &-header {
+    z-index: 100;
+
+    &-row {
+      position: relative;
+      width: 100%;
+      height: auto;
+    }
+
+    &-cell {
+      align-items: center;
+      min-height: @input-height;
+      padding-right: @sm;
+      padding-left: @sm;
+      font-weight: @bold;
+      user-select: none;
+    }
+  }
+
+  &-filter,
+  &-insert {
+    &-row {
+      background: @bg-secondary;
+
+      .jsgrid-cell {
+        width: 100%;
+        border-left: none;
+      }
+
+      input,
+      select {
+        padding-right: @sm;
+        padding-left: @sm;
+        border-radius: @border-radius;
+        background-color: @bg-white;
+      }
+
+      input {
+        width: 100%;
+      }
+    }
+  }
+
+  &-edit {
+    &-row {
+      background: @bg-warning;
+    }
+  }
+
+  &-control {
+    &-field {
+      max-width: 0;
+      padding-right: 0;
+      padding-left: 0;
+      border-left: none;
+    }
+  }
+
+  &-table {
+    flex-direction: column;
+    width: 100%;
+
+    // height: auto;
+    &-body {
+      flex-direction: column;
+      width: 100%;
+      overflow: auto;
+
+      .jsgrid-tr {
+        border-bottom: @input-border-width solid @border-color;
+
+        &:last-of-type {
+          border-bottom: none;
+        }
+
+        .jsgrid-cell {
+          align-items: center;
+          min-height: @input-height;
+        }
+      }
+    }
+  }
+
+  &-tr {
+
+    position: relative;
+    flex-shrink: 0;
+    padding-top: @xxs;
+    padding-right: @btn-height + @sm;
+    padding-bottom: @xxs;
+    padding-left: @btn-height + @sm;
+
+    input,
+    select {
+      width: 100%;
+      height: @input-height;
+      padding-right: @sm;
+      padding-left: @sm;
+      border-radius: @btn-radius;
+      background: @bg-white;
+    }
+  }
+}
+
+.jsgrid-selected-row .jsgrid-cell {
+  cursor: pointer;
+}
+
+.jsgrid-nodata-row .jsgrid-cell {
+  padding: .5em 0;
+  text-align: center;
+}
+
+.jsgrid-header-sort {
+  cursor: pointer;
+}
+
+// .jsgrid-pager {
+// 	padding: .5em 0;
+// }
+
+// .jsgrid-pager-nav-button {
+// 	padding: .2em .6em;
+// }
+
+// .jsgrid-pager-nav-inactive-button {
+// 	display: none;
+// 	pointer-events: none;
+// }
+
+// .jsgrid-pager-page {
+// 	padding: .2em .6em;
+// }
+
+//buttons
+
+.jsgrid {
+
+  &-cancel-edit-button,
+  &-clear-filter-button,
+  &-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  &-mode-button,
+  &-edit-button,
+  &-update-button {
+    left: 13px;
+  }
+
+  &-search-button {
+    //left: 18px;
+    left: 13px;
+  }
+
+  &-cancel-edit-button,
+  &-clear-filter-button,
+  &-delete-button {
+    right: 13px;
+  }
+
+  &-insert-button {
+    //left: 18px;
+    left: 14px;
+  }
+}
+
+// .jsgrid-search-button

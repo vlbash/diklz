@@ -1,0 +1,19 @@
+{
+  "Framework": "jasmine",
+  "References": [
+    { "Path": "js/UacJs.js" },
+    { "Path": "js/uac-plugin-1.3.js" },
+    { "Path": "js/utils.js" }
+  ],
+  "Tests": [
+    { "Path": "tests" }
+  ],
+  "exclude": [
+    "**/bin",
+    "**/bower_components",
+    "**/jspm_packages",
+    "**/node_modules",
+    "**/obj",
+    "**/platforms"
+  ]
+}

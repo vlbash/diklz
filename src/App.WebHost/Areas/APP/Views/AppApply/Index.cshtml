@@ -1,0 +1,69 @@
+﻿@using Newtonsoft.Json
+@inject App.Core.Mvc.Helpers.SelectListHelper Sel
+
+@{
+    ViewData["Title"] = "Подання заяв";
+}
+
+@section Buttons {
+    <a class="btn btn-round icon-add"
+        asp-area="App"
+       asp-controller="AppTypes"
+       asp-action="Index"
+       data-tooltipleft='1'
+       data-title="Створити заяву">
+    </a>
+}
+
+<div class="content-search-wrapper">
+    <partial name="_Searchform" />
+</div>
+
+<div class="results" id="results">
+
+</div>
+
+@section Scripts {
+
+    <script>
+        var searchFormControls = {
+            controlsConfig: [
+                {
+                    labelName: 'Тип заяви',
+                    name: 'AppSortEnum',
+                    type: 'select',
+                    selectOptions: @Html.Raw(JsonConvert.SerializeObject(Sel.Enum("ApplicationSort")))
+                },
+                {
+                    labelName: 'Вид діяльності',
+                    name: 'AppTypeEnum',
+                    type: 'select',
+                    selectOptions: @Html.Raw(JsonConvert.SerializeObject(Sel.Enum("ActivityType")))
+                },
+            ]
+        };
+
+        var searchFormConfig = {
+            formConfig: {
+                formName: 'form0',
+                formDataAjaxUpdate: '#results',
+                formMethod: 'post',
+                controls: searchFormControls
+            },
+            presetFiltersUrl: {
+                //controllerName: '@ViewContext.RouteData.Values["Controller"].ToString()',
+                //actionName: '@ViewContext.RouteData.Values["Action"].ToString()'
+            },
+            mainInputConfig: {
+                labelName: 'Вид заяви',
+                type: 'text',
+                mainInputLookUp: ['AppSort']
+            }
+        };
+
+        //console.log('searchFormConfig', searchFormConfig)
+        mt.createContentSearchForm(searchFormConfig);
+
+    </script>
+
+}

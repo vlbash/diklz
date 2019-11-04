@@ -1,0 +1,171 @@
+﻿@model App.Data.DTO.CRV.LimsDetailsRPDTO
+@{
+    ViewData["Title"] = "РП ЛЗ №"  + Model.RegNum;
+}
+
+<div class="content-item-holder">
+    <div class="content-item">
+        <div class="content-item-header">
+            <i class="icon icon-xlg icon-person-edit-card"></i>
+            <h2>@Model.DrugNameUkr</h2>
+        </div>
+        <div class="content-item-details">
+            <div class="content-item-inner content-details-wrapper col-2">
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.StateName)</label>
+                        <p>@Html.DisplayFor(model => model.StateName)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.RegNum)</label>
+                        <p>@Html.DisplayFor(model => model.RegNum)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.RegDate)</label>
+                        <p>@Html.DisplayFor(model => model.RegDate)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.EndDate)</label>
+                        <p>@Html.DisplayFor(model => model.EndDate)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.OrdRegNum)</label>
+                        <p>@Html.DisplayFor(model => model.OrdRegNum)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.OrdRegDate)</label>
+                        <p>@Html.DisplayFor(model => model.OrdRegDate)</p>
+                    </div>
+                </div>
+            </div>
+            <div class="content-item-inner content-details-wrapper col-2">
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.OffOrderNum)</label>
+                        <p>@Html.DisplayFor(model => model.OffOrderNum)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.OffOrderDate)</label>
+                        <p>@Html.DisplayFor(model => model.OffOrderDate)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.OffReason)</label>
+                        <p>@Html.DisplayFor(model => model.OffReason)</p>
+                    </div>
+                </div>
+            </div>
+            <div class="content-item-inner content-details-wrapper col-2">
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.DrugNameUkr)</label>
+                        <p>@Html.DisplayFor(model => model.DrugNameUkr)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.FormName)</label>
+                        <p>@Html.DisplayFor(model => model.FormName)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.FormTypeDesc)</label>
+                        <p>@Html.DisplayFor(model => model.FormTypeDesc)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.SideName)</label>
+                        <p>@Html.DisplayFor(model => model.SideName)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.CountryName)</label>
+                        <p>@Html.DisplayFor(model => model.CountryName)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.ProducerName)</label>
+                        <p>@Html.DisplayFor(model => model.ProducerName)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.ProdCountryName)</label>
+                        <p>@Html.DisplayFor(model => model.ProdCountryName)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.RegProcName)</label>
+                        <p>@Html.DisplayFor(model => model.RegProcName)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.RegProcedure)</label>
+                        <p>@Html.DisplayFor(model => model.RegProcedure)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.DrugTypeName)</label>
+                        <p>@Html.DisplayFor(model => model.DrugTypeName)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.DrugNameEng)</label>
+                        <p>@Html.DisplayFor(model => model.DrugNameEng)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.ActiveSubstances)</label>
+                        <p>@Html.DisplayFor(model => model.ActiveSubstances)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.FarmGroup)</label>
+                        <p>@Html.DisplayFor(model => model.FarmGroup)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.SaleTerms)</label>
+                        <p>@Html.DisplayFor(model => model.SaleTerms)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.PublicityInfo)</label>
+                        <p>@Html.DisplayFor(model => model.PublicityInfo)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.Notes)</label>
+                        <p>@Html.DisplayFor(model => model.Notes)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

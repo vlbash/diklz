@@ -1,0 +1,238 @@
+.content {
+
+  &-tree {
+    width: 100%;
+    margin: @xxs 0 @xxxl 0;
+
+    .parent-item {
+      flex-direction: column;
+
+      & .parent-item {
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+    }
+
+    &>.parent-item {
+      width: 100%;
+      margin-bottom: @xxs;
+
+      &>.child-item {
+        margin-bottom: @xxs;
+        border: @input-border-width solid @border-color;
+      }
+
+      &>.child-item>.parent-item {
+        margin-left: @xxxl;
+
+        &>.child-item {
+          width: calc(~"100% + "@xxxl);
+          margin-left: -@xxxl;
+          padding-top: @xxs;
+          padding-bottom: @xxs;
+          padding-left: @xl;
+          border-bottom: @input-border-width solid @border-color;
+        }
+
+        &>.child-item>.parent-item {
+          margin-left: @xxxl;
+
+          &>.child-item {
+            width: 100%;
+            margin-bottom: @xxs;
+
+            &>.parent-item {
+              margin-left: @xxs;
+            }
+          }
+        }
+      }
+    }
+
+    .last-item {
+      display: inline-flex;
+      width: 50%;
+    }
+    .child-item {
+      display: block;
+    }
+
+    .header-item {
+      margin-bottom: @xxs;
+      font-weight: @semibold;
+      position: relative;
+    }
+
+    .caption-item {
+      width: 85% !important;
+    }
+
+    .caption-input {
+      width: 60%;
+      margin: @xxxs 10px;
+      height: @input-height;
+      padding: @xxxs;
+      border: @input-border-width solid @border-color;
+    }
+
+    .caption-label{
+      text-align: right;
+      clear: both;
+      float:left;
+      margin-right:15px;
+    }
+
+    .caption-input[disabled] {
+      background-color: @input-readonly;
+      display: none;
+    }
+
+    .info-tree{
+      margin: 0 1.5em;
+      color: red;
+    }
+
+    label {
+      display: inline-flex;
+      padding: 0 @btn-tiny 0 @lg;
+      margin-right: @xxs;
+      cursor: pointer;
+
+      &:before {
+        right: initial;
+        left: 0;
+      }
+
+      &:after {
+        right: initial;
+        left: -@input-height/6.5;
+      }
+    }
+
+    &>.parent-item {
+      width: 100%;
+
+      &>.child-item {
+        width: 100%;
+
+        & .header-item {
+          width: 100%;
+          margin-top: @xxxs;
+          margin-bottom: @xxxs;
+
+          .btn-parent {
+            display: inline-flex;
+            position: absolute;
+            right: @btn-tiny/2;
+            width: @btn-tiny*5;
+            height: @btn-tiny - @xxxs;
+            border: unset;
+            background-color: transparent;
+            color: @bg-secondary;
+            .transition-fast;
+
+            &:before {
+              content: '\e002';
+              position: absolute;
+              top: 0;
+              right: 0;
+              width: @btn-tiny - @xxxs;
+              height: @btn-tiny - @xxxs;
+              font-family: icon-font;
+              line-height: @btn-tiny - @xxxs;
+              text-align: center;
+              .transition-fast;
+            }
+
+            &.is-transform {
+              &:before {
+                transform: rotate(90deg);
+              }
+            }
+          }
+        }
+
+        &>.header-item {
+          position: relative;
+          width: 100%;
+          margin: 0;
+          padding: @sm;
+          color: @font-white;
+          background-color: @bg-secondary;
+          .btn-parent {
+            &:before {
+              color: @font-white;
+            }
+          }
+          .checkbox {
+            &+label{
+              &:before{
+                border-color: @font-white;
+              }
+            }
+            &:checked+label{
+              &:after {
+                color: @font-white;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .checkbox-disabled~label{
+      opacity: 0.6;
+      pointer-events: none;
+    }
+    .checkbox-deleted~label{
+      &:before {
+        border-color: @bg-danger;
+      }
+    }
+    .checkbox-added~label{
+      &:before {
+        border-color: @bg-success;
+      }
+    }
+    .checkbox-added:checked+label {
+      &:after {
+        //color: @bg-success;
+      }
+    }
+  }
+
+
+  &-readonly {
+    input,
+    label {
+      pointer-events: none;
+    }
+    
+    &>.parent-item {
+      &>.child-item {
+        background-color: @input-readonly;
+        &>.header-item {
+          background-color: @border-color-dark;
+          color: @font-black;
+          .btn-parent {
+            &:before {
+              color: @bg-secondary;
+            }
+          }
+          .checkbox {
+            &+label{
+              &:before{
+                border-color: @font-light;
+              }
+            }
+            &:checked+label{
+              &:after {
+                color: @font-light;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

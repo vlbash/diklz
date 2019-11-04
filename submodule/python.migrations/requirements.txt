@@ -1,0 +1,4 @@
+psycopg2-binary==2.8.2
+requests==2.21.0
+requests-file==1.4.3
+requests-ftp==0.3.1

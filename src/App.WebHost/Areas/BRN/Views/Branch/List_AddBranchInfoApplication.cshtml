@@ -1,0 +1,88 @@
+﻿@model IEnumerable<App.Data.DTO.BRN.BranchAltListDTO>
+
+<div class="content-list-wrapper" data-pgparams="@ViewBag.FormParamList">
+    <div class="content-list content-list-header">
+        <div class="content-list-edit"></div>
+        <div class="content-list-item grid-container">
+            <div class="grid" data-grid="2">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.DisplayNameFor(model => model.Name)
+                    </p>
+                </div>
+            </div>
+            <div class="grid" data-grid="2">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.DisplayNameFor(model => model.PhoneNumber)
+                    </p>
+                </div>
+            </div>
+            <div class="grid" data-grid="2">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.DisplayNameFor(model => model.IsChangedOperationListForm)
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="content-list-delete"></div>
+    </div>
+    @foreach (var item in Model)
+    {
+        <div class="content-list">
+            <div class="content-list-edit">
+                
+                @if (item.isEditable == true)
+                {
+                    <a class="btn-link btn btn-icon btn-square icon-md icon-eye"
+                       asp-area="BRN"
+                       asp-action="DetailsChangeInfoBranch"
+                       asp-controller="Branch"
+                       asp-route-id="@item.Id"
+                       asp-route-sort="@ViewBag.AppSort"
+                       data-title="Перегляд"
+                       data-tooltipright='1'>
+                    </a>
+                }
+                else
+                {
+                    <a class="btn-link btn btn-icon btn-square icon-md icon-eye"
+                       asp-area="BRN"
+                       asp-action="Details"
+                       asp-controller="Branch"
+                       asp-route-id="@item.Id"
+                       data-title="Перегляд"
+                       data-tooltipright='1'>
+                    </a>
+                }
+            </div>
+            <a class="content-list-link">
+                <div class="content-list-item grid-container-nested">
+                    <div class="grid">
+                        <div class="grid-inner">
+                            <p>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </p>
+                        </div>
+                    </div>
+                    <div class="grid">
+                        <div class="grid-inner">
+                            <p>
+                                @Html.DisplayFor(modelItem => item.PhoneNumber)
+                            </p>
+                        </div>
+                    </div>
+                    <div class="grid">
+                        <div class="grid-inner">
+                            <p>
+                                @Html.DisplayFor(modelItem => item.IsChangedOperationListForm)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            
+        </div>
+    }
+</div>

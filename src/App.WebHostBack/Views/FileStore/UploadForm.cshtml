@@ -1,0 +1,61 @@
+﻿@model App.Core.Data.DTO.Common.FileStoreDTO
+
+@{
+    Layout = null;
+}
+
+<form asp-controller="FileStore"
+      asp-action="Upload"
+      enctype="multipart/form-data"
+      class="form-file-upload content-upload">
+    <input type="hidden" asp-for="EntityName" />
+    <input type="hidden" asp-for="EntityId" />
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="content-upload-file">
+        <div class="input-file-group">
+            <input id="files"
+                   name="files"
+                   type="file"
+                   accept="image/*,.doc,.docx,.xls,xlsx,.txt,.csv,.pdf"
+                   class="input-file"
+                   data-multiple-caption="{count} файлів вибрано"
+                   autocomplete="off"
+                   multiple />
+            <label for="files" class="btn btn-secondary btn-fill input-file-label btn-square btn-tiny">
+                <i class="icon icon-lg icon-paperclip"></i>
+            </label>
+        </div>
+    </div>
+
+    <div class="content-upload-desc">
+        <div class="textarea-group">
+            <div class="content-upload-filename"></div>
+            <div class="textarea-group">
+                <textarea asp-for="Description"
+                          class="textarea empty"
+                          autocomplete="off" />
+                <span class="input-group-bar"></span>
+                <label asp-for="Description"></label>
+                <span class="js-validation"></span>
+                <span asp-validation-for="Description"
+                      class="asp-validation"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-submit-holder btn-holder content-upload-save">
+        @*<input type="button" value="Завантажити" class="btn btn-secondary btn-fill" />*@
+        <button class="btn btn-secondary btn-fill btn-square btn-tiny" type="submit">
+            <i class="icon icon-lg icon-save"></i>
+        </button>
+    </div>
+    <div class="btn-holder content-upload-delete">
+        <button class="btn btn-danger btn-text btn-tiny icon-md icon-delete" type="reset">
+        </button>
+    </div>
+</form>
+
+<script>
+    mt.inputFileCustomization($('#files'));
+</script>

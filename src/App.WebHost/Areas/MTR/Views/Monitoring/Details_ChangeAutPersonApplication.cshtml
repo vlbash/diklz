@@ -1,0 +1,57 @@
+﻿@model App.Data.DTO.APP.BaseAppDetailDTO
+
+@{
+    ViewData["Title"] = "Заява про зміну інформації у додатку до ліцензії щодо особливих умов провадження діяльності - Зміна уповноважених осіб " + (Model.AppType == "PRL" ? "(Виробництво)" : Model.AppType == "IML" ? "(Імпорт)" : "(Торгівля)");
+}
+
+@section Buttons{
+    @if (Model.AppState == "Reviewed" && (Model.DecisionType == "Denied" || Model.DecisionType == "WithoutConsideration"))
+    {
+        <a class="content-item-btn icon-md icon-edit-line"
+           asp-action="CreateNewApplication"
+           asp-route-id="@Model.Id"
+           asp-route-appType="@Model.AppType"
+           data-tab-main
+           data-title="Створити заяву на основі данної"
+           data-tooltipleft='1'>
+        </a>
+    }
+}
+
+<div class="content-item-holder">
+    @Html.Partial($"_ApplicationPartial", Model)
+
+    <div class="content-item">
+        <div class="content-item-header ">
+            <i class="icon icon-xlg icon-timeline-pin"></i>
+            <h2>Місця провадження діяльності</h2>
+        </div>
+        <div class="content-partial" data-tab-container-url="@Url.Action("List", "Branch", new { Area = "BRN" })?appId=@Model.Id&sort=ChangeInfoApplication"></div>
+
+    </div>
+
+    <div class="content-item">
+        <div class="content-item-header">
+            <i class="icon icon-xlg icon-users"></i>
+            <h2>Уповноважені особи</h2>
+        </div>
+
+        <div class="content-partial" data-tab-container-url="@Url.Action("List", "AppAssignee", new { Area = "APP" })?appId=@Model.Id&appType=@Model.AppType"></div>
+
+    </div>
+
+
+    @if (Model.BackOfficeAppState != "Project" && Model.AppState != "Project")
+    {
+        <div class="content-item">
+            <div class="content-item-header">
+                <i class="icon icon-xlg icon-clipboard-file"></i>
+                <h2 id="eDocument">Додаткові документи до заяви</h2>
+            </div>
+            <div class="content-partial" data-tab-container-url="@Url.Action("ListAdditionDocuments", "EDocument", new { Area = "DOC" })?appId=@Model.Id"></div>
+        </div>
+    }
+
+
+
+</div>

@@ -1,0 +1,58 @@
+@{
+    ViewData["Title"] = "Реєстр профілів";
+}
+
+@section Buttons {
+    <a class="btn btn-round icon-add"
+       asp-action="Edit"
+       data-tooltipleft='1'
+       data-title="Додати новий профіль">
+    </a>
+}
+
+<div class="content-search-wrapper">
+    <partial name="_Searchform" />
+</div>
+
+<div class="results" id="results">
+
+</div>
+
+@section Scripts {
+
+    <script>
+        var searchFormControls = {
+            controlsConfig: [
+                {
+                    labelName: 'Назва',
+                    name: 'Caption',
+                    type: 'text'
+                }
+            ]
+        }
+
+        var searchFormConfig = {
+            formConfig: {
+                formName: 'form0',
+                formDataAjaxUpdate: '#results',
+                // formDataAjax: 'true',
+                // formDataAjaxMode: 'replace',
+                formMethod: 'post',
+                controls:searchFormControls
+            },
+            presetFiltersUrl:{
+            },
+
+            mainInputConfig: {
+                labelName: 'Назва',
+                type: 'text',
+                mainInputLookUp: ['Caption']
+            },
+
+        };
+
+        mt.createContentSearchForm(searchFormConfig);
+
+    </script>
+
+}

@@ -1,0 +1,352 @@
+﻿@using App.Business.Extensions
+@using App.Core.Business.Services
+@inject IUserInfoService _UserInfoService
+@{
+    var userInfo = _UserInfoService.GetCurrentUserInfo();
+    var profileNameCheck = userInfo.LoginData.TryGetValue("ProfileName", out string profName);
+}
+
+<aside id="aside" class="aside">
+    <span id="aside-arrow-top" class="aside-arrow aside-arrow-top">
+        <svg xmlns="http://www.w3.org/2000/svg"
+             xmlns:xlink="http://www.w3.org/1999/xlink"
+             style="enable-background:new 0 0 139 139;"
+             version="1.1"
+             viewBox="0 0 139 139"
+             xml:space="preserve">
+        <polyline style="fill:none;stroke:#ffffff;stroke-width:6;stroke-miterlimit:10;" id="XMLID_6_" points="115.5,78.5 69.5,60.5 23.5,78.5 " />
+        </svg>
+    </span>
+    <span id="aside-arrow-bottom" class="aside-arrow aside-arrow-bottom">
+        <svg xmlns="http://www.w3.org/2000/svg"
+             xmlns:xlink="http://www.w3.org/1999/xlink"
+             style="enable-background:new 0 0 139 139;"
+             version="1.1" viewBox="0 0 139 139"
+             xml:space="preserve">
+        <polyline style="fill:none;stroke:#fff;stroke-width:6;stroke-miterlimit:10;" class="st0" id="XMLID_6_" points="23.5,60.5 69.5,78.5 115.5,60.5 " />
+        </svg>
+    </span>
+    <ul id="aside-menu" class="aside-menu menu-vertical">
+        <li class="aside-menu-li">
+            <div class="aside-menu-li-inner menu-item-wrapper">
+                <div class="menu-item">
+                    <div class="menu-item-inner">
+                        <i class="icon icon-xlg icon-production"></i>
+                        <span>Ліцензування виробництва</span>
+                    </div>
+                </div>
+                <ul class="menu-vertical">
+                    <li>
+                        <div class="menu-item-wrapper">
+                            <a class="menu-item"
+                               asp-area="PRL"
+                               asp-controller="Application"
+                               asp-action="Index">
+                                <div class="menu-item-inner">
+                                    <i class="icon icon-lg icon-card-list-box"></i>
+                                    <span>Журнал заяв</span>
+                                </div>
+                            </a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="menu-item-wrapper">
+                            <a class="menu-item"
+                               asp-area="APP"
+                               asp-controller="Protocol"
+                               asp-action="Index"
+                               asp-route-appType="PRL">
+                                <div class="menu-item-inner">
+                                    <i class="icon icon-lg icon-construction-map"></i>
+                                    <span>Протоколи засідань</span>
+                                </div>
+                            </a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="menu-item-wrapper">
+                            <a class="menu-item"
+                               asp-area="MSG"
+                               asp-controller="Message"
+                               asp-action="Index"
+                               asp-route-ActivityType="PRL">
+                                <div class="menu-item-inner">
+                                    <i class="icon icon-lg icon-info-book"></i>
+                                    <span>Журнал повідомлень про зміни</span>
+                                </div>
+                            </a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="menu-item-wrapper">
+                            <a class="menu-item"
+                               asp-area="PRL"
+                               asp-controller="PrlLicense"
+                               asp-action="Index">
+                                <div class="menu-item-inner">
+                                    <i class="icon icon-lg icon-doc-signed"></i>
+                                    <span>Журнал ліцензій</span>
+                                </div>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li class="aside-menu-li">
+            <div class="aside-menu-li-inner menu-item-wrapper">
+                <div class="menu-item">
+                    <div class="menu-item-inner">
+                        <i class="icon icon-xlg icon-material"></i>
+                        <span>Ліцензування імпорту</span>
+                    </div>
+                </div>
+                <ul class="menu-vertical">
+                    <li>
+                        <div class="menu-item-wrapper">
+                            <a class="menu-item"
+                               asp-area="IML"
+                               asp-controller="Application"
+                               asp-action="Index">
+                                <div class="menu-item-inner">
+                                    <i class="icon icon-lg icon-card-list-box"></i>
+                                    <span>Журнал заяв</span>
+                                </div>
+                            </a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="menu-item-wrapper">
+                            <a class="menu-item"
+                               asp-area="APP"
+                               asp-controller="Protocol"
+                               asp-action="Index"
+                               asp-route-appType="IML">
+                                <div class="menu-item-inner">
+                                    <i class="icon icon-lg icon-construction-map"></i>
+                                    <span>Протоколи засідань</span>
+                                </div>
+                            </a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="menu-item-wrapper">
+                            <a class="menu-item"
+                               asp-area="MSG"
+                               asp-controller="Message"
+                               asp-action="Index"
+                               asp-route-ActivityType="IML">
+                                <div class="menu-item-inner">
+                                    <i class="icon icon-lg icon-info-book"></i>
+                                    <span>Журнал повідомлень про зміни</span>
+                                </div>
+                            </a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="menu-item-wrapper">
+                            <a class="menu-item"
+                               asp-area="IML"
+                               asp-controller="ImlLicense"
+                               asp-action="Index">
+                                <div class="menu-item-inner">
+                                    <i class="icon icon-lg icon-doc-signed"></i>
+                                    <span>Журнал ліцензій</span>
+                                </div>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li class="aside-menu-li">
+            <div class="aside-menu-li-inner menu-item-wrapper">
+                <div class="menu-item">
+                    <div class="menu-item-inner">
+                        <i class="icon icon-xlg icon-purchasing"></i>
+                        <span>Ліцензування торгівлі</span>
+                    </div>
+                </div>
+                <ul class="menu-vertical">
+                    <li>
+                        <div class="menu-item-wrapper">
+                            <a class="menu-item"
+                               asp-area="TRL"
+                               asp-controller="Application"
+                               asp-action="Index">
+                                <div class="menu-item-inner">
+                                    <i class="icon icon-lg icon-card-list-box"></i>
+                                    <span>Журнал заяв</span>
+                                </div>
+                            </a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="menu-item-wrapper">
+                            <a class="menu-item"
+                               asp-area="APP"
+                               asp-controller="Protocol"
+                               asp-action="Index"
+                               asp-route-appType="TRL">
+                                <div class="menu-item-inner">
+                                    <i class="icon icon-lg icon-construction-map"></i>
+                                    <span>Протоколи засідань</span>
+                                </div>
+                            </a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="menu-item-wrapper">
+                            <a class="menu-item"
+                               asp-area="MSG"
+                               asp-controller="Message"
+                               asp-action="Index"
+                               asp-route-ActivityType="TRL">
+                                <div class="menu-item-inner">
+                                    <i class="icon icon-lg icon-info-book"></i>
+                                    <span>Журнал повідомлень про зміни</span>
+                                </div>
+                            </a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="menu-item-wrapper">
+                            <a class="menu-item"
+                               asp-area="TRL"
+                               asp-controller="TrlLicense"
+                               asp-action="Index">
+                                <div class="menu-item-inner">
+                                    <i class="icon icon-lg icon-doc-signed"></i>
+                                    <span>Журнал ліцензій</span>
+                                </div>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li class="aside-menu-li">
+            <div class="aside-menu-li-inner menu-item-wrapper">
+                <div class="menu-item">
+                    <div class="menu-item-inner">
+                        <i class="icon icon-lg icon-documents-case"></i>
+                        <span>Реєстр документів</span>
+                    </div>
+                </div>
+                <ul class="menu-vertical">
+                    <li>
+                        <div class="menu-item-wrapper">
+                            <a asp-area="CRV" asp-controller="LimsRP" asp-action="Index" class="menu-item">
+                                <div class="menu-item-inner text">
+                                    <span>Реєстраційне посвідчення на ввезені лікарські засоби</span>
+                                </div>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li class="aside-menu-li">
+            <div class="aside-menu-li-inner menu-item-wrapper">
+                <div class="menu-item">
+                    <div class="menu-item-inner">
+                        <i class="icon icon-xlg icon-settings"></i>
+                        <span>Адміністрування</span>
+                    </div>
+                </div>
+                <ul class="menu-vertical">
+                    <li>
+                        <div class="menu-item-wrapper">
+                            <a class="menu-item"
+                               asp-area="AUD"
+                               asp-controller="Audit"
+                               asp-action="Index">
+                                <div class="menu-item-inner">
+                                    <i class="icon icon-lg icon-card-list-box"></i>
+                                    <span>Журнал аудиту</span>
+                                </div>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+        @if (profName == "Admin")
+        {
+            <li class="aside-menu-li">
+                <div class="aside-menu-li-inner menu-item-wrapper">
+                    <div class="menu-item" tabindex="1">
+                        <div class="menu-item-inner">
+                            <i class="icon icon-huge icon-user-table"></i>
+                            <span>Адміністрування</span>
+                        </div>
+                    </div>
+                    <ul class="menu-vertical">
+                        <li is-active-route>
+                            <div class="menu-item-wrapper">
+                                <a class="menu-item"
+                                   is-active-route
+                                   asp-area="SEC"
+                                   asp-controller="Right"
+                                   asp-action="Index">
+                                    <div class="menu-item-inner">
+                                        <i class="icon icon-huge icon-user-security"></i>
+                                        <span>Реєстр прав</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </li>
+                        <li is-active-route>
+                            <div class="menu-item-wrapper">
+                                <a class="menu-item"
+                                   is-active-route
+                                   asp-area="SEC"
+                                   asp-controller="Role"
+                                   asp-action="Index">
+                                    <div class="menu-item-inner">
+                                        <i class="icon icon-xlg icon-admin"></i>
+                                        <span>Реєстр ролей</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </li>
+                        <li is-active-route>
+                            <div class="menu-item-wrapper">
+                                <a class="menu-item"
+                                   is-active-route
+                                   asp-area="SEC"
+                                   asp-controller="Profile"
+                                   asp-action="Index">
+                                    <div class="menu-item-inner">
+                                        <i class="icon icon-huge icon-workers"></i>
+                                        <span>Реєстр профілів</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </li>
+                        <li is-active-route
+                            asp-area="MIS"
+                            asp-controller="Person"
+                            asp-action="Index">
+                            <div class="menu-item-wrapper">
+                                <a class="menu-item"
+                                   asp-area="SEC"
+                                   asp-controller="Person"
+                                   asp-action="Index">
+                                    <div class="menu-item-inner">
+                                        <i class="icon icon-xlg icon-person-card"></i>
+                                        <span>Реєстр фізичних осіб</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        }
+    </ul>
+</aside>

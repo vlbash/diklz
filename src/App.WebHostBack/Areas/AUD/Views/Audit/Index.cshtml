@@ -1,0 +1,82 @@
+﻿@using Newtonsoft.Json
+@inject App.Core.Mvc.Helpers.SelectListHelper Sel
+@{
+    ViewData["Title"] = "Журнал аудиту";
+}
+
+<div class="content-search-wrapper">
+    <partial name="_Searchform" />
+</div>
+
+<div class="results" id="results">
+
+</div>
+
+@section Scripts {
+    <script>
+        var searchFormControls = {
+            controlsConfig: [
+                {
+                    labelName: 'Id',
+                    name: 'EntityId',
+                    type: 'text'
+                },
+                {
+                    labelName: 'Користувач',
+                    name: 'CreatedBy',
+                    type: 'text'
+                },
+                {
+                    labelName: 'Дата події',
+                    name: 'CreatedDate',
+                    type: 'dataGroup',
+                    children: [
+                        {
+                            labelName: 'з: ',
+                            name: 'CreatedDate_From',
+                            type: 'datepicker'
+                        }, {
+                            labelName: 'по: ',
+                            name: 'CreatedDate_To',
+                            type: 'datepicker'
+                        }
+                    ]
+                },
+                {
+                    labelName: 'Назва',
+                    name: 'EntityTypeNameCode',
+                    type: 'select',
+                    selectOptions: @Html.Raw(JsonConvert.SerializeObject(Sel.Enum("AuditTableName")))
+                }
+            ]
+        };
+
+        var searchFormConfig = {
+            formConfig: {
+                formName: 'form0',
+                formDataAjaxUpdate: '#results',
+                formMethod: 'post',
+                controls: searchFormControls
+            },
+
+            presetFiltersUrl: {
+                //controllerName: '@ViewContext.RouteData.Values["Controller"].ToString()',
+                //actionName: '@ViewContext.RouteData.Values["Action"].ToString()'
+            },
+
+            mainInputConfig: {
+                labelName: 'Користувач',
+                type: 'text',
+                mainInputLookUp: ['CreatedBy']
+            }
+        };
+
+
+        mt.createContentSearchForm(searchFormConfig);
+
+    </script>
+
+}
+
+
+

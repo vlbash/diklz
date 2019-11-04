@@ -1,0 +1,384 @@
+﻿@model string;
+<link rel="stylesheet" type="text/css" href="~/custom_js/clearJs/Styles.css" />
+<script type="text/JavaScript" src="~/custom_js/clearJs/JS/common.js"></script>
+<script type="text/JavaScript" src="~/custom_js/clearJs/JS/euutils.js"></script>
+<script type="text/JavaScript" src="~/custom_js/clearJs/JS/euscpt.js"></script>
+<script type="text/JavaScript" src="~/custom_js/clearJs/JS/euscpm.js"></script>
+<script async= async async= async async= async async= async async= async async= async async= async async= async type="text/javascript" src="~/custom_js/clearJs/JS/euscp.js"></script>
+<script type="text/JavaScript" src="~/custom_js/clearJs/JS/euscptest.js"></script>
+<script type="text/javascript" src="~/custom_js/clearJs/JS/qr/qrcodedecode.js"></script>
+<script type="text/javascript" src="~/custom_js/clearJs/JS/qr/reedsolomon.js"></script>
+<script type="text/javascript" src="~/custom_js/clearJs/JS/fs/Blob.min.js"></script>
+<script type="text/javascript" src="~/custom_js/clearJs/JS/fs/FileSaver.js"></script>
+<script type="text/JavaScript">
+
+    function onBodyLoad() {
+        /*MM_preloadImages('~/custom_js/clearJs/Images/ButtonHover.png', '~/custom_js/clearJs/Images/ButtonHover.png');*/
+        pageLoaded("@Model");
+    }
+
+
+    document.addEventListener("DOMContentLoaded", onBodyLoad);
+
+</script>
+
+
+<div id="iit1" class="content-item-holder">
+    <div class="content-item">
+
+        <!--header item-->
+        <div class="content-item-header">
+            <i class="icon-xlg icon-key"></i>
+            <h2>Ідентифікація за електронним підписом</h2>
+        </div>
+
+        <!--start model text
+        <div class="content-item-wrapper">
+            <p class="content-item-inner-text">
+                @Model
+            </p>
+            <p class="content-item-inner-text">
+                За допомогою форми можна підписувати дані з форми (текстові дані),
+                або файли, що знаходяться на файловій системі тощо
+            </p>
+        </div>
+        end model text -->
+
+        <div id="iit_line1" class="content-item-wrapper">
+
+            <!--start progress bar -->
+            <div class="headerwhite1 col">
+                <h2 style="display:none">Основні функції</h2>
+                <progress value="0" max="100" id="progress" style="display:none"></progress>
+            </div>
+            <!--end progress bar -->
+
+            <div class="MainPageMenuContent col">
+
+                <div id="MainPageMenuPKeyPage" class="MainPageMenuPanelSelected col content-item-edit">
+
+                    <div class="content-item-inner col">
+                        <div class="TextInTextImageContainer">
+                            <h3 class="col-lg-7">
+                                Інформація про особистий ключ
+                            </h3>
+                            <div id="buttonitem" style="display:none">
+                                <button id="PKeyShowOwnerInfoButton" type="button" class="btn btn-secondary btn-fill" title="Переглянути про власника" onclick="euSignTest.showOwnerInfo()" style=" width:auto;">Переглянути про власника</button>
+                            </div>
+                            <div id="buttonitem" style="width: auto; margin-left: auto">
+                                <button id="PKeyShowCertsInfoButton" type="button" class="btn btn-secondary btn-fill" title="Переглянути сертифікати" onclick="euSignTest.showOwnCertificates()">Переглянути сертифікати</button>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <p class="info-item">
+                                <span>Власник: </span>
+                                <span id="subjCn"> </span>
+                            </p>
+                            <p class="info-item">
+                                <span>ЦСК: </span>
+                                <span id="issuerCn"> </span>
+                            </p>
+                            <p class="info-item">
+                                <span>Серійний номер: </span>
+                                <span id="serialNumber"> </span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="content-item-inner col">
+                        <!--start heading-->
+                        <div class="col">
+                            <h3 class="TextInTextImageContainer">
+                                Встановлення особистого ключа
+                                <img src="~/custom_js/clearJs/Images/Key.png" id="KeyReadedImage" style="width:24px; height:24px; display:none" align="right" />
+                            </h3>
+                            <span id="status">(завантаження...)</span>
+                            <div class="SeparatorLine"> </div>
+                        </div>
+                        <!--end heading-->
+                        <!--start select key group -->
+                        @*<div class="select-group col-lg-12">
+                                <select id="CAsServersSelect" class="select"></select>
+                                <label for="CAsServersSelect">Оберіть ЦСК</label>
+                            </div>*@
+                        <!--end select key group -->
+
+                        <div class="col">
+                            <label for="CAsServersSelect" style="width:100%">Оберіть ЦСК</label>
+                            <select id="CAsServersSelect" class="standard-select" style="width: 100%"></select>
+                        </div>
+
+                    </div>
+
+                    <div class="content-item-inner col">
+                        <div id="PKeySelectPanel" class="col">
+                            <!--start heading-->
+                            <h3 id="ChoosePKFileText" class="TextInTextImageContainer">
+                                Оберіть файл з особистим ключем (зазвичай з ім'ям Key-6.dat) та вкажіть пароль захисту
+                            </h3>
+                            <div class="SeparatorLine"> </div>
+                            <!--end heading-->
+                            <div class="col">
+                                <div class="col-lg-12">
+                                    <!--start input key file-->
+                                    <div class="col-lg-10">
+                                        <div class="input-group">
+                                            <input id="PKeyFileName"
+                                                   type="text"
+                                                   class="input PKeyFileNameEdit"
+                                                   autocomplete="off"
+                                                   readonly
+                                                   onclick="document.getElementById('PKeyFileInput').click();" />
+                                            <span class="input-group-bar"></span>
+                                            <label for="PKeyFileName">Особистий ключ:</label>
+                                        </div>
+                                    </div>
+                                    <!--end input key file-->
+                                    <!--start button load key file-->
+                                    <div id="buttonitem" class="col-lg-2">
+                                        <button id="PKeySelectFileButton" type="button" class="btn btn-secondary btn-fill" title="Обрати" onclick="document.getElementById('PKeyFileInput').click();">Обрати</button>
+                                        <input id="PKeyFileInput" type="file" multiple="false" />
+                                    </div>
+                                    <!--end button load key file-->
+                                </div>
+                            </div>
+
+                            <div class="col">
+                                <div class="col-lg-12">
+                                    <!--start input key password-->
+                                    <div class="col-lg-10">
+                                        <div class="input-group">
+                                            <input id="PKeyPassword" type="password" class="input PasswordEdit"
+                                                   autocomplete="off" />
+                                            <label for="PKeyPassword">Пароль захисту ключа:</label>
+                                        </div>
+                                    </div>
+                                    <!--end input key password-->
+                                    <!--start buttons read and sign-->
+                                    <div class="col-lg-2">
+                                        <div id="buttonitem">
+                                            <button id="PKeyReadButton" type="button" class="btn btn-secondary btn-fill" title="Зчитати" onclick="euSignTest.readPrivateKeyButtonClick()">Зчитати</button>
+                                        </div>
+
+                                    </div>
+                                    <!--end buttons read and sign-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="content-item-inner col">
+                        @*<div class="col">
+                            <h3 class="TextInTextImageContainer">
+                                Щоб підписати та відправити заяву, дайте згоду на підписання наступних файлів:
+                            </h3>
+                            <div class="SeparatorLine"> </div>
+                        </div>
+
+                        <div class="checkbox-files-item">
+                            <input type="checkbox" class="checkbox" name="chooseAllFiles" id="chooseAllFiles">
+                            <label for="chooseAllFiles">Вибрати всі файли</label>
+                        </div>
+
+                        <!--start checkboxes -->
+                        <div id="checkboxesForSign" class="col"></div>
+                        <!--end checkboxes -->*@
+                        <div id="buttonitem" class="col-lg-2" style=" margin-left: auto">
+                            <button id="SignDataButton" type="button" class="btn btn-secondary btn-fill" title="Підписати" onclick="euSignTest.signData()">Підписати</button>
+                        </div>
+                    </div>
+
+                    <div id="MainPageMenuGenPKeyPage" class="MainPageMenuPanel">
+
+                    </div>
+                    <div id="MainPageMenuSignPage" class="MainPageMenuPanel">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!--
+<div id="iit1">
+    <table border="0" cellspacing="0" cellpadding="0" align="center" width="100%">
+
+        <tr style="height:128px">
+            <td valign="top" align="left" colspan="2">
+                <table border="0" cellspacing="0" cellpadding="0" align="center" width="100%">
+                    <tr>
+                        <td valign="top" align="left" width="104">
+                            <img src="~/custom_js/clearJs/Images/Keys.png" height="122px" />
+                        </td>
+                        <td valign="top" align="left">
+                            <table border="0" cellspacing="0" cellpadding="0" align="center" width="100%">
+                                <tr>
+                                    <td width="100%" valign="top" align="left" style="padding:10px 0px 0px 0px;" class="header35">
+                                        <b>ІІТ Користувач ЦСК-1. Бібліотека підпису (java-скрипт)</b>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="100%" valign="top" align="left" class="header12">
+                                        <br /> @Model
+                                        За допомогою форми можна підписувати дані з форми (текстові дані),
+                                        або файли, що знаходяться на файловій системі тощо<br /><br />
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+
+
+
+        <tr style="height:100%">
+                <td valign="top" align="center" style="padding:0px 0px 0px 0px" align="center">
+                    <div id="iit_line1">
+                        <table border="0" cellspacing="0" cellpadding="0" align="center">
+                            <tr>
+                                <td class="headerwhite1" colspan="2" valign="top">
+                                    Основні функції
+                                    <span id="status" style="font-weight: normal;">(завантаження...)</span>
+                                    <progress value="0" max="100" id="progress" hidden=1></progress>
+                                    <img src="~/custom_js/clearJs/Images/Key.png" id="KeyReadedImage" style="width:24px; height:24px;display:none" align="right" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding:20px 0px 0px;" valign="top">
+                                    <div class="MainPageMenuContent">
+                                        <div id="MainPageMenuPKeyPage" class="MainPageMenuPanelSelected">
+                                            <div class="TextHeaderH3">Встановлення особистого ключа</div>
+                                            <div class="SeparatorLine"> </div>
+                                            <div class="SmoothGradient"></div>
+                                            <div id="PKeySelectPanel">
+                                                <div class="TextImageContainer">
+                                                    <img class="ImageInTextImageContainer" src="~/custom_js/clearJs/Images/Arrow.png" border="0" />
+                                                    <span class="TextInTextImageContainer">Оберіть ЦСК</span>
+                                                </div>
+                                                <div class="SubMenuContent">
+                                                    <div class="styled-select1" style="width: 100%">
+                                                        <select id="CAsServersSelect" style="width: 100%"></select>
+                                                    </div>
+                                                </div>
+                                                <div class="SeparatorLine"> </div>
+                                                <div class="SmoothGradient"></div>
+                                                <div class="TextImageContainer">
+                                                    <img class="ImageInTextImageContainer" src="~/custom_js/clearJs/Images/Arrow.png" border="0" />
+                                                    <span class="TextInTextImageContainer" id="ChoosePKFileText">Оберіть файл з особистим ключем (зазвичай з ім'ям Key-6.dat) та вкажіть пароль захисту</span>
+                                                </div>
+                                                <div class="SubMenuContent">
+                                                    <div class="TextLabel">Особистий ключ:</div>
+                                                    <div>
+                                                        <input id="PKeyFileName" type="text" class="PKeyFileNameEdit" readonly="true" onclick="document.getElementById('PKeyFileInput').click();" style="width:200px;float:left;margin-top:3px" />
+                                                        <div id="buttonitem" style="margin-left:0px;padding-left:10px">
+                                                            <a id="PKeySelectFileButton" style="cursor:pointer; pointer-events:auto;" href="javascript:void(0);" title="Обрати" onclick="document.getElementById('PKeyFileInput').click();">Обрати</a>
+                                                            <input id="PKeyFileInput" type="file" multiple="false" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="TextLabel">Пароль захисту ключа:</div>
+                                                    <div>
+
+                                                        <input id="PKeyPassword" type="password" class="PasswordEdit" disabled="disabled" style="width: 200px; float: left; margin-top: 3px" />
+                                                        <div id="buttonitem" style="margin-left: 0px; padding-left: 10px">
+                                                            <a id="PKeyReadButton" style="cursor: pointer;" href="javascript:void(0);" title="Зчитати" onclick="euSignTest.readPrivateKeyButtonClick()">Зчитати</a>
+                                                        </div>
+
+                                                        <div id="checkboxesForSign"></div>
+
+                                                        <div id="buttonitem" style="float: left;">
+                                                            <a id="SignDataButton" style="cursor: pointer;" href="javascript:void(0);" title="Підписати" onclick="euSignTest.signData()">Підписати</a>
+                                                        </div>
+                                                        <br />
+                                                    </div>
+                                                </div>
+                                                <div class="SeparatorLine"> </div>
+                                                <div>
+                                                    <p>Власник:</p>
+                                                    <p id="subjCn"></p>
+                                                    <p>ЦСК:</p>
+                                                    <p id="issuerCn"></p>
+                                                    <p>Серійний номер:</p>
+                                                    <p id="serialNumber"></p>
+                                                </div>
+
+                                                <div class="SmoothGradient"></div>
+                                                <div class="TextImageContainer">
+                                                    <img class="ImageInTextImageContainer" src="~/custom_js/clearJs/Images/Arrow.png" border="0" />
+                                                    <span class="TextInTextImageContainer">Інформація про особистий ключ</span>
+                                                </div>
+                                                <div class="SubMenuContent">
+                                                    <div id="buttonitem" style="width:208px">
+                                                        <a id="PKeyShowOwnerInfoButton" style="cursor:pointer;" href="javascript:void(0);" title="Переглянути про власника" onclick="euSignTest.showOwnerInfo()">Переглянути про власника</a>
+                                                    </div>
+                                                    <div id="buttonitem" style="width:208px">
+                                                        <a id="PKeyShowCertsInfoButton" style="cursor:pointer;" href="javascript:void(0);" title="Переглянути сертифікати" onclick="euSignTest.showOwnCertificates()">Переглянути сертифікати</a>
+                                                    </div>
+                                                </div>
+                                                <div class="SeparatorLine"> </div>
+                                                <div class="SmoothGradient"></div>
+                                            </div>
+                                            <div id="MainPageMenuGenPKeyPage" class="MainPageMenuPanel">
+
+                                            </div>
+                                            <div id="MainPageMenuSignPage" class="MainPageMenuPanel">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </td>
+        </tr>
+    </table>
+</div>
+      -->
+
+<script>
+
+    $(window).on('load', function () {
+
+        mt.showLoader($('#iit1'));
+
+        setTimeout(function () {
+            mt.createSelectList($('#CAsServersSelect'));
+            mt.manageContentReload($('#iit1'));
+            mt.hideLoader($('#iit1'));
+        }, 3000)
+    });
+
+
+    $(document).on('change', '#PKeyFileInput', function () {
+
+        var fileName = $('#PKeyFileInput')[0].files[0].name;
+
+        $('#PKeyFileName').val(fileName);
+        mt.manageContentReload($('#iit1'));
+    });
+
+    //choose All Checkbox files
+    $(document).on('change', '#chooseAllFiles', function () {
+        if ($(this).prop('checked')) {
+            $('#checkboxesForSign').find('.checkbox').each(function () {
+                $(this).prop('checked', true);
+            })
+            $('#chooseAllFiles + label').text('Скасувати усі позначки');
+        } else {
+            $('#checkboxesForSign').find('.checkbox').each(function () {
+                $(this).prop('checked', false);
+            })
+            $('#chooseAllFiles + label').text('Вибрати всі файли');
+        }
+    });
+    $(document).on('change', '#checkboxesForSign', function () {
+        if (!$(this).prop('checked')) {
+            $('#chooseAllFiles').prop('checked', false);
+            $('#chooseAllFiles + label').text('Вибрати всі файли');
+        }
+    });
+</script>

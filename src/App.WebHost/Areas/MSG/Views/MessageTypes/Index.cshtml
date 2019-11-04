@@ -1,0 +1,88 @@
+﻿@{
+    ViewData["Title"] = "Створення повідомлень, пов'язаних з ліцензуванням діяльності";
+}
+
+<div class="content-item-holder">
+    <div class="accordion">
+        <div class="accordion-item">
+            <div class="accordion-item-header">Повідомлення щодо зміни згальної інформаціії заявника</div>
+            <div class="accordion-item-content">
+                <a data-type="SgdChiefNameChange" class="accordion-content-inner accordion-content-link" href="@Url.Action("CreateMessageType", "MessageTypes", new {Area = "MSG", msgType = "SgdChiefNameChange"})">
+                    Зміна ПІБ керівника Суб'єкту господарювання
+                    <span>Всі ліцензії</span>
+                </a>
+                <a data-type="SgdNameChange" class="accordion-content-inner accordion-content-link" href="@Url.Action("CreateMessageType", "MessageTypes", new {Area = "MSG", msgType = "SgdNameChange"})">
+                    Зміна найменування Суб'єкту господарювання
+                    <span>Всі ліцензії</span>
+                </a>
+                <a data-type="OrgFopLocationChange" class="accordion-content-inner accordion-content-link" href="@Url.Action("CreateMessageType", "MessageTypes", new {Area = "MSG", msgType = "OrgFopLocationChange"})">
+                    Зміна місця знаходження юридичної особи \ фізичної особи підприємця
+                    <span>Всі ліцензії</span>
+                </a>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <div class="accordion-item-header">Повідомлення щодо змін в роботі МПД</div>
+            <div class="accordion-item-content">
+                <a data-type="MPDActivitySuspension" class="accordion-content-inner accordion-content-link" href="@Url.Action("CreateMessageType", "MessageTypes", new {Area = "MSG", msgType = "MPDActivitySuspension"})">
+                    Призупинення провадження діяльності МПД
+                    <span>Всі ліцензії</span>
+                </a>
+                <a data-type="MPDActivityRestoration" class="accordion-content-inner accordion-content-link" href="@Url.Action("CreateMessageType", "MessageTypes", new {Area = "MSG", msgType = "MPDActivityRestoration"})">
+                    Відновлення провадження діяльності МПД
+                    <span>Всі ліцензії</span>
+                </a>
+                <a data-type="MPDClosingForSomeActivity" class="accordion-content-inner accordion-content-link" href="@Url.Action("CreateMessageType", "MessageTypes", new {Area = "MSG", msgType = "MPDClosingForSomeActivity"})">
+                    Закриття місця провадження діяльності для проведення ремонтних робіт, технічного переобладнання чи інших робіт, пов'язаних з веденням певного виду господарської діяльності
+                    <span>Всі ліцензії</span>
+                </a>
+                <a data-type="MPDRestorationAfterSomeActivity" class="accordion-content-inner accordion-content-link" href="@Url.Action("CreateMessageType", "MessageTypes", new {Area = "MSG", msgType = "MPDRestorationAfterSomeActivity"})">
+                    Відновлення роботи місця провадження діяльності після проведення ремонтних робіт, технічного переобладнання чи інших робіт, пов'язаних з веденням певного виду господарської діяльності
+                    <span>Всі ліцензії</span>
+                </a>
+                <a data-type="MPDLocationRatification" class="accordion-content-inner accordion-content-link" href="@Url.Action("CreateMessageType", "MessageTypes", new {Area = "MSG", msgType = "MPDLocationRatification"})">
+                    Уточнення адреси місця провадженнядіяльності
+                    <span>Всі ліцензії</span>
+                </a>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <div class="accordion-item-header">Повідомлення про зміни у відомостях що подавались для отримання ліцензій</div>
+            <div class="accordion-item-content">
+                <a data-type="PharmacyHeadReplacement" class="accordion-content-inner accordion-content-link" href="@Url.Action("CreateMessageType", "MessageTypes", new {Area = "MSG", msgType = "PharmacyHeadReplacement"})">
+                    Заміна завідуючого аптечного закладу
+                    <span>Торгівля</span>
+                </a>
+                <a data-type="PharmacyAreaChange" class="accordion-content-inner accordion-content-link" href="@Url.Action("CreateMessageType", "MessageTypes", new {Area = "MSG", msgType = "PharmacyAreaChange"})">
+                    Зміна площі аптечного закладу
+                    <span>Торгівля</span>
+                </a>
+                <a data-type="PharmacyNameChange" class="accordion-content-inner accordion-content-link" href="@Url.Action("CreateMessageType", "MessageTypes", new {Area = "MSG", msgType = "PharmacyNameChange"})">
+                    Заміна назви аптечного закладу
+                    <span>Торгівля</span>
+                </a>
+                <a data-type="LeaseAgreementChange" class="accordion-content-inner accordion-content-link" href="@Url.Action("CreateMessageType", "MessageTypes", new {Area = "MSG", msgType = "LeaseAgreementChange"})">
+                    Зміна договору оренди
+                    <span>Торгівля</span>
+                </a>
+                <a data-type="ProductionDossierChange" class="accordion-content-inner accordion-content-link" href="@Url.Action("CreateMessageType", "MessageTypes", new {Area = "MSG", msgType = "ProductionDossierChange"})">
+                    Заміна або нова редакція Досьє
+                    <span>Виробництво, Імпорт</span>
+                </a>
+                <a data-type="SupplierChange" class="accordion-content-inner accordion-content-link" href="@Url.Action("CreateMessageType", "MessageTypes", new {Area = "MSG", msgType = "SupplierChange"})">
+                    Зміна постачальника
+                    <span>Імпорт</span>
+                </a>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <div class="accordion-item-header">Інше</div>
+            <div class="accordion-item-content">
+                <a data-type="AnotherEvent" class="accordion-content-inner accordion-content-link" href="@Url.Action("CreateMessageType", "MessageTypes", new {Area = "MSG", msgType = "AnotherEvent"})">
+                    Повідомити про іншу подію
+                    <span>Всі ліцензії</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

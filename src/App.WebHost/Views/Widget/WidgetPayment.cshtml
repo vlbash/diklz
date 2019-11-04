@@ -1,0 +1,26 @@
+﻿@model List<App.Data.DTO.Common.Widget.WidgetPaymentDTO>
+@if (Model.Count != 0)
+{
+    <div class="col-lg-5">
+        <div class="widget-inner">
+            <div class="widget-header">
+                <i class="icon icon-xlg icon-clipboard-time"></i>
+                Нагадуємо, що Ви маєте підтвердити оплату протягом 10 робочих днів по заявах:
+            </div>
+            <div class="widget-datalist contS" style="overflow-y: scroll; max-height: 450px;">
+                    @foreach (var item in Model)
+                    {
+                        <a class="widget-datalist-item" href="@Url.Action("Details", "Monitoring", new {Area = "MTR", id = item.Id})?sort=@item.AppSort&appType=@item.AppType">
+                            <span class="col-lg-9">
+                                <i class="icon icon-sm icon-eye"></i>
+                                № <span style="font-weight: bold">@item.RegNumber</span> від <span style="font-weight: bold">@item.RegDate.ToString("dd.MM.yyyy")</span> рішення від
+                                <span style="font-weight: bold">
+                                    @item.DecisionDate.ToString("dd.MM.yyyy")
+                                </span>
+                            </span>
+                        </a>
+                    }
+            </div>
+        </div>
+    </div>
+}

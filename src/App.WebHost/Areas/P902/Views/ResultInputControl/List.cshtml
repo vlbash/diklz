@@ -1,0 +1,209 @@
+﻿@addTagHelper *, ReflectionIT.Mvc.Paging
+@using ReflectionIT.Mvc.Paging
+@model ReflectionIT.Mvc.Paging.PagingList<App.Data.DTO.P902.ResultInputControlListDTO>
+
+<div class="content-list-wrapper" data-pgparams="@ViewBag.FormParamList">
+    <div class="content-list content-list-header">
+        <div class="content-list-edit"></div>
+        <div class="content-list-item grid-container">
+            <div class="grid" data-grid="1">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.SortableHeaderFor(model => model.StateEnumName)
+                    </p>
+                </div>
+            </div>
+            <div class="grid" data-grid="1">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.SortableHeaderFor(model => model.CreatedOn)
+                    </p>
+                </div>
+            </div>
+            <div class="grid" data-grid="2">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.SortableHeaderFor(model => model.DateWin)
+                    </p>
+                </div>
+            </div>
+            <div class="grid" data-grid="2">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.SortableHeaderFor(model => model.DrugName)
+                    </p>
+                </div>
+            </div>
+            <div class="grid" data-grid="2">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.SortableHeaderFor(model => model.MedicineSeries)
+                    </p>
+                </div>
+            </div>
+            <div class="grid" data-grid="2">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.SortableHeaderFor(model => model.SizeOfSeries)
+                    </p>
+                </div>
+            </div>
+            <div class="grid" data-grid="2">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.SortableHeaderFor(model => model.AmountOfImportedMedicine)
+                    </p>
+                </div>
+            </div>
+            <div class="grid" data-grid="2">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.SortableHeaderFor(model => model.InputControlResultEnumName)
+                    </p>
+                </div>
+            </div>
+            <div class="grid" data-grid="2">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.DisplayNameFor(model => model.SendCheck) 
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    @foreach (var item in Model)
+    {
+        <div class="content-list">
+            <div class="content-list-edit">
+                <a class="btn-link btn btn-icon btn-square icon-md icon-eye"
+                   asp-action="Details"
+                   asp-route-id="@item.Id"
+                   data-tab-main
+                   data-title="Переглянути заяву"
+                   target="_blank"
+                   data-tooltipleft='1'>
+                </a>
+            </div>
+            <a class="content-list-link">
+                <div class="content-list-item grid-container-nested">
+                    <div class="grid">
+                        <div class="grid-inner">
+                            <p>@Html.DisplayFor(modelItem => item.StateEnumName)</p>
+                        </div>
+                    </div>
+                    <div class="grid">
+                        <div class="grid-inner">
+                            <p>@Html.DisplayFor(modelItem => item.CreatedOn)</p>
+                        </div>
+                    </div>
+                    <div class="grid">
+                        <div class="grid-inner">
+                            <p>@Html.DisplayFor(modelItem => item.DateWin)</p>
+                        </div>
+                    </div>
+                    <div class="grid">
+                        <div class="grid-inner">
+                            <p>@Html.DisplayFor(modelItem => item.DrugName)</p>
+                        </div>
+                    </div>
+                    <div class="grid">
+                        <div class="grid-inner">
+                            <p>@Html.DisplayFor(modelItem => item.MedicineSeries)</p>
+                        </div>
+                    </div>
+                    <div class="grid">
+                        <div class="grid-inner">
+                            <p>@Html.DisplayFor(modelItem => item.SizeOfSeries)</p>
+                        </div>
+                    </div>
+                    <div class="grid">
+                        <div class="grid-inner">
+                            <p>@Html.DisplayFor(modelItem => item.AmountOfImportedMedicine)</p>
+                        </div>
+                    </div>
+                    <div class="grid">
+                        <div class="grid-inner">
+                            <p>@Html.DisplayFor(modelItem => item.InputControlResultEnumName)</p>
+                        </div>
+                    </div>
+                    @if (item.State == "Project")
+                    {
+                        <div class="grid">
+                            <div class="grid-inner send-check">
+                                <input type="checkbox" class="sendApp checkbox" data-id="@item.Id" id="check@(item.Id)" checked="@(item.SendCheck)"/>
+                                <label class="control-label" for="check@(item.Id)"></label>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </a>
+        </div>
+    }
+
+</div>
+<div class="content-submit-holder btn-holder btn-holder-right">
+    <input type="submit" value="Відправити результат" id="send-tds" class="btn btn-secondary btn-fill"/>
+</div>
+
+
+
+<script>
+    $('.sendApp').on('click', function () {
+        $.ajax({
+            type: "POST",
+            url: "@Url.Action("ChangeSendCheck", "ResultInputControl", new {Area = "P902"})",
+            data: { entityId: $(this).attr('data-id') },
+            success: function(data) {
+                if (data.success) {
+
+                } else {
+                    alert(data.ErrorMessage);
+                }
+            },
+            error: function(data) {
+                $(this).click();
+            }
+        });
+    });
+
+    $('#send-tds').on('click', function () {
+        $.ajax({
+            type: "POST",
+            url: "@Url.Action("SendResult", "ResultInputControl", new {Area = "P902"})",
+            //data: { entityId: $(this).attr('data-id') },
+            success: function(data) {
+                if (data.success) {
+                    document.location.reload(true);
+                } else {
+                    alert(data.ErrorMessage);
+                }
+            },
+            error: function(data) {
+                $(this).click();
+            }
+        });
+    });
+
+
+    //$(document).ready(function (){
+    //    debugger;
+    //    var items = [];
+    //    var sendCheck = $('.send-check input').attr("data-id");
+
+    //    $('.send-check input').each(function(sendCheck, value) {
+    //        items.push($(value).val());
+    //    });
+    //    selectedItemId = JSON.stringify(sendCheck);
+    //});
+  
+  
+    //sendCheck.each(function(index, value) {
+    //    items.push($(value).val());
+    //});
+    //selectedItemId = JSON.stringify(items);
+    //activityTypeId = selectedItemId;
+</script>
+
+<nav>
+    <vc:pager paging-list="@Model" />
+</nav>

@@ -1,0 +1,237 @@
+﻿@using ReflectionIT.Mvc.Paging
+@model ReflectionIT.Mvc.Paging.PagingList<App.Data.DTO.CRV.LimsListRPDTO>
+@addTagHelper *, ReflectionIT.Mvc.Paging
+
+
+<div class="content-list-wrapper" data-pgparams="@ViewBag.FormParamList" style="font-size: 11px">
+    <div class="content-list content-list-header">
+        <div class="content-list-edit"></div>
+        <div class="content-list-item grid-container">
+            <div class="grid" data-grid="1">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.SortableHeaderFor(model => model.StateName)
+                    </p>
+                </div>
+            </div>
+            <div class="grid" data-grid="1">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.SortableHeaderFor(model => model.RegProcCode)
+                    </p>
+                </div>
+            </div>
+
+            <div class="grid" data-grid="1">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.SortableHeaderFor(model => model.RegNum)
+                    </p>
+                </div>
+            </div>
+
+            <div class="grid" data-grid="1">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.SortableHeaderFor(model => model.RegDate)
+                    </p>
+                </div>
+            </div>
+            <div class="grid" data-grid="1">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.SortableHeaderFor(model => model.EndDate)
+                    </p>
+                </div>
+            </div>
+            <div class="grid" data-grid="1">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.SortableHeaderFor(model => model.OrdRegNum)
+                    </p>
+                </div>
+            </div>
+            <div class="grid" data-grid="1">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.SortableHeaderFor(model => model.OrdRegDate)
+                    </p>
+                </div>
+            </div>
+            <div class="grid" data-grid="1">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.SortableHeaderFor(model => model.DrugNameUkr)
+                    </p>
+                </div>
+            </div>
+            <div class="grid" data-grid="2">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.SortableHeaderFor(model => model.FormTypeDesc)
+                    </p>
+                </div>
+            </div>
+            <div class="grid" data-grid="2">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.SortableHeaderFor(model => model.ProducerName)
+                    </p>
+                </div>
+            </div>
+            <div class="grid" data-grid="1">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.SortableHeaderFor(model => model.CountryName)
+                    </p>
+                </div>
+            </div>
+            <div class="grid" data-grid="2">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.SortableHeaderFor(model => model.FarmGroup)
+                    </p>
+                </div>
+            </div>
+            <div class="grid" data-grid="1">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.SortableHeaderFor(model => model.DrugNameEng)
+                    </p>
+                </div>
+            </div>
+            <div class="grid" data-grid="1">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.SortableHeaderFor(model => model.OffOrderNum)
+                    </p>
+                </div>
+            </div>
+            <div class="grid" data-grid="1">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.SortableHeaderFor(model => model.OffOrderDate)
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @foreach (var item in Model)
+    {
+        var selectColorStyle = @"border: 1px solid;
+        border-radius: 3px;
+        padding: 4px 10px 4px 10px;
+        font-weight:500;";
+        if (item.StateId == 1)
+        {
+            selectColorStyle += "color:#07bd0c;background-color: #d8f1d8;";
+        }
+        else if (item.StateId == 3)
+        {
+            selectColorStyle += "color:#ccc608  ;background-color: #fdfcd7";
+        }
+        else if (item.StateId == 2)
+        {
+            selectColorStyle += "color:#ff6a6a  ;background-color: #fba7a740";
+        }
+
+        <div class="content-list">
+            <div class="content-list-edit">
+                <a class="btn-link btn btn-icon btn-square icon-md icon-eye"
+                   asp-action="Details"
+                   asp-route-id="@item.Id"
+                   data-tab-main
+                   data-title="Переглянути РП"
+                   target="_blank"
+                   data-tooltipleft='1'>
+                </a>
+            </div>
+            <a class="content-list-link">
+                <div class="content-list-item grid-container-nested">
+                    <div class="grid">
+                        <div class="grid-inner">
+                            <p style="@selectColorStyle">@Html.DisplayFor(modelItem => item.StateName)</p>
+                        </div>
+                    </div>
+                    <div class="grid">
+                        <div class="grid-inner">
+                            <p>@Html.DisplayFor(modelItem => item.RegProcCode)</p>
+                        </div>
+                    </div>
+                    <div class="grid">
+                        <div class="grid-inner">
+                            <p>@Html.DisplayFor(modelItem => item.RegNum)</p>
+                        </div>
+                    </div>
+                    <div class="grid">
+                        <div class="grid-inner">
+                            <p>@Html.DisplayFor(modelItem => item.RegDate)</p>
+                        </div>
+                    </div>
+                    <div class="grid">
+                        <div class="grid-inner">
+                            <p>@Html.DisplayFor(modelItem => item.EndDate)</p>
+                        </div>
+                    </div>
+                    <div class="grid">
+                        <div class="grid-inner">
+                            <p>@Html.DisplayFor(modelItem => item.OrdRegNum)</p>
+                        </div>
+                    </div>
+                    <div class="grid">
+                        <div class="grid-inner">
+                            <p>@Html.DisplayFor(modelItem => item.OrdRegDate)</p>
+                        </div>
+                    </div>
+                    <div class="grid">
+                        <div class="grid-inner">
+                            <p>@Html.DisplayFor(modelItem => item.DrugNameUkr)</p>
+                        </div>
+                    </div>
+                    <div class="grid">
+                        <div class="grid-inner">
+                            <p>@Html.DisplayFor(modelItem => item.FormTypeDesc)</p>
+                        </div>
+                    </div>
+                    <div class="grid">
+                        <div class="grid-inner">
+                            <p>@Html.DisplayFor(modelItem => item.ProducerName)</p>
+                        </div>
+                    </div>
+                    <div class="grid">
+                        <div class="grid-inner">
+                            <p>@Html.DisplayFor(modelItem => item.CountryName)</p>
+                        </div>
+                    </div>
+                    <div class="grid">
+                        <div class="grid-inner">
+                            <p>@Html.DisplayFor(modelItem => item.FarmGroup)</p>
+                        </div>
+                    </div>
+                    <div class="grid">
+                        <div class="grid-inner">
+                            <p>@Html.DisplayFor(modelItem => item.DrugNameEng)</p>
+                        </div>
+                    </div>
+                    <div class="grid">
+                        <div class="grid-inner">
+                            <p>@Html.DisplayFor(modelItem => item.OffOrderNum)</p>
+                        </div>
+                    </div>
+                    <div class="grid">
+                        <div class="grid-inner">
+                            <p>@Html.DisplayFor(modelItem => item.OffOrderDate)</p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    }
+
+</div>
+
+<nav>
+    <vc:pager paging-list="@Model" />
+</nav>
+

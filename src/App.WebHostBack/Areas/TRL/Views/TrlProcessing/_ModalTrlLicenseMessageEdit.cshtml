@@ -1,0 +1,91 @@
+﻿@model App.Data.DTO.APP.AppLicenseMessageDTO
+@inject App.Core.Mvc.Helpers.SelectListHelper Sel
+<h3>Створення повідомлення про результат розгляду заяви</h3>
+
+<form method="post"
+      data-ajax-url="@Url.Action("SaveLicenseMessage", "TrlProcessing")"
+      data-ajax="true"
+      data-ajax-method="post"
+      data-ajax-complete="completed" class="content-item-edit">
+    <input type="hidden" asp-for="Id" value="@Model.Id" />
+    <input type="hidden" asp-for="AppId" />
+    
+    <div class="input-group">
+        <input class="input"
+               asp-for="MessageNumber"
+               type="text"
+               autocomplete="off" />
+        <span class="input-group-bar"></span>
+        <label asp-for="MessageNumber"></label>
+        <span asp-validation-for="MessageNumber" class="asp-validation"></span>
+    </div>
+
+    <div class="input-group datepicker-group">
+        <input class="input datepicker"
+               asp-for="DateOfMessage"
+               type="text"
+               autocomplete="off" />
+        <span class="input-group-bar"></span>
+        <label asp-for="DateOfMessage"></label>
+        <span asp-validation-for="DateOfMessage" class="asp-validation"></span>
+    </div>
+
+    <div class="input-group">
+        <input class="input"
+               asp-for="SignedJobPosition"
+               type="text"
+               autocomplete="off" />
+        <span class="input-group-bar"></span>
+        <label asp-for="SignedJobPosition"></label>
+        <span asp-validation-for="SignedJobPosition" class="asp-validation"></span>
+    </div>
+
+    <div class="input-group">
+        <input class="input"
+               asp-for="SignedFullName"
+               type="text"
+               autocomplete="off" />
+        <span class="input-group-bar"></span>
+        <label asp-for="SignedFullName"></label>
+        <span asp-validation-for="SignedFullName" class="asp-validation"></span>
+    </div>
+
+    <div class="input-group">
+        <input class="input" asp-for="PerformerName"
+               validate-not-empty
+               autocomplete-allowcreate
+               autocomplete-idinput-name="PerformerId"
+               autocomplete-init-id="PerformerOfExpertiseId"
+               autocomplete-url="@Url.Action("AutoCompletePerformer", "Application", new {Area = "TRL"})"
+               autocomplete-onselect="mt.onChangeUrl($('#PerformerId'))"
+               autocomplete-onblur="if (!value) { mt.onChangeUrl($('#PerformerId')) }" />
+        <span class="input-group-bar"></span>
+        <input asp-for="PerformerId" type="hidden" onchange-url="@Url.Action("AutoCompletePerformer", "Application")" />
+        <label>@Html.DisplayNameFor(p => p.PerformerName)</label>
+        <span class="asp-validation"></span>
+    </div>
+
+    <div class="content-submit-holder btn-holder btn-holder-right">
+        <a href="#" onclick="mt.closeModal()" class="btn btn-text btn-danger">Відмінити</a>
+        <input type="submit" value="Зберегти" class="btn btn-secondary btn-fill" />
+    </div>
+</form>
+
+<script>
+    completed = function (xhr, status) {
+        var json = JSON.parse(xhr.responseText);
+        if (status === "success" && json.success === true) {
+            var container = $('#licenseMsgPart');
+            mt.closeModal();
+            mt.tryLoadContainer(container, container.attr('data-tab-container-url'));
+        }
+    }
+    $(document).ready(function () {
+        if ($('*').is('[autocomplete-url]')) {
+            $('[autocomplete-url]').each(function () {
+                mt.autocompleteEl($(this));
+                mt.onLoadCheckAllInputs();
+            });
+        }
+    });
+</script>

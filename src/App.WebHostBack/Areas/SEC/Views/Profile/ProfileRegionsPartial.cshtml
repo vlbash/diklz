@@ -1,0 +1,151 @@
+﻿
+<div class="content-edit-wrapper"style="width: 400px">
+    <div class="content-edit">
+        <div class="checkbox-group" id="regAll">
+            <label ><input  type="checkbox"/>Будь-який</label>
+        </div>
+    </div>
+</div>
+
+
+<div class="content-edit-wrapper " style="width: 400px"  >
+    <div class="content-edit">
+        <div class="checkbox-group" id="regDefault">
+            <label ><input  type="checkbox" />Свій</label>
+        </div>
+    </div>
+</div>
+
+
+        
+
+<div id="jsGridProfileRegions"></div>
+
+<script>
+    $(document).ready(function () {
+        var regAccess = "@Html.Raw(ViewBag.RegAccessLevel)";
+        if (regAccess === "Default") {
+            var regDef = $("#regDefault")[0].children[0].children[0];
+            regDef.checked = true;
+            $("#jsGridProfileRegions").hide();
+        }
+        if (regAccess === "All") {
+            var regAll = $("#regAll")[0].children[0].children[0];
+            regAll.checked = true;
+            $("#jsGridProfileRegions").hide();
+        }
+    });
+
+    $("#regAll").change(function() {
+        var regDef = $("#regDefault")[0].children[0].children[0];
+        regDef.checked = false;
+        levelUpdate();
+    });
+       
+    $("#regDefault").change(function() {
+        var regAll = $("#regAll")[0].children[0].children[0];
+        regAll.checked = false;
+        levelUpdate();
+    });
+
+    function levelUpdate() {
+        var regDef = $("#regDefault")[0].children[0].children[0];
+        var regAll = $("#regAll")[0].children[0].children[0];
+
+        var regAccess = "Specified";
+        if (!regDef.checked && regAll.checked) {
+            regAccess = "All";
+            $("#jsGridProfileRegions").hide();
+        }
+        if (regDef.checked && !regAll.checked) {
+            regAccess = "Default";
+            $("#jsGridProfileRegions").hide();
+        }
+        if (!regDef.checked && !regAll.checked) {
+            $("#jsGridProfileRegions").show();
+        }
+        $.ajax({
+            type: "POST",
+            url: "/Sec/Profile/UpdateLevelRegions?profileId=" + "@Html.Raw(ViewBag.ProfileId)" + "&access=" + regAccess,
+            dataType: "json"
+        });
+    }
+
+
+    var jsGridContainer = $("#jsGridProfileRegions");
+
+    var roleRights = [];
+
+    var RegionList = '' || '@Html.Raw(ViewBag.RegionList)';
+    if (!RegionList) {
+        RegionList = [];
+    } else {
+        RegionList = JSON.parse(RegionList);
+    }
+
+    jsGridContainer.jsGrid({
+        width: "100%",
+        inserting: true,
+        editing: false,
+        sorting: true,
+        autoload: true,
+        paging: true,
+        pageSize: 10,
+        pageIndex: 1,
+        deleteConfirm: "Ви впевнені, що хочете видалити елемент?",
+        controller: {
+            loadData: function (filter) {
+                return $.ajax({
+                    type: "GET",
+                    url: "/Sec/Profile/GetProfileRegions?profileId=" + "@Html.Raw(ViewBag.ProfileId)",
+                    dataType: "json"
+                });
+                return null;
+            },
+            insertItem: function (item) {
+                item.id = "@Html.Raw(ViewBag.RowLvl)";
+                item.ProfileId = "@Html.Raw(ViewBag.ProfileId)";
+                return $.ajax({
+                    type: "POST",
+                    url: "/Sec/Profile/InsertProfileRegion",
+                    contentType: "application/json",
+                    data: JSON.stringify(item),
+                    error: function (xhr, httpStatusMessage, customErrorMessage) {
+                        mt.createDialog(false, xhr.responseText);
+                        //alert(xhr.responseText);
+                    },
+                    dataType: "json"
+                });
+            },
+            deleteItem: function (item) {
+                return $.ajax({
+                    type: "DELETE",
+                    url: "/Sec/Profile/DeleteProfileRegion?id=" + item.id
+                });
+            }
+        },
+        onDataLoaded: mt.updateNiceScroll,
+        fields: [
+            {
+                title: "Регіон",
+                name: "entityId",
+                type: "select",
+                validate: "required",
+                items: RegionList,
+                valueField: "regionId",
+                textField: "name",
+                search: false,
+                insertTemplate: function () {
+                    var $insertControl = jsGrid.fields.select.prototype.insertTemplate.call(this);
+                    $insertControl.val('');
+                    return $insertControl;
+                }
+            },
+            {
+                type: "control",
+                editButton: false
+            }
+        ]
+    });
+
+</script>

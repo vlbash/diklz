@@ -1,0 +1,98 @@
+@font-face {
+  font-family: 'icomoon';
+  src:  url('fonts/icomoon.eot?fd7l2w');
+  src:  url('fonts/icomoon.eot?fd7l2w#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?fd7l2w') format('truetype'),
+    url('fonts/icomoon.woff?fd7l2w') format('woff'),
+    url('fonts/icomoon.svg?fd7l2w#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-box:before {
+  content: "\e95c";
+}
+.icon-admin-control:before {
+  content: "\e966";
+}
+.icon-workers:before {
+  content: "\e967";
+}
+.icon-coins:before {
+  content: "\e90c";
+}
+.icon-money:before {
+  content: "\e90c";
+}
+.icon-worker-hat:before {
+  content: "\e977";
+}
+.icon-consultations-alternative:before {
+  content: "\e900";
+}
+.icon-consultations:before {
+  content: "\e901";
+}
+.icon-episodes:before {
+  content: "\e902";
+}
+.icon-telemed:before {
+  content: "\e903";
+}
+.icon-acts:before {
+  content: "\e954";
+}
+.icon-paper-fill:before {
+  content: "\e955";
+}
+.icon-file-fill:before {
+  content: "\e956";
+}
+.icon-reports:before {
+  content: "\e959";
+}
+.icon-org-note:before {
+  content: "\e958";
+}
+.icon-message-fill:before {
+  content: "\e952";
+}
+.icon-info-book:before {
+  content: "\e957";
+}
+.icon-calendar-fill:before {
+  content: "\e95e";
+}
+.icon-calendar-check-fill:before {
+  content: "\e95f";
+}
+.icon-time-calendar:before {
+  content: "\e961";
+}
+.icon-calendar-delete:before {
+  content: "\e960";
+}
+.icon-building:before {
+  content: "\e905";
+}
+.icon-wait:before {
+  content: "\e975";
+}
+.icon-time-alarm:before {
+  content: "\e976";
+}

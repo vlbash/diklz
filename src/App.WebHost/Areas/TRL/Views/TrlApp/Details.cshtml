@@ -1,0 +1,136 @@
+﻿@model App.Data.DTO.TRL.TrlAppDetailDTO
+
+@{
+    var title = Model.AppSort == "AdditionalInfoToLicense" ? "Доповнення інформації по наявній ліцензії" : Model.AppSort == "IncreaseToTRLApplication" ?
+        "Заява про розширення провадження виду господарської діяльності" : "Заява про отримання ліцензії на провадження діяльності";
+    ViewData["Title"] = title;
+}
+
+@section Scripts
+{
+    <script>
+
+
+        $('#signButton').click(function() {
+            var agreeChecks = $('.license_check_agree');
+            try {
+                agreeChecks.each(function() {
+                    if (!this.checked) {
+                        throw store;
+                    }
+                });
+            } catch (e) {
+                alert("Вам потрібно погодитись з ліцензійними умовами перед підписанням заяви");
+                $(".btn-tab[title='Сповіщення та ліцензійні умови']").trigger("click");
+                return;
+            }
+            //var optionalAgreeChecks = $('.optional_agree');
+            //var countOfChecks = 0;
+            //optionalAgreeChecks.each(function() {
+            //    if (this.checked)
+            //        countOfChecks ++;
+            //});
+            //if (countOfChecks == 0) {
+            //    alert("Вам потрібно відмітити хоча б один варіант отримання результатів розгляду заяви");
+            //    $(".btn-tab[title='Сповіщення та ліцензійні умови']").trigger("click");
+            //    return false;
+            //}
+            $.ajax({
+                type: 'get',
+                url: '@Url.Action("Index", "TrlVerification")',
+                data: {
+                    jsonData: true,
+                    appId: '@Model.Id'
+                },
+                success: function(data) {
+                    if (Object.keys(data)[0] == null) {
+                        window.location.replace(
+                            "@Html.Raw(Url.Action("Sign", "EuSign", new {Area = "", urlAction = Url.Action("GetFilesForSign", new {id = Model.Id}), urlActionSave = Url.Action("SaveSignedFiles") }))");
+                    } else {
+                        alert(
+                            "Перед підписанням та відправкою заяви Вам потрібно заповнити заяву згідно з екпертизою комплектності заяви.");
+                        $(".btn-tab[title='Перевірка комплектності']").trigger("click");
+                    }
+                }
+            });
+
+        });
+
+        $(document).ready(function () {
+            var currentUrl = $(location).attr('href');
+            var tabId = currentUrl.split('#')[1];
+            $("#" + tabId).trigger("click");
+
+            $("#appAssignee").prop('title', 'Завідувачі/Уповноважені особи');
+        });
+
+    </script>
+
+
+}
+
+@section Buttons
+{
+    @if (ViewBag.IsEditable == true)
+    {
+        <a class="content-item-btn icon-md icon-edit-line"
+           asp-action="Edit"
+           asp-route-id="@Model.Id"
+           data-tab-main
+           data-title="Редагувати проект"
+           data-tooltipleft='1'>
+        </a>
+    }
+}
+
+<div class="content-item-holder">
+    @Html.Partial($"_ApplicationPartial", Model)
+    <div class="content-item">
+        <div class="content-item-header">
+            <i class="icon icon-xlg icon-timeline-pin"></i>
+            <h2 id="branch">Місця провадження діяльності</h2>
+        </div>
+        <div class="content-partial" data-tab-container-url="@Url.Action("List", "Branch", new { Area = "BRN" })?appId=@Model.Id&appType=TRL"></div>
+    </div>
+    <div class="content-item">
+        <div class="content-item-header">
+            <i class="icon icon-xlg icon-admin"></i>
+            <h2 id="appAssignee">Завідувачі/Уповноважені особи</h2>
+        </div>
+        <div class="content-partial" data-tab-container-url="@Url.Action("List", "AppAssignee", new { Area = "APP" })?appId=@Model.Id&sort=@Model.AppSort&appType=TRL"></div>
+    </div>
+    <div class="content-item">
+        <div class="content-item-header">
+            <i class="icon icon-xlg icon-clipboard-list"></i>
+            <h2 id="eDocument">Матеріально-технічна база</h2>
+        </div>
+        <div class="content-partial" data-tab-container-url="@Url.Action("List", "EDocument", new { Area = "DOC" })?appId=@Model.Id&appType=TRL"></div>
+    </div>
+
+    <div class="content-item">
+        <div class="content-item-header">
+            <i class="icon icon-xlg icon-data-cube"></i>
+            <h2 id="prlVerification">Перевірка комплектності</h2>
+        </div>
+        <div class="content-partial" data-tab-container-url="@Url.Action("Index", "TrlVerification", new { Area = "TRL" })?appId=@Model.Id"></div>
+    </div>
+
+    @Html.Partial($"_ApplicationChecksPartial", Model)
+
+    <div class="content-item">
+        <div class="content-item-header">
+            <i class="icon icon-xlg icon-clipboard-data"></i>
+            <h2 id="applyApp">Подання заяви</h2>
+        </div>
+        <div class="content-partial" data-tab-empty>
+            <div class="content-submit-holder btn-holder">
+                <a class="btn btn-secondary btn-panel"
+                   id="signButton"
+                   data-tab>
+                    <span class="icon icon-huge icon-document"></span>
+                    <span>Підписати і відправити заявy</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

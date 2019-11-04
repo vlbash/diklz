@@ -1,0 +1,40 @@
+﻿@model App.Data.DTO.DOS.EDocumentDetailsDTO
+@inject App.Core.Mvc.Helpers.SelectListHelper Sel
+
+<h3>Коментар до платежів</h3>
+
+<form method="post"
+      data-ajax-url="@Url.Action("CancelPayment", "Application")"
+      data-ajax="true"
+      data-ajax-method="post"
+      data-ajax-complete="completed" class="content-item-edit">
+    <input type="hidden" asp-for="EntityId" value="@Model.EntityId" />
+
+    <div class="input-group datepicker-group">
+        <textarea class="textarea"
+               asp-for="Comment"
+               autocomplete="off">
+        </textarea>
+        <span class="input-group-bar"></span>
+        <label asp-for="Comment"></label>
+        <span asp-validation-for="Comment" class="asp-validation"></span>
+    </div>
+
+    <div class="content-submit-holder btn-holder btn-holder-right">
+        <a href="#" onclick="mt.closeModal()" class="btn btn-text btn-danger">Відмінити</a>
+        <input type="submit" value="Відправити" class="btn btn-secondary btn-fill" />
+    </div>
+</form>
+
+<script>
+    completed = function (xhr, status) {
+        var json = JSON.parse(xhr.responseText);
+        if (status === "success" && json.success === true) {
+            var containers = [$('#paymentPart')];
+            mt.closeModal();
+            containers.forEach(function(el) {
+                mt.tryLoadContainer(el, el.attr('data-tab-container-url'));
+            });
+        }
+    }
+</script>

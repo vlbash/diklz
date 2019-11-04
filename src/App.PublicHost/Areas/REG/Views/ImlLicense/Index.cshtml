@@ -1,0 +1,85 @@
+﻿@using Newtonsoft.Json
+@inject App.Core.Mvc.Helpers.SelectListHelper Sel
+
+@{
+    ViewData["Title"] = "Реєстр ліцензій з виробництва";
+}
+
+
+<div class="content-search-wrapper">
+    <partial name="_Searchform" />
+</div>
+
+<div class="results" id="results">
+
+</div>
+
+@section Scripts {
+
+    <script>
+        var searchFormControls = {
+            controlsConfig: [
+                {
+                    labelName: 'Дата початку дії ліцензії',
+                    name: 'LicenseDate',
+                    type: 'dataGroup',
+                    children: [
+                        {
+                            labelName: 'з: ',
+                            name: 'LicenseDate_From',
+                            type: 'datepicker'
+                        }, {
+                            labelName: 'по: ',
+                            name: 'LicenseDate_To',
+                            type: 'datepicker'
+                        }
+                    ]
+                },
+                {
+                    labelName: 'Статус',
+                    name: 'LicState',
+                    type: 'select',
+                    selectOptions: @Html.Raw(JsonConvert.SerializeObject(Sel.Enum("LicenseState")))
+                },
+                {
+                    labelName: 'Найменування юридичної особи / ПІБ ФОП',
+                    name: 'OrgName',
+                    type: 'text'
+                },
+                {
+                    labelName: 'ЄДРПОУ/РНОКПП (Індивідуальний податковий номер)',
+                    name: 'EDRPOU',
+                    type: 'text'
+                },
+                {
+                    labelName: 'Юридична адреса (область,місто,вулиця)',
+                    name: 'SqlAddress',
+                    type: 'text'
+                }
+            ]
+        };
+
+        var searchFormConfig = {
+            formConfig: {
+                formName: 'form0',
+                formDataAjaxUpdate: '#results',
+                formMethod: 'post',
+                controls: searchFormControls
+            },
+            presetFiltersUrl: {
+                //controllerName: '@ViewContext.RouteData.Values["Controller"].ToString()',
+                //actionName: '@ViewContext.RouteData.Values["Action"].ToString()'
+            },
+            mainInputConfig: {
+                labelName: 'ЄДРПОУ/РНОКПП (Індивідуальний податковий номер)',
+                type: 'text',
+                mainInputLookUp: ['EDRPOU']
+            }
+        };
+
+        //console.log('searchFormConfig', searchFormConfig)
+        mt.createContentSearchForm(searchFormConfig);
+
+    </script>
+
+}

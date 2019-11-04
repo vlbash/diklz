@@ -1,0 +1,49 @@
+@import "../abstracts/_bundle";
+
+
+.map {
+  &-holder {
+    flex-direction: column;
+    width: 100%;
+
+    &.edit-map-mode {
+      .map-edit {
+        max-height: @map-frame-height*2;
+        opacity: 1;
+      }
+
+      .map-scan {
+        max-height: 0;
+        opacity: 0;
+      }
+    }
+  }
+
+  &-outer {
+    flex-direction: column;
+    width: 100%;
+    overflow: hidden;
+    transition: opacity @transition-slow;
+  }
+
+  &-header {
+    padding: @xxxs @sm @sm;
+    font-size: @font-size-h3;
+    font-weight: @semibold;
+  }
+
+  &-frame {
+    width: 100%;
+    height: @map-frame-height;
+  }
+
+  &-edit {
+    max-height: 0;
+    opacity: 0;
+  }
+
+  &-scan {
+    max-height: @map-frame-height*2;
+    opacity: 1;
+  }
+}

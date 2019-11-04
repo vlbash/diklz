@@ -1,0 +1,73 @@
+﻿@model App.Data.DTO.ATU.AtuStreetDTO
+@inject App.Core.Mvc.Helpers.SelectListHelper Sel
+<h3>Додати вулицю</h3>
+
+<form method="post"
+      data-ajax-url="@Url.Action("AtuSaveStreet", "Atu", new {Area = ""})"
+      data-ajax="true"
+      data-ajax-method="post"
+      data-ajax-complete="completed" class="content-item-edit">
+    <input type="hidden" asp-for="CityId" />
+    <div class="input-group">
+        <input asp-for="CityName"
+               class="input"
+               autocomplete="off"
+               disabled="disabled" />
+        <span class="input-group-bar"></span>
+        <label asp-for="CityName">@Html.DisplayNameFor(model => model.CityName)</label>
+        <span class="asp-validation"></span>
+    </div>
+
+    <div class="select-group mtn">
+        <select asp-for="@Model.TypeEnum"
+                class="select"
+                asp-items='@Sel.Enum("StreetType")'
+                autocomplete="off">
+            <option></option>
+        </select>
+        <label asp-for="TypeEnum">@Html.DisplayNameFor(model => model.TypeEnum)</label>
+        <span asp-validation-for="TypeEnum" class="asp-validation"></span>
+    </div>
+
+    <div class="input-group">
+        <input asp-for="Name"
+               class="input"
+               autocomplete="off" />
+        <span class="input-group-bar"></span>
+        <label asp-for="Name">@Html.DisplayNameFor(model => model.Name)</label>
+        <span asp-validation-for="Name" class="asp-validation"></span>
+    </div>
+
+    <div class="content-submit-holder btn-holder btn-holder-right">
+        <a href="#" onclick="mt.closeModal()" class="btn btn-text btn-danger">Відмінити</a>
+        <input type="submit" value="Створити" class="btn btn-secondary btn-fill" />
+    </div>
+</form>
+
+<script>
+    completed = function (xhr, status) {
+        var json = JSON.parse(xhr.responseText);
+        if (status === "success" && json.success === true) {
+            $("#StreetName").val(json.newStreetName);
+            $("#StreetId").val(json.newStreetId);
+            mt.closeModal();
+            mt.onLoadCheckAllInputs();
+        } else if (json.success === false) {
+            setError('Name', json.errorMessage);
+        }
+    }
+
+    function setError(id, message) {
+        var span = $("span[data-valmsg-for=\"" + id + "\"]");
+        if (span && span.length > 0) {
+            $(span).html(message);
+            if (message && message != "") {
+                $(span).removeClass("field-validation-valid");
+                $(span).addClass("field-validation-no-valid active");
+            } else {
+                $(span).removeClass("field-validation-no-valid");
+                $(span).addClass("field-validation-valid");
+            }
+        }
+    }
+</script>

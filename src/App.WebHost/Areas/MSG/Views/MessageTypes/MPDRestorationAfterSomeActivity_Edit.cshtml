@@ -1,0 +1,128 @@
+﻿@model App.Data.DTO.MSG.MPDRestorationAfterSomeActivityMessageDTO
+@inject App.Core.Mvc.Helpers.SelectListHelper Sel
+
+@{
+    ViewData["Title"] = "Повідомлення";
+}
+
+@section Scripts{
+    <script src="~/custom_js/msg-mpd.js"></script>
+}
+
+@section Buttons {
+    <a class="content-item-btn btn-column-list icon-md icon-list" data-title="Змінити вигляд" data-tooltipleft='1'></a>
+}
+
+<div class="content-item-holder">
+    <div class="content-item">
+        <div class="content-item-header">
+            @if (Model.Id == Guid.Empty)
+            {
+                <i class="icon-xlg icon-add-file"></i>
+                <h2>Створення повідомлення щодо відновлення роботи місця провадження діяльності після проведення робіт, технічного переобладнання чи інших робіт, пов'язаних з веденням певного виду господарської діяльнсті</h2>
+            }
+            else
+            {
+                <i class="icon-xlg icon-edit-list"></i>
+                <h2>Редагування повідомлення щодо відновлення роботи місця провадження діяльності після проведення робіт, технічного переобладнання чи інших робіт, пов'язаних з веденням певного виду господарської діяльнсті</h2>
+            }
+        </div>
+
+        <form asp-action="EditMessage" method="post" class="content-item-edit">
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="IsCreatedOnPortal" />
+            <input type="hidden" asp-for="MessageType" value="MPDRestorationAfterSomeActivity" />
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+            <div class="content-item-inner">
+                <div class="content-edit">
+                    <div class="datepicker-group input-group">
+                        <input class="input datepicker"
+                               autocomplete="off"
+                               type="text" asp-for="MessageDate" />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="MessageDate"></label>
+                        <span asp-validation-for="MessageDate" class="asp-validation"></span>
+                    </div>
+                </div>
+                <div class="content-edit ">
+                    <div class="input-group">
+                        <input asp-for="MessageNumber"
+                               class="input"
+                               autocomplete="off" />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="MessageNumber"></label>
+                        <span asp-validation-for="MessageNumber" class="asp-validation"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-item-inner">
+                <div class="content-edit">
+                    <div class="select-group">
+                        <select asp-for="LicenseType"
+                                class="select"
+                                asp-items='@Sel.Enum("ActivityType", initialSelectedValue: Model.IsPrlLicense ? "PRL" : Model.IsImlLicense ? "TRL" : Model.IsImlLicense ? "IML" : null)'
+                                autocomplete="off">
+                            <option></option><!-- добавить пустой option-->
+                        </select>
+                        <label asp-for="LicenseType"></label>
+                        <span asp-validation-for="LicenseType" class="asp-validation"></span>
+                    </div>
+                </div>
+                <div class="content-edit">
+                    <div class="select-group">
+                        <select asp-for="MPDGuidEnum"
+                                class="select"
+                                asp-items='@ViewBag.BranchList'
+                                autocomplete="off">
+                            <option></option><!-- добавить пустой option-->
+                        </select>
+                        <label asp-for="MPDGuidEnum"></label>
+                        <span asp-validation-for="MPDGuidEnum" class="asp-validation"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="content-item-inner">
+                <div class="content-edit">
+                    <div class="datepicker-group input-group">
+                        <input class="input datepicker"
+                               autocomplete="off"
+                               type="text" asp-for="RestorationDate" />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="RestorationDate"></label>
+                        <span asp-validation-for="RestorationDate" class="asp-validation"></span>
+                    </div>
+                </div>
+
+                <div class="content-edit content-edit-wide">
+                    <div class="textarea-group">
+                        <textarea asp-for="RestorationReason"
+                                  class="textarea"
+                                  autocomplete="off">
+                                </textarea>
+                        <span class="input-group-bar"></span>
+                        <label asp-for="RestorationReason"></label>
+                        <span asp-validation-for="RestorationReason" class="asp-validation"></span>
+                    </div>
+                </div>
+
+                <div class="content-edit content-edit-wide">
+                    <div class="textarea-group">
+                        <textarea asp-for="MessageText"
+                                  class="textarea"
+                                  autocomplete="off">
+                                </textarea>
+                        <span class="input-group-bar"></span>
+                        <label asp-for="MessageText"></label>
+                        <span asp-validation-for="MessageText" class="asp-validation"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="content-submit-holder btn-holder btn-holder-right">
+                <a href="#" onclick="mt.goStepBack()" class="btn btn-text btn-danger">Відмінити</a>
+                <input type="submit" value="Зберегти" class="btn btn-secondary btn-fill" />
+            </div>
+        </form>
+    </div>
+</div>

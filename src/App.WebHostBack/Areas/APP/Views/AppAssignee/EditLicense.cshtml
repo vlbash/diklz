@@ -1,0 +1,300 @@
+﻿@model App.Data.DTO.APP.AppAssigneeDetailDTO
+@inject App.Core.Mvc.Helpers.SelectListHelper Sel
+
+@{
+    ViewData["Title"] = "Уповноважена особа";
+}
+
+@section Buttons {
+    <a class="content-item-btn btn-column-list icon-md icon-list" data-title="Змінити вигляд" data-tooltipleft='1'></a>
+}
+
+<div class="content-item-holder">
+    <div class="content-item">
+        <div class="content-item-header">
+            <i class="icon-xlg icon-edit-list"></i>
+            <h2>Редагування уповноваженої особи</h2>
+        </div>
+        <form asp-action="EditLicense" class="content-item-edit">
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="LicenseDeleteCheck" />
+            <input type="hidden" asp-for="LicenseAssigneeId" />
+            <input type="hidden" asp-for="appId" />
+            <input type="hidden" asp-for="AppSort" />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="content-item-inner">
+                <div class="content-edit">
+                    <div class="select-group">
+                        <select asp-for="OrgPositionType"
+                                class="select"
+                                asp-items='@Sel.Enum("OrgPositionType",initialSelectedValue: Model.OrgPositionType)'
+                                autocomplete="off"
+                                readonly></select>
+                        <label asp-for="OrgPositionType"></label>
+                        <span asp-validation-for="OrgPositionType" class="asp-validation"></span>
+                    </div>
+                </div>
+
+                <div class="content-edit">
+                    <div class="input-group">
+                        <input asp-for="LastName"
+                               class="input"
+                               autocomplete="off"
+                               readonly />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="LastName"></label>
+                        <span asp-validation-for="LastName"
+                              class="asp-validation"></span>
+                    </div>
+                </div>
+
+                <div class="content-edit">
+                    <div class="input-group">
+                        <input asp-for="Name"
+                               class="input"
+                               autocomplete="off"
+                               readonly />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="Name"></label>
+                        <span asp-validation-for="Name"
+                              class="asp-validation"></span>
+                    </div>
+                </div>
+
+                <div class="content-edit">
+                    <div class="input-group">
+                        <input asp-for="MiddleName"
+                               class="input"
+                               autocomplete="off"
+                               readonly />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="MiddleName"></label>
+                        <span asp-validation-for="MiddleName"
+                              class="asp-validation"></span>
+                    </div>
+                </div>
+
+
+
+                <div class="content-edit">
+                    <div class="input-group">
+                        <input asp-for="IPN"
+                               class="input"
+                               autocomplete="off"
+                               readonly />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="IPN"></label>
+                        <span asp-validation-for="IPN"
+                              class="asp-validation"></span>
+                    </div>
+                </div>
+
+                <div class="content-edit">
+                    <div class="datepicker-group input-group">
+                        <input asp-for="Birthday"
+                               class="input datepicker"
+                               autocomplete="off"
+                               type="text"
+                               readonly />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="Birthday"></label>
+                        <span asp-validation-for="Birthday" class="asp-validation"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="content-item-inner">
+                <div class="content-edit">
+                    <div class="input-group">
+                        <input asp-for="EducationInstitution"
+                               class="input"
+                               autocomplete="off"
+                               readonly />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="EducationInstitution"></label>
+                        <span asp-validation-for="EducationInstitution"
+                              class="asp-validation"></span>
+                    </div>
+                </div>
+
+
+                <div class="content-edit">
+                    <div class="input-group">
+                        <input asp-for="YearOfGraduation"
+                               class="input"
+                               autocomplete="off"
+                               readonly />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="YearOfGraduation"></label>
+                        <span asp-validation-for="YearOfGraduation"
+                              class="asp-validation"></span>
+                    </div>
+                </div>
+
+                <div class="content-edit">
+                    <div class="input-group">
+                        <input asp-for="NumberOfDiploma"
+                               class="input"
+                               autocomplete="off"
+                               readonly />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="NumberOfDiploma"></label>
+                        <span asp-validation-for="NumberOfDiploma"
+                              class="asp-validation"></span>
+                    </div>
+                </div>
+
+                <div class="content-edit">
+                    <div class="datepicker-group input-group">
+                        <input asp-for="DateOfGraduation"
+                               class="input datepicker"
+                               autocomplete="off"
+                               type="text"
+                               readonly />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="DateOfGraduation"></label>
+                        <span asp-validation-for="DateOfGraduation"
+                              class="asp-validation"></span>
+                    </div>
+                </div>
+
+                <div class="content-edit">
+                    <div class="input-group">
+                        <input asp-for="Speciality"
+                               class="input"
+                               autocomplete="off"
+                               readonly />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="Speciality"></label>
+                        <span asp-validation-for="Speciality"
+                              class="asp-validation"></span>
+                    </div>
+                </div>
+
+                <div class="content-edit">
+                    <div class="input-group">
+                        <input asp-for="WorkExperience"
+                               class="input"
+                               autocomplete="off"
+                               readonly />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="WorkExperience"></label>
+                        <span asp-validation-for="WorkExperience"
+                              class="asp-validation"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="content-item-inner">
+                <div class="content-edit">
+                    <div class="input-group">
+                        <input asp-for="NumberOfContract"
+                               class="input"
+                               autocomplete="off"
+                               readonly />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="NumberOfContract"></label>
+                        <span asp-validation-for="NumberOfContract"
+                              class="asp-validation"></span>
+                    </div>
+                </div>
+
+                <div class="content-edit">
+                    <div class="input-group">
+                        <input asp-for="OrderNumber"
+                               class="input"
+                               autocomplete="off"
+                               readonly />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="OrderNumber"></label>
+                        <span asp-validation-for="OrderNumber"
+                              class="asp-validation"></span>
+                    </div>
+                </div>
+
+                <div class="content-edit">
+                    <div class="datepicker-group input-group">
+                        <input asp-for="DateOfContract"
+                               class="input datepicker"
+                               autocomplete="off"
+                               type="text"
+                               readonly />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="DateOfContract"></label>
+                        <span asp-validation-for="DateOfContract"
+                              class="asp-validation"></span>
+                    </div>
+                </div>
+
+                <div class="content-edit">
+                    <div class="datepicker-group input-group">
+                        <input asp-for="DateOfAppointment"
+                               class="input datepicker"
+                               autocomplete="off"
+                               type="text"
+                               readonly />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="DateOfAppointment"></label>
+                        <span asp-validation-for="DateOfAppointment"
+                              class="asp-validation"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="content-item-inner">
+                <div class="content-edit">
+                    <div class="input-group">
+                        <input asp-for="NameOfPosition"
+                               class="input"
+                               autocomplete="off"
+                               readonly />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="NameOfPosition"></label>
+                        <span asp-validation-for="NameOfPosition"
+                              class="asp-validation"></span>
+                    </div>
+                </div>
+
+                <div class="content-edit">
+                    <div class="input-group">
+                        <input asp-for="ContactInformation"
+                               class="input"
+                               autocomplete="off"
+                               readonly />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="ContactInformation"></label>
+                        <span asp-validation-for="ContactInformation"
+                              class="asp-validation"></span>
+                    </div>
+                </div>
+
+                <div class="content-edit">
+                    <div class="input-group">
+                        <input asp-for="Comment"
+                               class="input"
+                               autocomplete="off"
+                               readonly />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="Comment"></label>
+                        <span asp-validation-for="Comment"
+                              class="asp-validation"></span>
+                    </div>
+                </div>
+
+                <div class="content-edit">
+                    <select asp-for="ListOfBranches"
+                            id="branches-select"
+                            data-placeholder="Оберіть МПД"
+                            class="multiselect"
+                            multiple
+                            asp-items="@ViewBag.multiSelectBranchList"
+                            autocomplete="off"></select>
+
+                    <span asp-validation-for="ListOfBranches" class="asp-validation"></span>
+                </div>
+            </div>
+            <div class="content-submit-holder btn-holder btn-holder-right">
+                <a href="#" onclick="mt.goStepBack()" class="btn btn-text btn-danger">Відмінити</a>
+                <input type="submit" value="Зберегти" class="btn btn-secondary btn-fill" />
+            </div>
+        </form>
+    </div>
+</div>

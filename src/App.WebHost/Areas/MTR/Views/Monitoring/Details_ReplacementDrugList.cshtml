@@ -1,0 +1,148 @@
+﻿@model App.Data.DTO.APP.BaseAppDetailDTO
+
+@{
+    ViewData["Title"] = "Заява про заміну переліку лікарських засобів, що імпортує ліцензіат";
+}
+
+@section Buttons{
+    @if (Model.AppState == "Reviewed" && (Model.DecisionType == "Denied" || Model.DecisionType == "WithoutConsideration"))
+    {
+        <a class="content-item-btn icon-md icon-edit-line"
+           asp-action="CreateNewApplication"
+           asp-route-id="@Model.Id"
+           asp-route-appType="@Model.AppType"
+           data-tab-main
+           data-title="Створити заяву на основі данної"
+           data-tooltipleft='1'>
+        </a>
+    }
+}
+
+<div class="content-item-holder">
+    @Html.Partial($"_ApplicationPartial", Model)
+    <div class="content-item">
+        <div class="content-item-header">
+            <i class="icon icon-xlg icon-timeline-pin"></i>
+            <h2>Місця провадження діяльності</h2>
+        </div>
+        <div class="content-partial" data-tab-container-url="@Url.Action("List", "Branch", new { Area = "BRN" })?appId=@Model.Id&sort=ChangeInfoApplication"></div>
+    </div>
+    <div class="content-item">
+        <div class="content-item-header">
+            <i class="icon icon-xlg icon-doc-envelope"></i>
+            <h2 id="imlMedicine">Інформація про лікарські засоби, що планує ввозити на територію України заявник</h2>
+        </div>
+        <div class="content-partial" id="imlMedicinePartial" data-tab-container-url="@Url.Action("List", "ImlMedicine", new { Area = "IML" })?ApplicationId=@Model.Id"></div>
+    </div>
+    <div class="content-item">
+        <div class="content-item-header">
+            <i class="icon icon-xlg icon-admin"></i>
+            <h2>Уповноважені особи</h2>
+        </div>
+        <div class="content-partial" data-tab-container-url="@Url.Action("List", "AppAssignee", new { Area = "APP" })?appId=@Model.Id&sort=AddBranchApplication&appType=@Model.AppType"></div>
+    </div>
+    <div class="content-item">
+        <div class="content-item-header">
+            <i class="icon icon-xlg icon-data-cube"></i>
+            <h2>Перевірка комплектності</h2>
+        </div>
+        <div class="content-partial" data-tab-container-url="@Url.Action("Verification_ReplacementDrugList", "ImlVerification", new { Area = "IML" })?appId=@Model.Id"></div>
+    </div>
+
+    <div class="content-item">
+        <div class="content-partial" data-tab-empty>
+            <div class="content-item-header">
+                <i class="icon icon-xlg icon-msg-envelope"></i>
+                <h2>Сповіщення та ліцензійні умови</h2>
+            </div>
+            <div class="content-btn">
+                <a class="content-item-btn icon-lg icon-search-file"
+                   asp-action="GetImlApplicationReport"
+                   asp-controller="ImlApp"
+                   asp-route-id="@Model.Id"
+                   data-tab
+                   data-title="Переглянути заяву у формі PDF"
+                   target="_blank"
+                   data-tooltipleft='1'>
+                </a>
+            </div>
+            <div class="content-item-edit">
+                <div class="content-item-inner">
+                    <div class="content-edit content-edit-wide">
+                        <input type="checkbox" class="checkbox license_check" id="IsCheckMPD" checked="@Model.IsCheckMpd" disabled="disabled" />
+                        <label for="IsCheckMPD">
+                            Прошу за місцем/місцями провадження господарської діяльності провести перевірку матеріально-технічної бази,
+                            кваліфікованого персоналу, а також умов щодо контролю якості лікарських засобів, що вироблятимуться
+                        </label>
+                    </div>
+                    <div class="content-edit content-edit-wide">
+                        <input type="checkbox" class="checkbox license_check" id="IsPaperLicense" checked="@Model.IsPaperLicense" disabled="disabled" />
+                        <label for="IsPaperLicense">Додатково до електронної форми бажаю отримати ліцензію на паперовому носії</label>
+                    </div>
+                    <div class="content-edit content-edit-wide">
+                        <input type="checkbox" class="checkbox license_check" id="IsCourierDelivery" checked="@Model.IsCourierDelivery" disabled="disabled" />
+                        <label for="IsCourierDelivery">Нарочно</label>
+                    </div>
+                    <div class="content-edit content-edit-wide">
+                        <input type="checkbox" class="checkbox license_check" id="IsPostDelivery" checked="@Model.IsPostDelivery" disabled="disabled" />
+                        <label for="IsPostDelivery">Поштовим відправленням за місцезнаходженням/місцем проживання</label>
+                    </div>
+                </div>
+                <div class="content-item-inner">
+                    <div class="content-inner-header">Про рішення, прийняте за результатами розгляду цієї заяви, прошу повідомити:</div>
+                    <div class="content-edit content-edit-wide">
+                        <input type="checkbox" class="checkbox license_check" id="IsCourierResults" checked="@Model.IsCourierResults" disabled="disabled" />
+                        <label for="IsCourierResults">Нарочно</label>
+                    </div>
+                    <div class="content-edit content-edit-wide">
+                        <input type="checkbox" class="checkbox license_check" id="IsPostResults" checked="@Model.IsPostResults" disabled="disabled" />
+                        <label for="IsPostResults">Поштовим відправленням за місцезнаходженням/місцем проживання</label>
+                    </div>
+                    <div class="content-edit content-edit-wide">
+                        <input type="checkbox" class="checkbox license_check" id="IsElectricFormResults" checked="@Model.IsElectricFormResults" disabled="disabled" />
+                        <label for="IsElectricFormResults">В електронному вигляді</label>
+                    </div>
+
+                </div>
+                <div class="content-item-inner">
+                    <div class="content-inner-header">Ліцензійні умови:</div>
+                    <div class="content-edit content-edit-wide">
+                        <input type="checkbox" class="checkbox license_check" id="IsAgreeLicenseTerms" checked="@Model.IsAgreeLicenseTerms" disabled="disabled" />
+                        <label for="IsAgreeLicenseTerms">З порядком отримання ліцензії ознайомлений. Ліцензійним умовам провадження господарської діяльності з виробництва лікарських засобів, оптової та роздрібної торгівлі лікарськими засобами, імпорту лікарських засобів(крім активних фармацевтичних інгредієнтів) відповідаю і зобов’язуюсь їх виконувати.</label>
+                    </div>
+                    <div class="content-edit content-edit-wide">
+                        <input type="checkbox" class="checkbox license_check" id="IsAgreeProcesingData" checked="@Model.IsAgreeProcessingData" disabled="disabled" />
+                        <label for="IsAgreeProcesingData">Згоден на обробку персональних даних з метою забезпечення виконання вимог Закону України “Про ліцензування видів господарської діяльності” (для фізичної особи - підприємця)</label>
+                    </div>
+                    <div class="content-edit content-edit-wide">
+                        <input type="checkbox" class="checkbox license_check" id="IsProtectionFromAggressors" checked="@Model.IsProtectionFromAggressors" disabled="disabled" />
+                        <label for="IsProtectionFromAggressors">На виконання вимог Закону України "Про ліцензування видів господарської діяльності" інформуємо про відсутність контролю (у значенні наведеному в статті 1 Закону України "Про захист економічної конкуренції") за діяльністю осіб - резидентів інших держав, що здійснюють збройну агресію проти України (у значенні, наведеному у статті 1 Закону України "Про оборону України") та\або дії яких створюють умови для виникнення воєнного конфлікту та застосування воєнної сили проти України.</label>
+                    </div>
+                    <div class="content-edit content-edit-wide">
+                        <div class="textarea-group">
+                            <textarea asp-for="Comment"
+                                      class="textarea"
+                                      autocomplete="off" disabled="disabled">
+                                </textarea>
+                            <span class="input-group-bar"></span>
+                            <label asp-for="Comment"></label>
+                            <span asp-validation-for="Comment"
+                                  class="asp-validation"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    @if (Model.BackOfficeAppState != "Project" && Model.AppState != "Project")
+    {
+        <div class="content-item">
+            <div class="content-item-header">
+                <i class="icon icon-xlg icon-clipboard-file"></i>
+                <h2 id="eDocument">Додаткові документи до заяви</h2>
+            </div>
+            <div class="content-partial" data-tab-container-url="@Url.Action("ListAdditionDocuments", "EDocument", new { Area = "DOC" })?appId=@Model.Id"></div>
+        </div>
+    }
+</div>

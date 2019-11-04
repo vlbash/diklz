@@ -1,0 +1,82 @@
+﻿@{
+    var _sfUrl = ViewBag.SearchFormUrl ?? Url.Action("List");
+    var _part_class = ViewBag.SearchFormUrl == null ? "" : "search-form-partial";
+    var _form_name = ViewBag.SearchFormName ?? "form0";
+}
+
+Застосувати
+
+
+<div class="content-search content-filter @_part_class">
+    <div class="content-search-top">
+        <div class="input-wrapper">
+            <p class="content-search-main-text"></p>
+            <!-- <input class="input content-search-main-input" type="text" autocomplete="off" /> -->
+        </div>
+        <div class="content-search-switcher-wrapper">
+            <div class="content-search-switcher">
+                <i class="icon icon-md icon-triangle-down"></i>
+            </div>
+            <div class="content-preset-switcher">
+                <i class="icon icon-md icon-filters"></i>
+            </div>
+        </div>
+    </div>
+    <form id="content-search-form"
+          name="@( _form_name)"
+          class="content-search-form"
+          action="@_sfUrl">
+        <div class="content-search-form-ul-container">
+            <div class="content-search-form-preset">
+                <div class="content-search-form-preset-header">
+                    <p>Збережені фільтри:</p>
+                    <button type="button" class="preset-filters-settings btn btn-secondary-border btn-tiny" data-tooltipleft="1" data-title="Налаштування збережених фільтрів">
+                        <i class="icon-lg icon-settings"></i>
+                    </button>
+                    <button type="button" class="preset-filters-settings-cancel btn btn-secondary-border btn-tiny" data-tooltipleft="1" data-title="Вийти з налаштування">
+                        <i class="icon-lg icon-close"></i>
+                    </button>
+                </div>
+                <ul></ul>
+            </div>
+            <div class="content-search-form-holder">
+                <ul></ul>
+                <div class="content-search-form-submit btn-wrapper">
+                    <button type="button" class="search-form-btn-clean btn btn-danger btn-text">Очистити</button>
+                    <button type="button" class="search-form-btn-submit btn btn-secondary btn-fill ">Знайти</button>
+                    <button type="button" class="search-form-btn-save-filter btn btn-text disabled" >
+                        <i class="icon-md icon-save"></i>
+                        Зберегти фільтр
+                    </button>
+                    <div class="preset-filter-wrapper">
+                        <div class="preset-filter-inner">
+                            <div class="input-group">
+                                <input class="input empty preset-filter-name-input" type="text" name="presetFilterName" validate validate-not-empty />
+                                <span class="input-group-bar"></span>
+                                <label>Назва фільтру</label>
+                                <span class="js-validation"></span>
+                            </div>
+                            <div class="checkbox-group">
+                                <div class="checkbox-group-inner">
+                                    <input class="checkbox preset-filter-default-checkbox" type="checkbox" id="presetFilterDefault" name="presetFilterDefault" />
+
+                                    <label for="presetFilterDefault">Фільтр за замовчуванням</label>
+                                </div>
+                                <span class="checkbox-group-bar"></span>
+                            </div>
+                            <div class="preset-filter-btn-holder btn-holder">
+                                <button type=button class="btn btn-danger btn-text preset-filter-cancel">Відмінити</button>
+                                <button type="button" class="btn btn-secondary btn-fill preset-filter-save">Зберігти фільтр</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="content-filter-parameters">
+        <ul></ul>
+        <div class="content-filter-parameters-clear-all">очистити фільтр</div>
+    </div>
+
+</div>

@@ -1,0 +1,1 @@
+sed -i 's/diklz-dev/diklz-test/' submodule/python.migrations/config.py

@@ -1,0 +1,113 @@
+﻿@model App.Data.DTO.DOS.EDocumentDetailsDTO
+@inject App.Core.Mvc.Helpers.SelectListHelper Sel
+
+@{
+    ViewData["Title"] = "Досьє";
+}
+@section Scripts
+    {
+        <script>
+            var uploadFormContainer = $("#uploadForm"),
+                uploadFormLink = "@(Url.Action("UploadForm", "FileStore", new {Area = "", EntityId = Model.Id, EntityName = "EDocument"}))",
+                fileListLink = "@(Url.Action("List", "FileStore", new {Area = "", EntityId = Model.Id, EntityName = "EDocument"}))",
+                fileListContainer = $("#fileList");
+
+            mt.getAjaxContainer(uploadFormContainer, uploadFormLink);
+            mt.getAjaxContainer(fileListContainer, fileListLink);
+        </script>
+    
+}
+@section Buttons {
+    <a class="content-item-btn btn-column-list icon-md icon-list" data-title="Змінити вигляд" data-tooltipleft='1'></a>
+}
+
+    <div class="content-item-holder">
+        <div class="content-item">
+            <div class="content-item-header">
+                <i class="icon-xlg icon-list-edit"></i>
+                <h2>Редагування досьє</h2>
+            </div>
+            <form asp-action="Edit" class="content-item-edit">
+                <input type="hidden" asp-for="Id" />
+                <input type="hidden" asp-for="EDocumentType" />
+                <input type="hidden" asp-for="ApplicationId" />
+                <input type="hidden" asp-for="AppSort" />
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="content-item-inner">
+                    <div class="content-edit">
+                        <div class="input-group">
+                            <input asp-for="Version"
+                                   class="input"
+                                   autocomplete="off"
+                                   readonly />
+                            <span class="input-group-bar"></span>
+                            <label asp-for="Version"></label>
+                            <span asp-validation-for="Version"
+                                  class="asp-validation"></span>
+                        </div>
+                    </div>
+
+                    <div class="content-edit">
+                        <div class="input-group">
+                            <input asp-for="Comment"
+                                   class="input"
+                                   autocomplete="off"
+                                   readonly />
+                            <span class="input-group-bar"></span>
+                            <label asp-for="Comment"></label>
+                            <span asp-validation-for="Comment"
+                                  class="asp-validation"></span>
+                        </div>
+                    </div>
+
+                    <div class="content-edit">
+                        <div class="datepicker-group input-group">
+                            <input asp-for="DateFrom"
+                                   class="input datepicker"
+                                   autocomplete="off"
+                                   type="text"
+                                   readonly />
+                            <span class="input-group-bar"></span>
+                            <label asp-for="DateFrom"></label>
+                            <span asp-validation-for="DateFrom" class="asp-validation"></span>
+                        </div>
+                    </div>
+
+                    <div class="content-edit">
+                        <div class="datepicker-group input-group">
+                            <input asp-for="DateTo"
+                                   class="input datepicker"
+                                   autocomplete="off"
+                                   type="text"
+                                   readonly />
+                            <span class="input-group-bar"></span>
+                            <label asp-for="DateTo"></label>
+                            <span asp-validation-for="DateTo" class="asp-validation"></span>
+                        </div>
+                    </div>
+
+                    <div class="content-edit">
+                        <select asp-for="ListOfBranches"
+                                id="branches-select"
+                                data-placeholder="Оберіть МПД"
+                                class="multiselect"
+                                multiple
+                                asp-items="@ViewBag.multiSelectBranchList"
+                                autocomplete="off"></select>
+
+                        <span asp-validation-for="ListOfBranches" class="asp-validation"></span>
+                    </div>
+                </div>
+                <div class="content-submit-holder btn-holder btn-holder-right">
+                    <a href="#" onclick="mt.goStepBack()" class="btn btn-text btn-danger">Відмінити</a>
+                    <input type="submit" value="Зберегти" class="btn btn-secondary btn-fill" />
+                </div>
+            </form>
+        </div>
+        <div class="upload-edit content-readonly">
+            <div id="fileList" class="fileList">
+
+            </div>
+        </div>
+    </div>

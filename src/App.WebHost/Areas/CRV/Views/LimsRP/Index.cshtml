@@ -1,0 +1,126 @@
+﻿@using Newtonsoft.Json
+@inject App.Core.Mvc.Helpers.SelectListHelper Sel
+@{
+    ViewData["Title"] = "Реєстр РП і АНД (МКЯ)";
+}
+
+<div class="content-search-wrapper">
+    <partial name="_Searchform" />
+</div>
+
+
+<div class="results" id="results">
+
+</div>
+
+@section Scripts {
+
+    <script>
+        var searchFormControls = {
+            controlsConfig: [
+                {
+                    labelName: '№ РП',
+                    name: 'RegNum',
+                    type: 'text'
+                },
+                {
+                    labelName: 'Дата початку дії РП',
+                    name: 'RegDate',
+                    type: 'dataGroup',
+                    children: [
+                        {
+                            labelName: 'з: ',
+                            name: 'RegDate_From',
+                            type: 'datepicker'
+                        }, {
+                            labelName: 'по: ',
+                            name: 'RegDate_To',
+                            type: 'datepicker'
+                        }
+                    ]
+                },
+                {
+                    labelName: '№ наказу',
+                    name: 'OrdRegNum',
+                    type: 'text'
+                },
+                {
+                    labelName: 'Дата наказу',
+                    name: 'OrdRegDate',
+                    type: 'dataGroup',
+                    children: [
+                        {
+                            labelName: 'з: ',
+                            name: 'OrdRegDate_From',
+                            type: 'datepicker'
+                        }, {
+                            labelName: 'по: ',
+                            name: 'OrdRegDate_To',
+                            type: 'datepicker'
+                        }
+                    ]
+                },
+                {
+                    labelName: 'Назва ЛЗ',
+                    name: 'DrugNameUkr',
+                    type: 'text'
+                },
+                {
+                    labelName: 'Форма випуску',
+                    name: 'FormTypeDesc',
+                    type: 'text'
+                },
+                {
+                    labelName: 'Стан дії РП',
+                    name: 'StateId',
+                    type: 'select',
+                    selectOptions: @Html.Raw(JsonConvert.SerializeObject(new SelectList(new List<SelectListItem>
+                                       {
+                                           new SelectListItem {Text = "Діє", Value = "1"},
+                                           new SelectListItem {Text = "Термін закінчився", Value = "2"},
+                                           new SelectListItem {Text = "Припинено дію", Value = "3"},
+                                       }, "Value", "Text")))
+                },
+                {
+                    labelName: 'МНН',
+                    name: 'DrugNameEng',
+                    type: 'text'
+                },
+                {
+                    labelName: 'Виробник',
+                    name: 'ProducerName',
+                    type: 'text'
+                },
+                {
+                    labelName: 'Клінічно-фарм. група',
+                    name: 'FarmGroup',
+                    type: 'text'
+                },
+            ]
+        };
+
+        var searchFormConfig = {
+            formConfig: {
+                formName: 'form0',
+                formDataAjaxUpdate: '#results',
+                formMethod: 'post',
+                controls: searchFormControls
+            },
+            @*
+            presetFiltersUrl: {
+                controllerName: '@ViewContext.RouteData.Values["Controller"].ToString()',
+                actionName: '@ViewContext.RouteData.Values["Action"].ToString()'
+            },
+*@
+            mainInputConfig: {
+                labelName: '№ РП',
+                type: 'text',
+                mainInputLookUp: ['RegNum']
+            }
+        };
+
+        debugger;
+        mt.createContentSearchForm(searchFormConfig);
+
+    </script>
+}

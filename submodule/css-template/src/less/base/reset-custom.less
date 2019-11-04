@@ -1,0 +1,126 @@
+@import "../abstracts/_bundle";
+
+legend {
+  display: block;
+  padding: 0;
+  white-space: normal;
+}
+
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+select[readonly][disabled],
+input[type="checkbox"][readonly][disabled] {
+  cursor: default;
+}
+
+select::-ms-expand {
+  display: none;
+}
+
+::-webkit-input-placeholder {
+  transition: opacity .3s;
+  opacity: 1;
+  color: inherit;
+}
+
+::-moz-input-placeholder {
+  transition: opacity .3s;
+  opacity: 1;
+  color: inherit;
+}
+
+:-moz-placeholder {
+  transition: opacity .3s;
+  opacity: 1;
+  color: inherit;
+}
+
+:-ms-input-placeholder {
+  transition: opacity .3s;
+  opacity: 1;
+  color: inherit;
+}
+
+:focus::-webkit-input-placeholder {
+  opacity: 0;
+}
+
+:focus::-moz-input-placeholder {
+  opacity: 0;
+}
+
+:focus:-moz-placeholder {
+  opacity: 0;
+}
+
+:focus:-ms-input-placeholder {
+  opacity: 0;
+}
+
+tr,
+th,
+td {
+  box-sizing: border-box;
+}
+
+/////////////////////////////////////////////////////////////////??????????????????????????
+
+svg {
+  display: flex;
+  width: auto;
+  height: 100%;
+  fill: currentColor;
+
+}
+
+.disabled {
+  cursor: not-allowed;
+}
+
+:-webkit-autofill {
+  box-shadow: 0 0 100px #fff inset;
+  -webkit-text-fill-color: currentColor;
+}
+
+::selection {
+  background-color: #004fe4;
+  color: #fff;
+}
+
+.clearfix:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+.visually-hidden {
+  position: absolute;
+  z-index: -1;
+  width: 0;
+  height: 0;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  border: none;
+}
+
+.cover-pic,
+.contain-pic {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.cover-pic {
+  object-fit: cover;
+}
+
+.contain-pic {
+  object-fit: contain;
+}

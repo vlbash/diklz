@@ -1,0 +1,164 @@
+﻿@model App.Data.DTO.TRL.TrlAppDetailDTO
+
+@section Scripts
+{
+    <script>
+        $(document).ready(function () {
+
+            mt.currentTab();
+
+
+        });
+    </script>
+}
+
+@if (Model.BackOfficeAppState == "Project" && string.IsNullOrEmpty(Model.AppState))
+{
+    <div class="content-item">
+        <div class="content-item-header">
+            <i class="icon icon-xlg icon-clipboard-data"></i>
+            <h2 id="applyApp">Подання заяви</h2>
+        </div>
+        <div class="content-partial" data-tab-empty>
+            <div class="content-submit-holder btn-holder">
+                <a class="btn btn-secondary btn-panel"
+                   asp-action="SubmitApplication"
+                   asp-controller="Application"
+                   asp-route-id="@Model.Id"
+                   data-tab>
+                    <span class="icon icon-huge icon-doc-signed"></span>
+                    <span>Відправити заяву</span>
+                </a>
+            </div>
+        </div>
+
+    </div>
+}
+
+@if (Model.AppState == "Submitted" && Model.BackOfficeAppState == "Submitted")
+{
+    <div class="content-item">
+        <div class="content-item-header">
+            <i class="icon icon-xlg icon-clipboard-data"></i>
+            <h2 id="applyApp">Реєстрація заяви</h2>
+        </div>
+        <div class="content-partial" data-tab-empty>
+            <div class="content-submit-holder btn-holder">
+                @if (Model.ReturnCheck == false)
+                {
+                    <button type="button" class="btn btn-secondary btn-panel"
+                            data-modal="modal-center"
+                            data-tab-container-url="@Url.Action("ModalRegisterApplication", "Application", new {id = Model.Id})">
+                        <span class="icon icon-huge icon-document"></span>
+                        <span>Зареєструвати заяву</span>
+                    </button>
+                    <button type="button" class="btn btn-secondary btn-panel"
+                            data-modal="modal-center"
+                            data-tab-container-url="@Url.Action("ModalReturnApplication", "Application", new {id = Model.Id})">
+                        <span class="icon icon-huge icon-document"></span>
+                        <span>Повернути з коментарем</span>
+                    </button>
+                }
+                else
+                {
+                    <div class="content-details-group">
+                        <div class="content-top">
+                            <h1>@Html.DisplayNameFor(model => model.ReturnComment)</h1>
+                        </div>
+                        <div class="content-top">
+                            <p>@Html.DisplayFor(model => model.ReturnComment)</p>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+
+    </div>
+}
+else if (Model.BackOfficeAppState == "Registered")
+{
+    if (Model.AppSort != "AdditionalInfoToLicense")
+    {
+        <div class="content-item">
+            <div class="content-item-header">
+                <i class="icon icon-xlg icon-clipboard-data"></i>
+                <h2 id="applyApp">Подання заяви</h2>
+            </div>
+            <div class="content-partial" data-tab-empty>
+                <div class="content-submit-holder btn-holder">
+                    <a class="btn btn-secondary btn-panel"
+                       asp-action="ReviewApplication"
+                       asp-controller="Application"
+                       asp-route-id="@Model.Id"
+                       data-tab>
+                        <span class="icon icon-huge icon-doc-signed"></span>
+                        <span>В обробку</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="content-item">
+            <div class="content-item-header">
+                <i class="icon icon-xlg icon-clipboard-data"></i>
+                <h2 id="applyApp">Подання заяви</h2>
+            </div>
+            <div class="content-partial" data-tab-empty>
+                <div class="content-submit-holder btn-holder">
+                    <div class="input-group">
+                        <input type="text" id="ReasonDesicion"
+                               class="input" autocomplete="off" />
+                        <span class="input-droup-bar"></span>
+                        <label for="ReasonDesicion"></label>
+                        <span class="textarea-col-2" id="reasonError"></span>
+                    </div>
+                    <a class="btn btn-secondary btn-panel additionalInfo"
+                       data-type="Submit"
+                       data-tab>
+                        <span class="icon icon-huge icon-doc-signed"></span>
+                        <span>Прийняти доповнення</span>
+                    </a>
+                    <a class="btn btn-secondary btn-panel additionalInfo"
+                       data-type="Reject"
+                       data-tab>
+                        <span class="icon icon-huge icon-doc-signed"></span>
+                        <span>Відхилити доповнення</span>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    }
+}
+else if (Model.BackOfficeAppState == "InReview" || Model.BackOfficeAppState == "Reviewed")
+{
+    if (Model.AppSort != "AdditionalInfoToLicense")
+    {
+<div class="content-item">
+    <div class="content-item-header">
+        <i class="icon icon-xlg icon-clipboard-data"></i>
+        <h2 id="applyApp">Обробка заяви</h2>
+    </div>
+    <div id="expertisePart" class="content-partial" data-tab-container-url="@Url.Action("ExpertiseDetails", "TrlProcessing", new {Area = "TRL"})?appId=@Model.Id"></div>
+    <div id="decisionPart" class="content-partial" data-tab-container-url="@Url.Action("DecisionDetails", "TrlProcessing", new {Area = "TRL"})?appId=@Model.Id"></div>
+    @*@if (Model.AppSort == "GetLicenseApplication" || Model.AppSort == "AddBranchInfoApplication" || Model.AppSort == "AddBranchApplication")
+        {
+            <div id="preLicensePart" class="content-partial" data-tab-container-url="@Url.Action("PreLicenseCheckDetails", "TrlProcessing", new {Area = "TRL"})?appId=@Model.Id"></div>
+        }*@
+    @if (!string.IsNullOrEmpty(Model.PerformerOfExpertiseString) && string.IsNullOrEmpty(Model.DecisionType))
+    {
+        <div class="content-partial" data-tab-empty id="buttonitem">
+            <div class="content-submit-holder btn-holder" >
+                <a class="btn btn-secondary btn-panel">
+                    <span class="icon icon-huge icon-document"></span>
+                    <span>Створити доручення</span>
+                </a>
+            </div>
+        </div>
+    }
+    <div id="licenseMsgPart" class="content-partial" data-tab-container-url="@Url.Action("LicenseMessageDetails", "TrlProcessing", new {Area = "TRL"})?appId=@Model.Id"></div>
+</div>
+    }
+}

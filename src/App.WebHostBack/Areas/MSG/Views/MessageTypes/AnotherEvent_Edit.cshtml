@@ -1,0 +1,115 @@
+﻿@model App.Data.DTO.MSG.AnotherEventMessageDTO
+@inject App.Core.Mvc.Helpers.SelectListHelper Sel
+
+@{
+    ViewData["Title"] = "Повідомлення";
+}
+
+@section Buttons{
+    <a class="content-item-btn btn-column-list icon-md icon-list" data-title="Змінити вигляд" data-tooltipleft='1'></a>
+}
+
+<div class="content-item-holder">
+    <div class="content-item">
+        <div class="content-item-header">
+            @if (Model.Id == Guid.Empty)
+            {
+                <i class="icon-xlg icon-add-file"></i>
+                <h2>Створення повідомлення про іншу подію</h2>
+            }
+            else
+            {
+                <i class="icon-xlg icon-edit-list"></i>
+                <h2>Редагування повідомлення про іншу подію</h2>
+            }
+        </div>
+
+        <form asp-action="EditMessage" method="post" class="content-item-edit">
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="IsCreatedOnPortal" />
+            <input type="hidden" asp-for="MessageType" value="AnotherEvent" />
+            <input type="hidden" asp-for="OrgUnitId" value="@ViewBag.OrgId" />
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+            <div class="content-item-inner">
+                <div class="content-edit">
+                    <div class="datepicker-group input-group">
+                        <input class="input datepicker"
+                               autocomplete="off"
+                               type="text" asp-for="MessageDate" />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="MessageDate"></label>
+                        <span asp-validation-for="MessageDate" class="asp-validation"></span>
+                    </div>
+                </div>
+                <div class="content-edit ">
+                    <div class="input-group">
+                        <input asp-for="MessageNumber"
+                               class="input"
+                               autocomplete="off" />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="MessageNumber"></label>
+                        <span asp-validation-for="MessageNumber" class="asp-validation"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-item-inner">
+                @if (ViewBag.isPRL)
+                {
+                    <div class="content-edit">
+                        <div class="checkbox-group">
+                            <div class="checkbox-group-inner">
+                                <input class="checkbox" asp-for="IsPrlLicense" />
+                                <label asp-for="IsPrlLicense">Виробництво лікарських засобів (промислове)</label>
+                                <span asp-validation-for="IsPrlLicense" class="asp-validation"></span>
+                            </div>
+                        </div>
+                    </div>
+                }
+                @if (ViewBag.isTRL)
+                {
+                    <div class="content-edit">
+                        <div class="checkbox-group">
+                            <div class="checkbox-group-inner">
+                                <input asp-for="IsTrlLicense" class="checkbox" />
+                                <label asp-for="IsTrlLicense">Оптова роздрібна торгівля лікарськими засобами</label>
+                                <span asp-validation-for="IsTrlLicense" class="asp-validation"></span>
+                            </div>
+                        </div>
+                    </div>
+                }
+                @if (ViewBag.isIML)
+                {
+                    <div class="content-edit">
+                        <div class="checkbox-group">
+                            <div class="checkbox-group-inner">
+                                <input asp-for="IsImlLicense" class="checkbox" />
+                                <label asp-for="IsImlLicense">Імпорт лікарських засобів</label>
+                                <span asp-validation-for="IsImlLicense" class="asp-validation"></span>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <div class="content-item-inner">
+                <div class="content-edit content-edit-wide">
+                    <div class="textarea-group">
+                        <textarea asp-for="MessageText"
+                                  class="textarea"
+                                  autocomplete="off">
+                                </textarea>
+                        <span class="input-group-bar"></span>
+                        <label asp-for="MessageText">Додайте примітки та коментарі до повідомлення</label>
+                        <span asp-validation-for="MessageText" class="asp-validation"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="content-submit-holder btn-holder btn-holder-right">
+                <a href="#" onclick="mt.goStepBack()" class="btn btn-danger btn-text">Відмінити</a>
+                <input type="submit" value="Зберегти" class="btn btn-secondary btn-fill" />
+            </div>
+        </form>
+    </div>
+</div>

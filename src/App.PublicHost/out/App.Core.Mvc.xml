@@ -1,0 +1,197 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>App.Core.Mvc</name>
+    </assembly>
+    <members>
+        <member name="M:App.Core.Mvc.Controllers.CommonApiController`3.GetItems(System.Collections.Generic.IDictionary{System.String,System.String})">
+            <summary>
+            Gets collection of items filtered and paginated by http query string
+            </summary>
+            <remarks>
+            Sample request:
+                ?orderBy=caption&amp;age=5
+            </remarks>
+            <param name="paramList">Query string. Supports next parameters
+            pageSize - int, use for pagination
+            pageNumber - int, use for pagination, starts from 1
+            orderBy - field to sort
+            [model field name] - for filtering data by this field. 
+            Usually string values filtered by part &quot;like&quot; expression, Guid by &quot;equals&quot; expression.
+            Periods filtered by &quot;overlaps&quot; expression. For example, if you have period with fields startDate = &quot;2019-03-10T14:58:05&quot; and endDate = &quot;2019-03-16T00:00:00&quot;
+            then you should set both fileds in a query filter as a required period. 
+            For example setting in a query string ?startDate=2019-03-01T00:00:00&amp;endDate=2019-03-15T05:00:00 you will get all records,
+            where required period overlaps your filter.
+            Date fields and numeric fields usually filtered by range. For example, if model has a date field registrationDate, then you can filter record with next query:
+            ?registrationDate_From=2019-03-10T00:00:00&amp;registrationDate_To=2019-03-18T05:00:00
+            IMPORTANT: every field can be filtered in a way (range, equals etc), configured on server and cannot be changed. Some fields cannot be filtered at all
+            </param>
+            <returns>A filtered list of items</returns>
+            <response code="200">If there is no any error</response>
+            <response code="400">If user has no rights to get this collection or there is an error in query filter string</response> 
+        </member>
+        <member name="M:App.Core.Mvc.Controllers.CommonApiController`3.GetItemsExt(System.Collections.Generic.IDictionary{System.String,System.String})">
+            <summary>
+            Gets collection of items filtered and paginated by http query string.
+            Method returns models with extra fields that are not part of base entity. For example caption of related entity joined by Id.
+            </summary>
+            <remarks>
+            Sample request:
+                ?orderBy=caption&amp;age=5
+            </remarks>
+            <param name="paramList">Query string. Supports next parameters
+            pageSize - int, use for pagination
+            pageNumber - int, use for pagination, starts from 1
+            orderBy - field to sort
+            [model field name] - for filtering data by this field. 
+            Usually string values filtered by part &quot;like&quot; expression, Guid by &quot;equals&quot; expression.
+            Periods filtered by &quot;overlaps&quot; expression. For example, if you have period with fields startDate = &quot;2019-03-10T14:58:05&quot; and endDate = &quot;2019-03-16T00:00:00&quot;
+            then you should set both fileds in filter as a required period. 
+            For example setting in a query string ?startDate=2019-03-01T00:00:00&amp;endDate=2019-03-15T05:00:00 you will get all records,
+            where required period overlaps your filter.
+            Date fields and numeric fields usually filtered by range. For example, if model has a date field, for example registrationDate, then you can filter record with next query:
+            ?registrationDate_From=2019-03-10T00:00:00&amp;registrationDate_To=2019-03-18T05:00:00
+            IMPORTANT: every field can be filtered in a way (range, equals etc), configured on server and cannot be changed. Some fields cannot be filtered at all
+            </param>
+            <returns>A filtered list of items</returns>
+            <response code="200">If there is no any error</response>
+            <response code="400">If user has no rights to get this collection or there is an error in query filter string</response> 
+        </member>
+        <member name="M:App.Core.Mvc.Controllers.CommonApiController`3.GetItem(System.Guid)">
+            <summary>
+            Gets an item by id
+            </summary>
+            <remarks>
+            Sample request:
+                /aa0d3321-3415-4878-bd7e-6ae8a3a5ec81
+            </remarks>
+            <param name="id">Id of an item</param>
+            <returns>An item found by id</returns>
+            <response code="200">If item exists</response>
+            <response code="400">If user has no rights to get this item or there is an internal error</response> 
+            <response code="404">If item not found</response> 
+        </member>
+        <member name="M:App.Core.Mvc.Controllers.CommonApiController`3.GetItemExt(System.Guid)">
+            <summary>
+            Gets an item with extra fields by id. Such extra fields are not part of the item and are included for convenience
+            </summary>
+            <remarks>
+            Sample request:
+                /aa0d3321-3415-4878-bd7e-6ae8a3a5ec81
+            </remarks>
+            <param name="id">Id of an item</param>
+            <returns>An item found by id</returns>
+            <response code="200">If item exists</response>
+            <response code="400">If user has no rights to get this item or there is an internal error</response> 
+            <response code="404">If item not found</response>
+        </member>
+        <member name="M:App.Core.Mvc.Controllers.CommonApiController`3.PostItem(`1)">
+            <summary>
+            Creates an item
+            </summary>
+            <remarks>
+            Sample request:
+                Body:
+                {
+                    &quot;field1&quot;: 5,
+                    &quot;field2&quot;: &quot;Smith&quot;
+                }
+            </remarks>
+            <param name="item">An item to by created</param>
+            <returns>The created item</returns>
+            <response code="201">If item created successfully</response>
+            <response code="400">If user has no rights to create this item or there is an internal error</response> 
+        </member>
+        <member name="M:App.Core.Mvc.Controllers.CommonApiController`3.PutItem(System.Guid,`1)">
+            <summary>
+            Updates an item
+            </summary>
+            <remarks>
+            Sample request:
+                /aa0d3321-3415-4878-bd7e-6ae8a3a5ec81
+                Body:
+                {
+                    &quot;id&quot;: &quot;aa0d3321-3415-4878-bd7e-6ae8a3a5ec81&quot;,
+                    &quot;field1&quot;: 5,
+                    &quot;field2&quot;: &quot;Smith&quot;
+                }
+            </remarks>
+            <param name="id">Id of an item</param>
+            <param name="item">Item data</param>
+            <returns>No content</returns>
+            <response code="204">If item updated successfully</response>
+            <response code="400">If user has no rights to update this item or there is an internal error</response> 
+            <response code="404">If item not found</response>
+            <response code="404">If there is a conflict in a body data. For example an id in the body is different from id in query string</response>
+        </member>
+        <member name="M:App.Core.Mvc.Controllers.CommonApiController`3.PatchItem(System.Guid,Microsoft.AspNetCore.JsonPatch.JsonPatchDocument{`1})">
+            <summary>
+            Updates an item with patch operation
+            </summary>
+            <remarks>
+            
+            Sample request:
+                /aa0d3321-3415-4878-bd7e-6ae8a3a5ec81
+                Body:
+                [
+                    {&quot;op&quot; : &quot;replace&quot;, &quot;path&quot; : &quot;age&quot;, &quot;value&quot; : &quot;21&quot;},
+                    {&quot;op&quot; : &quot;replace&quot;, &quot;path&quot; : &quot;caption&quot;, &quot;value&quot; : &quot;Patched successfully&quot;}
+                ]
+            </remarks>
+            <param name="id">Id of an item</param>
+            <param name="patchData">A set of operations formatted according to jsonpatch.com</param>
+            <returns>No content</returns>
+            <response code="204">If item patched successfully</response>
+            <response code="400">If user has no rights to update this item or there is an internal error</response> 
+            <response code="404">If item not found</response>
+        </member>
+        <member name="M:App.Core.Mvc.Controllers.CommonApiController`3.DeleteItem(System.Guid,System.Boolean)">
+            <summary>
+            Deletes an item by id
+            </summary>
+            <remarks>
+            Sample request:
+                /aa0d3321-3415-4878-bd7e-6ae8a3a5ec81
+            </remarks>
+            <param name="id">Id of an item</param>
+            <param name="softDeleting">Setting to true only marks an item as deleted. The item won't be accessible anymore from any method.</param>
+            <returns>No content</returns>
+            <response code="204">If item deleted successfully</response>
+            <response code="400">If user has no rights to delete this item or there is an internal error</response> 
+            <response code="404">If item not found</response>
+        </member>
+        <member name="M:App.Core.Mvc.Helpers.HttpQueryStringHelper.GetQueryParametersFromQueryParamList(System.Collections.Generic.IDictionary{System.String,System.String})">
+            <summary>
+            Gets paging parameters from the dictionary of parameters and returns these parameters along with other parameters left as new Dictionary
+            </summary>
+            <param name="paramList"></param>
+            <returns></returns>
+        </member>
+        <member name="P:App.Core.Mvc.TagHelpers.ActiveRouteTagHelper.Action">
+            <summary>The name of the action method.</summary>
+            <remarks>Must be <c>null</c> if <see cref="P:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Route" /> is non-<c>null</c>.</remarks>
+        </member>
+        <member name="P:App.Core.Mvc.TagHelpers.ActiveRouteTagHelper.Controller">
+            <summary>The name of the controller.</summary>
+            <remarks>Must be <c>null</c> if <see cref="P:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Route" /> is non-<c>null</c>.</remarks>
+        </member>
+        <member name="P:App.Core.Mvc.TagHelpers.ActiveRouteTagHelper.RouteValues">
+            <summary>Additional parameters for the route.</summary>
+        </member>
+        <member name="P:App.Core.Mvc.TagHelpers.ActiveRouteTagHelper.ViewContext">
+            <summary>
+            Gets or sets the <see cref="T:Microsoft.AspNetCore.Mvc.Rendering.ViewContext" /> for the current request.
+            </summary>
+        </member>
+        <member name="T:App.Core.Mvc.TagHelpers.AppRightsTagHelper">
+            <summary>
+            app-rights-entity - указываем название сущности (i.e. OrgDeparment)
+            app-rights-property - название свойства/поля сущности(i.e.Name)
+            app-rights - если указан только атрибут без значений:
+            - entity будет присвоено значение по умолчанию = ИмяКонтроллера, если тег находится внутри внешнео тега, где было указано app-rights-entity(например на теге формы), тогда будет использовано значение внешнего тега.
+            - property будет писвоено значение текущего аттрибута Name, в случае его отсутствия - значение по умолчанию = "".
+            - если для родительского элемента установлен атрибут app-rights-entity, тогда для всех вложенных элементов типа "input", "select" будет также атрибут app-rights.
+            </summary>
+        </member>
+    </members>
+</doc>

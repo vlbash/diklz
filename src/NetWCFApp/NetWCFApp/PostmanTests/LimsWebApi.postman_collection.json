@@ -1,0 +1,88 @@
+{
+	"info": {
+		"_postman_id": "6d799142-4978-4ef6-a7d9-cb3ebc16f8d2",
+		"name": "LimsWebApi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "license by id",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "553f21ee-652b-480b-a17d-66d290c7820c",
+						"exec": [
+							"let license_ids = JSON.parse(pm.environment.get(\"license_array\"));",
+							"let one_id = license_ids[Math.floor(Math.random()*license_ids.length)];",
+							"pm.environment.set(\"license_id\", one_id);",
+							"console.log(pm.environment.get(\"license_id\"))"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "a3f89dca-f775-4829-8d15-a2c378d3b4b8",
+						"exec": [
+							"function standardDeviation(values, avg) {\r",
+							"    var squareDiffs = values.map(value => Math.pow(value - avg, 2));\r",
+							"    return Math.sqrt(average(squareDiffs));\r",
+							"}\r",
+							"\r",
+							"function average(data) {\r",
+							"    return data.reduce((sum, value)=>sum + value) / data.length;\r",
+							"}\r",
+							"\r",
+							"if (responseCode.code === 200 || responseCode.code === 201) {\r",
+							"    response_array = globals['response_times'] ? JSON.parse(globals['response_times']) : []\r",
+							"    response_array.push(responseTime)\r",
+							"    postman.setGlobalVariable(\"response_times\", JSON.stringify(response_array))\r",
+							"\r",
+							"    response_average = average(response_array);\r",
+							"    postman.setGlobalVariable('response_average', response_average)\r",
+							"\r",
+							"    response_std = standardDeviation(response_array, response_average)\r",
+							"    postman.setGlobalVariable('response_std', response_std)\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "text/xml",
+						"type": "text"
+					},
+					{
+						"key": "SOAPAction",
+						"value": "http://tempuri.org/IWebApiService/GetLicenseById",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<x:Envelope xmlns:x=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:tem=\"http://tempuri.org/\">\n    <x:Header/>\n    <x:Body>\n        <tem:GetLicenseById>\n            <tem:id>{{license_id}}</tem:id>\n        </tem:GetLicenseById>\n    </x:Body>\n</x:Envelope>"
+				},
+				"url": {
+					"raw": "http://localhost:52310/WebApiService.svc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "52310",
+					"path": [
+						"WebApiService.svc"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

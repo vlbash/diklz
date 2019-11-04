@@ -1,0 +1,252 @@
+﻿@model App.Data.Models.MSG.Message
+@{
+    ViewData["Title"] = "Повідомлення";
+
+    var fileListLink = ViewBag.IsEditableFile == true ? Url.Action("List", "FileStore", new { Area = "", EntityId = Model.Id, EntityName = "Message" }) :
+        Url.Action("List", "FileStore", new { Area = "", EntityId = Model.Id, EntityName = "EDocument", pg_PartialViewName = "ListDetails" });
+    var uploadFormLink = Html.Raw(ViewBag.IsEditableFile == true ?
+        Url.Action("UploadForm", "FileStore", new { Area = "", EntityId = Model.Id }) + "&EntityName=Message" : "");
+}
+
+@section Scripts
+{
+    <script>
+        var uploadFormContainer = $("#uploadForm"),
+            fileListLink = "@fileListLink",
+            uploadFormLink = "@uploadFormLink",
+            fileListContainer = $("#fileList");
+        if (uploadFormLink != "")
+            mt.getAjaxContainer(uploadFormContainer, uploadFormLink);
+        mt.getAjaxContainer(fileListContainer, fileListLink);
+    </script>
+    <script>
+        $(document).ready(function () {
+            var container = $('#msgPart');
+            mt.tryLoadContainer(container, container.attr('data-tab-container-url'));
+        });
+    </script>
+}
+
+@section Buttons{
+    @if (Model.MessageState == "Project")
+    {
+        <a class="content-item-btn icon-md icon-edit-line"
+           asp-action="EditMessage"
+           asp-route-id="@Model.Id"
+           data-tab-main
+           data-title="Редагувати повідомлення"
+           data-tooltipleft='1'>
+        </a>
+    }
+}
+
+<div class="content-item-holder">
+    <div class="content-item">
+        <div class="content-item-header">
+            <i class="icon icon-xlg icon-clipboard-data"></i>
+            <h2>Інформація щодо ліцензіата</h2>
+        </div>
+        <div id="msgPart" class="content-partial" data-tab-container-url="@Url.Action("GetApplicationDetails", "MessageTypes", new { Area = "MSG" })?orgId=@Model.OrgUnitId&performerId=@Model.PerformerId&msgId=@Model.Id"></div>
+    </div>
+    <div class="content-item">
+        <div class="content-item-header">
+            <i class="icon-xlg icon-edit-list"></i>
+            <h2>Деталі повідомлення щодо відновлення провадження МПД</h2>
+        </div>
+
+        @if (Model.MessageState == "Project")
+        {
+            <div class="content-btn">
+                <a class="content-item-btn icon-md icon-edit-line"
+                   asp-action="EditMessage"
+                   asp-route-id="@Model.Id"
+                   data-title="Редагувати повідомлення"
+                   data-tooltipleft='1'>
+                </a>
+                <a class="content-item-btn icon-lg icon-search-file"
+                   asp-action="GetMsgPDF"
+                   asp-controller="MessageTypes"
+                   asp-area="MSG"
+                   asp-route-id="@Model.Id"
+                   target="_blank"
+                   data-title="Переглянути повідомлення у формі PDF"
+                   data-tooltipleft='1'>
+                </a>
+            </div>
+        }
+        else
+        {
+            <div class="content-btn">
+                <a class="content-item-btn icon-lg icon-search-file"
+                   asp-action="GetMsgPDF"
+                   asp-controller="MessageTypes"
+                   asp-area="MSG"
+                   asp-route-id="@Model.Id"
+                   target="_blank"
+                   data-title="Переглянути повідомлення у формі PDF"
+                   data-tooltipleft='1'>
+                </a>
+            </div>
+        }
+
+        <div class="content-item-details">
+            <div class="content-item-inner content-details-wrapper col-2">
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.MessageDate)</label>
+                        <p>@Model.MessageDate.ToString("dd.MM.yyyy")</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.MessageNumber)</label>
+                        <p>@Html.DisplayFor(model => model.MessageNumber)</p>
+                    </div>
+                </div>
+            </div>
+            <div class="content-item-inner content-details-wrapper col-2">
+                @if (Model.IsPrlLicense)
+                {
+                    <div class="content-edit">
+                        <div class="checkbox-group">
+                            <div class="checkbox-group-inner">
+                                <input asp-for="IsPrlLicense" class="checkbox" disabled="disabled" />
+                                <label asp-for="IsPrlLicense">Виробництво лікарських засобів (промислове)</label>
+                            </div>
+                        </div>
+                    </div>
+                }
+                @if (Model.IsTrlLicense)
+                {
+                    <div class="content-edit">
+                        <div class="checkbox-group">
+                            <div class="checkbox-group-inner">
+                                <input asp-for="IsTrlLicense" class="checkbox" disabled="disabled" />
+                                <label asp-for="IsTrlLicense">Оптова роздрібна торгівля лікарськими засобами</label>
+                            </div>
+                        </div>
+                    </div>
+                }
+                @if (Model.IsImlLicense)
+                {
+                    <div class="content-edit">
+                        <div class="checkbox-group">
+                            <div class="checkbox-group-inner">
+                                <input asp-for="IsImlLicense" class="checkbox" disabled="disabled" />
+                                <label asp-for="IsImlLicense">Імпорт лікарських засобів</label>
+                            </div>
+                        </div>
+                    </div>
+                }
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>МПД щодо якого необхідно виконати зміни</label>
+                        <p>@ViewBag.BranchName</p>
+                    </div>
+                </div>
+            </div>
+            <div class="content-item-inner content-details-wrapper col-2">
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.RestorationDate)</label>
+                        <p>@Html.DisplayFor(model => model.RestorationDate)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.RestorationReason)</label>
+                        <p>@Html.DisplayFor(model => model.RestorationReason)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.MessageText)</label>
+                        <p>@Html.DisplayFor(model => model.MessageText)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content-item">
+        <div class="content-item-header">
+            <i class="icon icon-xlg icon-list-paperclip"></i>
+            <h2 id="additionalDoc">Додаткові документи до повідомлення</h2>
+        </div>
+        <div class="content-partial" data-tab-empty>
+            <div class="upload-edit">
+                <div id="uploadForm">
+
+                </div>
+                <div id="fileList" class="fileList">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    @if (Model.MessageState != "Accepted" && Model.MessageState != "Rejected")
+    {
+        <div class="content-item">
+            <div class="content-partial" data-tab-empty>
+                <div class="content-item-outer">
+                    <div class="content-item-header">
+                        <i class="icon icon-xlg icon-clipboard-data"></i>
+                        <h2>Дії щодо повідомлення</h2>
+                    </div>
+                    @switch (Model.MessageState)
+                    {
+                        case "Project":
+                            {
+                                <div class="content-submit-holder btn-holder">
+                                    <a class="btn btn-secondary btn-panel"
+                                       asp-action="ChangeMessageState"
+                                       asp-route-id="@Model.Id"
+                                       asp-route-orgId="@Model.OrgUnitId"
+                                       asp-route-type="Submit"
+                                       data-tab>
+                                        Відправити повідомлення
+                                    </a>
+                                </div>
+                                break;
+                            }
+                        case "Submitted":
+                            {
+                                <div class="content-submit-holder btn-holder">
+                                    <button type="button" class="btn btn-secondary btn-panel"
+                                            data-modal="modal-center"
+                                            data-tab-container-url="@Url.Action("ModalRegisterMessage", "MessageTypes", new {msgId = Model.Id, orgId = Model.OrgUnitId})">
+                                        <span class="icon icon-huge icon-document"></span>
+                                        <span>Зареєструвати повідомлення</span>
+                                    </button>
+                                </div>
+                                break;
+                            }
+                        case "Registered":
+                            {
+                                <div class="content-submit-holder btn-holder">
+                                    <a class="btn btn-secondary btn-panel"
+                                       asp-action="ChangeMessageState"
+                                       asp-route-id="@Model.Id"
+                                       asp-route-orgId="@Model.OrgUnitId"
+                                       asp-route-type="Accept"
+                                       data-tab>
+                                        Прийняти до відома
+                                    </a>
+                                </div>
+                                <div class="content-submit-holder btn-holder">
+                                    <a class="btn btn-danger btn-panel"
+                                       asp-action="ChangeMessageState"
+                                       asp-route-id="@Model.Id"
+                                       asp-route-orgId="@Model.OrgUnitId"
+                                       asp-route-type="Reject"
+                                       data-tab>
+                                        Відмовити
+                                    </a>
+                                </div>
+                                break;
+                            }
+                    }
+                </div>
+            </div>
+        </div>
+    }
+</div>

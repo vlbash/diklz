@@ -1,0 +1,51 @@
+﻿@model App.Data.DTO.PRL.PrlContractorDetailDTO
+@{
+    ViewData["Title"] = "Контрагент";
+}
+
+<div class="content-item-holder">
+    <div class="content-item">
+        <div class="content-item-header">
+            <i class="icon icon-xlg icon-edit-list"></i>
+            <h2>Контрагент</h2>
+        </div>
+        <div class="content-item-details">
+            <div class="content-item-inner content-details-wrapper col-2">
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.ContractorTypeName)</label>
+                        <p>@Html.DisplayFor(model => model.ContractorTypeName)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.Edrpou)</label>
+                        <p>@Html.DisplayFor(model => model.Edrpou)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.Name)</label>
+                        <p>@Html.DisplayFor(model => model.Name)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.Address)</label>
+                        <p>@Html.DisplayFor(model => model.Address)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.ListOfBranchsNames)</label>
+
+                        @foreach (var br in Model.ListOfBranchsNames)
+                        {
+                            <p>@Html.Raw(br)</p>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

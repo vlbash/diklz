@@ -1,0 +1,81 @@
+@import "../abstracts/_bundle";
+
+.datepicker {
+  width: 100%;
+  height: @input-height;
+  .material-transition;
+
+  &-group {
+
+    &.datepicker-input-select-wrapper,
+    &.date-range-before-wrapper,
+    &.date-range-after-wrapper,
+    &.date-range-before-after-wrapper {
+      position: relative;
+
+      .select-group-inner {
+        position: absolute;
+      }
+    }
+
+    &.datepicker-input-select-wrapper {
+      .input {
+        z-index: 3;
+        width: ~"calc(100% - 3em)";
+      }
+
+      .select-group-inner {
+        left: 0;
+        width: 100%;
+      }
+
+      &.select-hidden {
+        .select-group-inner {
+          visibility: hidden;
+        }
+      }
+    }
+
+    &.date-range-before-wrapper {
+      .select-group-inner {
+        left: 0;
+        width: 49%;
+      }
+
+      .input-group-bar,
+      .input {
+        width: 49%;
+        margin-left: 51%;
+      }
+    }
+
+    &.date-range-after-wrapper {
+      .select-group-inner {
+        left: 51%;
+        width: 49%;
+      }
+
+      .input-group-bar,
+      .input {
+        width: 49%;
+      }
+    }
+
+    &.date-range-before-after-wrapper {
+      .select-group-inner {
+        left: 71%;
+        width: 29%;
+
+        &:first-of-type {
+          left: 0;
+        }
+      }
+
+      .input-group-bar,
+      .input {
+        width: 38%;
+        margin-left: 31%;
+      }
+    }
+  }
+}

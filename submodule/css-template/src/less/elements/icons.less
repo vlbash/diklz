@@ -1,0 +1,83 @@
+@import "../abstracts/_bundle";
+
+.icon {
+  font-size: inherit;
+  text-align: center;
+
+  &-svg {
+    align-items: center;
+    align-items: center;
+    justify-content: center;
+    width: @md;
+    height: @md;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-size: contain;
+
+    &-big {
+      width: @icon-width-large;
+      height: @icon-height-large;
+    }
+
+    &-small {
+      width: @icon-width-large / 2;
+      height: @icon-height-large / 2;
+    }
+  }
+
+  // icon-fonts
+  &-huge {
+    font-size: @icon-huge!important;
+  }
+
+  &-xlg {
+    font-size: @icon-xlg!important;
+  }
+
+  &-lg {
+    font-size: @icon-lg!important;
+  }
+
+  &-md {
+    font-size: @icon-md!important;
+  }
+
+  &-sm {
+    font-size: @icon-sm!important;
+  }
+
+  &-xs {
+    font-size: @icon-xs!important;
+  }
+
+  &-xxs {
+    font-size: @icon-xxs!important;
+  }
+}
+
+.item-icon {
+  //todo
+  display: flex;
+  position: relative;
+  min-width: @xxxs + @icon-width;
+
+  &::before {
+    content: "";
+    display: flex;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: @icon-width;
+    height: @icon-height;
+    transform: translateY(-50%);
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-size: contain;
+  }
+}
+
+.back-icon-dark {
+  &:before {
+    background-image: url("../img/icons/back-icon-dark.svg");
+  }
+}

@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  
+  <ItemGroup>
+
+    <EmbeddedResource Include="Dto\pgsql\BaseEnumRecordDto.sql" />
+    <EmbeddedResource Include="Dto\pgsql\BaseExPropertyCoTypeDto.sql" />
+    <EmbeddedResource Include="Dto\pgsql\BaseExPropertyDto.sql" />
+    <EmbeddedResource Include="Dto\pgsql\BaseFileStoreDto.sql" />
+    <EmbeddedResource Include="Dto\pgsql\BasePersonDetailDto.sql" />
+    <EmbeddedResource Include="Dto\pgsql\BasePersonListDto.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.ComponentModel.Annotations" Version="4.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Core.Base">
+      <HintPath>..\Shared\lib\netstandard2.0\Core.Base.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

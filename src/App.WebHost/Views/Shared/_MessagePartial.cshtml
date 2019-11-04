@@ -1,0 +1,51 @@
+﻿@section Scripts
+    {
+        <script>
+
+            $('#signButton').click(function() {
+                var agreeChecks = $('.license_check_agree');
+                try {
+                    agreeChecks.each(function() {
+                        if (!this.checked) {
+                            throw store;
+                        }
+                    });
+                } catch (e) {
+                    alert("Вам потрібно погодитись з ліцензійними умовами перед підписанням заяви");
+                    $(".btn-tab[title='Сповіщення та ліцензійні умови']").trigger("click");
+                    return;
+                }
+                var optionalAgreeChecks = $('.optional_agree');
+                var countOfChecks = 0;
+                optionalAgreeChecks.each(function() {
+                    if (this.checked)
+                        countOfChecks ++;
+                });
+                if (countOfChecks == 0) {
+                    alert("Вам потрібно відмітити хоча б один варіант отримання результатів розгляду заяви");
+                    $(".btn-tab[title='Сповіщення та ліцензійні умови']").trigger("click");
+                    return false;
+                }
+                $.ajax({
+                    type: 'get',
+                    url: '@Url.Action("Index", "PrlVerification")',
+                    data: {
+                        jsonData: true,
+                        appId: '@Model.Id'
+                    },
+                    success: function(data) {
+                        if (Object.keys(data)[0] == null) {
+                            window.location.replace(
+                                "@Url.Action("Sign", "EuSign", new {Area = "", urlAction = Url.Action("GetFilesForSign", "PrlApp", new {id = Model.Id})})");
+                        } else {
+                            alert(
+                                "Перед підписанням та відправкою заяви Вам потрібно заповнити заяву згідно з екпертизою комплектності заяви.");
+                            $(".btn-tab[title='Перевірка комплектності']").trigger("click");
+                        }
+                    }
+                });
+
+            });
+
+        </script>
+    }

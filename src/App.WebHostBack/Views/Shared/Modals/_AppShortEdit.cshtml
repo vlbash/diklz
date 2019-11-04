@@ -1,0 +1,96 @@
+﻿@model App.Data.DTO.APP.AppShortDTO
+@inject App.Core.Mvc.Helpers.SelectListHelper Sel
+<h3>Дані про заяву</h3>
+
+<form method="post"
+      data-ajax-url="@Url.Action("RegisterApplication", "Application", new {id=@Model.Id})"
+      data-ajax="true"
+      data-ajax-method="post"
+      data-ajax-complete="completed" class="content-item-edit">
+    <input type="hidden" asp-for="Id" />
+    <input type="hidden" asp-for="AppSort" />
+    <input type="hidden" asp-for="IsCreatedOnPortal">
+
+    <div class="input-group">
+        <input class="input"
+               autocomplete="off"
+               disabled="disabled"
+               value="@Sel.Enum("ApplicationSort", p=> p.Code == Model.AppSort).SingleOrDefault()?.Text" />
+        <span class="input-group-bar"></span>
+        <label asp-for="AppSort"></label>
+        <span class="asp-validation"></span>
+    </div>
+
+    <div class="input-group">
+        <input class="input"
+               autocomplete="off"
+               disabled="disabled"
+               @if (Model.IsCreatedOnPortal) { @: value="Заява ліцензіата (Веб-портал)"
+               } else if (!Model.IsCreatedOnPortal) { @: value="Заява ліцензіата (Паперова)"
+               } />
+        <span class="input-group-bar"></span>
+        <label asp-for="IsCreatedOnPortal"></label>
+        <span class="asp-validation"></span>
+    </div>
+
+    <div class="input-group datepicker-group">
+        <input class="input datepicker"
+               asp-for="RegDate"
+               type="text"
+               autocomplete="off" />
+        <span class="input-group-bar"></span>
+        <label asp-for="RegDate"></label>
+        <span asp-validation-for="RegDate" class="asp-validation"></span>
+    </div>
+
+    <div class="input-group">
+        <input class="input"
+               asp-for="RegNumber"
+               type="text"
+               autocomplete="off" />
+        <span class="input-group-bar"></span>
+        <label asp-for="RegNumber"></label>
+        <span asp-validation-for="RegNumber" class="asp-validation"></span>
+    </div>
+
+    <div class="input-group">
+        <input class="input" asp-for="PerformerName"
+               validate-not-empty
+               autocomplete-allowcreate
+               autocomplete-idinput-name="PerformerId"
+               autocomplete-init-id="PerformerId"
+               autocomplete-url="@Url.Action("AutoCompletePerformer", "Application")"
+               autocomplete-onselect="mt.onChangeUrl($('#PerformerId'))"
+               autocomplete-onblur="if (!value) { mt.onChangeUrl($('#PerformerId')) }" />
+        <span class="input-group-bar"></span>
+        <input asp-for="PerformerId" type="hidden" onchange-url="@Url.Action("AutoCompletePerformer", "Application")" />
+        <label>@Html.DisplayNameFor(p => p.PerformerName)</label>
+        <span class="asp-validation"></span>
+    </div>
+
+    <div class="content-submit-holder btn-holder btn-holder-right">
+        <a href="#" onclick="mt.closeModal()" class="btn btn-text btn-danger">Відмінити</a>
+        <input type="submit" value="Створити" class="btn btn-secondary btn-fill" />
+    </div>
+</form>
+
+<script>
+    completed = function (xhr, status) {
+        var json = JSON.parse(xhr.responseText);
+        if (status === "success" && json.success === true) {
+            mt.closeModal();
+            location.reload();
+        } else {
+            mt.closeModal();
+            mt.createDialog(false, 'Помилка! Такий реєстраційний номер вже існує');
+        }
+    }
+    $(document).ready(function () {
+        if ($('*').is('[autocomplete-url]')) {
+            $('[autocomplete-url]').each(function () {
+                mt.autocompleteEl($(this));
+                mt.onLoadCheckAllInputs();
+            });
+        }
+    });
+</script>

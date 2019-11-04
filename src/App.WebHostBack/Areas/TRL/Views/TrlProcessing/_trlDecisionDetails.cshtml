@@ -1,0 +1,126 @@
+﻿@model App.Data.DTO.APP.AppDecisionDTO
+@inject App.Core.Mvc.Helpers.SelectListHelper Sel
+
+    @if (Model.Id != Guid.Empty)
+    {
+        <div class="content-item-details">
+            <div class="content-item-inner content-details-wrapper col-2">
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.DecisionType)</label>
+                        <p>@Sel.Enum("DecisionType").SingleOrDefault(p => p.Value == Model.DecisionType)?.Text</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.DecisionReasons)</label>
+                        <p>@Html.DisplayFor(model => model.DecisionReasons)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.DateOfStart)</label>
+                        <p>@Html.DisplayFor(model => model.DateOfStart)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.ProtocolDetails)</label>
+                        <p>@Html.DisplayFor(model => model.ProtocolDetails)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.DecisionDescription)</label>
+                        <p>@Html.DisplayFor(model => model.DecisionDescription)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.Notes)</label>
+                        <p>@Html.DisplayFor(model => model.Notes)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    @if (!Model.IsClosed)
+    {
+        <div class="content-submit-holder btn-holder">
+            @if (ViewBag.IsEditable == true)
+            {
+                if (Model.Id == Guid.Empty)
+                 {
+                     <button type="button" class="btn btn-secondary btn-panel"
+                             data-modal="modal-center"
+                             data-tab-container-url="@Url.Action("ModalDecisionApplication", "TrlProcessing", new {id = Model.AppId})">
+                         <span class="icon icon-huge icon-document"></span>
+                         <span> Створити рішення </span>
+                     </button>
+                 }
+                 else
+                 {
+                     <button type="button" class="btn btn-secondary btn-panel"
+                             data-modal="modal-center"
+                             data-tab-container-url="@Url.Action("ModalDecisionApplication", "TrlProcessing", new {id = Model.AppId})">
+                         <span class="icon icon-huge icon-document"></span>
+                         <span> Редагувати рішення </span>
+                     </button>
+                     <button class="btn btn-secondary btn-panel" type="button"
+                             id="btnRemoveDecision"
+                             href="@Url.Action("RemoveDecision", "TrlProcessing", new {appId = Model.AppId})"
+                             onclick="removeDecision(event, this)">
+                         <span class="icon icon-huge icon-document"></span>
+                         <span> Видалити рішення </span>
+                     </button>
+                 }
+            }
+        </div>
+    }
+
+    <script>
+        function removeDecision(e, btn) {
+            btn = $(this);
+            var disableAttr = $(this).attr("disabled");
+            if (typeof disableAttr !== typeof undefined && disableAttr !== false) {
+                return;
+            }
+
+            $(this).attr("disabled", "disabled");
+
+            var url = $('#btnRemoveDecision').attr("href");
+
+            var msg = "<p>Ви впевнені що хочете видалити рішення?</p>";
+
+            mt.createDialog(e, msg, confirmDialog, refuseDialog);
+
+            function confirmDialog() {
+                $.ajax({
+                    type: "Post",
+                    url: url,
+                    complete: function (jqXHR, textStatus, errorThrown) {
+                        console.log(jqXHR.status);
+                        console.log(textStatus);
+                        console.log(errorThrown);
+                    },
+                    error: function (data) {
+                        console.log('error', data);
+                        $(btn).prop("disabled", false);
+                        msg = "<p>Помилка видалення</p>";
+                        mt.createDialog(e, msg, refuseDialog);
+                    },
+                    success: function (data) {
+                        console.log('success', data);
+                        $(btn).prop("disabled", false);
+                        var container = $('#decisionPart');
+                        mt.tryLoadContainer(container, container.attr('data-tab-container-url'));
+                    }
+                });
+            }
+            function refuseDialog() {
+                $(btn).prop("disabled", false);
+            }
+        }
+    </script>
+
+

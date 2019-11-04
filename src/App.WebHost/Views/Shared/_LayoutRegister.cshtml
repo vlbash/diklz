@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;subset=cyrillic" rel="stylesheet" />
+
+    <title>
+        Держлікслужба @ViewData["Title"]
+    </title>
+
+    <link href="~/stylesheets/main.css" rel="stylesheet" />
+    <script src="~/javascripts/vendor.min.js" asp-append-version="true"></script>
+
+    <link href="~/fe-ext/stylesheets/info-page.css" rel="stylesheet" />
+    
+</head>
+<body>
+
+    <div id="main-wrapper">
+        <div class="aside-wrapper">
+            <div class="aside">
+                <header class="aside__header">
+                    <a class="aside__link" href="#">
+                        <img class="aside__img" src="~/images/sidebar-emblem.svg" alt="Trizub" />
+                        <span class="aside__label">портал держлікслужби</span>
+
+                    </a>
+                    <div class="aside__services">Електронні послуги</div>
+                </header>
+            </div>
+        </div>
+        <!--content wrapper-->
+        <div id="content-wrapper">
+            @RenderBody()
+        </div>
+    </div>
+
+
+    <!-- dialog-wrapper -->
+    <div id="dialog-wrapper" class="dialog-wrapper">
+        <div id="dialog-inner" class="dialog-inner">
+            <div id="dialog-text" class="dialog-text"></div>
+            <div id="dialog-btn" class="btn-holder"></div>
+        </div>
+    </div>
+
+    <!--footer-->
+    <div id="footer-wrapper" class="footer-wrapper">
+        <partial name="_Footer" />
+    </div>
+
+    <script>
+        var breadCrumbCookie = 'Current_Lims_BreadCrumb_Key';
+    </script>
+
+    <script src="~/javascripts/main.js" asp-append-version="false"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

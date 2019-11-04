@@ -1,0 +1,1 @@
+﻿select pr.id, pr.caption, pr.is_active from sec_profile as pr

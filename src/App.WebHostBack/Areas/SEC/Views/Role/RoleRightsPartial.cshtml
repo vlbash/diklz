@@ -1,0 +1,95 @@
+﻿<div id="jsGridRoleRights"></div>
+
+<script>
+
+    var jsGridContainer = $("#jsGridRoleRights");
+
+    var roleRights = [];
+
+    var RightList = '' || '@Html.Raw(ViewBag.RightList)';
+    if (!RightList) {
+        RightList = [];
+    } else {
+        RightList = JSON.parse(RightList);
+    }
+    debugger;
+    jsGridContainer.jsGrid({
+        width: "100%",
+        inserting: true,
+        editing: false,
+        sorting: true,
+        autoload: true,
+        paging: true,
+        pageSize: 10,
+        pageIndex: 1,
+        deleteConfirm: "Ви впевнені, що хочете видалити елемент?",
+        controller: {
+            loadData: function (filter) {
+                return $.ajax({
+                    type: "GET",
+                    url: "/Sec/Role/GetRoleRights?roleId=" + "@Html.Raw(ViewBag.RoleId)",
+                    dataType: "json"
+                });
+                return null;
+            },
+            insertItem: function (item) {
+                item.id = "00000000-0000-0000-0000-000000000000";
+                item.RoleId = "@Html.Raw(ViewBag.RoleId)";
+                return $.ajax({
+                    type: "POST",
+                    url: "/Sec/Role/InsertRoleRight",
+                    contentType: "application/json",
+                    data: JSON.stringify(item),
+                    error: function (xhr, httpStatusMessage, customErrorMessage) {
+                        mt.createDialog(false, xhr.responseText);
+                        //alert(xhr.responseText);
+                    },
+                    dataType: "json"
+                });
+            },
+            //updateItem: function (item) {
+            //    return $.ajax({
+            //        type: "PUT",
+            //        url: "/Sec/Right/UpdateFieldRight",
+            //        contentType: "application/json",
+            //        data: JSON.stringify(item),
+            //        error: function (xhr, httpStatusMessage, customErrorMessage) {
+            //            mt.createDialog(false, xhr.responseText);
+            //            //alert(xhr.responseText);
+            //        },
+            //        dataType: "json"
+            //    });
+            //},
+            deleteItem: function (item) {
+                return $.ajax({
+                    type: "DELETE",
+                    url: "/Sec/Role/DeleteRoleRight?id=" + item.id
+                });
+            }
+        },
+        onDataLoaded: mt.updateNiceScroll,
+        fields: [
+            { name: "id", visible: false, width: 0, id: "id" },            
+            { name: "roleId", visible: false, width: 0, id: "roleId" },
+            {
+                title: "Назва",
+                name: "rightId",
+                type: "select",
+                validate: "required",
+                items: RightList,
+                valueField: "rightId",
+                id:"rightId",
+                textField: "rightName",
+                search: false,
+                insertTemplate: function () {
+                    var $insertControl = jsGrid.fields.select.prototype.insertTemplate.call(this);
+                    $insertControl.val('');
+                    return $insertControl;
+                }
+            },
+            { title: "Активовано", name: "isActive", align: "center", type: "checkbox", id: "isActive", inserting: false},
+            { type: "control" }
+        ]
+    });
+
+</script>

@@ -1,0 +1,1 @@
+﻿select r.id, r.caption, r.is_active, r.entity_name, r.entity_access_level from sec_right as r

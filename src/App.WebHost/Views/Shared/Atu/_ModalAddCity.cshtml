@@ -1,0 +1,72 @@
+﻿@model App.Data.DTO.ATU.AtuCityDTO
+@inject App.Core.Mvc.Helpers.SelectListHelper Sel
+<h3>Додати населений пункт</h3>
+
+<form action="@Url.Action("AtuSaveCity", "Atu", new {Area =""})" method="post" class="content-item-edit">
+    
+    <div class="select-group">
+        <select asp-for="RegionId"
+                class="select"
+                asp-items='@ViewBag.Regions'
+                autocomplete="off">
+            <option></option>
+        </select>
+        <label asp-for="RegionId">@Html.DisplayNameFor(model => model.RegionId)</label>
+        <span asp-validation-for="RegionId" class="asp-validation"></span>
+    </div>
+
+    <div class="select-group mtn">
+        <select asp-for="TypeEnum"
+                class="select"
+                asp-items='@Sel.Enum("LocalityType")'
+                autocomplete="off">
+            <option></option>
+        </select>
+        <label>Тип населеного пункту</label>
+        <span class="asp-validation"></span>
+    </div>
+
+    <div class="input-group">
+        <input class="input"
+               asp-for="DistrictName"
+               autocomplete-allowcreate
+               autocomplete-idinput-name="DistrictId"
+               autocomplete-init-id="DistrictId"
+               autocomplete-url="@Url.Action("AutoCompleteDistrict", "Atu")"
+               autocomplete-params="RegionId" />
+        <span class="input-group-bar"></span>
+        <label asp-for="DistrictName">@Html.DisplayNameFor(model => model.DistrictName)</label>
+        <span asp-validation-for="DistrictName" class="asp-validation"></span>
+    </div>
+
+    <div class="input-group">
+        <input class="input"
+               asp-for="Name"
+               autocomplete="off" />
+        <span class="input-group-bar"></span>
+        <label asp-for="Name">@Html.DisplayNameFor(model => model.Name)</label>
+        <span asp-validation-for="Name" class="asp-validation"></span>
+    </div>
+
+
+    <div class="content-submit-holder btn-holder btn-holder-right">
+        <a href="#" onclick="mt.closeModal()" class="btn btn-text btn-danger">Відмінити</a>
+        <input type="submit" value="Створити" class="btn btn-secondary btn-fill" />
+    </div>
+</form>
+
+<script>
+    // TEST
+    $(document).ready(function () {
+        if ($('*').is('[autocomplete-url]')) {
+            $('[autocomplete-url]').each(function () {
+                mt.autocompleteEl($(this));
+                mt.onLoadCheckAllInputs();
+            });
+        }
+    });
+</script>
+
+
+
+

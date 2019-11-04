@@ -1,0 +1,4 @@
+@ECHO OFF
+cd ..\..\src\App.Data
+set DEPLOY_LOCATION=Local
+dotnet ef database update %1   -v -c ApplicationDbContext

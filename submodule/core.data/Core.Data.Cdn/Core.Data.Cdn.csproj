@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Dto\BaseEmployeeSpecialityDetailDto.sql" />
+    <None Remove="Dto\BaseSpecialityDetailDto.sql" />
+    <None Remove="Dto\BaseSpecialityListDto.sql" />
+    <None Remove="Dto\BaseSpecialitySelectDto.sql" />
+    <None Remove="Dto\pgsql\BaseEmployeeSpecialityListDto.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Dto\pgsql\BaseEmployeeSpecialityDetailDto.sql" />
+    <EmbeddedResource Include="Dto\pgsql\BaseEmployeeSpecialityListDto.sql" />
+    <EmbeddedResource Include="Dto\pgsql\BaseSpecialityDetailDto.sql" />
+    <EmbeddedResource Include="Dto\pgsql\BaseSpecialityListDto.sql" />
+    <EmbeddedResource Include="Dto\pgsql\BaseSpecialitySelectDto.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.ComponentModel.Annotations" Version="4.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Core.Base">
+      <HintPath>..\Shared\lib\netstandard2.0\Core.Base.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

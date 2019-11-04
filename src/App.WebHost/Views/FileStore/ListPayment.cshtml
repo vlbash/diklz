@@ -1,0 +1,103 @@
+﻿@using ReflectionIT.Mvc.Paging
+@model ReflectionIT.Mvc.Paging.PagingList<App.Data.DTO.Common.FileStoreDTO>
+@inject App.Core.Mvc.Helpers.SelectListHelper Sel
+@addTagHelper *, ReflectionIT.Mvc.Paging
+
+
+<div class="content-list-wrapper" data-pgparams="@ViewBag.FormParamList">
+    <div class="content-list content-list-header">
+        <div class="content-list-edit"></div>
+        <div class="content-list-item grid-container">
+            <div class="grid" data-grid="1">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.SortableHeaderFor(model => model.OrigFileName)
+                    </p>
+                </div>
+            </div>
+            <div class="grid" data-grid="1">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.SortableHeaderFor(model => model.FileSizeCount)
+                    </p>
+                </div>
+            </div>
+            <div class="grid" data-grid="1">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.SortableHeaderFor(model => model.Description)
+                    </p>
+                </div>
+            </div>
+            <div class="grid" data-grid="1">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.SortableHeaderFor(model => model.EdocumentStatus)
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="content-list-delete"></div>
+    </div>
+    @foreach (var item in Model)
+    {
+        <div class="content-list">
+            <div class="content-list-edit">
+                <a asp-controller="FileStore"
+                   asp-action="Download"
+                   asp-route-fileid="@item.Id"
+                   data-title="Вивантажити"
+                   data-tooltipright="1"
+                   target="_blank"
+                   class="btn btn-icon btn-square icon-lg icon-import-down">
+                </a>
+            </div>
+            <div class="content-list-item grid-container-nested">
+                <div class="grid">
+                    <div class="grid-inner">
+                        <p>
+                            @Html.DisplayFor(modelItem => item.OrigFileName)
+                        </p>
+                    </div>
+                </div>
+                <div class="grid">
+                    <div class="grid-inner">
+                        <p>
+                            @Html.DisplayFor(modelItem => item.FileSizeCount)
+                        </p>
+                    </div>
+                </div>
+                <div class="grid">
+                    <div class="grid-inner">
+                        <p>
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </p>
+                    </div>
+                </div>
+                <div class="grid">
+                    <div class="grid-inner">
+                        <p>
+                            @Sel.Enum("PaymentStatus", p => p.Code == item.EdocumentStatus).SingleOrDefault()?.Text
+                        </p>
+                    </div>
+                </div>
+            </div>
+            @if (item.EdocumentStatus == "RequiresPayment")
+            {
+                <div class="content-list-delete">
+                    <a asp-controller="FileStore"
+                       asp-action="DeleteFile"
+                       data-title="Видалити"
+                       data-tooltipleft="1"
+                       asp-route-id="@item.Id"
+                       class="btn btn-icon btn-square icon-md icon-remove">
+                    </a>
+                </div>
+            }
+        </div>
+    }
+</div>
+
+<nav>
+    <vc:pager paging-list="@Model" />
+</nav>

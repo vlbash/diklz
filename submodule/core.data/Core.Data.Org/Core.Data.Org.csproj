@@ -1,0 +1,55 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Dto\BaseDepartmentDetailDto.sql" />
+    <None Remove="Dto\BaseDepartmentListDto.sql" />
+    <None Remove="Dto\BaseEmployeeDetailDto.sql" />
+    <None Remove="Dto\BaseEmployeeForLoginDto.sql" />
+    <None Remove="Dto\BaseEmployeeListDto.sql" />
+    <None Remove="Dto\BaseEmployeeMinDto.sql" />
+    <None Remove="Dto\BaseOrganizationDetailDto.sql" />
+    <None Remove="Dto\BaseOrganizationListDto.sql" />
+    <None Remove="Dto\BasePositionDetailDto.sql" />
+    <None Remove="Dto\BasePositionListDto.sql" />
+    <None Remove="Dto\BaseUnitDetailDto.sql" />
+    <None Remove="Dto\BaseUnitListDto.sql" />
+    <None Remove="Dto\BaseUnitMinDto.sql" />
+    <None Remove="Dto\BaseUnitPositionEmployeeDetailDto.sql" />
+    <None Remove="Dto\BaseUnitPositionEmployeeSelectDto.sql" />
+    <None Remove="Dto\BaseUnitPositionListDto.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Dto\pgsql\BaseDepartmentDetailDto.sql" />
+    <EmbeddedResource Include="Dto\pgsql\BaseDepartmentListDto.sql" />
+    <EmbeddedResource Include="Dto\pgsql\BaseEmployeeDetailDto.sql" />
+    <EmbeddedResource Include="Dto\pgsql\BaseEmployeeForLoginDto.sql" />
+    <EmbeddedResource Include="Dto\pgsql\BaseEmployeeListDto.sql" />
+    <EmbeddedResource Include="Dto\pgsql\BaseEmployeeMinDto.sql" />
+    <EmbeddedResource Include="Dto\pgsql\BaseOrganizationDetailDto.sql" />
+    <EmbeddedResource Include="Dto\pgsql\BaseOrganizationListDto.sql" />
+    <EmbeddedResource Include="Dto\pgsql\BasePositionDetailDto.sql" />
+    <EmbeddedResource Include="Dto\pgsql\BasePositionListDto.sql" />
+    <EmbeddedResource Include="Dto\pgsql\BaseUnitDetailDto.sql" />
+    <EmbeddedResource Include="Dto\pgsql\BaseUnitListDto.sql" />
+    <EmbeddedResource Include="Dto\pgsql\BaseUnitMinDto.sql" />
+    <EmbeddedResource Include="Dto\pgsql\BaseUnitPositionEmployeeDetailDto.sql" />
+    <EmbeddedResource Include="Dto\pgsql\BaseUnitPositionEmployeeSelectDto.sql" />
+    <EmbeddedResource Include="Dto\pgsql\BaseUnitPositionListDto.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.ComponentModel.Annotations" Version="4.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Core.Base">
+      <HintPath>..\Shared\lib\netstandard2.0\Core.Base.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  
+</Project>

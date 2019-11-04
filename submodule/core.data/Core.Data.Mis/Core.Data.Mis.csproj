@@ -1,0 +1,51 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Dto\BaseAppointmentDetailDto.sql" />
+    <None Remove="Dto\BaseAppointmentListDto.sql" />
+    <None Remove="Dto\BaseDiagnosisDetailDto.sql" />
+    <None Remove="Dto\BaseDiagnosisListDto.sql" />
+    <None Remove="Dto\BaseDoctorDetailDto.sql" />
+    <None Remove="Dto\BaseDoctorInfoDto.sql" />
+    <None Remove="Dto\BaseDoctorListDto.sql" />
+    <None Remove="Dto\BaseEpisodeDetailDto.sql" />
+    <None Remove="Dto\BaseEpisodeListDto.sql" />
+    <None Remove="Dto\BaseEpisodeMinDto.sql" />
+    <None Remove="Dto\BasePatientCardDetailDto.sql" />
+    <None Remove="Dto\BasePatientCardListDto.sql" />
+    <None Remove="Dto\BasePatientCardSelectDto.sql" />
+    <None Remove="Dto\BasePatientListDto.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Dto\pgsql\BaseAppointmentDetailDto.sql" />
+    <EmbeddedResource Include="Dto\pgsql\BaseAppointmentListDto.sql" />
+    <EmbeddedResource Include="Dto\pgsql\BaseAppointmentEpisodeDetailDto.sql" />
+    <EmbeddedResource Include="Dto\pgsql\BaseAppointmentEpisodeListDto.sql" />
+    <EmbeddedResource Include="Dto\pgsql\BaseDoctorDetailDto.sql" />
+    <EmbeddedResource Include="Dto\pgsql\BaseDoctorInfoDto.sql" />
+    <EmbeddedResource Include="Dto\pgsql\BaseDoctorListDto.sql" />
+    <EmbeddedResource Include="Dto\pgsql\BaseEpisodeDetailDto.sql" />
+    <EmbeddedResource Include="Dto\pgsql\BaseEpisodeListDto.sql" />
+    <EmbeddedResource Include="Dto\pgsql\BaseEpisodeMinDto.sql" />
+    <EmbeddedResource Include="Dto\pgsql\BasePatientCardDetailDto.sql" />
+    <EmbeddedResource Include="Dto\pgsql\BasePatientCardListDto.sql" />
+    <EmbeddedResource Include="Dto\pgsql\BasePatientCardSelectDto.sql" />
+    <EmbeddedResource Include="Dto\pgsql\BasePatientListDto.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.ComponentModel.Annotations" Version="4.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Core.Base">
+      <HintPath>..\Shared\lib\netstandard2.0\Core.Base.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

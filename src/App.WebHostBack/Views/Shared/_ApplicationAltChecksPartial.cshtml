@@ -1,0 +1,117 @@
+﻿@model App.Data.DTO.APP.BaseAppDetailDTO
+
+
+
+<div class="content-item">
+    <div class="content-item-header">
+        <i class="icon icon-xlg icon-msg-envelope"></i>
+        <h2 id="licenseTerms">Сповіщення та ліцензійні умови</h2>
+    </div>
+    <div class="content-btn">
+        <a class="content-item-btn icon-lg icon-search-file"
+           asp-action="@("Get" + Model.AppType + "ApplicationReport")"
+           asp-controller="Application"
+           asp-area="@Model.AppType"
+           asp-route-id="@Model.Id"
+           data-tab
+           data-title="Переглянути заяву у формі PDF"
+           target="_blank"
+           data-tooltipleft='1'>
+        </a>
+    </div>
+    <div class="content-partial @(ViewBag.IsEditable == false ? "content-readonly" : "")" data-tab-empty>
+        <div class="content-item-edit">
+            @if (Model.AppSort == "AddBranchApplication" || Model.AppSort == "AddBranchInfoApplication")
+            {
+                <div class="content-item-inner @(Model.IsCreatedOnPortal ? "content-readonly" : "")">
+                    <div class="content-edit content-edit-wide">
+                        <input type="checkbox" class="checkbox license_check" id="IsCheckMPD" checked="@(Model.IsCheckMpd)"/>
+                        <label for="IsCheckMPD">
+                            Прошу за місцем/місцями провадження господарської діяльності провести перевірку матеріально-технічної бази,
+                            кваліфікованого персоналу, а також умов щодо контролю якості лікарських засобів, що вироблятимуться
+                        </label>
+                    </div>
+                </div>
+            }
+            <div class="content-item-inner @(Model.IsCreatedOnPortal ? "content-readonly" : "")">
+                <div class="content-inner-header">Про рішення, прийняте за результатами розгляду цієї заяви, прошу повідомити:</div>
+                <div class="content-edit content-edit-wide">
+                    <input type="checkbox" class="checkbox license_check optional_agree" id="IsCourierResults" checked="@Model.IsCourierResults"/>
+                    <label for="IsCourierResults">Нарочно</label>
+                </div>
+                <div class="content-edit content-edit-wide">
+                    <input type="checkbox" class="checkbox license_check optional_agree" id="IsPostResults" checked="@Model.IsPostResults"/>
+                    <label for="IsPostResults">Поштовим відправленням за місцезнаходженням/місцем проживання</label>
+                </div>
+                <div class="content-edit content-edit-wide">
+                    <input type="checkbox" class="checkbox license_check optional_agree" id="IsElectricFormResults" checked="@Model.IsElectricFormResults"/>
+                    <label for="IsElectricFormResults">В електронному вигляді</label>
+                </div>
+            </div>
+            <div class="content-item-inner @(Model.IsCreatedOnPortal ? "content-readonly" : "")">
+                <div class="content-inner-header">Ліцензійні умови:</div>
+                <div class="content-edit content-edit-wide">
+                    <input type="checkbox" class="checkbox license_check license_check_agree" id="IsAgreeLicenseTerms" checked="@Model.IsAgreeLicenseTerms"/>
+                    <label for="IsAgreeLicenseTerms">З порядком отримання ліцензії ознайомлений. Ліцензійним умовам провадження господарської діяльності з виробництва лікарських засобів, оптової та роздрібної торгівлі лікарськими засобами, імпорту лікарських засобів(крім активних фармацевтичних інгредієнтів) відповідаю і зобов’язуюсь їх виконувати.</label>
+                </div>
+                <div class="content-edit content-edit-wide">
+                    <input type="checkbox" class="checkbox license_check license_check_agree" id="IsAgreeProcesingData" checked="@Model.IsAgreeProcessingData"/>
+                    <label for="IsAgreeProcesingData">Згоден на обробку персональних даних з метою забезпечення виконання вимог Закону України “Про ліцензування видів господарської діяльності” (для фізичної особи - підприємця)</label>
+                </div>
+                <div class="content-edit content-edit-wide">
+                    <input type="checkbox" class="checkbox license_check license_check_agree" id="IsProtectionFromAggressors" checked="@Model.IsProtectionFromAggressors"/>
+                    <label for="IsProtectionFromAggressors">На виконання вимог Закону України "Про ліцензування видів господарської діяльності" інформуємо про відсутність контролю (у значенні наведеному в статті 1 Закону України "Про захист економічної конкуренції") за діяльністю осіб - резидентів інших держав, що здійснюють збройну агресію проти України (у значенні, наведеному у статті 1 Закону України "Про оборону України") та\або дії яких створюють умови для виникнення воєнного конфлікту та застосування воєнної сили проти України.</label>
+                </div>
+                <div class="content-edit content-edit-wide">
+                    <div class="textarea-group">
+                        <textarea asp-for="Comment"
+                                  class="textarea"
+                                  autocomplete="off">
+                                </textarea>
+                        <span class="input-group-bar"></span>
+                        <label asp-for="Comment"></label>
+                        <span asp-validation-for="Comment"
+                              class="asp-validation"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script>
+        $(".license_check").click(function() {
+            var id = $(this).attr('id');
+            var appId = "@Model.Id";
+            $.ajax({
+                type: "post",
+                url: "@Url.Action("ChangeCheckBox", "Application", new {Area=Model.AppType})",
+                data: {
+                    checkBoxId: id,
+                    appId: appId
+                },
+                error: function(data) {
+                    $(this).click();
+                }
+            });
+        });
+
+        $("#Comment").on('blur',
+            function() {
+                var appId = "@Model.Id";
+                var text = $(this).val();
+                $.ajax({
+                    type: "post",
+                    url: "@Url.Action("SaveComment", "Application", new {Area=Model.AppType})",
+                    data: {
+                        text: text,
+                        appId: appId
+                    },
+                    error: function() {
+                        $("#comment-error").html("Виникла помилка, перезавантажте сторінку та додайте коментар знову");
+                    }
+
+                });
+            });
+    </script>
+</div>
+

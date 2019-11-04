@@ -1,0 +1,65 @@
+﻿@model App.Data.DTO.APP.AppLicenseMessageDTO
+@inject App.Core.Mvc.Helpers.SelectListHelper Sel
+@if (!string.IsNullOrEmpty(Model.ExpertiseResultEnum) && !string.IsNullOrEmpty(Model.DecisionType))
+{
+    if (Model.Id != Guid.Empty)
+    {
+        <div class="content-item-details">
+            <div class="content-item-inner content-details-wrapper col-2">
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.MessageNumber)</label>
+                        <p>@Html.DisplayFor(model => model.MessageNumber)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.DateOfMessage)</label>
+                        <p>@Html.DisplayFor(model => model.DateOfMessage)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.SignedJobPosition)</label>
+                        <p>@Html.DisplayFor(model => model.SignedJobPosition)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.SignedFullName)</label>
+                        <p>@Html.DisplayFor(model => model.SignedFullName)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.PerformerName)</label>
+                        <p>@Html.DisplayFor(model => model.PerformerName)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.State)</label>
+                        <p>@Html.DisplayFor(model => model.State)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.AttachedFile)</label>
+                        <p>@Html.DisplayFor(model => model.AttachedFile)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    <div class="content-submit-holder btn-holder">
+        @if (Model.Id == Guid.Empty)
+        {
+            <button type="button" class="btn btn-secondary btn-panel"
+                    data-modal="modal-center"
+                    data-tab-container-url="@Url.Action("ModalLicenseMessage", "PrlProcessing", new {appId = Model.AppId})">
+                <span class="icon icon-huge icon-document"></span>
+                <span> Створити повідомлення про результат розгляду заяви </span>
+            </button>
+        }
+    </div>
+}

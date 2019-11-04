@@ -1,0 +1,116 @@
+@import "../abstracts/_bundle";
+
+.textarea,
+.select,
+.input {
+  width: 100%;
+  height: @input-height;
+  padding-top: @xxs;
+  padding-right: @sm;
+  padding-bottom: @xxs;
+  padding-left: @sm;
+
+  //todo стили для placeholder-ов прописать
+
+  &-group {
+    position: relative;
+    flex-direction: column;
+    width: 100%;
+    margin-top: @xs;
+    margin-bottom: @xs;
+
+    .input-readonly~label,
+    label {
+      position: absolute;
+      top: @font-size-small;
+      left: @sm;
+      transform: translateY(-50%);
+      color: @font-color-main;
+      font-size: @font-size-small;
+      pointer-events: none;
+      .material-transition;
+    }
+
+    &-bar {
+      position: relative;
+      width: 100%;
+
+      &::before,
+      &:after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: @input-bar-height;
+        background: @input-bar-color;
+        .material-transition;
+      }
+
+      &::before {
+        left: 50%;
+      }
+
+      &::after {
+        right: 50%;
+      }
+    }
+  }
+}
+
+.datepicker-group.not-empty label,
+.select-group-inner.on+label,
+.select-group-inner.not-empty+label,
+.textarea:focus~label,
+.input:focus~label,
+.input-readonly.not-empty~label,
+.textarea.not-empty~label,
+.input.not-empty~label {
+  top: 0;
+  transform: translateY(-120%) translateX(-@sm);
+  color: @input-bar-color;
+  font-size: @font-size-smallest;
+  font-weight: @bold;
+}
+
+.select-group-inner.on .select-group-bar,
+.textarea:focus~.input-group-bar,
+.input:focus~.input-group-bar {
+  &::before {
+    width: 50%;
+  }
+
+  &::after {
+    width: 50%;
+  }
+}
+
+.select-group-inner+label,
+.textarea.empty~label,
+.input.empty~label,
+.input-col-2 label {
+  color: @font-color-light;
+  font-size: @font-size-small;
+}
+
+.datepicker-group.not-empty label,
+.select-group-inner.on+label,
+.select-group-inner.not-empty+label,
+.textarea:focus~label,
+.input:focus~label,
+.input-readonly.not-empty~label,
+.textarea.not-empty~label,
+.input.not-empty~label {
+  color: @input-bar-color;
+  font-size: @font-size-smallest;
+}
+
+.ms-options-wrap button{
+  width: 100%;
+  height: @input-height*1.2;
+  font-size: @font-size-main;
+  border-top: none !important;
+  border-left: none !important;
+  border-right: none !important;
+}
+.ms-options-wrap > .ms-options{
+  margin-top: -1px!important;
+}

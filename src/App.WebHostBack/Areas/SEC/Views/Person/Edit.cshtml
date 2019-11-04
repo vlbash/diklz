@@ -1,0 +1,210 @@
+﻿@model App.Core.Data.DTO.Common.PersonDetailDTO
+@inject App.Core.Mvc.Helpers.SelectListHelper Sel
+
+@{
+    ViewData["Title"] = "Картка фізичної особи";
+}
+
+
+<div class="content-item-holder">
+    <div class="content-item">
+        <div class="content-item-header">
+
+            @if (Model.Id == Guid.Empty)
+            {
+                <i class="icon-huge icon-person-add"></i>
+                <h2 id="edit-title">Створення картки фізичної особи</h2>
+            }
+            else
+            {
+                <i class="icon-huge icon-clipboard-edit"></i>
+                <h2 id="edit-title">Редагування картки фізичної особи</h2>
+            }
+
+        </div>
+        <form asp-action="Edit" class="content-item-edit">
+            <input type="hidden" asp-for="Id" />
+            @*<input type="hidden" asp-for="_ReturnUrl" />*@
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="content-item-inner">
+                <div class="content-edit">
+                    <div class="input-group">
+                        <input asp-for="LastName"
+                               class="input"
+                               autocomplete="off" />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="LastName"></label>
+                        <span class="js-validation"></span>
+                        <span asp-validation-for="LastName" class="asp-validation"></span>
+                    </div>
+                </div>
+                <div class="content-edit">
+                    <div class="input-group">
+                        <input asp-for="Name"
+                               class="input"
+                               autocomplete="off" />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="Name"></label>
+                        <span class="js-validation"></span>
+                        <span asp-validation-for="Name" class="asp-validation"></span>
+                    </div>
+                </div>
+                <div class="content-edit">
+                    <div class="input-group">
+                        <input asp-for="MiddleName"
+                               class="input"
+                               autocomplete="off" />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="MiddleName"></label>
+                        <span class="js-validation"></span>
+                        <span asp-validation-for="MiddleName" class="asp-validation"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="content-item-inner">
+                <div class="content-edit">
+                    <div class="datepicker-group input-group">
+                        <input asp-for="Birthday"
+                               class="input datepicker"
+                               autocomplete="off"
+                               type="text" />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="Birthday"></label>
+                        <span class="js-validation"></span>
+                        <span asp-validation-for="Birthday" class="asp-validation"></span>
+                    </div>
+                </div>
+                <div class="content-edit">
+                    <div class="select-group">
+                        <select asp-for="GenderEnum"
+                                class="select"
+                                asp-items="@Sel.Enum("Gender")"
+                                autocomplete="off"></select>
+                        <label asp-for="GenderEnum"></label>
+                        <span class="js-validation"></span>
+                        <span asp-validation-for="GenderEnum"
+                              class="asp-validation"></span>
+                    </div>
+                </div>
+                <div class="content-edit">
+                    <div class="input-group">
+                        <input asp-for="Email"
+                               class="input"
+                               autocomplete="off" />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="Email"></label>
+                        <span class="js-validation"></span>
+                        <span asp-validation-for="Email" class="asp-validation"></span>
+                    </div>
+                </div>
+                <div class="content-edit">
+                    <div class="input-group">
+                        <input asp-for="Phone"
+                               class="input"
+                               autocomplete="off" />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="Phone"></label>
+                        <span class="js-validation"></span>
+                        <span asp-validation-for="Phone" class="asp-validation"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="content-item-inner">
+                <div class="content-edit">
+                    <div class="checkbox-group">
+                        <div class="checkbox-group-inner">
+                            <input class="checkbox" asp-for="NoIPN" />
+                            <label asp-for="NoIPN"></label>
+                        </div>
+                        <span class="checkbox-group-bar"></span>
+                    </div>
+                </div>
+                <div class="content-edit">
+                    <div class="input-group">
+                        <input asp-for="IPN"
+                               class="input"
+                               autocomplete="off" />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="IPN"></label>
+                        <span class="js-validation"></span>
+                        <span asp-validation-for="IPN" class="asp-validation"></span>
+                    </div>
+                </div>
+                <div class="content-edit">
+                    <div class="select-group">
+                        <select asp-for="IdentityDocumentTypeEnum"
+                                class="select"
+                                asp-items="@Sel.Enum("IdentityDocumentType")"
+                                autocomplete="off"></select>
+                        <label asp-for="IdentityDocumentTypeEnum"></label>
+                        <span class="js-validation"></span>
+                        <span asp-validation-for="IdentityDocumentTypeEnum"
+                              class="asp-validation"></span>
+                    </div>
+                </div>
+                <div class="content-edit">
+                    <div class="input-group">
+                        <input asp-for="DocPrefix"
+                               class="input"
+                               autocomplete="off" />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="DocPrefix"></label>
+                        <span class="js-validation"></span>
+                        <span asp-validation-for="DocPrefix" class="asp-validation"></span>
+                    </div>
+                </div>
+                <div class="content-edit">
+                    <div class="input-group">
+                        <input asp-for="PersonalDocumentNumber"
+                               class="input"
+                               autocomplete="off" />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="PersonalDocumentNumber"></label>
+                        <span class="js-validation"></span>
+                        <span asp-validation-for="PersonalDocumentNumber" class="asp-validation"></span>
+                    </div>
+                </div>
+                <div class="content-edit">
+                    <div class="input-group">
+                        <input asp-for="PersonalDocumentAuthority"
+                               class="input"
+                               autocomplete="off" />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="PersonalDocumentAuthority"></label>
+                        <span class="js-validation"></span>
+                        <span asp-validation-for="PersonalDocumentAuthority" class="asp-validation"></span>
+                    </div>
+                </div>
+                <div class="content-edit">
+                    <div class="datepicker-group input-group">
+                        <input asp-for="DocumentIssueDate"
+                               class="input datepicker"
+                               autocomplete="off"
+                               type="text" />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="DocumentIssueDate"></label>
+                        <span class="js-validation"></span>
+                        <span asp-validation-for="DocumentIssueDate" class="asp-validation"></span>
+                    </div>
+                </div>
+                <div class="content-edit">
+                    <div class="datepicker-group input-group">
+                        <input asp-for="ExpirationDate"
+                               class="input datepicker"
+                               autocomplete="off"
+                               type="text" />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="ExpirationDate"></label>
+                        <span class="js-validation"></span>
+                        <span asp-validation-for="ExpirationDate" class="asp-validation"></span>
+                    </div>
+                </div>
+                <div class="content-submit-holder btn-holder btn-holder-right">
+                    <a href="#" onclick="mt.goStepBack()" class="btn btn-text btn-danger">Відмінити</a>
+                    <input type="submit" value="Зберегти" class="btn btn-secondary btn-fill" />
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>

@@ -1,0 +1,185 @@
+﻿@model App.Data.DTO.IML.ImlMedicineDetailDTO
+
+@{
+    ViewData["Title"] = "Лікарський засіб";
+}
+
+<div class="content-item-holder">
+    <div class="content-item">
+        <div class="content-item-header">
+
+            @if (Model.Id == Guid.Empty)
+            {<i class="icon-xlg icon-add-user"></i>
+            <h2>Створення лікарського засобу</h2>
+            }
+            else
+            { <i class="icon-xlg icon-person-edit-bold"></i>
+            <h2>Редагування додавання лікарського засобу</h2>
+            }
+
+        </div>
+        <form asp-action="Edit" class="content-item-edit">
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="ApplicationId">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="content-item-inner">
+                <div class="content-edit">
+                    <div class="input-group">
+                        <input asp-for="MedicineName"
+                               class="input"
+                               autocomplete="off" />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="MedicineName"></label>
+                        <span asp-validation-for="MedicineName"
+                              class="asp-validation"></span>
+                    </div>
+                </div>
+
+                <div class="content-edit">
+                    <div class="input-group">
+                        <input asp-for="FormName"
+                               class="input"
+                               autocomplete="off" />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="FormName"></label>
+                        <span asp-validation-for="FormName"
+                              class="asp-validation"></span>
+                    </div>
+                </div>
+
+                <div class="content-edit">
+                    <div class="input-group">
+                        <input asp-for="DoseInUnit"
+                               class="input"
+                               autocomplete="off" />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="DoseInUnit"></label>
+                        <span asp-validation-for="DoseInUnit"
+                              class="asp-validation"></span>
+                    </div>
+                </div>
+
+                <div class="content-edit">
+                    <div class="input-group">
+                        <input asp-for="NumberOfUnits"
+                               class="input"
+                               autocomplete="off" />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="NumberOfUnits"></label>
+                        <span asp-validation-for="NumberOfUnits"
+                              class="asp-validation"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="content-item-inner">
+                <div class="content-edit">
+                    <div class="input-group">
+                        <input asp-for="MedicineNameEng"
+                               class="input"
+                               autocomplete="off" />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="MedicineNameEng"></label>
+                        <span asp-validation-for="MedicineNameEng"
+                              class="asp-validation"></span>
+                    </div>
+                </div>
+                <div class="content-edit">
+                    <div class="input-group">
+                        <input asp-for="RegisterNumber"
+                               class="input"
+                               autocomplete="off" />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="RegisterNumber"></label>
+                        <span asp-validation-for="RegisterNumber"
+                              class="asp-validation"></span>
+                    </div>
+                </div>
+
+                <div class="content-edit">
+                    <div class="input-group">
+                        <input asp-for="AtcCode"
+                               class="input"
+                               autocomplete="off" />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="AtcCode"></label>
+                        <span asp-validation-for="AtcCode"
+                              class="asp-validation"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="content-item-inner">
+                <div class="content-edit">
+                    <div class="input-group">
+                        <input asp-for="ProducerName"
+                               class="input"
+                               autocomplete="off" />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="ProducerName"></label>
+                        <span asp-validation-for="ProducerName"
+                              class="asp-validation"></span>
+                    </div>
+                </div>
+
+                <div class="select-group">
+                    <input asp-for="ProducerCountry"
+                           class="input"
+                           autocomplete="off" />
+                    <span class="input-group-bar"></span>
+                    <label asp-for="ProducerCountry"></label>
+                    <span asp-validation-for="ProducerCountry" class="asp-validation"></span>
+                </div>
+
+                <div class="content-edit">
+                    <div class="datepicker-group input-group">
+                        <input asp-for="SupplierName"
+                               class="input"
+                               autocomplete="off"
+                               type="text" />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="SupplierName"></label>
+                        <span asp-validation-for="SupplierName"
+                              class="asp-validation"></span>
+                    </div>
+                </div>
+                <div class="select-group">
+                    <input asp-for="SupplierCountry"
+                           class="input"
+                           autocomplete="off"
+                           type="text" />
+                    <span class="input-group-bar"></span>
+                    <label asp-for="SupplierCountry"></label>
+                    <span asp-validation-for="SupplierCountry" class="asp-validation"></span>
+                </div>
+                <div class="content-edit">
+                    <div class="input-group">
+                        <input asp-for="SupplierAddress"
+                               class="input"
+                               autocomplete="off" />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="SupplierAddress"></label>
+                        <span asp-validation-for="SupplierAddress"
+                              class="asp-validation"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="content-item-inner">
+                <div class="content-edit">
+                    <div class="input-group">
+                        <input asp-for="Notes"
+                               class="input"
+                               autocomplete="off" />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="Notes"></label>
+                        <span asp-validation-for="Notes"
+                              class="asp-validation"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="content-submit-holder btn-holder btn-holder-right">
+                <a href="#" onclick="mt.goStepBack()" class="btn btn-text btn-danger">Відмінити</a>
+                <input type="submit" value="Зберегти" class="btn btn-secondary btn-fill" />
+            </div>
+        </form>
+    </div>
+</div>

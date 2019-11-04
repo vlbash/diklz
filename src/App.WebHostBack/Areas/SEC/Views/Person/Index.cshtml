@@ -1,0 +1,80 @@
+﻿@using Newtonsoft.Json
+
+@{
+    ViewData["Title"] = "Реєстр фізичних осіб";
+}
+
+@section Buttons {
+    <a class="btn btn-secondary btn-square  btn-tiny icon-md icon-add"
+       asp-action="Edit"
+       data-tooltipleft='1'
+       data-title="Додати нову особу">
+    </a>
+}
+
+<div class="content-search-wrapper">
+    <partial name="_Searchform" />
+</div>
+
+<div class="results" id="results">
+
+</div>
+
+@section Scripts {
+
+    <script>
+
+
+        var searchFormControls = {
+            controlsConfig: [
+                {
+                    labelName: 'ПІБ',
+                    name: 'Name',
+                    type: 'text'
+                },
+                {
+                    labelName: 'Дата реалізації:',
+                    type:'dataGroup',
+                    children:[
+                        {
+                            labelName: 'з: ',
+                            name: 'DateBegin_From',
+                            type: 'datepicker',
+                            validate:['date']
+                        }, {
+                            labelName: 'по: ',
+                            name: 'DateBegin_To',
+                            type: 'datepicker',
+                            validate:['date']
+                        }
+                    ]
+                }
+            ]
+        }
+
+        var searchFormConfig = {
+            formConfig: {
+                formName: 'form0',
+                formDataAjaxUpdate: '#results',
+                // formDataAjax: 'true',
+                // formDataAjaxMode: 'replace',
+                formMethod: 'post',
+                controls:searchFormControls
+            },
+            presetFiltersUrl:{
+            },
+
+            mainInputConfig: {
+                labelName: 'ПІБ',
+                type: 'text',
+                mainInputLookUp: ['Name']
+            },
+
+        };
+
+
+        mt.createContentSearchForm(searchFormConfig);
+
+    </script>
+
+}

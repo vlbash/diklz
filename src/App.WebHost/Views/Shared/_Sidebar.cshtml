@@ -1,0 +1,384 @@
+﻿
+@using App.Core.Business.Services
+@inject IUserInfoService UserIdentityInfo;
+@{
+    var userInfo = UserIdentityInfo.GetCurrentUserInfo();
+    var check = false;
+    if (userInfo.LoginData == null)
+    {
+        check = true;
+    }
+}
+<script>
+    function CheckLicense(e, element, appType) {
+        var licUrl = $(element).data('url');
+        var checkUrl = $(element).data('url-check');
+        $.ajax({
+            url: checkUrl,
+            type: 'GET',
+            success: function (data) {
+                document.location = licUrl;
+            },
+            error: function (error) {
+                mt.createDialog(e, appType + " не знайдена!", null);
+            }
+        });
+    }
+</script>
+
+<aside id="aside" class="aside">
+    <span id="aside-arrow-top" class="aside-arrow aside-arrow-top">
+        <svg xmlns="http://www.w3.org/2000/svg"
+             xmlns:xlink="http://www.w3.org/1999/xlink"
+             style="enable-background:new 0 0 139 139;"
+             version="1.1"
+             viewBox="0 0 139 139"
+             xml:space="preserve">
+        <polyline style="fill:none;stroke:#ffffff;stroke-width:6;stroke-miterlimit:10;" id="XMLID_6_" points="115.5,78.5 69.5,60.5 23.5,78.5 " />
+
+
+        </svg>
+    </span>
+    <span id="aside-arrow-bottom" class="aside-arrow aside-arrow-bottom">
+        <svg xmlns="http://www.w3.org/2000/svg"
+             xmlns:xlink="http://www.w3.org/1999/xlink"
+             style="enable-background:new 0 0 139 139;"
+             version="1.1" viewBox="0 0 139 139"
+             xml:space="preserve">
+        <polyline style="fill:none;stroke:#fff;stroke-width:6;stroke-miterlimit:10;" class="st0" id="XMLID_6_" points="23.5,60.5 69.5,78.5 115.5,60.5 " />
+
+        </svg>
+    </span>
+    <ul id="aside-menu" class="aside-menu menu-vertical">
+    @if (check)
+    {
+        <li class="aside-menu-li">
+            <div class="aside-menu-li-inner menu-item-wrapper">
+                <a class="menu-item"
+                   asp-controller="Home"
+                   asp-action="Info"
+                   asp-area="">
+                    <div class="menu-item-inner">
+                        <i class="icon icon-lg icon-compass"></i>
+                        <span>Головна</span>
+                    </div>
+                </a>
+            </div>
+        </li>
+    }
+    else { 
+    <li class="aside-menu-li">
+            <div class="aside-menu-li-inner menu-item-wrapper">
+                <a class="menu-item"
+                   asp-controller="Home"
+                   asp-action="Index"
+                   asp-area="">
+                    <div class="menu-item-inner">
+                        <i class="icon icon-lg icon-compass"></i>
+                        <span>Головна</span>
+                    </div>
+                </a>
+            </div>
+        </li>
+
+        <li class="aside-menu-li">
+            <div class="aside-menu-li-inner menu-item-wrapper">
+                <div class="menu-item">
+                    <div class="menu-item-inner">
+                        <i class="icon icon-lg icon-documents-archive"></i>
+                        <span>Подання заяв</span>
+                    </div>
+                </div>
+                <ul class="menu-vertical">
+                    <li>
+                        <div class="menu-item-wrapper">
+                            <a asp-area="APP" asp-controller="AppApply" asp-action="Index" class="menu-item">
+                                <div class="menu-item-inner text">
+                                    <span>Ліцензування</span>
+                                </div>
+                            </a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="menu-item-wrapper">
+                            <a asp-area="P902" asp-controller="AppConclusion" asp-action="Index" class="menu-item">
+                                <div class="menu-item-inner text">
+                                    <span>Контроль якості ЛЗ при ввезенні</span>
+                                </div>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+        
+        <li class="aside-menu-li">
+            <div class="aside-menu-li-inner menu-item-wrapper">
+                <div class="menu-item">
+                    <div class="menu-item-inner">
+                        <i class="icon icon-lg icon-monitoring"></i>
+                        <span>Моніторинг розгляду</span>
+                    </div>
+                </div>
+                <ul class="menu-vertical">
+                    <li>
+                        <div class="menu-item-wrapper">
+                            <a asp-area="MTR" asp-controller="Monitoring" asp-action="Index" class="menu-item">
+                                <div class="menu-item-inner text">
+                                    <span>Ліцензування</span>
+                                </div>
+                            </a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="menu-item-wrapper">
+                            <a asp-area="APP" asp-controller="AppApply" asp-action="Index" class="menu-item">
+                                <div class="menu-item-inner text">
+                                    <span>Контроль якості ЛЗ при ввезенні</span>
+                                </div>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+        @*<li class="aside-menu-li">
+            <div class="aside-menu-li-inner menu-item-wrapper">
+                <a class="menu-item"
+                   asp-area="APP"
+                   asp-controller="AppApply"
+                   asp-action="Index">
+                    <div class="menu-item-inner">
+                        <i class="icon icon-lg icon-clipboard-data"></i>
+                        <span>Ліцензування</span>
+                    </div>
+                </a>
+            </div>
+        </li>*@
+
+        @*<li class="aside-menu-li">
+            <div class="aside-menu-li-inner menu-item-wrapper">
+                <a class="menu-item"
+                   asp-area="MTR"
+                   asp-controller="Monitoring"
+                   asp-action="Index">
+                    <div class="menu-item-inner">
+                        <i class="icon icon-lg icon-monitoring"></i>
+                        <span>Моніторинг розгляду</span>
+                    </div>
+                </a>
+            </div>
+        </li>*@
+        @*<li is-active-route
+                asp-area="ORG"
+                asp-controller="OrgDepartment">
+                <div class="menu-item-wrapper">
+                    <a class="menu-item"
+                    asp-area="ORG"
+                    asp-controller="OrgDepartment"
+                    asp-action="Index">
+                        <div class="menu-item-inner">
+                            <i class="item-icon test-icon-white"></i>
+                            <span>Реєстр департаментів</span>
+                        </div>
+                    </a>
+                </div>
+            </li>
+        *@
+
+        <li class="aside-menu-li">
+            <div class="aside-menu-li-inner menu-item-wrapper">
+                <a class="menu-item"
+                   asp-area="MSG"
+                   asp-controller="Message"
+                   asp-action="Index">
+                    <div class="menu-item-inner">
+                        <i class="icon icon-lg icon-msg-box"></i>
+                        <span>Повідомлення</span>
+                    </div>
+                </a>
+            </div>
+        </li>
+
+
+        <li class="aside-menu-li">
+            <div class="aside-menu-li-inner menu-item-wrapper">
+                <a class="menu-item"
+                   asp-area="P902"
+                   asp-controller="ResultInputControl"
+                   asp-action="Index">
+                    <div class="menu-item-inner">
+                        <i class="icon icon-lg icon-file-signed"></i>
+                        <span>Звіт про результати</span>
+                    </div>
+                </a>
+            </div>
+        </li>
+
+        <li class="aside-menu-li">
+            <div class="aside-menu-li-inner menu-item-wrapper">
+                <div class="menu-item">
+                    <div class="menu-item-inner">
+                        <i class="icon icon-lg icon-documents-case"></i>
+                        <span>Реєстр документів</span>
+                    </div>
+                </div>
+                <ul class="menu-vertical">
+                    <li>
+                        <div class="menu-item-wrapper">
+                            <a asp-area="DOC" asp-controller="Register" asp-action="EDocuments" class="menu-item">
+                                <div class="menu-item-inner text">
+                                    <span>Досьє та відомості МТБ та персоналу</span>
+                                </div>
+                            </a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="menu-item-wrapper">
+                            <a class="menu-item">
+                                <div class="menu-item-inner text">
+                                    <span>Сертифікат якості, виданий виробником на серію лікарського засобу</span>
+                                </div>
+                            </a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="menu-item-wrapper">
+                            <a class="menu-item">
+                                <div class="menu-item-inner text">
+                                    <span>Документи, що пітверджують відповідність умов виробництва лыкарських засобів вимогам до виробництва лікарських засобів в Україні</span>
+                                </div>
+                            </a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="menu-item-wrapper">
+                            <a asp-area="CRV" asp-controller="LimsRP" asp-action="Index" class="menu-item">
+                                <div class="menu-item-inner text">
+                                    <span>Реєстраційне посвідчення на ввезені лікарські засоби</span>
+                                </div>
+                            </a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="menu-item-wrapper">
+                            <a class="menu-item">
+                                <div class="menu-item-inner text">
+                                    <span>Митна документація</span>
+                                </div>
+                            </a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="menu-item-wrapper">
+                            <a class="menu-item">
+                                <div class="menu-item-inner text">
+                                    <span>Документ, що підтверджує дотримання умов зберігання підчас транспортування від виробника до імпортера</span>
+                                </div>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+
+        <li class="aside-menu-li">
+            <div class="aside-menu-li-inner menu-item-wrapper">
+                <div class="menu-item">
+                    <div class="menu-item-inner">
+                        <i class="icon icon-lg icon-documents-archive"></i>
+                        <span>Централізовані реєстри</span>
+                    </div>
+                </div>
+                <ul class="menu-vertical">
+                    <li>
+                        <div class="menu-item-wrapper">
+                            <a class="menu-item">
+                                <div class="menu-item-inner text">
+                                    <span>Реєст розпоряджень про заборону обігу ЛЗ</span>
+                                </div>
+                            </a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="menu-item-wrapper">
+                            <a class="menu-item">
+                                <div class="menu-item-inner text">
+                                    <span>Реєст висновків про якість ввезених лікарських засобів</span>
+                                </div>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+        <li class="aside-menu-li">
+            <div class="aside-menu-li-inner menu-item-wrapper">
+                <div class="menu-item">
+                    <div class="menu-item-inner">
+                        <i class="icon icon-lg icon-doc-signed"></i>
+                        <span>Лiцензiї</span>
+                    </div>
+                </div>
+                <ul class="menu-vertical">
+                    <li>
+                        <div class="menu-item-wrapper">
+                            <a onclick="return CheckLicense(event, this, 'Ліцензія на промислове виробництво')"
+                               data-url="@Url.Action("Index", "PrlLicense", new {Area = "PRL"})"
+                               data-url-check="@Url.Action("CheckLicense", "PrlLicense", new {Area = "PRL"})" class="menu-item">
+                                <div class="menu-item-inner text">
+                                    <span>Лiцензiя з виробництва ЛЗ</span>
+                                </div>
+                            </a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="menu-item-wrapper">
+                            <a onclick="return CheckLicense(event, this, 'Ліцензія на імпорт')"
+                               data-url="@Url.Action("Index", "ImlLicense", new {Area = "IML"})"
+                               data-url-check="@Url.Action("CheckLicense", "ImlLicense", new {Area = "IML"})" class="menu-item">
+                                <div class="menu-item-inner text">
+                                    <span>Лiцензiя з Iмпорту ЛЗ</span>
+                                </div>
+                            </a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="menu-item-wrapper">
+                            <a onclick="return CheckLicense(event, this, 'Ліцензія на торгівлю')"
+                               data-url="@Url.Action("Index", "TrlLicense", new {Area = "TRL"})"
+                               data-url-check="@Url.Action("CheckLicense", "TrlLicense", new {Area = "TRL"})" class="menu-item">
+                                <div class="menu-item-inner text">
+                                    <span>Лiцензiя з Торгiвлi ЛЗ</span>
+                                </div>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+        <li class="aside-menu-li">
+            <div class="aside-menu-li-inner menu-item-wrapper">
+                <div class="menu-item">
+                    <div class="menu-item-inner">
+                        <i class="icon icon-lg icon-settings"></i>
+                        <span>Налаштування</span>
+                    </div>
+                </div>
+                <ul class="menu-vertical">
+                    <li>
+                        <div class="menu-item-wrapper">
+                            <a asp-area="AUD" asp-controller="Audit" asp-action="Index" class="menu-item">
+                                <div class="menu-item-inner text">
+                                    <span>Журнал аудиту</span>
+                                </div>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+    }   
+    </ul>
+</aside>

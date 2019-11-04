@@ -1,0 +1,165 @@
+﻿@model IEnumerable<App.Data.DTO.BRN.BranchListForLicenseDTO>
+@inject App.Core.Mvc.Helpers.SelectListHelper Sel
+
+<div class="content-list-wrapper" data-pgparams="@ViewBag.FormParamList">
+    <div class="content-list content-list-header">
+        <div class="content-list-edit"></div>
+        <div class="content-list-item grid-container">
+            <div class="grid" data-grid="2">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.DisplayNameFor(model => model.Name)
+                    </p>
+                </div>
+            </div>
+            <div class="grid" data-grid="2">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.DisplayNameFor(model => model.PhoneNumber)
+                    </p>
+                </div>
+            </div>
+            <div class="grid" data-grid="2">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.DisplayNameFor(model => model.KoatuuCode)
+                    </p>
+                </div>
+            </div>
+            <div class="grid" data-grid="2">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.DisplayNameFor(model => model.BranchActivity)
+                    </p>
+                </div>
+            </div>
+            <div class="grid" data-grid="2">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.DisplayNameFor(model => model.MessageNumDate)
+                    </p>
+                </div>
+            </div>
+            @if (ViewBag.appType == "TRL")
+            {
+                <div class="grid" data-grid="2">
+                    <div class="grid-inner">
+                        <p class="content-list-sortable">
+                            @Html.DisplayNameFor(model => model.PowerOfAttorney)
+                        </p>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="content-list-delete"></div>
+    </div>
+    @foreach (var item in Model)
+    {
+        
+        <div class="content-list" >
+            <input type="hidden" value="@item.Id" />
+            <div class="content-list-edit">
+                <a class="btn-link btn btn-icon btn-square icon-md icon-eye"
+                   asp-area="BRN"
+                   asp-action="Details"
+                   asp-controller="Branch"
+                   asp-route-id="@item.Id"
+                   data-title="Перегляд"
+                   data-tooltipright='1'>
+                </a>
+
+            </div>
+            <a class="content-list-link">
+                <div class="content-list-item grid-container-nested">
+                    <div class="grid">
+                        <div class="grid-inner">
+                            <p>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </p>
+                        </div>
+                    </div>
+                    <div class="grid">
+                        <div class="grid-inner">
+                            <p>
+                                @Html.DisplayFor(modelItem => item.PhoneNumber)
+                            </p>
+                        </div>
+                    </div>
+                    <div class="grid">
+                        <div class="grid-inner">
+                            <p>
+                                @Html.DisplayFor(modelItem => item.KoatuuCode)
+                            </p>
+                        </div>
+                    </div>
+                    <div class="grid">
+                        <div class="grid-inner">
+                            <p class="col">
+                                @if (item.BranchActivity == "Closed")
+                                {
+                                    <i class="icon icon-xs icon-close mb-sm danger-font"></i>
+                                }
+                                else if (item.BranchActivity == "Active")
+                                {
+                                    <i class="icon icon-sm icon-check mb-sm success-font"></i>
+                                }
+                                @Sel.Enum("BranchActivity", p => p.Code == item.BranchActivity).FirstOrDefault()?.Text
+                            </p>
+                        </div>
+                    </div>
+                    @*<div class="grid">
+                        <div class="grid-inner">
+                            <p>
+                                @Sel.Enum("BranchActivity", p => p.Code == item.BranchActivity).FirstOrDefault()?.Text
+                            </p>
+                        </div>
+                    </div>*@
+                    <div class="grid">
+                        <div class="grid-inner">
+                            <p>
+                                @Html.DisplayFor(modelItem => item.MessageNumDate)
+                            </p>
+                        </div>
+                    </div>
+                    @if (item.AppType == "TRL")
+                    {
+                        <div class="grid">
+                            <div class="grid-inner">
+                                @if (item.CreateTds)
+                                {
+                                    <p>Доручення ТДС створено</p>
+                                }
+                                else
+                                {
+                                    <p class="tds"></p>
+                                }
+                                @if (item.CreateDls)
+                                {
+                                    <p>Доручення ДЛС створено</p>
+                                }
+                                else
+                                {
+                                    <p class="dls"></p>
+                                }
+                            </div>
+                        </div>
+                    }
+                </div>
+            </a>
+            <div class="content-list-delete">
+                @if (item.isEditable == true)
+                {
+                    <a class="btn btn-icon btn-square icon-md icon-remove"
+                       asp-area="BRN"
+                       asp-action="DeleteBranch"
+                       asp-controller="Branch"
+                       data-title="Видалити"
+                       data-tooltipleft='1'
+                       asp-route-id="@item.Id">
+                    </a>
+                }
+            </div>
+        </div>
+
+    }
+</div>

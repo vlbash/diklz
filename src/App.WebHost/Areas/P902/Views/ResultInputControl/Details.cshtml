@@ -1,0 +1,159 @@
+﻿@model App.Data.DTO.P902.ResultInputControlDetailsDTO
+@{
+    ViewData["Title"] = "Результат вхідного контролю субстанцій";
+}
+
+@section Buttons{
+        <a class="content-item-btn icon-md icon-edit-line"
+           asp-action="Edit"
+           asp-route-id="@Model.Id"
+           data-tab-main
+           data-title="Редагувати"
+           data-tooltipleft='1'>
+        </a>
+}
+
+<div class="content-item-holder">
+    <div class="content-item">
+        <div class="content-item-header">
+            <i class="icon icon-xlg icon-edit-list"></i>
+            <h2>Результат вхідного контролю субстанцій </h2>
+        </div>
+        <div class="content-item-details">
+            <div class="content-item-inner content-details-wrapper col-2">
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.StateEnumName)</label>
+                        <p>@Html.DisplayFor(model => model.StateEnumName)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.TeritorialServiceEnumName)</label>
+                        <p>@Html.DisplayFor(model => model.TeritorialServiceEnumName)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.LicenseString)</label>
+                        <p>@Html.DisplayFor(model => model.LicenseString)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.Edrpou)</label>
+                        <p>@Html.DisplayFor(model => model.Edrpou)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.OrgName)</label>
+                        <p>@Html.DisplayFor(model => model.OrgName)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.Address)</label>
+                        <p>@Html.DisplayFor(model => model.Address)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.RegisterNumber)</label>
+                        <p>@Html.DisplayFor(model => model.RegisterNumber)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.EndDate)</label>
+                        <p>@Html.DisplayFor(model => model.EndDate)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.DrugName)</label>
+                        <p>@Html.DisplayFor(model => model.DrugName)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.DrugForm)</label>
+                        <p>@Html.DisplayFor(model => model.DrugForm)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.ProducerName)</label>
+                        <p>@Html.DisplayFor(model => model.ProducerName)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.ProducerCountry)</label>
+                        <p>@Html.DisplayFor(model => model.ProducerCountry)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.MedicineSeries)</label>
+                        <p>@Html.DisplayFor(model => model.MedicineSeries)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.MedicineExpirationDate)</label>
+                        <p>@Html.DisplayFor(model => model.MedicineExpirationDate)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.SizeOfSeries)</label>
+                        <p>@Html.DisplayFor(model => model.SizeOfSeries)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.UnitOfMeasurementEnumName)</label>
+                        <p>@Html.DisplayFor(model => model.UnitOfMeasurementEnumName)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.AmountOfImportedMedicine)</label>
+                        <p>@Html.DisplayFor(model => model.AmountOfImportedMedicine)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.WinNumber)</label>
+                        <p>@Html.DisplayFor(model => model.WinNumber)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.DateWin)</label>
+                        <p>@Html.DisplayFor(model => model.DateWin)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.InputControlResultEnumName)</label>
+                        <p>@Html.DisplayFor(model => model.InputControlResultEnumName)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.NameOfMismatch)</label>
+                        <p>@Html.DisplayFor(model => model.NameOfMismatch)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.Comment)</label>
+                        <p>@Html.DisplayFor(model => model.Comment)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

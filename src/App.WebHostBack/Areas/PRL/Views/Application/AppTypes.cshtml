@@ -1,0 +1,66 @@
+﻿@{
+    ViewData["Title"] = "Створення нової заяви щодо провадження діяльності з виробництва лікарських засобів (промислового)";
+}
+
+<div class="content-item-holder">
+    <div class="content-item">
+        <div class="content-item-outer">
+            <div class="content-item-header">
+                <i class="icon-huge icon-person-clip"></i>
+                <h2>Назва організації: @ViewBag.OrgName</h2>
+                <h2>ІНН\ЄДРПОУ: @ViewBag.Number</h2>
+            </div>
+        </div>
+    </div>
+    <div class="accordion not-active">
+        <div class="accordion-item">
+            <div class="accordion-item-header">Заява щодо провадження діяльності з виробництва лікарських засобів (промислового)</div>
+            <div class="accordion-item-content">
+                <a class="accordion-content-inner accordion-content-link" href="@(ViewBag.PrlLicense != null ? "#" : Url.Action("Edit", "Application", new {Area = "PRL", orgId = ViewBag.OrgId}))">
+                    Заява про отримання ліцензії на провадження діяльності з виробництва лікарських засобів (промислового)
+                    <span>Додаток 2</span>
+                </a>
+                @*<a class="accordion-content-inner accordion-content-link" href="@Url.Action("CreateOnOpen", "PrlAppAlt", new {Area = "PRL", sort = "RenewLicenseApplication", orgId = ViewBag.OrgId})">
+                    Заява на переоформлення ліцензії
+                    <span>Додаток 14</span>
+                </a>*@
+                <a class="accordion-content-inner accordion-content-link" href="@(ViewBag.PrlLicense == null ? "#" : Url.Action("CreateOnOpen", "PrlAppAlt", new {Area = "PRL", sort = "AddBranchApplication", orgId = ViewBag.OrgId}))">
+                    Заява на створення місць провадження діяльності
+                    <span>Додаток 12</span>
+                </a>
+                <a class="accordion-content-inner accordion-content-link" href="@(ViewBag.PrlLicense == null ? "#" : Url.Action("CreateOnOpen", "PrlAppAlt", new {Area = "PRL", sort = "AddBranchInfoApplication", orgId = ViewBag.OrgId}))">
+                    Заява про розширення переліку лікарських форм
+                    <span>Додаток 12</span>
+                </a>
+                <a class="accordion-content-inner accordion-content-link" href="@(ViewBag.PrlLicense == null ? "#" : Url.Action("CreateOnOpen", "PrlAppAlt", new {Area = "PRL", sort = "RemBranchApplication", orgId = ViewBag.OrgId}))">
+                    Заява на закриття місць провадження діяльності
+                    <span>Додаток 16</span>
+                </a>
+                <a class="accordion-content-inner accordion-content-link" href="@(ViewBag.PrlLicense == null ? "#" : Url.Action("CreateOnOpen", "PrlAppAlt", new {Area = "PRL", sort = "RemBranchInfoApplication", orgId = ViewBag.OrgId}))">
+                    Заява про звуження переліку лікарських форм
+                    <span>Додаток 16</span>
+                </a>
+                <a class="accordion-content-inner accordion-content-link" href="@(ViewBag.PrlLicense == null ? "#" : Url.Action("CreateOnOpen", "PrlAppAlt", new {Area = "PRL", sort = "ChangeAutPersonApplication", orgId = ViewBag.OrgId}))">
+                    Заява про зміну уповноважених осіб
+                    <span>Додаток 18</span>
+                </a>
+                <a class="accordion-content-inner accordion-content-link" href="@(ViewBag.PrlLicense == null ? "#" : Url.Action("CreateOnOpen", "PrlAppAlt", new {Area = "PRL", sort = "ChangeContrApplication", orgId = ViewBag.OrgId}))">
+                    Заява на зміну контрактних виробників і контрактних лабораторій
+                    <span>Додаток 18</span>
+                </a>
+                <a class="accordion-content-inner accordion-content-link" href="#">
+                    Заява про звуження провадження виду господарської діяльності
+                    <span>Додаток 20</span>
+                </a>
+                <a class="accordion-content-inner accordion-content-link" href="#">
+                    Заява про розширення провадження виду господарської діяльності
+                    <span>Додаток 21</span>
+                </a>
+                <a class="accordion-content-inner accordion-content-link" href="@(ViewBag.PrlLicense == null ? "#" : Url.Action("CreateOnOpen", "PrlAppAlt", new {Area = "PRL", sort = "CancelLicenseApplication", orgId = ViewBag.OrgId}))">
+                    Заява про анулювання ліцензії
+                    <span>Додаток 22</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

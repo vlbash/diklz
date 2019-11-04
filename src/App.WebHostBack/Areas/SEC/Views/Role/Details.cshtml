@@ -1,0 +1,46 @@
+﻿@model App.Data.DTO.SEC.RoleListDTO
+
+@section Buttons {
+    <a class="content-item-btn icon-md icon-edit-line" asp-action="Edit" asp-route-id="@Model.Id" data-title="Редагувати" data-tooltipleft="1"></a>
+}
+
+@*<div class="content-item-btn btn-holder btn-holder-right"></div>*@
+<div class="content-item-holder">
+    <div class="content-item">
+        <div class="content-item-header">
+            <i class="icon-xlg icon-admin"></i>
+            <h2>Роль (перегляд)</h2>
+        </div>
+
+        <div class="content-item-details">
+            <div class="content-details">
+                <div class="content-details-group">
+                    <label>
+                        @Html.DisplayNameFor(model => model.Caption)
+                    </label>
+                    <p>
+                        @Html.DisplayFor(model => model.Caption)
+                    </p>
+                </div>
+            </div>
+            <div class="content-details">
+                <div class="content-details-group">
+                    <label>
+                        @Html.DisplayNameFor(model => model.IsActive)
+                    </label>
+                    <p>
+                        @Html.DisplayFor(model => model.IsActive)
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-item">
+        <div class="content-item-header">
+            <i class="icon-xlg icon-user-security"></i>
+            <h2>Права дану роль</h2>
+        </div>
+        <div class="content-partial" data-tab-container-url="@Url.Action("RoleRights")?roleId=@Model.Id"></div>
+    </div>
+</div>

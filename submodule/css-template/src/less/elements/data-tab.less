@@ -1,0 +1,48 @@
+@import "../abstracts/_bundle";
+
+.data-tab {
+  &-group {
+    position: relative;
+
+    &-inner {
+      .material-transition;
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: @partial-select-width;
+      max-width: 0;
+      overflow: hidden;
+
+    }
+
+    &.open {
+      .btn:not(.data-tab-visible) {
+        z-index: -1;
+        opacity: 0;
+
+      }
+
+      .data-tab-visible {
+        flex-shrink: 0;
+      }
+
+      .data-tab-group-inner {
+        max-width: @partial-select-width;
+        overflow: visible;
+
+        .input-group {
+          height: 100%;
+          margin: 0;
+          background-color: @bg-white;
+          .shadow-down;
+
+          .input {
+            min-height: @btn-height;
+            margin: 0;
+            padding: @xxxs @sm;
+          }
+        }
+      }
+    }
+  }
+}

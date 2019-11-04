@@ -1,0 +1,63 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20180813071659_test.cs" />
+    <Compile Remove="Migrations\20180813074750_test.cs" />
+    <Compile Remove="Migrations\20180813083744_Test.cs" />
+    <Compile Remove="Migrations\20180813085904_Test.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="DTO\ADM\AdmProfileDetailDTO.sql" />
+    <None Remove="DTO\ADM\AdmProfileListDTO.sql" />
+    <None Remove="DTO\ADM\AdmRightDetailDTO.sql" />
+    <None Remove="DTO\ADM\AdmRightListDTO.sql" />
+    <None Remove="DTO\ADM\AdmRoleDetailDTO.sql" />
+    <None Remove="DTO\ADM\AdmRoleListDTO.sql" />
+    <None Remove="DTO\ADM\AdmUserDetailDTO.sql" />
+    <None Remove="DTO\ADM\AdmUserListDTO.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="DTO\ADM\AdmProfileDetailDTO.sql">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTO\ADM\AdmProfileListDTO.sql">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTO\ADM\AdmRightDetailDTO.sql">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTO\ADM\AdmRightListDTO.sql">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTO\ADM\AdmRoleDetailDTO.sql">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTO\ADM\AdmRoleListDTO.sql">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTO\ADM\AdmUserDetailDTO.sql">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTO\ADM\AdmUserListDTO.sql">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.2.0" />
+    <PackageReference Include="Npgsql" Version="4.0.4" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\App.Core.Data\App.Core.Data.csproj" />
+  </ItemGroup>
+
+</Project>

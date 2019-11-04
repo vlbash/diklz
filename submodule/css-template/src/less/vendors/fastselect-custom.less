@@ -1,0 +1,292 @@
+@import "../abstracts/_bundle";
+
+/*----------------------------------------------------------------------------------------------------
+General styling
+----------------------------------------------------------------------------------------------------*/
+@-webkit-keyframes fstAnimationEnter {
+  from {
+    -webkit-transform: translate3d(0, -1em, 0);
+    opacity: 0;
+  }
+
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
+
+@-moz-keyframes fstAnimationEnter {
+  from {
+    -moz-transform: translate3d(0, -1em, 0);
+    opacity: 0;
+  }
+
+  to {
+    -moz-transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
+
+@keyframes fstAnimationEnter {
+  from {
+    -webkit-transform: translate3d(0, -1em, 0);
+    -moz-transform: translate3d(0, -1em, 0);
+    -ms-transform: translate3d(0, -1em, 0);
+    -o-transform: translate3d(0, -1em, 0);
+    transform: translate3d(0, -1em, 0);
+    opacity: 0;
+  }
+
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
+    -o-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
+
+.fstElement {
+  display: inline-block;
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  height: @input-height + @xxs;
+  padding: @xxs @sm;
+  border-bottom: @input-border-width solid @border-color;
+}
+
+.fstElement>select,
+.fstElement>input {
+  position: absolute;
+  left: -999em;
+}
+
+.fstToggleBtn {
+  display: block;
+  position: relative;
+  box-sizing: border-box;
+  min-width: 14.28571em;
+  padding: 0.71429em 1.42857em 0.71429em 0.71429em;
+  font-size: 1.4em;
+  cursor: pointer;
+}
+
+.fstToggleBtn:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 0.71429em;
+  margin-top: -0.17857em;
+  border: 0.35714em solid transparent;
+  border-top-color: #cacaca;
+}
+
+.fstQueryInput {
+  box-sizing: border-box;
+  border: 0;
+  outline: none;
+  background: transparent;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+}
+
+.fstResults {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: -1px;
+  left: -1px;
+  max-height: 30em;
+  overflow-x: hidden;
+  overflow-y: auto;
+  border: 1px solid #d7d7d7;
+  border-top: 0;
+  background-color: #fff;
+  -webkit-overflow-scrolling: touch;
+}
+
+.fstResultItem {
+  // font-size: 1.4em;
+  display: block;
+  margin: 0;
+  padding: @xxs @sm;
+  border-top: 1px solid #fff;
+  cursor: pointer;
+}
+
+.fstResultItem.fstUserOption {
+  color: #707070;
+}
+
+.fstResultItem.fstFocused {
+  border-color: #73baf6;
+  background-color: #43a2f3;
+  color: #fff;
+}
+
+.fstResultItem.fstSelected {
+  border-color: #73baf6;
+  background-color: #2694f1;
+  color: #fff;
+}
+
+.fstGroupTitle {
+  display: block;
+  margin: 0;
+  padding: 0.5em 0.71429em;
+  font-size: 1.4em;
+  font-weight: bold;
+}
+
+.fstGroup {
+  padding-top: 1em;
+}
+
+.fstGroup:first-child {
+  padding-top: 0;
+}
+
+.fstNoResults {
+  display: block;
+  margin: 0;
+  padding: 0.71429em 0.71429em;
+  color: #999;
+  font-size: 1.4em;
+}
+
+/*----------------------------------------------------------------------------------------------------
+Single Mode
+----------------------------------------------------------------------------------------------------*/
+.fstSingleMode .fstControls {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: -1px;
+  left: -1px;
+  padding: 0.5em;
+  border: 1px solid #d7d7d7;
+  background-color: #fff;
+}
+
+.fstSingleMode .fstQueryInput {
+  display: block;
+  width: 100%;
+  padding: 0.5em 0.35714em;
+  border: 1px solid #d7d7d7;
+  color: #999;
+  font-size: 1.4em;
+}
+
+.fstSingleMode.fstActive {
+  z-index: 100;
+}
+
+.fstSingleMode.fstActive.fstElement,
+.fstSingleMode.fstActive .fstControls,
+.fstSingleMode.fstActive .fstResults {
+  box-shadow: 0 0.2em 0.2em rgba(0, 0, 0, 0.1);
+}
+
+.fstSingleMode.fstActive .fstControls {
+  display: block;
+}
+
+.fstSingleMode.fstActive .fstResults {
+  display: block;
+  z-index: 10;
+  margin-top: -1px;
+}
+
+/*----------------------------------------------------------------------------------------------------
+Multiple mode
+----------------------------------------------------------------------------------------------------*/
+.fstChoiceItem {
+  display: inline-block;
+  position: relative;
+  margin: 0 0.41667em 0.41667em 0;
+  padding: 0.33333em 0.33333em 0.33333em 1.5em;
+  float: left;
+  -webkit-animation: fstAnimationEnter 0.2s;
+  -moz-animation: fstAnimationEnter 0.2s;
+  animation: fstAnimationEnter 0.2s;
+  border: 1px solid #43a2f3;
+  border-radius: 0.25em;
+  background-color: #43a2f3;
+  color: #fff;
+  font-size: 1.2em;
+  cursor: auto;
+}
+
+.fstChoiceItem.mod1 {
+  border: 1px solid #d7d7d7;
+  background-color: #f9f9f9;
+  color: #232323;
+}
+
+.fstChoiceItem.mod1>.fstChoiceRemove {
+  color: #a4a4a4;
+}
+
+.fstChoiceRemove {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 1.28571em;
+  margin: 0;
+  margin-top: -0.64286em;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: #fff;
+  font-size: 1.16667em;
+  line-height: 1.28571em;
+  text-align: center;
+  cursor: pointer;
+}
+
+.fstChoiceRemove::-moz-focus-inner {
+  padding: 0;
+  border: 0;
+}
+
+.fstMultipleMode .fstControls {
+  box-sizing: border-box;
+  width: 100%;
+  // padding: 0.5em 0.5em 0em 0.5em;
+  overflow: hidden;
+  cursor: text;
+}
+
+.fstMultipleMode .fstQueryInput {
+  // margin: 0 0 0.35714em 0;
+  width: 2em;
+  padding: @xxs 0;
+  // font-size: 1.4em;
+  float: left;
+  color: @font-color-lightest;
+}
+
+.fstMultipleMode .fstQueryInputExpanded {
+  width: 100%;
+  padding: 0.28571em 0.35714em;
+  float: none;
+}
+
+.fstMultipleMode .fstFakeInput {
+  font-size: 1.4em;
+}
+
+// .fstMultipleMode.fstActive,
+// .fstMultipleMode.fstActive .fstResults {
+//   box-shadow: 0 0.2em 0.2em rgba(0, 0, 0, 0.1); }
+
+.fstMultipleMode.fstActive .fstResults {
+  display: block;
+  z-index: 10;
+  border-top: 1px solid #d7d7d7;
+}

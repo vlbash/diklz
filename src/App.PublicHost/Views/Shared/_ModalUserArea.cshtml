@@ -1,0 +1,154 @@
+﻿@model App.Data.DTO.USER.UserAreaDetailDTO
+@inject App.Core.Mvc.Helpers.SelectListHelper Sel
+
+<h3>
+    Особистий кабінет користувача - @Model.PIB 
+</h3>
+
+
+<div class="content-item-details">
+    <div class="content-item-inner content-details-wrapper col-2">
+        <div class="content-details">
+            <div class="content-details-group">
+                <label>РНОКПП (Індивідуальний податковий номер) Користувача: </label>
+                <p>@Model.INN</p>
+            </div>
+        </div>
+
+        <div class="content-details">
+            <div class="content-details-group">
+                <label>ЄДРПОУ Компанії:</label>
+                <p>@Model.EDRPOU</p>
+            </div>
+        </div>
+    </div>
+
+    <form method="post"
+          class="content-item-edit col-2"
+          data-ajax-url="@Url.Action("InfoUpdate", "UserArea", new {Area = ""})"
+          data-ajax="true"
+          data-ajax-method="post"
+          data-ajax-complete="completed">
+
+        <div class="content-item-inner content-details-wrapper">
+
+            <input type="hidden" asp-for="INN" />
+            <input type="hidden" asp-for="EDRPOU" />
+            <input type="hidden" asp-for="OrgEmployeeId" />
+            <input type="hidden" asp-for="PersonId" />
+            <input type="hidden" asp-for="PIB" />
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"> </div>
+
+            <div class="input-group">
+                <input asp-for="Position" class="input" autocomplete="off" type="text" />
+                <span class="input-group-bar"></span>
+                <label asp-for="Position"></label>
+                <span class="js-validation"></span>
+                <span asp-validation-for="Position" class="asp-validation"></span>
+            </div>
+
+            <div class="input-group">
+                <input asp-for="UserEmail" class="input" autocomplete="off" type="text" />
+                <span class="input-group-bar"></span>
+                <label asp-for="UserEmail"></label>
+                <span class="js-validation"></span>
+                <span asp-validation-for="UserEmail" class="asp-validation"></span>
+            </div>
+
+            <div class="input-group">
+                <input asp-for="OrgEmail" class="input" autocomplete="off" type="text" />
+                <span class="input-group-bar"></span>
+                <label asp-for="OrgEmail"></label>
+                <span class="js-validation"></span>
+                <span asp-validation-for="OrgEmail" class="asp-validation"></span>
+            </div>
+
+            <div class="input-group">
+                <input asp-for="Phone" class="input" autocomplete="off" type="text" />
+                <span class="input-group-bar"></span>
+                <label asp-for="Phone"></label>
+                <span class="js-validation"></span>
+                <span asp-validation-for="Phone" class="asp-validation"></span>
+            </div>
+        </div>
+
+        <div class="content-item-inner content-details-wrapper">
+            <div class="content-details-group">
+                <p style="text-align:center; padding: 2px;">Сповіщення на електронну пошту при роботі з власними заявами/повідомленнями</p>
+            </div>
+        </div>
+
+        <div class="content-item-inner content-details-wrapper content-edit" style="padding: 4px;">
+
+            <div class="content-edit" style="padding: 2px;">
+                <input class="checkbox" asp-for="ReceiveOnChangeOwnApplication" />
+                <label asp-for="ReceiveOnChangeOwnApplication"></label>
+            </div>
+            <div class="content-edit" style="padding: 2px;">
+                <input class="checkbox" asp-for="ReceiveOnChangeOwnMessage" />
+                <label asp-for="ReceiveOnChangeOwnMessage"></label>
+            </div>
+            <div class="content-edit" style="padding: 2px;">
+                <input class="checkbox" asp-for="PersonalCabinetStatus" />
+                <label asp-for="PersonalCabinetStatus"></label>
+            </div>
+        </div>
+
+        <div class="content-item-inner content-details-wrapper">
+            <div class="content-details-group">
+                <p style="text-align:center; padding: 2px;">Сповіщення на електронну пошту при роботі з заявами/повідомленнями компанії</p>
+            </div>
+        </div>
+
+        <div class="content-item-inner content-details-wrapper content-edit" style="padding: 4px;">
+
+            <div class="content-edit" style="padding: 2px;">
+                <input class="checkbox" asp-for="ReceiveOnChangeAllApplication" />
+                <label asp-for="ReceiveOnChangeAllApplication"></label>
+            </div>
+            <div class="content-edit" style="padding: 2px;">
+                <input class="checkbox" asp-for="ReceiveOnChangeAllMessage" />
+                <label asp-for="ReceiveOnChangeAllMessage"></label>
+            </div>
+            <div class="content-edit" style="padding: 2px;">
+                <input class="checkbox" asp-for="ReceiveOnChangeOrgInfo" />
+                <label asp-for="ReceiveOnChangeOrgInfo"></label>
+            </div>
+            <div class="content-edit" style="padding: 2px;">
+                <input class="checkbox" asp-for="ReceiveOnOverduePayment" />
+                <label asp-for="ReceiveOnOverduePayment"></label>
+            </div>
+        </div>
+
+        <div class="content-submit-holder btn-holder btn-holder-right">
+            <a href="#" onclick="mt.closeModal()" class="btn btn-text btn-danger">Відмінити</a>
+            <input type="submit" value="Зберегти зміни" class="btn btn-secondary btn-fill" />
+        </div>
+
+    </form>
+    
+</div>
+
+    <script>
+        // TEST
+        $(document).ready(function () {
+            if ($('*').is('[autocomplete-url]')) {
+                $('[autocomplete-url]').each(function () {
+                    mt.autocompleteEl($(this));
+                    mt.onLoadCheckAllInputs();
+                });
+            }
+        });
+
+        completed = function (xhr, status, errortext) {
+            var json = JSON.parse(xhr.responseText);
+            if (status === "success" && json.success === true) {
+                mt.closeModal();
+            }
+            else
+            {
+                alert(json.errortext);
+            }
+        }
+    </script>

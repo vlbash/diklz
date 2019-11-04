@@ -1,0 +1,104 @@
+﻿@using ReflectionIT.Mvc.Paging
+@model ReflectionIT.Mvc.Paging.PagingList<App.Data.DTO.Common.ProtocolListDTO>
+@addTagHelper *, ReflectionIT.Mvc.Paging
+
+
+<div class="content-list-wrapper" data-pgparams="@ViewBag.FormParamList">
+    <div class="content-list content-list-header">
+        <div class="content-list-edit"></div>
+        <div class="content-list-item grid-container">
+            <div class="grid" data-grid="1">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.SortableHeaderFor(model => model.ProtocolDate)
+                    </p>
+                </div>
+            </div>
+            <div class="grid" data-grid="1">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.SortableHeaderFor(model => model.ProtocolNumber)
+                    </p>
+                </div>
+            </div>
+            <div class="grid" data-grid="1">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.SortableHeaderFor(model => model.OrderDate)
+                    </p>
+                </div>
+            </div>
+            <div class="grid" data-grid="1">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.SortableHeaderFor(model => model.OrderNumber)
+                    </p>
+                </div>
+            </div>
+            <div class="grid" data-grid="1">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.SortableHeaderFor(model => model.StatusName)
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="content-list-delete"></div>
+    </div>
+
+    @foreach (var item in Model)
+    {
+        <div class="content-list">
+            <div class="content-list-edit">
+                <a asp-area="App" asp-controller="Protocol" asp-action="Details" asp-route-appType="@ViewBag.appType" class="btn-link btn btn-icon btn-square icon-md icon-eye"
+                   asp-route-id="@item.Id">
+                </a>
+            </div>
+            <a class="content-list-link">
+                <div class="content-list-item grid-container-nested">
+                    <div class="grid">
+                        <div class="grid-inner">
+                            <p>@Html.DisplayFor(modelItem => item.ProtocolDate)</p>
+                        </div>
+                    </div>
+                    <div class="grid">
+                        <div class="grid-inner">
+                            <p>@Html.DisplayFor(modelItem => item.ProtocolNumber)</p>
+                        </div>
+                    </div>
+                    <div class="grid">
+                        <div class="grid-inner">
+                            <p>@Html.DisplayFor(modelItem => item.OrderDate)</p>
+                        </div>
+                    </div>
+                    <div class="grid">
+                        <div class="grid-inner">
+                            <p>@Html.DisplayFor(modelItem => item.OrderNumber)</p>
+                        </div>
+                    </div>
+                    <div class="grid">
+                        <div class="grid-inner">
+                            @*<p>@Html.DisplayFor(modelItem => item.StatusName)</p>*@
+                            <p class="col">
+                                @if (item.StatusName == "Закрито")
+                                {
+                                    <i class="icon icon-xs icon-close mb-sm danger-font"></i>
+                                }
+                                else if (item.StatusName == "В роботі")
+                                {
+                                    <i class="icon icon-sm icon-check mb-sm success-font"></i>
+                                }
+                                @Html.DisplayFor(modelItem => item.StatusName)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    }
+
+</div>
+
+<nav>
+    <vc:pager paging-list="@Model" />
+</nav>

@@ -1,0 +1,11 @@
+{
+ "environment": "Test",
+ "connectionString": "1111",
+ "Authority": "http://ids-cent.axel.com.ua",
+ "FileStorePath": "/download/3/",
+ "TemplatePath": "Templates/Docx/3/",
+ "RowCount": "30" 
+
+
+}
+

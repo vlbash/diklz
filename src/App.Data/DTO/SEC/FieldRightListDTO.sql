@@ -1,0 +1,1 @@
+﻿select fr.id, fr.caption, fr.right_id, fr.field_name, fr.access_level from sec_field_right as fr

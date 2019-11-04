@@ -1,0 +1,52 @@
+﻿@inject App.Core.Mvc.Helpers.SelectListHelper Sel
+@{
+    ViewData["Title"] = "Сповіщення по діям з заявами та повідомленнями";
+}
+
+<div class="content-search-wrapper">
+    <partial name="_Searchform" />
+</div>
+
+
+<div class="results" id="results">
+
+</div>
+
+@section Scripts {
+
+    <script>
+        var searchFormControls = {
+            controlsConfig: [
+                {
+                    labelName: 'Тип сповіщення',
+                    name: 'NotificationSubject',
+                    type: 'text'
+                }
+            ]
+        };
+
+        var searchFormConfig = {
+            formConfig: {
+                formName: 'form0',
+                formDataAjaxUpdate: '#results',
+                formMethod: 'post',
+                controls: searchFormControls
+            },
+
+            @*presetFiltersUrl: {
+                controllerName: '@ViewContext.RouteData.Values["Controller"].ToString()',
+                actionName: '@ViewContext.RouteData.Values["Action"].ToString()'
+            },*@
+
+            mainInputConfig: {
+                labelName: 'Тема сповіщення',
+                type: 'text',
+                mainInputLookUp: ['NotificationSubject']
+            }
+        };
+
+
+        mt.createContentSearchForm(searchFormConfig);
+
+    </script>
+}

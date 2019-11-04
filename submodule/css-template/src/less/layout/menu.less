@@ -1,0 +1,216 @@
+@import "../abstracts/_bundle";
+
+.menu {
+
+  &-vertical,
+  &-horizontal,
+  &-side {
+    li {
+      position: relative;
+      flex-shrink: 0;
+
+      .menu-item-wrapper {
+        position: relative;
+        flex-direction: column;
+        flex-shrink: 0;
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+
+        >.menu {
+          &-vertical {
+            margin-left: @xs;
+
+            .menu-item {
+              //max-height: 0;
+              height: 0;
+              overflow: hidden;
+              .material-transition;
+            }
+
+            &.open {
+              >li {
+                &>.menu-item-wrapper {
+                  .material-transition;
+
+                  >.menu-item {
+                    //max-height: 5em;
+                    height: auto;
+                    overflow: visible;
+
+                    &-inner {
+                      padding-top: @sm;
+                      padding-bottom: @sm;
+                    }
+
+                    .material-transition;
+
+                    span {
+                      display: inline-block;
+
+                    }
+                  }
+                }
+
+                .material-transition;
+              }
+            }
+          }
+        }
+
+        >.menu {
+          &-side {
+            position: absolute;
+            top: 0;
+            opacity: 0;
+          }
+
+          &-right {
+            left: 100%;
+            margin-left: 0;
+          }
+
+          &-left {
+            right: 100%;
+            margin-left: 0;
+          }
+        }
+      }
+    }
+  }
+
+  &-vertical {
+    flex-direction: column;
+  }
+
+  &-horizontal {
+    flex-direction: row;
+
+    >li {
+      >.menu-item-wrapper {
+        >.menu {
+          &-vertical {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            min-width: 100%;
+            margin-left: 0;
+
+            li {
+              .material-transition;
+
+              &:hover,
+              &:focus {
+                .menu-item-wrapper {
+                  background-color: fade(@aside-hover, 40%);
+                }
+
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &-item {
+    &-inner {
+      display: flex;
+      flex-direction: row;
+      align-content: center;
+      align-items: center;
+      justify-content: flex-start;
+      min-width: 100%;
+      min-height: @icon-height;
+      // padding-top: @md;
+      // padding-right: @sm;
+      // padding-bottom: @md
+      // padding-left: @sm;
+      padding: @md @sm @md @lg;
+
+      i {
+        margin-top: auto;
+        margin-bottom: auto;
+      }
+
+      span,
+      i {
+        cursor: pointer;
+      }
+    }
+
+    &-nested,
+    &-chevron {
+      position: relative;
+
+      &::before,
+      &::after {
+        content: "";
+        position: absolute;
+        .material-transition;
+      }
+
+      span {
+        padding-right: @sm;
+      }
+    }
+
+    &-nested {
+
+      &::before,
+      &::after {
+        top: 50%;
+        right: @xs;
+        width: 0;
+        height: 0;
+        border: 0 solid transparent;
+        transform: rotate(0);
+        border-left-width: @xs/2;
+        border-right-width: @xs/2;
+        border-top: @xs/2 solid;
+        opacity: 0.45;
+        cursor: pointer;
+      }
+
+      &::after {
+        display: none;
+        transform: translate(-2 * @chevron-size, -50%) rotate(0deg);
+      }
+    }
+
+    &-chevron {
+      &::after {
+        display: none;
+      }
+
+      &::before {
+        // width: @chevron-size;
+        // height: @chevron-size;
+        // transform: rotate(-45deg);
+        // border-width: 0 @chevron-width @chevron-width 0;
+        // border-style: solid;
+        top: 50%;
+        right: @chevron-size;
+        width: 0;
+        height: 0;
+        border: 0 solid transparent;
+        transform: rotate(0);
+        border-left-width: @xs/2;
+        border-right-width: @xs/2;
+        border-top: @xs/2 solid @font-white;
+      }
+    }
+  }
+}
+
+.open>.menu-item-wrapper>.menu-item-nested {
+  &::before {
+    transform: rotate(-90deg);
+  }
+}
+
+.open>.menu-item-wrapper>.menu-item-chevron {
+  &::before {
+    transform: rotate(-90deg);
+  }
+}

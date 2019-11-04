@@ -1,0 +1,26 @@
+﻿@model Dictionary<string, string>
+
+<div class="content-details-wrapper">
+    @{ foreach (var item in Model)
+        {
+
+            <div class="content-item-error">
+                <div class="title-error">
+                    @Html.Raw(item.Key)
+                </div>
+
+                <div class="content-error">
+                    <p>@Html.Raw(item.Value)</p>
+                </div>
+            </div>
+        }
+    }
+
+    @{ if (Model.Count == 0)
+        {
+            <div class="content-item-success">
+                <p>Перевірка комплектності поданих документів не виявила ніяких помилок</p>
+            </div>
+        }
+    }
+</div>

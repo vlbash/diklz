@@ -1,0 +1,292 @@
+﻿@model App.Data.DTO.IML.ImlOrganizationExtFullDTO
+@using App.Core.Mvc.Helpers
+@inject SelectListHelper Sel
+
+@{
+    ViewData["Title"] = "Додавання ФОП";
+}
+
+<div class="content-item-holder">
+    <div class="content-item">
+        <div class="content-item-header">
+            <i class="icon-xlg icon-person-card"></i>
+            <h2>Додавання ФОП</h2>
+        </div>
+
+        <form asp-action="EditFop" asp-route-returnUrl="@ViewBag.returnUrl" class="content-item-edit">
+            <input type="hidden" asp-for="Id" />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="content-item-inner">
+                <div class="input-group">
+                    <input asp-for="Name"
+                           class="input"
+                           no-validate
+                           autocomplete="off" />
+                    <span class="input-group-bar"></span>
+                    <label asp-for="Name">ПІБ ФОП</label>
+                    <span asp-validation-for="Name"
+                          class="asp-validation"></span>
+                </div>
+            </div>
+
+            <div class="content-item-inner">
+                <div class="content-edit">
+                    <div class="input-group">
+                        <input asp-for="INN"
+                               class="input"
+                               autocomplete="off" />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="INN">@Html.DisplayNameFor(model => model.INN)</label>
+                        <span asp-validation-for="INN"
+                              class="asp-validation"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-item-inner">
+
+                <div class="content-edit">
+                    <div class="input-group">
+                        <input asp-for="PassportSerial"
+                               class="input"
+                               no-validate
+                               autocomplete="off" />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="PassportSerial">@Html.DisplayNameFor(model => model.PassportSerial)</label>
+                        <span asp-validation-for="PassportSerial" class="asp-validation"></span>
+                    </div>
+                </div>
+
+                <div class="content-edit">
+                    <div class="input-group">
+                        <input asp-for="PassportNumber"
+                               class="input"
+                               no-validate
+                               autocomplete="off" />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="PassportNumber">@Html.DisplayNameFor(model => model.PassportNumber)</label>
+                        <span asp-validation-for="PassportNumber" class="asp-validation"></span>
+                    </div>
+                </div>
+
+                <div class="content-edit">
+                    <div class="datepicker-group input-group">
+                        <input asp-for="PassportDate"
+                               class="input datepicker"
+                               autocomplete="off"
+                               no-validate
+                               type="text" />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="PassportDate">@Html.DisplayNameFor(model => model.PassportDate)</label>
+                        <span asp-validation-for="PassportDate" class="asp-validation"></span>
+                    </div>
+                </div>
+
+                <div class="content-edit">
+                    <div class="input-group">
+                        <input asp-for="PassportIssueUnit"
+                               class="input"
+                               autocomplete="off" />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="PassportIssueUnit">@Html.DisplayNameFor(model => model.PassportIssueUnit)</label>
+                        <span asp-validation-for="PassportIssueUnit" class="asp-validation"></span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="content-item-inner">
+                <!--ATU START-->
+                <input type="hidden" asp-for="AddressId" />
+                <input type="hidden" id="OldCityName" />
+                <input type="hidden" id="OldStreetName" />
+                <div class="content-edit content-edit">
+                    <div class="input-group">
+                        <input class="input" id="CityName"
+                               autocomplete-allowcreate
+                               autocomplete-idinput-name="CityId"
+                               autocomplete-init-id="CityId"
+                               autocomplete-url="@Url.Action("AutoCompleteDistrictFull", "Atu", new {Area = ""})"
+                               autocomplete-params="RegionId"
+                               autocomplete-onselect="OnSelectCity(item)"
+                               value="@ViewBag.District" />
+                        <span class="input-group-bar"></span>
+                        <input asp-for="CityId" type="hidden" />
+                        <label>Населений пункт або знайти за допомогою коду КОАТУУ</label>
+                        <span class="asp-validation"></span>
+                    </div>
+                </div>
+
+                <div class="content-edit content-edit">
+                    <div class="input-group">
+                        <input asp-for="Building"
+                               class="input"
+                               autocomplete="off" />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="Building">@Html.DisplayNameFor(p => p.Building)</label>
+                        <span class="asp-validation"></span>
+                    </div>
+                </div>
+
+                <div class="content-edit content-edit">
+                    <div class="input-group">
+                        <input class="input" id="StreetName"
+                               autocomplete-allowcreate
+                               autocomplete-idinput-name="StreetId"
+                               autocomplete-init-id="StreetId"
+                               autocomplete-url="@Url.Action("AutoCompleteStreet", "Atu", new {Area = ""})"
+                               autocomplete-params="CityId"
+                               autocomplete-onselect="OnSelectStreet(item)"
+                               value="@ViewBag.Street" />
+                        <span class="input-group-bar"></span>
+                        <input asp-for="StreetId" type="hidden" />
+                        <label>Вулиця</label>
+                        <span class="asp-validation"></span>
+                    </div>
+                    <button id="btn-street"
+                            type="button"
+                            data-modal="modal-center"
+                            data-tab-container-url="@Url.Action("AtuModalStreet", "Atu", new { Area = "" })"
+                            class="btn btn-secondary btn-fill btn-square btn-tiny icon-sm icon-add"></button>
+                </div>
+
+                <div class="content-edit content-edit">
+                    <div class="input-group">
+                        <input asp-for="PostIndex"
+                               class="input"
+                               autocomplete="off" />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="PostIndex">@Html.DisplayNameFor(p => p.PostIndex)</label>
+                        <span class="asp-validation"></span>
+                    </div>
+                </div>
+                <!--ATU END-->
+
+                <div class="content-edit">
+                    <div class="input-group">
+                        <input asp-for="EMail"
+                               class="input"
+                               no-validate
+                               autocomplete="off" />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="EMail">@Html.DisplayNameFor(model => model.EMail)</label>
+                        <span asp-validation-for="EMail" class="asp-validation"></span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="content-item-inner">
+                <div class="content-edit">
+                    <div class="input-group">
+                        <input asp-for="PhoneNumber"
+                               class="input phone"
+                               no-validate
+                               autocomplete="off" />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="PhoneNumber">@Html.DisplayNameFor(model => model.PhoneNumber)</label>
+                        <span asp-validation-for="PhoneNumber" class="asp-validation"></span>
+                    </div>
+                </div>
+                <div class="content-edit">
+                    <div class="input-group">
+                        <input asp-for="FaxNumber"
+                               class="input phone"
+                               autocomplete="off" />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="FaxNumber">@Html.DisplayNameFor(model => model.FaxNumber)</label>
+                        <span asp-validation-for="FaxNumber" class="asp-validation"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-item-inner">
+                <div class="content-edit">
+                    <div class="input-group">
+                        <input asp-for="NationalAccount"
+                               class="input"
+                               autocomplete="off" />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="NationalAccount">@Html.DisplayNameFor(model => model.NationalAccount)</label>
+                        <span asp-validation-for="NationalAccount" class="asp-validation"></span>
+                    </div>
+                </div>
+
+                <div class="content-edit">
+                    <div class="input-group">
+                        <input asp-for="NationalBankRequisites"
+                               class="input"
+                               autocomplete="off" />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="NationalBankRequisites">@Html.DisplayNameFor(model => model.NationalBankRequisites)</label>
+                        <span asp-validation-for="NationalBankRequisites" class="asp-validation"></span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="content-item-inner">
+
+                <div class="content-edit">
+                    <div class="input-group">
+                        <input asp-for="InternationalAccount"
+                               class="input"
+                               autocomplete="off" />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="InternationalAccount">@Html.DisplayNameFor(model => model.InternationalAccount)</label>
+                        <span asp-validation-for="InternationalAccount" class="asp-validation"></span>
+                    </div>
+                </div>
+
+                <div class="content-edit">
+                    <div class="input-group">
+                        <input asp-for="InternationalBankRequisites"
+                               class="input"
+                               autocomplete="off" />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="InternationalBankRequisites">@Html.DisplayNameFor(model => model.InternationalBankRequisites)</label>
+                        <span asp-validation-for="InternationalBankRequisites" class="asp-validation"></span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="content-item-inner">
+
+                <div class="content-edit">
+                    <div class="input-group">
+                        <input asp-for="Duns"
+                               class="input"
+                               autocomplete="off" />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="Duns">@Html.DisplayNameFor(model => model.Duns)</label>
+                        <span asp-validation-for="Duns" class="asp-validation"></span>
+                    </div>
+                </div>
+
+                <div class="content-edit">
+                    <div class="input-group">
+                        <input asp-for="Description"
+                               class="input"
+                               autocomplete="off" />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="Description">@Html.DisplayNameFor(model => model.Description)</label>
+                        <span asp-validation-for="Description" class="asp-validation"></span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="content-submit-holder btn-holder btn-holder-right">
+                <a href="#" onclick="mt.goStepBack()" class="btn btn-danger btn-text">Відмінити</a>
+                <input type="submit" value="Створити" class="btn btn-secondary btn-fill" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script src="~/custom_js/atu-address.js"></script>
+}

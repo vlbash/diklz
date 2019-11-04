@@ -1,0 +1,119 @@
+﻿@{
+    ViewData["Title"] = "Dev buttons. Do NOT touch unless 100% sure";
+}
+
+<div class="widget-container">
+    <div class="col-lg-4">
+        <div class="widget-inner">
+            <div class="widget-header">
+                <i class="icon icon-xlg icon-clipboard-data"></i>
+                PRL App
+            </div>
+            <div class="widget-datalist">
+                <a class="widget-datalist-item" asp-controller="Dev" asp-action="CreateNewPRLLicenseApplication">
+                    <span class="col-lg-9">
+                        <i class="icon icon-sm icon-edit-line"></i>
+                        Заява про отримання ліцензії на виробництво
+                    </span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="widget-inner">
+            <div class="widget-header">
+                <i class="icon icon-xlg icon-clipboard-data"></i>
+                IML App
+            </div>
+            <div class="widget-datalist">
+                <a class="widget-datalist-item" asp-controller="Dev" asp-action="CreateNewIMLLicenseApplication">
+                    <span class="col-lg-9">
+                        <i class="icon icon-sm icon-edit-line"></i>
+                        Заява про отримання ліцензії на імпорт
+                    </span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="widget-inner">
+            <div class="widget-header">
+                <i class="icon icon-xlg icon-clipboard-data"></i>
+                TRL App
+            </div>
+            <div class="widget-datalist">
+                <a class="widget-datalist-item" asp-controller="Dev" asp-action="CreateNewTRLLicenseApplication">
+                    <span class="col-lg-9">
+                        <i class="icon icon-sm icon-edit-line"></i>
+                        Заява про отримання ліцензії на торгівлю
+                    </span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="widget-container">
+    <div class="col-lg-4">
+        <div class="widget-inner">
+            <div class="widget-header">
+                <i class="icon icon-xlg icon-clipboard-data"></i>
+                Refresh DB
+            </div>
+            <div class="widget-datalist">
+                <a class="widget-datalist-item" asp-controller="Dev" asp-action="RefreshEnums">
+                    <span class="col-lg-9">
+                        <i class="icon icon-sm icon-edit-line"></i>
+                        Refresh enums
+                    </span>
+                </a>
+                <a class="widget-datalist-item" asp-controller="Dev" asp-action="SeedAdmin">
+                    <span class="col-lg-9">
+                        <i class="icon icon-sm icon-edit-line"></i>
+                        Seed admin
+                    </span>
+                </a>
+                <a class="widget-datalist-item" asp-controller="Dev" asp-action="RefreshRoles">
+                    <span class="col-lg-9">
+                        <i class="icon icon-sm icon-edit-line"></i>
+                        Refresh roles
+                    </span>
+                </a>
+                <a class="widget-datalist-item" asp-controller="Dev" asp-action="AddRoles">
+                    <span class="col-lg-9">
+                        <i class="icon icon-sm icon-edit-line"></i>
+                        Add roles
+                    </span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="widget-inner">
+            <div class="widget-header">
+                <i class="icon icon-xlg icon-clipboard-data"></i>
+                Import data
+            </div>
+            <div class="widget-datalist">
+                <a class="widget-datalist-item" asp-controller="Dev" asp-action="ImportProtocols">
+                    <span class="col-lg-9">
+                        <i class="icon icon-sm icon-edit-line"></i>
+                        ImportProtocols
+                    </span>
+                </a>
+                <a class="widget-datalist-item" asp-controller="Dev" asp-action="ImportRP">
+                    <span class="col-lg-9">
+                        <i class="icon icon-sm icon-edit-line"></i>
+                        Import lims RP
+                    </span>
+                </a>
+                <a class="widget-datalist-item" asp-controller="Dev" asp-action="UpdateLimsProtocols">
+                    <span class="col-lg-9">
+                        <i class="icon icon-sm icon-edit-line"></i>
+                        UpdateLimsProtocols
+                    </span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

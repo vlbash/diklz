@@ -1,0 +1,148 @@
+﻿@model App.Data.DTO.DOS.EDocumentDetailsDTO
+
+<script>
+    var uploadFormContainer = $("#uploadFormPayment"),
+        uploadFormLink = "@(Url.Action("UploadForm", "FileStore", new {Area = "", EntityId = Model.Id}))&EntityName=EDocument",
+        fileListLink = "@(Url.Action("List", "FileStore", new {Area = "", EntityId = Model.EntityId, EntityName = "EDocument",  pg_PartialViewName = "ListPayment"}))",
+        fileListContainer = $("#fileListPayment");
+
+    mt.getAjaxContainer(uploadFormContainer, uploadFormLink);
+    mt.getAjaxContainer(fileListContainer, fileListLink);
+
+    function confirmPayment(e, btn) {
+        btn = $(this);
+        var disableAttr = $(this).attr("disabled");
+        if (typeof disableAttr !== typeof undefined && disableAttr !== false) {
+            return;
+        }
+
+        $(this).attr("disabled", "disabled");
+        var url = $('#btnConfirmPayment').attr("href");
+
+        $.ajax({
+            type: "Post",
+            url: url,
+            complete: function (jqXHR, textStatus, errorThrown) {
+                console.log(jqXHR.status);
+                console.log(textStatus);
+                console.log(errorThrown);
+            },
+            error: function (data) {
+                console.log('error', data);
+                $(btn).prop("disabled", false);
+                var msg = "<p>Неможливо підтвердити оплату</p>";
+                mt.createDialog(e, msg, refuseDialog);
+            },
+            success: function (data) {
+                if (data.success === false) {
+                    var msg = "<p>Неможливо підтвердити оплату</p>";
+                    mt.createDialog(e, msg, refuseDialog);
+                    $(btn).prop("disabled", false);
+                    return;
+                }
+                console.log('success', data);
+                $(btn).prop("disabled", false);
+                var container = $('#paymentPart');
+                mt.tryLoadContainer(container, container.attr('data-tab-container-url'));
+            }
+        });
+    }
+
+    function sendPayment(e, btn) {
+        btn = $(this);
+        var disableAttr = $(this).attr("disabled");
+        if (typeof disableAttr !== typeof undefined && disableAttr !== false) {
+            return;
+        }
+
+        $(this).attr("disabled", "disabled");
+        var url = $('#btnSendPayment').attr("href");
+
+        $.ajax({
+            type: "Post",
+            url: url,
+            complete: function (jqXHR, textStatus, errorThrown) {
+                console.log(jqXHR.status);
+                console.log(textStatus);
+                console.log(errorThrown);
+            },
+            error: function (data) {
+                console.log('error', data);
+                $(btn).prop("disabled", false);
+                var msg = "<p>Неможливо відправити документи</p>";
+                mt.createDialog(e, msg, refuseDialog);
+            },
+            success: function (data) {
+                if (data.success === false) {
+                    var msg = "<p>Неможливо відправити документи</p>";
+                    mt.createDialog(e, msg, refuseDialog);
+                    $(btn).prop("disabled", false);
+                    return;
+                }
+                console.log('success', data);
+                $(btn).prop("disabled", false);
+                var container = $('#paymentPart');
+                mt.tryLoadContainer(container, container.attr('data-tab-container-url'));
+            }
+        });
+    }
+
+    function refuseDialog() {
+        $(btn).prop("disabled", false);
+    }
+</script>
+
+@if (!string.IsNullOrEmpty(Model.Comment))
+{
+    <div class="content-item-inner no-border">
+        <div class="content-details-wide">
+            <div class="content-details-group">
+                <label>@Html.DisplayNameFor(model => model.Comment)</label>
+                <p>@Html.DisplayFor(model => model.Comment)</p>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="content-partial" data-tab-empty>
+    <div class="upload-edit">
+        @if (Model.EDocumentStatus == "RequiresPayment")
+        {
+            <div id="uploadFormPayment">
+
+            </div>
+        }
+        <div id="fileListPayment" class="fileList">
+
+        </div>
+    </div>
+</div>
+
+@if (Model.EDocumentStatus == "RequiresPayment")
+{
+    <div class="content-submit-holder btn-holder">
+        <button id="btnSendPayment" class="btn btn-secondary btn-panel" type="button"
+                href="@Url.Action("SendPayment", "Application", new {Area="Prl", appId = Model.EntityId})"
+                onclick="sendPayment(event, this)">
+            <span class="icon icon-huge icon-document"></span>
+            <span> Відправити </span>
+        </button>
+    </div>
+}
+else if (Model.EDocumentStatus == "WaitingForConfirmation")
+{
+    <div class="content-submit-holder btn-holder">
+        <button id="btnConfirmPayment" class="btn btn-secondary btn-panel" type="button"
+                href="@Url.Action("ConfirmPayment", "Application", new {Area="PRL", appId = Model.EntityId})"
+                onclick="confirmPayment(event, this)">
+            <span class="icon icon-huge icon-document"></span>
+            <span> Підтвердити оплату </span>
+        </button>
+        <button class="btn btn-secondary btn-panel" type="button"
+                data-modal="modal-center"
+                data-tab-container-url="@Url.Action("CancelPayment", "Application", new {Area="PRL" ,appId = Model.EntityId})">
+            <span class="icon icon-huge icon-document"></span>
+            <span> Відхилити оплату </span>
+        </button>
+    </div>
+}

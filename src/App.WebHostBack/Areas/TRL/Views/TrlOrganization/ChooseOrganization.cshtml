@@ -1,0 +1,106 @@
+﻿@model App.Data.DTO.TRL.TrlOrganizationExtMediumDTO
+@using App.Core.Mvc.Helpers
+@inject SelectListHelper Sel
+
+@{
+    ViewData["Title"] = "Вибір ліцензіата";
+}
+
+
+@section Buttons {
+    <a class="content-item-btn icon-lg icon-admin"
+       asp-area="TRL"
+       asp-controller="TrlOrganization"
+       asp-action="EditSgd"
+       asp-route-returnUrl="@ViewBag.returnUrl"
+       data-tooltipleft="1"
+       data-title="Створити СГД">
+    </a>
+    
+    <a class="content-item-btn icon-xlg icon-add-user"
+       asp-area="TRL"
+       asp-controller="TrlOrganization"
+       asp-action="EditFop"
+       asp-route-returnUrl="@ViewBag.returnUrl"
+       data-tooltipleft="1"
+       data-title="Створити ФОП">
+    </a>
+}
+
+<div class="content-item-holder">
+    <div class="content-item">
+        <div class="content-item-header">
+            <i class="icon-xlg icon-person-card"></i>
+            <h2>Вибір ліцензіата</h2>
+        </div>
+
+        <form asp-action="ChooseOrganization" asp-route-returnUrl="@ViewBag.returnUrl" class="content-item-edit">
+            <input type="hidden" asp-for="EDRPOU" no-validate />
+            <input type="hidden" asp-for="INN" no-validate />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="content-edit-wide">
+                <div class="input-group">
+                    <input class="input lookup"
+                           asp-for="edrpouOrInn"
+                           validate-not-empty
+                           autocomplete-allowcreate
+                           autocomplete-idinput-name="Id"
+                           autocomplete-init-id="@Model.Id"
+                           autocomplete-url='@Url.Action(action: "AutoCompleteOrganization",controller: "TrlOrganization", values: new {Area = "TRL"})'
+                           autocomplete-onselect="mt.onChangeUrl($('#Id'))" ,
+                           autocomplete-onblur="if (!value) { mt.onChangeUrl($('#Id')) }" />
+                    <span class="input-group-bar"></span>
+                    <label asp-for="edrpouOrInn">@Html.DisplayNameFor(model => model.edrpouOrInn)</label>
+                    <span asp-validation-for="edrpouOrInn" class="asp-validation"></span>
+                    <input type="hidden" asp-for="Id"
+                           onchange-url="@Url.Action("OnChangeOrganization")" />
+                </div>
+            </div>
+            <div class="content-edit-wide">
+                <div class="input-group">
+                    <input asp-for="Name"
+                           class="input input-readonly"
+                           autocomplete="off" disabled />
+                    <span class="input-group-bar"></span>
+                    <label asp-for="Name">@Html.DisplayNameFor(model => model.Name)</label>
+                    <span asp-validation-for="Name" class="asp-validation"></span>
+                </div>
+            </div>
+            <div class="content-edit-wide">
+                <div class="input-group">
+                    <input asp-for="OrgDirector"
+                           class="input input-readonly"
+                           autocomplete="off" disabled />
+                    <span class="input-group-bar"></span>
+                    <label asp-for="OrgDirector">@Html.DisplayNameFor(model => model.OrgDirector)</label>
+                    <span asp-validation-for="OrgDirector" class="asp-validation"></span>
+                </div>
+            </div>
+            <div class="content-edit-wide">
+                <div class="input-group">
+                    <input asp-for="Address"
+                           class="input input-readonly"
+                           autocomplete="off" disabled />
+                    <span class="input-group-bar"></span>
+                    <label asp-for="Address">@Html.DisplayNameFor(model => model.Address)</label>
+                    <span asp-validation-for="Address" class="asp-validation"></span>
+                </div>
+            </div>
+            <div class="content-edit-wide">
+                <div class="input-group">
+                    <input asp-for="EMail"
+                           class="input input-readonly"
+                           autocomplete="off" disabled />
+                    <span class="input-group-bar"></span>
+                    <label asp-for="EMail">@Html.DisplayNameFor(model => model.EMail)</label>
+                    <span asp-validation-for="EMail" class="asp-validation"></span>
+                </div>
+            </div>
+            <div class="content-submit-holder btn-holder btn-holder-right">
+                <a href="#" onclick="mt.goStepBack()" class="btn btn-danger btn-text">Відмінити</a>
+                <input type="submit" value="Обрати" class="btn btn-secondary btn-fill" />
+            </div>
+        </form>
+    </div>
+</div>

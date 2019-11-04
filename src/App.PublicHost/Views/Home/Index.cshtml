@@ -1,0 +1,236 @@
+﻿@{
+    //ViewData["Title"] = ViewBag.OrganizationName;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="widget-wrapper">
+    <div class="widget-container">
+        <div class="col-lg-7">
+            <div class="widget-inner">
+                <div class="widget-header">
+
+                    Публічний портал держлікслужби
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*<header class="page__header">
+        <div class="header__btn btn__info btn__disabled"></div>
+        <span class="header__label">@ViewBag.OrganizationName</span>
+    </header>*@
+
+
+@*
+        <ul class="license__list">
+
+            @if (modelManufacture != null)
+            {
+                <li class="license__item license__item--green">
+                    <a class="license__link" href="#">Ліцензія на промислове виробництво</a>
+                </li>
+            }
+            else
+            {
+                <li class="license__item license__item--red">
+                    <a class="license__link" href="#">Ліцензія на промислове виробництво</a>
+                </li>
+            }
+
+            @if (modelImport != null)
+            {
+                <li class="license__item license__item--green">
+                    <a class="license__link" href="#">Ліцензія на імпорт</a>
+                </li>
+            }
+            else
+            {
+                <li class="license__item license__item--red">
+                    <a class="license__link" href="#">Ліцензія на імпорт</a>
+                </li>
+            }
+            @if (modelCommerce != null)
+            {
+                <li class="license__item license__item--green">
+                    <a class="license__link" href="#">Ліцензія на торгівлю</a>
+                </li>
+            }
+            else
+            {
+                <li class="license__item license__item--red">
+                    <a class="license__link" href="#">Ліцензія на торгівлю</a>
+                </li>
+            }
+
+            @*<li class="license__item license__item--green">
+                    <a class="license__link" href="#">Ліцензія на імпорт</a>
+                </li>
+    </ul>
+    <div class="widget__container">
+        <div class="info-update">
+            <header class="info-update__header">
+                <span class="info-update__header-mark">!</span>
+                <span class="info-update__header-text">Заяви, що потребують оновлення інформації</span>
+            </header>
+            <div class="info-update__row">
+                <div class="info-update__row-left">
+                    <a href="#" class="info-update__btn"><img class="info-update__btn-edit" src="~/images/icons/buttons/icon-pencil-green.svg" alt="EDIT"></a>
+                    <span class="info-update__text-main">Заява про отримання ліцензії на виробництво</span>
+                </div>
+                <div class="info-update__row-right">
+                    <span class="info-update__text-reject">До відхилення:</span>
+                    <span class="info-update__text-timer">23</span>
+                    <span class="info-update__text-label">год.</span>
+                </div>
+            </div>
+            <div class="info-update__row">
+                <div class="info-update__row-left">
+                    <a href="#" class="info-update__btn"><img class="info-update__btn-edit" src="~/images/icons/buttons/icon-pencil-green.svg" alt="EDIT"></a>
+                    <span class="info-update__text-main">Заява про внесення до ЄДР відомостей про МПД</span>
+                </div>
+                <div class="info-update__row-right">
+                    <span class="info-update__text-reject">До відхилення:</span>
+                    <span class="info-update__text-timer">3</span>
+                    <span class="info-update__text-label">год.</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="data-diff">
+            <header class="data-diff__header">
+                <span class="data-diff__header-mark">!</span>
+                <span class="data-diff__header-text">Розбіжності в даних щодо ліцензій</span>
+            </header>
+            <div class="data-diff__row">
+                <span class="data-diff__text">Керівник ліцензіата</span>
+            </div>
+            <div class="data-diff__row">
+                <span class="data-diff__text">Місцезнаходження юридичної особи</span>
+            </div>
+            <div class="data-diff__row">
+                <span class="data-diff__text">Адреса місця провадження діяльності</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="widget__container">
+        <div class="app__status">
+            <div class="app__status--header header-collapced">Статус поданих заяв щодо ліцензування</div>
+
+            <div class="app__status--row">
+                <span class="app__status--subtitle">Заяви щодо ліцензування виробництва (пром.)</span>
+                <div class="app__status--item">
+                    <div class="app__item--num">@manufactureSent</div>
+                    <div class="app__item--label">Подано</div>
+                </div>
+
+                <div class="app__status--item">
+                    <div class="app__item--num">@manufactureReview</div>
+                    <div class="app__item--label">На розгляді</div>
+                </div>
+            </div>
+            <div class="app__status--row">
+                <span class="app__status--subtitle">Заяви щодо ліцензування імпорту</span>
+                <div class="app__status--item">
+                    <div class="app__item--num">@importProj</div>
+                    <div class="app__item--label">Подано</div>
+                </div>
+
+                <div class="app__status--item">
+                    <div class="app__item--num">@importReview</div>
+                    <div class="app__item--label">На розгляді</div>
+                </div>
+            </div>
+            <div class="app__status--row">
+                <span class="app__status--subtitle">Заяви щодо ліцензування торгівлі</span>
+                <div class="app__status--item">
+                    <div class="app__item--num">@commerceProj</div>
+                    <div class="app__item--label">Подано</div>
+                </div>
+
+                <div class="app__status--item">
+                    <div class="app__item--num">@commerceReview</div>
+                    <div class="app__item--label">На розгляді</div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="app__conclusion">
+            <div class="app__conclusion--header header-collapced">Очікує висновків</div>
+
+            <div class="app__conclusion--row">
+                <span class="app__conclusion--subtitle">Лікарських засобів (постанова 902)</span>
+                <div class="app__conclusion--item">
+                    <div class="app__item--num">0</div>
+                    <div class="app__item--label">Подано</div>
+                </div>
+
+                <div class="app__conclusion--item">
+                    <div class="app__item--num">0</div>
+                    <div class="app__item--label">На розгляді</div>
+                </div>
+            </div>
+            <div class="app__conclusion--row">
+                <span class="app__conclusion--subtitle">МІБП (постанова 698)</span>
+                <div class="app__conclusion--item">
+                    <div class="app__item--num">0</div>
+                    <div class="app__item--label">Подано</div>
+                </div>
+
+                <div class="app__conclusion--item">
+                    <div class="app__item--num">0</div>
+                    <div class="app__item--label">На розгляді</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @section Scripts {
+        <script>
+            $(".app__status--header").on("click", function () {
+                $(this).toggleClass("header-collapced");
+                $(".app__status--row").toggleClass("collapced");
+            });
+        </script>
+
+        <script>
+            $(".app__conclusion--header").on("click", function () {
+                $(this).toggleClass("header-collapced");
+                $(".app__conclusion--row").toggleClass("collapced");
+            });
+        </script>
+    }
+
+
+*@

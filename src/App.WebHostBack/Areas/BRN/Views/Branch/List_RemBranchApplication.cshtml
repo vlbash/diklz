@@ -1,0 +1,72 @@
+﻿@model IEnumerable<App.Data.DTO.BRN.BranchListDTO>
+
+<div class="content-list-wrapper" data-pgparams="@ViewBag.FormParamList">
+    <div class="content-list content-list-header">
+        <div class="content-list-edit"></div>
+        <div class="content-list-item grid-container">
+            <div class="grid" data-grid="2">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.DisplayNameFor(model => model.Name)
+                    </p>
+                </div>
+            </div>
+            <div class="grid" data-grid="2">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.DisplayNameFor(model => model.PhoneNumber)
+                    </p>
+                </div>
+            </div>
+            <div class="grid" data-grid="2">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.DisplayNameFor(model => model.LicenseDeleteCheck) 
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="content-list-delete"></div>
+    </div>
+    @foreach (var item in Model)
+    {
+        <div class="content-list">
+            <div class="content-list-item grid-container-nested">
+                <div class="grid">
+                    <div class="grid-inner">
+                        <p>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </p>
+                    </div>
+                </div>
+                <div class="grid">
+                    <div class="grid-inner">
+                        <p>
+                            @Html.DisplayFor(modelItem => item.PhoneNumber)
+                        </p>
+                    </div>
+                </div>
+                <div class="grid">
+                    <div class="grid-inner">
+                        <input type="checkbox" class="deleteBranch checkbox" data-id="@item.Id" id="check@(item.Id)" checked="@(item.LicenseDeleteCheck ?? false)"  @(item.isEditable != true ? "readonly" : "")/>
+                        <label class="control-label" for="check@(item.Id)"></label>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    }
+</div>
+<script>
+    $('.deleteBranch').on('click', function () {
+        //debugger;
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("ChangeLicenseDeleteCheck", "PrlAppAlt", new {Area = "PRL"})",
+                data: { entityId: $(this).attr('data-id'), entity: "branch"  },
+                error: function(data) {
+                    $(this).click();
+                }
+            });
+        });
+</script>

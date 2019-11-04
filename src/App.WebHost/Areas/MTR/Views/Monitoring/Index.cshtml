@@ -1,0 +1,81 @@
+﻿@using Newtonsoft.Json
+@inject App.Core.Mvc.Helpers.SelectListHelper Sel
+@{
+    ViewData["Title"] = "Моніторинг розгляду";
+}
+
+<div class="content-search-wrapper">
+    <partial name="_Searchform" />
+</div>
+
+
+<div class="results" id="results">
+
+</div>
+
+@section Scripts {
+
+    <script>
+        var searchFormControls = {
+            controlsConfig: [
+                {
+                    labelName: 'Дата подання',
+                    name: 'RegDate',
+                    type: 'dataGroup',
+                    children: [
+                        {
+                            labelName: 'з: ',
+                            name: 'ModifiedOn_From',
+                            type: 'datepicker'
+                        }, {
+                            labelName: 'по: ',
+                            name: 'ModifiedOn_To',
+                            type: 'datepicker'
+                        }
+                    ]
+                },
+                {
+                    labelName: 'Тип заяви',
+                    name: 'AppTypeEnum',
+                    type: 'select',
+                    selectOptions: @Html.Raw(JsonConvert.SerializeObject(Sel.Enum("ActivityType")))
+                },
+                {
+                    labelName: 'Вид заяви',
+                    name: 'AppSortEnum',
+                    type: 'select',
+                    selectOptions: @Html.Raw(JsonConvert.SerializeObject(Sel.Enum("ApplicationSort")))
+                },
+                {
+                    labelName: 'Тип рішення',
+                    name: 'DecisionEnum',
+                    type: 'select',
+                    selectOptions: @Html.Raw(JsonConvert.SerializeObject(Sel.Enum("DecisionType")))
+                }
+            ]
+        };
+
+        var searchFormConfig = {
+            formConfig: {
+                formName: 'form0',
+                formDataAjaxUpdate: '#results',
+                formMethod: 'post',
+                controls: searchFormControls
+            },
+            
+            presetFiltersUrl: {
+                @*controllerName: '@ViewContext.RouteData.Values["Controller"].ToString()',
+                actionName: '@ViewContext.RouteData.Values["Action"].ToString()'*@
+            },
+
+            mainInputConfig: {
+                labelName: 'Вид заяви',
+                type: 'text',
+                mainInputLookUp: ['AppSort']
+            }
+        };
+
+        mt.createContentSearchForm(searchFormConfig);
+
+    </script>
+}

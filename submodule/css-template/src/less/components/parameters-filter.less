@@ -1,0 +1,66 @@
+@import "../abstracts/_bundle";
+
+.content-filter-parameters {
+  flex-direction: row;
+  justify-content: space-between;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  .material-transition;
+
+  &.active {
+    max-height: 20em;
+    overflow: visible;
+
+    ul {
+      padding-top: @xxxs;
+    }
+  }
+
+  &.open {
+    opacity: 1;
+  }
+
+  ul {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  &-item {
+    padding: @xxxs @xs;
+    margin-bottom: @xxxs;
+    margin-right: @xs;
+    background-color: @input-readonly;
+    color: @font-light;
+    font-size: @font-size-smallest;
+    flex-shrink: 0;
+    flex-wrap: nowrap;
+    border-radius: @font-size-smallest;
+    .material-shadow(1);
+    .material-transition;
+    &:hover{
+      .material-shadow(2);
+    }
+    span {
+      margin-left: @xs;
+      cursor: pointer;
+    }
+  }
+
+  &-clear-all {
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    height: @icon-height;
+    margin-top: @xxxs;
+    margin-left: @xxxs;
+    opacity: .65;
+    color: @font-light;
+    font-size: @font-size-smallest;
+    cursor: pointer;
+    .material-transition;
+    &:hover {
+      opacity: 1;
+    }
+  }
+}

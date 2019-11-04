@@ -1,0 +1,84 @@
+
+@{
+    ViewData["Title"] = "Головна сторінка";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Онлайн-подача та відслідковування заяв на отримання дозвільних документів, що надаються Держлікслужбою та її територіальними органами</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;subset=cyrillic" rel="stylesheet" />
+    <link href="~/fe-ext/stylesheets/info-page.css" rel="stylesheet" />
+
+</head>
+<body>
+    <div id="main-wrapper">
+        <div class="aside-wrapper">
+            <div class="aside">
+                <header class="aside__header">
+                    <a class="aside__link" href="#">
+                        <img class="aside__img" src="~/images/sidebar-emblem.svg" alt="Trizub" />
+                        <span class="aside__label">портал держлікслужби</span>
+
+                    </a>
+                    <div class="aside__services">Електронні послуги</div>
+                </header>
+            </div>
+        </div>
+        <div id="content-wrapper">
+
+
+            <div class="content__main">
+                <h1 class="content__title">
+                    Онлайн-подача та відслідковування заяв на отримання дозвільних документів,
+                    що надаються Держлікслужбою та її територіальними органами
+                </h1>
+                <p class="content__parag">
+                    Система  призначена для оптимізації процесу взаємодії ліцензіатів з Держлікслужбою та її територіальними органами протягом усього процесу розгляду наступних типів заяв:
+                </p>
+                <p class="content__option">
+                    заяв про видачу висновку про якість ввезених в Україну лікарських засобів
+                </p>
+                <p class="content__option">
+                    заяв про видачу висновку про відповідність медичного імунобіологічного препарату вимогам державних і міжнародних стандартів
+                </p>
+                <p class="content__option">
+                    заяв щодо провадження діяльності з виробництва лікарських засобів
+                </p>
+                <p class="content__option">
+                    заяв щодо провадження діяльності з імпорту лікарських засобів (крім активних фармацевтичних інгредієнтів)
+                </p>
+                <p class="content__option">
+                    заяв щодо провадження діяльності з виробництва (виготовлення) лікарських засобів в умовах аптеки, оптової, роздрібної торгівлі лікарськими засобами
+                </p>
+                <p class="content__parag">Система оптимізує процеси взаємодії ліцензіатів з Держлікслужбою та її територіальними органами при подачі повідомлень про зміни даних у ліцензіях, поданні звітів про результати вхідного контролю субстанцій, in bulk (902)</p>
+                <a class="btn__link" href="@Url.Action("Login", "Auth")"> <div class="content__button">увійти</div></a>
+                
+                <p class="content__parag">
+                    Реєстр ліцензій з промислового виробництва лікарських засобів, імпорту, оптової та роздрібної торгівлі,
+                    виробництва лікарських засобів в умовах аптеки містить інформацію про видані та анульовані ліцензії:
+                    інформацію про ліцензіата, види діяльності, дату видачі ліцензії, місця провадження діяльності та інші дані.
+                </p>
+                <p class="content__parag">У реєстрі реалізовані функції пошуку за ключовими реквізитами ліцензії.</p>
+
+                <a class="btn__link" target="_blank" href="@ViewBag.PortalLink"> <div class="content__button">реєстр</div></a>
+            </div>
+        </div>
+        <div class="content__footer">
+            <span class="content__footer--text">
+                Проект реалізовано
+                <a href="http://www.eurasia.org/">Фондом "Євразія"</a>,
+                <a href="http://eef.org.ua/">Фондом Східна Європа</a> та
+                <a href="https://www.e.gov.ua/">Державним агентством з питань електронного урядування України</a> у межах програми міжнародної технічної допомоги
+                <a href="http://tapas.org.ua/">"Прозорість та підзвітність у державному управлінні та послугах" / TAPAS</a>, за фінансової підтримки
+                <a href="https://www.usaid.gov/">Агенства США з міжнародного розвитку (USAID)</a> та
+                <a href="https://www.gov.uk/government/organisations/department-for-international-development">Уряду Великої Британії (UK aid)</a>
+            </span>
+        </div>
+    </div>
+</body>
+</html>

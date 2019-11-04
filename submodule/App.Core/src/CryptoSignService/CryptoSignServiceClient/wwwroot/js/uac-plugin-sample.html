@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>UAC web plugin sample</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="utils.js"></script>
+        <script src="UacJs.js"></script>
+        <script src="uac-plugin-1.3.js"></script>
+        <style>
+            .ui-panel {
+                padding: 15px;
+                border: 1px solid #d6e9c6;
+                border-radius: 4px;
+            }
+            .ui-table {
+                margin-top: 5px;
+                width: 100%;
+                border: 1px solid #d6e9c6;
+                table-layout: fixed;
+                border-collapse: collapse;
+                font-size: 90%;
+            }
+            
+            .ui-table td, th {
+                display: table-cell;
+                text-align: center;
+                border: 1px solid #d6e9c6;
+                vertical-align: middle;
+                /*border: 1px solid pink;*/
+            }
+            
+            .ui-widget-header {
+                background-color: #eeeeee;
+            }
+            
+            .ui-textarea {
+                width: 100%;
+            }
+            
+            #sign-signer {
+                margin-left: 5px;
+            }
+            
+        </style>
+    </head>
+    <body>
+<script>
+    var fileApiSupported = window.File && window.FileReader && window.FileList && window.Blob;
+    if (!fileApiSupported) {
+        alert("Ваш браузер не підтримує File API!");
+    } 
+</script>        
+  
+        <fieldset id="login" class="ui-panel">
+            <legend>Ключове сховище:</legend>
+            <table class="form">
+                <tr>
+                    <td>Файл:</td>
+                    <td><input type="file" id="key-file" name="file" accept=".dat,.pfx,.cnt,.pk8,Key-6.dat,.jks" /></td>
+                </tr>
+                <tr>
+                    <td>Пароль:</td>
+                    <td>
+                        <input type="text" id="key-pass" > 
+                        <input type="button" class="ui-button" id="file-selector-button" value="Завантажити" onclick="login()">
+                    </td>
+                </tr>
+            </table>
+            <p>Ключі:</p>
+            <table id="keys-table" class="ui-table" > 
+                <thead>
+                    <tr class="ui-widget-header">
+                        <th>№</th>
+                        <th>Власник</th>
+                        <th>ЦСК</th>
+                        <th>Підпис</th>
+                        <th>Шифрування</th>
+                    </tr>
+                </thead>
+                <tbody id="keys-table-body"></tbody>
+            </table>
+            <input type="file" id="certs-add-files" multiple accept=".cer,.crt"  style="display:none" onchange="certFilesSelected()"/>
+            <input type="button" id="certs-add-button" style="margin-top: 5px;" class="ui-button" value="Пошук сертифікатів" onclick="certFilesSelect()" disabled />
+            <input type="checkbox" id="certs-saveall-check" checked disabled /><label style="margin-top: 5px;"> зберігати усі сертифікати</label>
+        </fieldset>
+        
+       <fieldset id="sign-panel" class="ui-panel" style="display:none">
+            <legend>Підпис:</legend>
+            Підписувач:<select id="sign-signer"></select>
+            <table>
+                <tr><td>Додати позначку часу:</td><td><input type="checkbox" id="sign-add-timestamp" /></td></tr>
+                <tr><td>Включати вміст повідомлення:</td><td><input type="checkbox" id="sign-store-content" checked /></td></tr>
+                <tr><td>Додати сертифікат підписувача:</td><td><input type="checkbox" id="sign-add-certificate" checked /></td></tr>
+                <tr><td>Ідентифікація підписувача:</td>
+                    <td><input type="radio" name="sign-id" id="sign-keyid" checked />за ідентифікатором ключа</td>
+                    <td><input type="radio" name="sign-id" id="sign-serial" />за серійним номером</td>
+                </tr>
+            </table>
+            <p>Повідомлення:</p>
+            <textarea id="sign-message" rows="3" class="ui-textarea"></textarea>
+            <div class="ui-command"><button id="sign-button" onClick="sign();">Підписати</button></div>
+            <p>Підписані дані:</p>
+            <textarea id="sign-signed" rows="3" class="ui-textarea"></textarea>
+            <div class="ui-command"><button id="sign-button" onClick="verify();">Перевірити</button></div>
+        </fieldset>
+       
+        <fieldset id="encr-panel" class="ui-panel" style="display:none">
+            <legend>Шифрування:</legend>
+            <table>
+                <tr><td>Відправник:</td><td><select id="encr-originator"></select></td></tr>
+                <tr><td>Отримувач:</td><td><select id="encr-recipient"></select></td></tr>
+            </table>
+            <p>Повідомлення:</p>
+            <textarea id="encr-message" rows="3" class="ui-textarea"></textarea>
+            <div class="ui-command"><button id="encr-encrypt-button" onClick="encrypt();">Зашифрувати</button></div>
+            <p>Зашифровані дані:</p>
+            <textarea id="encr-encrypted" rows="3" class="ui-textarea"></textarea>
+            <div class="ui-command"><button id="encr-decrypt-button" onClick="decrypt();">Розшифрувати</button></div>
+            <p>Розшифровані дані:</p>
+            <textarea id="encr-decrypted" rows="3" class="ui-textarea"></textarea>
+        </fieldset>
+
+
+ <script type="text/javascript">	
+    var lib;
+    window.uacOnLoad = function() {
+		lib = new UacPlugin("http://cala.it-engineering.com.ua/service/");
+        console.log("Library v." + lib.version + " was created. Server URL: " + lib.getUrl());
+    };
+    
+    
+    var keyStore;
+    var MAX_CERT_SIZE = 10000;
+    
+    var keyInput = Utils.find('key-file');
+    var keyPass = Utils.find('key-pass');
+    var loginBtn = Utils.find('file-selector-button');
+    var keysTable = Utils.find('keys-table-body');
+    var certsInput = Utils.find('certs-add-files');
+    var certsBtn = Utils.find('certs-add-button');
+    var certsSaveAll = Utils.find('certs-saveall-check');
+
+    var signPanel = Utils.find('sign-panel');
+    var signSigner = Utils.find('sign-signer');
+    var signMessage = Utils.find('sign-message');
+    var signSigned = Utils.find('sign-signed');
+    
+    var encrPanel = Utils.find('encr-panel');
+    var encrOriginator = Utils.find('encr-originator');
+    var encrRecipient = Utils.find('encr-recipient');
+    var encrMessage = Utils.find('encr-message');
+    var encrEncrypted = Utils.find('encr-encrypted');
+    var encrDecrypted = Utils.find('encr-decrypted');
+    
+    
+    function clear() {
+        keyStore = null;
+        keyInput.files = null;
+        keyInput.value = null;
+        keyInput.disabled = false;
+        keyPass.value = '';
+        loginBtn.value = 'Завантажити';
+        var rows = keysTable.getElementsByTagName("tr").length;
+        for(var i=rows-1; i>=0; i--) {
+            keysTable.deleteRow(i);
+        }
+        
+        certsInput.files = null; //?
+        certsBtn.disabled = true;
+        certsSaveAll.disabled = true;
+
+        Utils.clearOptions(signSigner);
+        Utils.setVisible(signPanel, false);
+        signSigned.value = '';
+        
+        Utils.setVisible(encrPanel, false);
+        Utils.clearOptions(encrOriginator);
+        Utils.clearOptions(encrRecipient);
+        encrEncrypted.value = encrDecrypted.value = '';
+    }
+    
+    function errorHandler(err, obj) {
+        console.log("Error " + err, obj);
+        alert("Виникла помилка (" + err + ")!");
+    }
+    
+    function certFilesSelect() { 
+        certsInput.click();  
+    }
+    
+    function certFilesSelected() {
+        if (!lib) return; //TODO
+        var files = certsInput.files;
+        if (files.length) {
+            var index = 0;
+            var certs = [];
+            var loadNextCert = function() {
+                if (index < files.length) {
+                    var file = files[index];
+                    if (file.size <= MAX_CERT_SIZE) {
+                        var reader = new FileReader();
+                        reader.onloadend = function(evt) {
+                            var data = Utils.arrayBufferToBase64(evt.target.result);
+                            var info = lib.loadCert(data);
+                            if (info) {
+                                certs.push(info);
+                            }
+                        };
+                        reader.readAsArrayBuffer(file);
+                    }
+                    index++;
+                    setTimeout(loadNextCert, 100);
+                } else {
+                    lib.keyStoreAddCerts(keyStore, certs, certsSaveAll.checked,
+                            function(store, changes) {
+                                if (changes) {
+                                    keyStore = store; 
+                                    console.log(keyStore);
+                                    updateKeyStoreInfo();
+                                }
+                            }, 
+                            errorHandler
+                    );
+                }  
+            };
+            setTimeout(loadNextCert, 1);
+        }
+    }
+    
+    function procFile(inputFile, procFileFunc) {
+        var files = inputFile.files;
+        if (!files.length) {
+            alert("Оберіть файл!");
+            return;
+        }
+        var file = files[0];
+        var reader = new FileReader();
+        reader.onloadend = function(evt) {
+            procFileFunc(Utils.arrayBufferToBase64(evt.target.result), file);
+        };
+        reader.readAsArrayBuffer(file);
+    }
+    
+    function login() {
+        if (keyStore) {
+            clear();
+            return;
+        }
+        procFile(keyInput, 
+                function(data, file) {
+                    var keyData = {data: data};
+                    if (file && file.name) {
+                        keyData.name = file.name;
+                    } 
+                    lib.loadKeyStore(
+                            keyData,
+                            window.btoa(keyPass.value), 
+                            function(store) {
+                                keyStore = store; 
+                                console.log(keyStore);
+                                loginBtn.value = 'Вивантажити';
+                                keyInput.disabled = true;
+                                certsBtn.disabled = false;
+                                certsSaveAll.disabled = false;
+                                updateKeyStoreInfo();
+                            },
+                            errorHandler
+                    );
+                }
+        );
+    }
+    
+    function updateKeyStoreInfo() {
+        Utils.clearOptions(signSigner);
+        Utils.clearOptions(encrOriginator);
+        Utils.clearOptions(encrRecipient);
+        var index = 0;
+        for(var i=0; i<keyStore.keys.length; i++) {
+            var key = keyStore.keys[i];
+            var info = key.info;
+            if (key.isKeyOnly() || key.isKeyPair()) {
+                var isNewRow = keysTable.rows.length <= index;
+                var row = isNewRow ? keysTable.insertRow() : keysTable.rows.item(index);
+                if (isNewRow) {
+                    row.insertCell(0).innerHTML = index + 1;
+                }
+                (isNewRow ? row.insertCell(1) : row.cells.item(1)).innerHTML = info && info.subject || '-'; 
+                (isNewRow ? row.insertCell(2) : row.cells.item(2)).innerHTML = info && info.issuer || '-'; 
+                (isNewRow ? row.insertCell(3) : row.cells.item(3)).innerHTML = info && info.forSign ? 'Так' : '-';
+                (isNewRow ? row.insertCell(4) : row.cells.item(4)).innerHTML = info && info.forEncrypt ? 'Так' : '-';
+                index++;
+                if (key.isKeyPair()) {
+                    if (info.forSign) {
+                        Utils.addCertInfoOption(signSigner, info, i);
+                    } 
+                    if(info.forEncrypt) {
+                        Utils.addCertInfoOption(encrOriginator, info, i);
+                    }
+                } 
+                if (info && info.forEncrypt) {
+                    Utils.addCertInfoOption(encrRecipient, info, i);
+                }
+            } else {
+                if (info && info.forEncrypt) {
+                    Utils.addCertInfoOption(encrRecipient, info, i);
+                }
+            }
+        }
+        Utils.setVisible(signPanel, signSigner.length !== 0);
+        Utils.setVisible(encrPanel, encrOriginator.length !== 0 && encrRecipient.length !== 0);
+    }
+      
+    function sign() {
+        var text = signMessage.value;
+        if (text.isEmpty()) {
+            alert("Введіть повідомлення для підпису");
+            return;
+        }
+        signSigned.value = '';
+        var key = keyStore.keys[Utils.getSelectedValue(signSigner)];
+        var data = window.btoa(text); 
+        var addTimestamp = Utils.find('sign-add-timestamp').checked;
+        var options = Uac.UAC_OPTION_INCLUDE_SIGNED_TIME;
+        if (Utils.find('sign-keyid').checked) {
+            options |= Uac.UAC_OPTION_IDENT_BY_KEY_ID;
+        } else {
+            options |= Uac.UAC_OPTION_IDENT_BY_SERIAL_NUMBER;
+        }
+        if (Utils.find('sign-store-content').checked) {
+            options |= Uac.UAC_OPTION_STORE_CONTENT;
+        }
+        if (Utils.find('sign-add-certificate').checked) {
+            options |= Uac.UAC_OPTION_INCLUDE_CERT;
+        }
+        lib.sign(data, key, options, addTimestamp,
+            function(env) { signSigned.value = env; },
+            errorHandler
+        );
+    };
+    
+    function verify() {
+        var signedData = signSigned.value;
+        lib.signedDataGetContent(
+            signedData, 
+            function(content) {
+                var data = content || window.btoa(signMessage.value);
+                lib.verify(
+                    signedData,
+                    data,
+                    function(signInfos) {
+                        var msg = "Підпис вірний.";
+                        for(var i=0; i<signInfos.length; i++) {
+                            var si = signInfos[i];
+                            msg += "\n    " + (i+1) + '. ' + si.signerInfo.subject;
+                            if (si.timestamp) {
+                                msg += ' timestamp=' + si.timestamp;
+                            }
+                        }
+                        alert(msg);
+                    },
+                    function(code) {
+                        alert("Підпис невірний! Помилка " + code + ".");
+                    }
+                );
+                if (content) {}
+            }, 
+            function(code) {
+                alert("Підпис невірний! Помилка " + code + ".");
+            }
+        );
+    }
+    
+    function encrypt() {
+        var text = encrMessage.value;
+        if (text.isEmpty()) {
+            alert("Введіть повідомлення для зашифрування");
+            return;
+        }
+        var recipient = keyStore.keys[Utils.getSelectedValue(encrRecipient)];
+        var key = keyStore.keys[Utils.getSelectedValue(encrOriginator)];
+        lib.encrypt(
+            window.btoa(text),
+            key,
+            [recipient.cert],
+            0,
+            function(env) { encrEncrypted.value = env; },
+            errorHandler
+        );
+    };
+    
+    function decrypt() {
+        var env = encrEncrypted.value;
+        if (env.isEmpty()) {
+            alert("Введіть повідомлення для розшифрування");
+            return;
+        }
+        encrDecrypted.value = '';
+        lib.decrypt(
+            env, 
+            keyStore, 
+            function(decrypted) { 
+                encrDecrypted.value = window.atob(decrypted);
+            }, 
+            function(err) {
+                if (err === UacCodes.notFoundRecipient) {
+                    alert("Повідомлення не призначене для даного користувача.");
+                } else {
+                    errorHandler(err);
+                }
+            }
+        );
+    }
+ </script>
+    </body>
+</html>

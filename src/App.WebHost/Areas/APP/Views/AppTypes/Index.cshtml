@@ -1,0 +1,169 @@
+﻿@model Dictionary<string, bool>;
+@{
+    ViewData["Title"] = "Створення нової заяви";
+    var prlPendingLicCheck = Model.FirstOrDefault(x => x.Key == "PRL").Value;
+    var imlPendingLicCheck = Model.FirstOrDefault(x => x.Key == "IML").Value;
+    var trlPendingLicCheck = Model.FirstOrDefault(x => x.Key == "TRL").Value;
+
+    var prlLicCheck = Model.FirstOrDefault(x => x.Key == "LIC_PRL").Value;
+    var imlLicCheck = Model.FirstOrDefault(x => x.Key == "LIC_IML").Value;
+    var trlLicCheck = Model.FirstOrDefault(x => x.Key == "LIC_TRL").Value;
+}
+
+<div class="content-item-holder">
+    <div class="accordion">
+        <div class="accordion-item">
+            <div class="accordion-item-header">Заява щодо провадження діяльності з виробництва лікарських засобів (промислового)</div>
+            <div class="accordion-item-content">
+                @if (prlPendingLicCheck)
+                {
+                    <a class="accordion-content-inner accordion-content-link" href="@Url.Action("EditAdditionForLicense", "PrlApp", new {Area = "PRL"})">
+                        Повідомлення про доповнення інформації щодо наявної ліцензії з виробництва (промислового)
+                    </a>
+                }
+                <a class="accordion-content-inner accordion-content-link" href="@(ViewBag.isFop || prlPendingLicCheck || prlLicCheck || imlLicCheck || trlLicCheck? "#" : Url.Action("Edit", "PrlApp", new {Area = "PRL"}))">
+                    Заява про отримання ліцензії на провадження діяльності з виробництва лікарських засобів (промислового)
+                    <span>Додаток 2</span>
+                </a>
+                @*<a class="accordion-content-inner accordion-content-link" href="@Url.Action("CreateOnOpen", "PrlAppAlt", new {Area="PRL", sort = "RenewLicenseApplication"})">
+            Заява на переоформлення ліцензії
+            <span>Додаток 14</span>
+        </a>*@
+                <a class="accordion-content-inner accordion-content-link" href="@((ViewBag.isFop || prlPendingLicCheck || !prlLicCheck)? "#" : Url.Action("CreateOnOpen", "PrlAppAlt", new {Area = "PRL", sort = "AddBranchApplication"}))">
+                    Заява на створення місць провадження діяльності
+                    <span>Додаток 12</span>
+                </a>
+                <a class="accordion-content-inner accordion-content-link" href="@(ViewBag.isFop || prlPendingLicCheck || !prlLicCheck? "#" : Url.Action("CreateOnOpen", "PrlAppAlt", new {Area = "PRL", sort = "AddBranchInfoApplication"}))">
+                    Заява про розширення переліку лікарських форм
+                    <span>Додаток 12</span>
+                </a>
+                <a class="accordion-content-inner accordion-content-link" href="@(ViewBag.isFop || prlPendingLicCheck || !prlLicCheck? "#" : Url.Action("CreateOnOpen", "PrlAppAlt", new {Area = "PRL", sort = "RemBranchApplication"}))">
+                    Заява на закриття місць провадження діяльності
+                    <span>Додаток 16</span>
+                </a>
+                <a class="accordion-content-inner accordion-content-link" href="@(ViewBag.isFop || prlPendingLicCheck || !prlLicCheck? "#" : Url.Action("CreateOnOpen", "PrlAppAlt", new {Area = "PRL", sort = "RemBranchInfoApplication"}))">
+                    Заява про звуження переліку лікарських форм
+                    <span>Додаток 16</span>
+                </a>
+                <a class="accordion-content-inner accordion-content-link" href="@(ViewBag.isFop || prlPendingLicCheck || !prlLicCheck? "#" : Url.Action("CreateOnOpen", "PrlAppAlt", new {Area = "PRL", sort = "ChangeAutPersonApplication"}))">
+                    Заява про зміну уповноважених осіб
+                    <span>Додаток 18</span>
+                </a>
+                <a class="accordion-content-inner accordion-content-link" href="@(ViewBag.isFop || prlPendingLicCheck || !prlLicCheck? "#" : Url.Action("CreateOnOpen", "PrlAppAlt", new {Area = "PRL", sort = "ChangeContrApplication"}))">
+                    Заява на зміну контрактних виробників і контрактних лабораторій
+                    <span>Додаток 18</span>
+                </a>
+                <a class="accordion-content-inner accordion-content-link" href="@(prlLicCheck && (imlLicCheck || trlLicCheck)? Url.Action("CreateOnOpen", "PrlAppAlt", new {Area = "PRL", sort = "DecreasePRLApplication"}) : "#")">
+                    Заява про звуження провадження виду господарської діяльності
+                    <span>Додаток 20</span>
+                </a>
+                <a class="accordion-content-inner accordion-content-link" href="@(!prlLicCheck && (imlLicCheck || trlLicCheck)? Url.Action("Edit", "PrlApp", new {Area = "PRL", sort = "IncreaseToPRLApplication"}) : "#")">
+                    Заява про розширення провадження виду господарської діяльності
+                    <span>Додаток 21</span>
+                </a>
+                <a class="accordion-content-inner accordion-content-link" href="@(ViewBag.isFop || prlPendingLicCheck || !prlLicCheck? "#" : Url.Action("CreateOnOpen", "PrlAppAlt", new {Area = "PRL", sort = "CancelLicenseApplication"}))">
+                    Заява про анулювання ліцензії
+                    <span>Додаток 22</span>
+                </a>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <div class="accordion-item-header">Заяви щодо провадження діяльності з імпорту лікарських засобів (крім активних фармацевтичних інгредієнтів)</div>
+            <div class="accordion-item-content">
+                @if (imlPendingLicCheck)
+                {
+                    <a class="accordion-content-inner accordion-content-link" href="#">
+                        Повідомлення про доповнення інформації щодо наявної ліцензії з імпорту лікарських засобів (крім активних фармацевтичних інгредієнтів)
+                    </a>
+                }
+                <a class="accordion-content-inner accordion-content-link" href="@(ViewBag.isFop || imlPendingLicCheck || imlLicCheck || prlLicCheck || trlLicCheck ? "#" : Url.Action("Edit", "ImlApp", new{Area = "IML"}))">
+                    Заява про отримання ліцензії на провадження діяльності з імпорту лікарських засобів
+                    <span>Додаток 3</span>
+                </a>
+                @*<a class="accordion-content-inner accordion-content-link" href="#">
+                Заява на переоформлення ліцензії
+                <span>Додаток 14</span>
+                </a>*@
+                <a class="accordion-content-inner accordion-content-link" href="@(ViewBag.isFop || imlPendingLicCheck || !imlLicCheck? "#" : Url.Action("CreateOnOpen", "ImlAppAlt", new {Area = "IML", sort = "AddBranchApplication"}))">
+                    Заява на створення місць провадження діяльності
+                    <span>Додаток 13</span>
+                </a>
+                <a class="accordion-content-inner accordion-content-link" href="@(ViewBag.isFop || imlPendingLicCheck || !imlLicCheck? "#" : Url.Action("CreateOnOpen", "ImlAppAlt", new {Area = "IML", sort = "ChangeDrugList"}))">
+                    Заява про зміну (доповнення) переліку лікарських засобів, що імпортує ліцензіат
+                    <span>Додаток 19</span>
+                </a>
+                <a class="accordion-content-inner accordion-content-link" href="@(ViewBag.isFop || imlPendingLicCheck || !imlLicCheck? "#" : Url.Action("CreateOnOpen", "ImlAppAlt", new {Area = "IML", sort = "RemBranchApplication"}))">
+                    Заява на закриття місць провадження діяльності
+                    <span>Додаток 17</span>
+                </a>
+                <a class="accordion-content-inner accordion-content-link" href="@(ViewBag.isFop || imlPendingLicCheck || !imlLicCheck? "#" : Url.Action("CreateOnOpen", "ImlAppAlt", new {Area = "IML", sort = "ReplacementDrugList"}))">
+                    Заява про заміну переліку лікарських засобів, що імпортує ліцензіат
+                    <span>Додаток 19</span>
+                </a>
+                <a class="accordion-content-inner accordion-content-link" href="@(ViewBag.isFop || imlPendingLicCheck || !imlLicCheck? "#" : Url.Action("CreateOnOpen", "ImlAppAlt", new {Area = "IML", sort = "ChangeAutPersonApplication"}))">
+                    Заява про зміну інформації у додатку до ліцензії - зміна уповноважених осіб
+                    <span>Додаток 19</span>
+                </a>
+                <a class="accordion-content-inner accordion-content-link" href="@(imlLicCheck && (prlLicCheck || trlLicCheck)? Url.Action("CreateOnOpen", "ImlAppAlt", new {Area = "IML", sort = "DecreaseIMLApplication"}) : "#")">
+                    Заява про звуження провадження виду господарської діяльності
+                    <span>Додаток 20</span>
+                </a>
+                <a class="accordion-content-inner accordion-content-link" href="@(!imlLicCheck && (prlLicCheck || trlLicCheck) ? Url.Action("Edit", "ImlApp", new {Area = "IML", sort = "IncreaseToIMLApplication"}) : "#")">
+                    Заява про розширення провадження виду господарської діяльності
+                    <span>Додаток 21</span>
+                </a>
+                <a class="accordion-content-inner accordion-content-link" href="@(ViewBag.isFop || imlPendingLicCheck || !imlLicCheck? "#" : Url.Action("CreateOnOpen", "ImlAppAlt", new {Area = "IML", sort = "CancelLicenseApplication"}))">
+                    Заява про анулювання ліцензії
+                    <span>Додаток 22</span>
+                </a>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <div class="accordion-item-header">Заяви щодо провадження діяльності з виробництва (виготовлення) лікарських засобів в умовах аптеки, оптової, роздрібної торгівлі ЛЗ</div>
+            <div class="accordion-item-content">
+                @if (trlPendingLicCheck)
+                {
+                    <a class="accordion-content-inner accordion-content-link" href="#">
+                        Повідомлення про доповнення інформації щодо наявної ліцензії з виробництва (виготовлення) лікарських засобів в умовах аптеки, оптової, роздрібної торгівлі ЛЗ
+                    </a>
+                }
+                <a class="accordion-content-inner accordion-content-link" href="@(!trlLicCheck && !(prlLicCheck || imlLicCheck) ? Url.Action("Edit", "TrlApp", new {Area = "TRL"}) : "#")">
+                    Заява про отримання ліцензії на провадження діяльності з торгівлі лікарськими засобами
+                    <span>Додаток 1</span>
+                </a>
+                @*<a class="accordion-content-inner accordion-content-link" href="#">
+                        Заява на переоформлення ліцензії
+                        <span>Додаток 14</span>
+                </a>*@
+                <a class="accordion-content-inner accordion-content-link" href="@(trlPendingLicCheck || !trlLicCheck ? "#" : Url.Action("CreateOnOpen", "TrlAppAlt", new {Area = "TRL", sort = "AddBranchApplication"}))">
+                    Заява на створення місць провадження діяльності
+                    <span>Додаток 11</span>
+                </a>                                                                            
+                <a class="accordion-content-inner accordion-content-link" href="@(trlPendingLicCheck || !trlLicCheck ? "#" : Url.Action("CreateOnOpen", "TrlAppAlt", new {Area = "TRL", sort = "RemBranchApplication"}))">
+                    Заява на закриття місць провадження діяльності
+                    <span>Додаток 15</span>
+                </a>
+                <a class="accordion-content-inner accordion-content-link" href="@(!trlLicCheck && (prlLicCheck || imlLicCheck) ? Url.Action("Edit", "TrlApp", new {Area = "TRL", sort = "IncreaseToTRLApplication"}) : "#")">
+                    Заява про розширення провадження виду господарської діяльності (отримання нового типу)
+                    <span>Додаток 21</span>
+                </a>
+                <a class="accordion-content-inner accordion-content-link" href="#">
+                    Заява про розширення провадження виду господарської діяльності (новий вид наданого типу)
+                    <span>Додаток 21</span>
+                </a>
+                <a class="accordion-content-inner accordion-content-link" href="@(trlLicCheck && (prlLicCheck || imlLicCheck)? Url.Action("CreateOnOpen", "TrlAppAlt", new {Area = "TRL", sort = "DecreaseTRLApplication"}) : "#")">
+                    Заява про звуження провадження виду господарської діяльності (видалення даного типу)
+                    <span>Додаток 20</span>
+                </a>
+                <a class="accordion-content-inner accordion-content-link" href="#">
+                    Заява про звуження провадження виду господарської діяльності (видалення виду з наявних типів)
+                    <span>Додаток 20</span>
+                </a>
+                <a class="accordion-content-inner accordion-content-link" href="@(trlPendingLicCheck || !trlLicCheck ? "#" : Url.Action("CreateOnOpen", "TrlAppAlt", new {Area = "TRL", sort = "CancelLicenseApplication"}))">
+                    Заява про анулювання ліцензії
+                    <span>Додаток 22</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

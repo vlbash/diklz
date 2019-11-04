@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\App.Core.Base\App.Core.Base.csproj" />
+    <ProjectReference Include="..\..\App.Core.Business\App.Core.Business.csproj" />
+    <ProjectReference Include="..\..\App.Core.Common\App.Core.Common.csproj" />
+    <ProjectReference Include="..\..\App.Core.Data\App.Core.Data.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Business\" />
+  </ItemGroup>
+
+</Project>

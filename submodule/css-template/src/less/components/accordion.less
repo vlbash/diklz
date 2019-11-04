@@ -1,0 +1,117 @@
+.accordion {
+   display: block;
+
+   &-item {
+      display: block;
+
+      &-header {
+         position: relative;
+         align-items: center;
+         justify-content: center;
+         padding: @sm @xxl @sm @xs;
+         border-bottom: @input-border-width solid @bg-white;
+         background-color: @bg-secondary;
+         color: @font-white;
+         text-align: center;
+         cursor: pointer;
+         .material-transition;
+
+         &:hover {
+            background: fade(@bg-secondary, 90%);
+         }
+
+         &:after {
+            content: '+';
+            position: absolute;
+            top: calc(50% - @font-size-big);
+            right: @md;
+            color: @font-white;
+            font-size: @font-size-big;
+         }
+      }
+
+      &-content {
+         display: none;
+         flex-direction: column;
+      }
+
+      &.active {
+         .accordion-item-header {
+            background-color: @bg-primary;
+
+            &:after {
+               content: '–';
+            }
+         }
+      }
+   }
+
+   &-content {
+      &-inner {
+         padding: @xs @sm;
+      }
+
+      &-link {
+         display: flex;
+         position: relative;
+         align-items: center;
+         justify-content: space-between;
+         width: 100%;
+         background-color: @input-readonly;
+         .material-transition;
+
+         &:hover {
+            background-color: @modal-wrap-bg-light;
+         }
+
+         span {
+            right: @md;
+            width: auto;
+            margin-left: auto;
+            padding: @xxs @xs;
+            color: @bg-secondary;
+            font-size: @font-size-small;
+            text-transform: lowercase;
+            white-space: nowrap;
+            justify-self: flex-end;
+         }
+
+         span.link-desc {
+            width: auto;
+            padding: @xxs @xs;
+            border: @input-border-width solid @bg-secondary;
+            border-radius: @border-radius;
+            color: @bg-secondary;
+            font-weight: @semibold;
+            text-transform: lowercase;
+         }
+      }
+
+      &-link[href^="#"] {
+         background-color: @bg-light;
+         color: @font-color-lightest;
+         cursor: not-allowed;
+      }
+   }
+
+   &.not-active{
+      .accordion{
+         &-item {
+            &-header {
+               cursor: inherit;
+               &:after {
+                  content: '';
+               }
+               &:hover {
+                  background-color: @bg-secondary;
+               }
+            }
+      
+            &-content {
+               display: flex;
+            }
+         }
+      }
+      
+   }
+}

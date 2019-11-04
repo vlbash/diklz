@@ -1,0 +1,210 @@
+image: docker:18.09
+services:
+  - docker:18.09.7-dind
+
+#image: docker:latest
+#services:
+#  - docker:dind
+  
+#stages:
+#  - build
+#  - release
+#  - notify
+
+stages:
+  - migrations
+  - build
+  - notify
+  - deploy
+
+variables:
+  DOCKER_HOST: tcp://docker:2375
+  DOCKER_DRIVER: overlay2
+  GIT_SUBMODULE_STRATEGY: recursive
+  VERSION_TAG: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+  DEV_TAG: $CI_REGISTRY_IMAGE:dev
+  DEVPUBLIC_TAG: $CI_REGISTRY_IMAGE:devpublic
+  DEVBACK_TAG: $CI_REGISTRY_IMAGE:devback
+  TEST_TAG: $CI_REGISTRY_IMAGE:test
+  TESTBACK_TAG: $CI_REGISTRY_IMAGE:testback
+  STAGE_TAG: $CI_REGISTRY_IMAGE:stage
+  STAGEBACK_TAG: $CI_REGISTRY_IMAGE:stageback
+  TRANSFER_TAG: $CI_REGISTRY_IMAGE:transfer
+  TRANSFERBACK_TAG: $CI_REGISTRY_IMAGE:transferback
+  TRANSFERPUBLIC_TAG: $CI_REGISTRY_IMAGE:transferpublic 
+
+before_script:
+     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+     #- docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+     - cat /etc/resolv.conf
+     - cat /etc/hosts
+     - cat /etc/nsswitch.conf
+     - docker info
+
+
+
+dev-image:
+  stage: build
+  script:
+    - docker build -t $VERSION_TAG -f Dockerfile .
+    - docker tag $VERSION_TAG $DEV_TAG
+    - docker push $DEV_TAG
+  only:
+    - dev
+
+devpublic-image:
+  stage: build
+  script:
+    - docker build -t $VERSION_TAG -f DockerfilePublic .
+    - docker tag $VERSION_TAG $DEVPUBLIC_TAG
+    - docker push $DEVPUBLIC_TAG
+  only:
+    - dev
+
+
+devback-image:
+  stage: build
+  script:
+    - docker build -t $VERSION_TAG -f DockerfileBack .
+    - docker tag $VERSION_TAG $DEVBACK_TAG
+    - docker push $DEVBACK_TAG
+  only:
+    - dev
+
+stage-image:
+  stage: build
+  script:
+    - docker build -t $VERSION_TAG -f DockerfileStage .
+    - docker tag $VERSION_TAG $STAGE_TAG
+    - docker push $STAGE_TAG
+  only:
+    - stage
+
+stageback-image:
+  stage: build
+  script:
+    - docker build -t $VERSION_TAG -f DockerfileStageBack .
+    - docker tag $VERSION_TAG $STAGEBACK_TAG
+    - docker push $STAGEBACK_TAG
+  only:
+    - stage
+
+
+test-image:
+  stage: build
+  script:
+    - docker build -t $VERSION_TAG -f DockerfileTest .
+    - docker tag $VERSION_TAG $TEST_TAG
+    - docker push $TEST_TAG
+  only:
+    - test
+
+testback-image:
+  stage: build
+  script:
+    - docker build -t $VERSION_TAG -f DockerfileTestBack .
+    - docker tag $VERSION_TAG $TESTBACK_TAG
+    - docker push $TESTBACK_TAG
+  only:
+    - test
+
+transfer-image:
+  stage: build
+  script:
+    - docker build -t $VERSION_TAG -f DockerfileTransfer .
+    - docker tag $VERSION_TAG $TRANSFER_TAG
+    - docker push $TRANSFER_TAG
+  only:
+    - transfer
+
+transferback-image:
+  stage: build
+  script:
+    - docker build -t $VERSION_TAG -f DockerfileBackTransfer .
+    - docker tag $VERSION_TAG $TRANSFERBACK_TAG
+    - docker push $TRANSFERBACK_TAG
+  only:
+    - transfer
+
+transferpublic-image:
+  stage: build
+  script:
+    - docker build -t $VERSION_TAG -f DockerfilePublicTransfer .
+    - docker tag $VERSION_TAG $TRANSFERPUBLIC_TAG
+    - docker push $TRANSFERPUBLIC_TAG
+  only:
+    - transfer
+
+migrations-dev:
+  stage: migrations
+  script:
+    - apk update && apk add --no-cache python3 postgresql-dev gcc python3-dev musl-dev
+    - sh .ci-migration.sh
+  only:
+    - dev
+
+migrations-test:
+  stage: migrations
+  script:
+    - apk update && apk add --no-cache python3 postgresql-dev gcc python3-dev musl-dev
+    - sh .rewrite-test.sh
+    - sh .ci-migration.sh
+  only:
+    - test
+
+migrations-stage:
+  stage: migrations
+  script:
+    - apk update && apk add --no-cache python3 postgresql-dev gcc python3-dev musl-dev
+    - sh .rewrite-stage.sh
+    - sh .ci-migration.sh
+  only:
+    - stage
+
+
+notify_success:
+  before_script:
+  - apk add --no-cache curl
+  stage: notify
+  script:
+  - sh .ci-notify.sh ✅ 
+  when: on_success #deploy success
+
+notify_error:
+   before_script:
+   - apk add --no-cache curl
+   stage: notify
+   script:
+   - sh .ci-notify.sh ❌ 
+   when: on_failure #deploy fail
+
+#release_dev:
+#  before_script:  
+#    - apk add --update bash && rm -rf /var/cache/apk/* && apk add --no-cache expect openssh-client
+#    - chmod +x .ci-login_dev.sh
+#    - sh .ci-login_dev.sh
+#  stage: deploy
+#  script:
+#    - docker stop diklz.back
+#    - docker rm diklz.back
+#    - docker rmi registry.gitlab.com/bit-soft/diklz.next:back
+#    - docker run  -e TZ=Europe/Kiev -d -p 5858:5050 --name diklz.back --restart=always registry.gitlab.com/bit-soft/diklz.next:back 
+#  when: manual
+#  only:
+#    - dev
+
+release_dev:
+  image: ubuntu:latest
+  before_script:  
+    - apt update && apt install expect openssh-client -y
+    - chmod +x .ci-login_dev.sh
+    - sh .ci-login_dev.sh
+  stage: deploy
+  script:
+    - docker stop diklz.back
+    - docker rm diklz.back
+    - docker rmi registry.gitlab.com/bit-soft/diklz.next:back
+    - docker run  -e TZ=Europe/Kiev -d -p 5858:5050 --name diklz.back --restart=always registry.gitlab.com/bit-soft/diklz.next:back 
+  when: manual
+  only:
+    - dev

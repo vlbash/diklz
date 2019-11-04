@@ -1,0 +1,137 @@
+﻿@using Newtonsoft.Json
+@inject App.Core.Mvc.Helpers.SelectListHelper Sel
+@{
+    string type = @ViewBag.ActivityType;
+    ViewData["Title"] = "Журнал повідомлень " + Sel.Enum("ActivityType", p => p.Code == type).FirstOrDefault().Text;
+}
+
+@section Buttons {
+    <a class="btn btn-round icon-add"
+       asp-area="Msg"
+       asp-controller="MessageTypes"
+       asp-action="Index"
+       data-tooltipleft='1'
+       data-title="Створити повідомлення">
+    </a>
+}
+
+<div class="content-search-wrapper">
+    <partial name="_Searchform" />
+</div>
+
+<div class="results" id="results">
+
+</div>
+
+@section Scripts {
+    <script>
+        var searchFormControls = {
+            controlsConfig: [
+                {
+                    labelName: 'Тип',
+                    name: 'MessageTypeName',
+                    type: 'text'
+                },
+                {
+                    labelName: 'Номер реєстрації',
+                    name: 'RegNumber',
+                    type: 'text'
+                },
+                {
+                    labelName: 'Дата реєстрації',
+                    name: 'RegDate',
+                    type: 'dataGroup',
+                    children: [
+                        {
+                            labelName: 'з: ',
+                            name: 'RegDate_From',
+                            type: 'datepicker'
+                        }, {
+                            labelName: 'по: ',
+                            name: 'RegDate_To',
+                            type: 'datepicker'
+                        }
+                    ]
+                },
+                {
+                    labelName: 'Вихідний номер ліцензіата',
+                    name: 'MessageNumber',
+                    type: 'text'
+                },
+                {
+                    labelName: 'Дата вихідного ліцензіата',
+                    name: 'MessageDate',
+                    type: 'dataGroup',
+                    children: [
+                        {
+                            labelName: 'з: ',
+                            name: 'MessageDate_From',
+                            type: 'datepicker'
+                        }, {
+                            labelName: 'по: ',
+                            name: 'MessageDate_To',
+                            type: 'datepicker'
+                        }
+                    ]
+                },
+                {
+                    labelName: 'Стан повідомлення',
+                    name: 'MessageStateEnum',
+                    type: 'select',
+                    selectOptions: @Html.Raw(JsonConvert.SerializeObject(Sel.Enum("MessageState")))
+                },
+                {
+                    labelName: 'Найменування СГД/ПІБ ФОП ліцензіата',
+                    name: 'OrgName',
+                    type: 'text'
+                },
+            ]
+        };
+
+        var controls = searchFormControls.controlsConfig;
+        $.each(controls,
+            function(i, control) {
+                if (control.name === "MessageStateEnum") {
+                    $.each(control.selectOptions,
+                        function(i, option) {
+                            if (option.Value === "@ViewBag.AppState") {
+                                option.Selected = true;
+                            }
+                        });
+                }
+            });
+
+        var searchFormConfig = {
+            formConfig: {
+                formName: 'form0',
+                formDataAjaxUpdate: '#results',
+                formMethod: 'post',
+                controls: searchFormControls
+            },
+
+            presetFiltersUrl: {
+                //controllerName: '@ViewContext.RouteData.Values["Controller"].ToString()',
+                //actionName: '@ViewContext.RouteData.Values["Action"].ToString()'
+            },
+
+            mainInputConfig: {
+                labelName: 'Тип повідомлення',
+                type: 'text',
+                mainInputLookUp: ['MessageTypeName']
+            },
+
+            controlConfig: {
+                type: 'text',
+                appState: ['MessageStateEnum'],
+                value: '@ViewBag.AppState'
+            }
+        };
+
+        
+        mt.createContentSearchForm(searchFormConfig);
+
+    </script>
+
+}
+
+

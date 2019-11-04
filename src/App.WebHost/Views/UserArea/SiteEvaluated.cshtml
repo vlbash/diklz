@@ -1,0 +1,75 @@
+﻿@{
+    ViewData["Title"] = "Сторінка оцінки роботи порталу";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Оцінка порталу онлайн-подачі та відслідковування заяв на отримання дозвільних документів, що надаються Держлікслужбою та її територіальними органами</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;subset=cyrillic" rel="stylesheet" />
+    <link href="~/fe-ext/stylesheets/info-page.css" rel="stylesheet" />
+    <link href="~/stylesheets/starability-growRotate.css" rel="stylesheet" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+</head>
+<body>
+    <div id="main-wrapper">
+
+        <div class="aside-wrapper">
+            <div class="aside">
+                <header class="aside__header">
+                    <a class="aside__link" href="#">
+                        <img class="aside__img" src="~/images/sidebar-emblem.svg" alt="Trizub" />
+                        <span class="aside__label">портал держлікслужби</span>
+                    </a>
+                    <div class="aside__services">Оцінка роботи порталу електронних послуг</div>
+                </header>
+            </div>
+        </div>
+
+        <div id="content-wrapper">
+            <div class="content__main">
+
+                <h1 class="content__title">
+                    Оцінка роботи порталу онлайн-подачі та відслідковування заяв на отримання дозвільних документів,
+                    що надаються Держлікслужбою та її територіальними органами
+                    <br /><br />
+                </h1>
+
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>
+                            Роботу портала оцінено.
+                        </label>
+                        <br />
+                        <label>
+                            Дякуємо за Вашу участь в покращенні роботи державних установ.
+                        </label>
+                    </div>
+                </div>
+
+                <br />
+                <br />
+                
+                <a class="btn__link" href="@Url.Action("Index", "Home")"> <div class="content__button"><p style="margin: 5px;">повернутися на портал держлікслужби</p></div></a>
+            </div>
+        </div>
+
+        <div class="content__footer">
+            <span class="content__footer--text">
+                Проект реалізовано
+                <a href="http://www.eurasia.org/">Фондом "Євразія"</a>,
+                <a href="http://eef.org.ua/">Фондом Східна Європа</a> та
+                <a href="https://www.e.gov.ua/">Державним агентством з питань електронного урядування України</a> у межах програми міжнародної технічної допомоги
+                <a href="http://tapas.org.ua/">"Прозорість та підзвітність у державному управлінні та послугах" / TAPAS</a>, за фінансової підтримки
+                <a href="https://www.usaid.gov/">Агенства США з міжнародного розвитку (USAID)</a> та
+                <a href="https://www.gov.uk/government/organisations/department-for-international-development">Уряду Великої Британії (UK aid)</a>
+            </span>
+        </div>
+    </div>
+</body>
+</html>

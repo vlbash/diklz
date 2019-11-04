@@ -1,0 +1,172 @@
+﻿@model App.Data.DTO.MSG.MPDLocationRatificationMessageDTO
+@inject App.Core.Mvc.Helpers.SelectListHelper Sel
+
+@{
+    ViewData["Title"] = "Повідомлення";
+}
+
+@section Buttons {
+    <a class="content-item-btn btn-column-list icon-md icon-list" data-title="Змінити вигляд" data-tooltipleft='1'></a>
+}
+
+<div class="content-item-holder">
+    <div class="content-item">
+        <div class="content-item-header">
+            @if (Model.Id == Guid.Empty)
+            {
+                <i class="icon-xlg icon-add-file"></i>
+                <h2>Створення повідомлення щодо уточнення адреси місця провадження діяльності</h2>
+            }
+            else
+            {
+                <i class="icon-xlg icon-edit-list"></i>
+                <h2>Редагування повідомлення щодо уточнення адреси місця провадження діяльності</h2>
+            }
+        </div>
+
+        <form asp-action="EditMessage" method="post" class="content-item-edit">
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="IsCreatedOnPortal" />
+            <input type="hidden" asp-for="MessageType" value="MPDLocationRatification" />
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+            <div class="content-item-inner">
+                <div class="content-edit">
+                    <div class="datepicker-group input-group">
+                        <input class="input datepicker"
+                               autocomplete="off"
+                               type="text" asp-for="MessageDate" />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="MessageDate"></label>
+                        <span asp-validation-for="MessageDate" class="asp-validation"></span>
+                    </div>
+                </div>
+                <div class="content-edit ">
+                    <div class="input-group">
+                        <input asp-for="MessageNumber"
+                               class="input"
+                               autocomplete="off" />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="MessageNumber"></label>
+                        <span asp-validation-for="MessageNumber" class="asp-validation"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="content-item-inner">
+                <div class="content-edit">
+                    <div class="select-group">
+                        <select asp-for="LicenseType"
+                                class="select"
+                                asp-items='@Sel.Enum("ActivityType", initialSelectedValue: Model.IsPrlLicense ? "PRL" : Model.IsImlLicense ? "TRL" : Model.IsImlLicense ? "IML" : null)'
+                                autocomplete="off">
+                            <option></option><!-- добавить пустой option-->
+                        </select>
+                        <label asp-for="LicenseType"></label>
+                        <span asp-validation-for="LicenseType" class="asp-validation"></span>
+                    </div>
+                </div>
+                <div class="content-edit">
+                    <div class="select-group">
+                        <select asp-for="MPDGuidEnum"
+                                class="select"
+                                asp-items='@ViewBag.BranchList'
+                                autocomplete="off">
+                            <option></option><!-- добавить пустой option-->
+                        </select>
+                        <label asp-for="MPDGuidEnum"></label>
+                        <span asp-validation-for="MPDGuidEnum" class="asp-validation"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="content-item-inner">
+
+                <!--ATU START-->
+                <input type="hidden" asp-for="AddressBusinessActivityId" />
+                <input type="hidden" id="OldCityName" />
+                <input type="hidden" id="OldStreetName" />
+                <div class="content-edit content-edit">
+                    <div class="input-group">
+                        <input class="input" id="CityName"
+                               autocomplete-allowcreate
+                               autocomplete-idinput-name="CityId"
+                               autocomplete-init-id="CityId"
+                               autocomplete-url="@Url.Action("AutoCompleteDistrictFull", "Atu", new {Area = ""})"
+                               autocomplete-params="RegionId"
+                               autocomplete-onselect="OnSelectCity(item)"
+                               value="@Model.CityFullName" />
+                        <span class="input-group-bar"></span>
+                        <input asp-for="CityId" type="hidden" />
+                        <label>Населений пункт або знайти за допомогою коду КОАТУУ</label>
+                        <span class="asp-validation"></span>
+                    </div>
+                </div>
+
+                <div class="content-edit content-edit">
+                    <div class="input-group">
+                        <input asp-for="Building"
+                               class="input"
+                               autocomplete="off" />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="Building">@Html.DisplayNameFor(p => p.Building)</label>
+                        <span class="asp-validation"></span>
+                    </div>
+                </div>
+
+                <div class="content-edit content-edit">
+                    <div class="input-group">
+                        <input class="input" asp-for="StreetName"
+                               autocomplete-allowcreate
+                               autocomplete-idinput-name="StreetId"
+                               autocomplete-init-id="StreetId"
+                               autocomplete-url="@Url.Action("AutoCompleteStreet", "Atu", new {Area = ""})"
+                               autocomplete-params="CityId"
+                               autocomplete-onselect="OnSelectStreet(item)" />
+                        <span class="input-group-bar"></span>
+                        <input asp-for="StreetId" type="hidden" />
+                        <label>Вулиця</label>
+                        <span class="asp-validation"></span>
+                    </div>
+                    <button id="btn-street"
+                            type="button"
+                            data-modal="modal-center"
+                            data-tab-container-url="@Url.Action("AtuModalStreet", "Atu", new { Area = "" })"
+                            class="btn btn-secondary btn-fill btn-square btn-tiny icon-sm icon-add"></button>
+                </div>
+
+                <div class="content-edit content-edit">
+                    <div class="input-group">
+                        <input asp-for="PostIndex"
+                               class="input"
+                               autocomplete="off" />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="PostIndex">@Html.DisplayNameFor(p => p.PostIndex)</label>
+                        <span class="asp-validation"></span>
+                    </div>
+                </div>
+                <!--ATU END-->
+
+                <div class="content-edit content-edit-wide">
+                    <div class="textarea-group">
+                        <textarea asp-for="MessageText"
+                                  class="textarea"
+                                  autocomplete="off">
+                                </textarea>
+                        <span class="input-group-bar"></span>
+                        <label asp-for="MessageText">Додайте примітки та коментарі до повідомлення</label>
+                        <span asp-validation-for="MessageText" class="asp-validation"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="content-submit-holder btn-holder btn-holder-right">
+                <a href="#" onclick="mt.goStepBack()" class="btn btn-text btn-danger">Відмінити</a>
+                <input type="submit" value="Зберегти" class="btn btn-secondary btn-fill" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script src="~/custom_js/atu-address.js"></script>
+    <script src="~/custom_js/msg-mpd.js"></script>
+}

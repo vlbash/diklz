@@ -1,0 +1,49 @@
+﻿@model App.Data.DTO.LOG.UserIdentLog
+@*@inject App.Core.Mvc.Helpers.SelectListHelper Sel*@
+
+<div class="content-item-holder">
+    <div class="content-item">
+        <div class="content-item-header">
+            <i class="icon-xlg icon-location-map-pin"></i>
+            <h2>Login page</h2>
+        </div>
+        <form asp-action="LoginPage" class="content-item-edit">
+            <input type="hidden"
+                   asp-for="UserGuid" />
+            <input type="hidden"
+                   asp-for="LoginData" />
+            <input type="hidden"
+                   asp-for="PersonId" />
+            <div asp-validation-summary="ModelOnly"
+                 class="text-danger"></div>
+            
+            <div class="content-edit-wide">
+                <div class="select-group">
+                    <select asp-for="EmployeeId"
+                            class="select"
+                            asp-items='@(ViewBag.EmpList)'
+                            autocomplete="off"></select>
+                    <label asp-for="EmployeeId"></label>
+                    <span asp-validation-for="EmployeeId" class="asp-validation"></span>
+                </div>
+            </div>
+            <div class="content-edit-wide">
+                <div class="select-group">
+                    <select asp-for="ProfileId"
+                            class="select"
+                            asp-items='@(ViewBag.ProfList)'
+                            autocomplete="off"></select>
+                    <label asp-for="ProfileId"></label>
+                    <span asp-validation-for="ProfileId" class="asp-validation"></span>
+                </div>
+            </div>
+            
+            
+            <div class="content-submit-holder btn-holder btn-holder-right">
+                <input type="button" value="Login" class="btn btn-secondary btn-fill" />
+            </div>
+        </form>
+    </div>
+    <p style="color: white">@ViewBag.userId</p>
+</div>
+

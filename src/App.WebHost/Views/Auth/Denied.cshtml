@@ -1,0 +1,33 @@
+﻿@{
+    ViewData["Title"] = "Вас не аутентифіковано на порталі";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <title>Denied</title>
+    <link href="~/fe-ext/stylesheets/ext-main.css" rel="stylesheet" />
+
+</head>
+<body>
+
+    <div class="auth__container">
+        <div class="auth__image">
+            <img class="auth__icon" src="~/images/Subtract.svg" alt="Alternate Text" />
+        </div>
+        <div class="auth__content">
+            <h1 class="auth__title">Вас не аутентифіковано на порталі</h1>
+            @*<span class="auth__error">Доступ на веб-портал СГД Держлікслужби не надано.</span>*@
+            <h2 class="auth__message">@ViewBag.DeniedMessage</h2>
+            <div class="auth__buttons">
+                <a type="button" class="auth__button button-back" href="http://www.diklz.gov.ua/">Повернутися на сайт Дерлікслужби</a>
+                <a type="button" class="auth__button button-try" href="@Url.Action("Index", "Home")">Спробувати аутентифікуватися ще раз</a>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>

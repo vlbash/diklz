@@ -1,0 +1,148 @@
+﻿@using Newtonsoft.Json
+@inject App.Core.Mvc.Helpers.SelectListHelper Sel
+
+@{
+    ViewData["Title"] = "Журнал заяв щодо ліцензування імпорту";
+}
+
+@section Buttons {
+    <a class="btn btn-round  icon-add"
+       asp-area="IML"
+       asp-controller="ImlOrganization"
+       asp-action="ChooseOrganization"
+       asp-route-returnUrl="@Url.Action("AppTypes","Application", new {Area = "IML"})"
+       data-tooltipleft="1"
+       data-title="Створити заяву">
+    </a>
+}
+
+<div class="content-search-wrapper">
+    <partial name="_Searchform" />
+</div>
+
+<div class="results" id="results">
+
+</div>
+
+@section Scripts {
+
+    <script>
+        var searchFormControls = {
+            controlsConfig: [
+                {
+                    labelName: 'Найменування заявника',
+                    name: 'NameOrg',
+                    type: 'text'
+                },
+                {
+                    labelName: 'Стан заяви',
+                    name: 'BackOfficeAppStateEnum',
+                    type: 'select',
+                    selectOptions: @Html.Raw(JsonConvert.SerializeObject(Sel.Enum("BackOfficeAppState")))
+                },
+                {
+                    labelName: 'Тип рішення',
+                    name: 'DecisionType',
+                    type: 'select',
+                    selectOptions: @Html.Raw(JsonConvert.SerializeObject(Sel.Enum("DecisionType")))
+                },
+                {
+                    labelName: 'Код ЄДРПОУ/РНОКПП (Індивідуальний податковий номер)',
+                    name: 'IPN',
+                    type: 'text'
+                },
+                {
+                    labelName: 'Код КОАТУУ',
+                    name: 'Koatuu',
+                    type: 'text'
+                },
+                {
+                    labelName: 'Вид заяви',
+                    name: 'AppSortEnum',
+                    type: 'select',
+                    selectOptions: @Html.Raw(JsonConvert.SerializeObject(Sel.Enum("ApplicationSort")))
+                },
+                {
+                    labelName: 'Результат експертизи',
+                    name: 'ExpertiseResultEnum',
+                    type: 'select',
+                    selectOptions: @Html.Raw(JsonConvert.SerializeObject(Sel.Enum("ExpertiseResult")))
+                },
+                {
+                    labelName: 'Результат передліцензійної перевірки',
+                    name: 'ResultOfCheck',
+                    type: 'number'
+                },
+                {
+                    labelName: 'Номер реєстрації',
+                    name: 'RegNumber',
+                    type: 'text'
+                },
+                {
+                    labelName: 'Дата реєстрації',
+                    name: 'RegDate',
+                    type: 'dataGroup',
+                    children: [
+                        {
+                            labelName: 'з: ',
+                            name: 'RegDate_From',
+                            type: 'datepicker'
+                        }, {
+                            labelName: 'по: ',
+                            name: 'RegDate_To',
+                            type: 'datepicker'
+                        }
+                    ]
+                },
+                {
+                    labelName: 'Підтвердження оплати',
+                    name: 'EdocumentStatus',
+                    type: 'select',
+                    selectOptions: @Html.Raw(JsonConvert.SerializeObject(Sel.Enum("PaymentStatus")))
+                },
+                {
+                    labelName: 'Місце створення заяви',
+                    name: 'IsCreatedOnPortal',
+                    type: 'bool'
+                }
+            ]
+        };
+
+        var controls = searchFormControls.controlsConfig;
+        $.each(controls,
+            function(i, control) {
+                if (control.name === "BackOfficeAppStateEnum") {
+                    $.each(control.selectOptions,
+                        function(i, option) {
+                            if (option.Value === "@ViewBag.AppState") {
+                                option.Selected = true;
+                            }
+                        });
+                }
+            });
+
+        var searchFormConfig = {
+
+            formConfig: {
+                formName: 'form0',
+                formDataAjaxUpdate: '#results',
+                formMethod: 'post',
+                controls: searchFormControls
+            },
+            presetFiltersUrl: {
+            },
+            mainInputConfig: {
+                labelName: 'Тип заяви',
+                type: 'text',
+                mainInputLookUp: ['AppType']
+            },
+            controlConfig: {
+                type: 'text',
+                appState: ['BackOfficeAppStateEnum'],
+                value: '@ViewBag.AppState'
+            }
+        };
+        //debugger
+        mt.createContentSearchForm(searchFormConfig);
+    </script>
+}

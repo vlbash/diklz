@@ -1,0 +1,42 @@
+﻿@model App.Data.DTO.SEC.RoleListDTO
+
+@section Buttons {
+    <a class="content-item-btn btn-column-list icon-md icon-list" data-title="Змінити вигляд" data-tooltipleft="1"></a>
+}
+
+<div class="content-item-holder">
+    <div class="content-item">
+        <div class="content-item-header">
+            <i class="icon-xlg icon-location-map-pin"></i>
+            <h2>Роль (копіювання)</h2>
+        </div>
+
+        <form asp-action="MakeCopy" class="content-item-edit">
+            <input type="hidden"
+                   asp-for="Id" />
+            <div asp-validation-summary="ModelOnly"
+                 class="text-danger"></div>
+            <div class="content-edit">
+                <div class="input-group">
+                    <input asp-for="Caption"
+                           class="input"
+                           autocomplete="off" />
+                    <span class="input-group-bar"></span>
+                    <label asp-for="Caption"></label>
+                    <span asp-validation-for="Caption"
+                          class="asp-validation"></span>
+                </div>
+            </div>
+            <div class="content-edit">
+                <div class="checkbox-group-inner">
+                    <input class="checkbox" asp-for="IsActive" />
+                    <label asp-for="IsActive"></label>
+                </div>
+            </div>
+            <div class="content-submit-holder btn-holder btn-holder-right">
+                <a href="#" onclick="mt.goStepBack()" class="btn btn-danger-inverse">Відмінити</a>
+                <input type="submit" value="Зберегти" class="btn btn-secondary-inverse submit-form-button" />
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,508 @@
+﻿@model App.Data.DTO.BRN.BranchDetailsDTO
+@inject App.Core.Mvc.Helpers.SelectListHelper Sel
+
+@{
+    ViewData["Title"] = "МПД";
+}
+
+@section Buttons {
+    <a class="content-item-btn btn-column-list icon-md icon-list" data-title="Змінити вигляд" data-tooltipleft='1'></a>
+}
+
+@section Scripts
+{
+    <script src="~/custom_js/atu-address.js"></script>
+    <script>
+        var resultContainer = $('#content-tree'),
+            submitBtn = $('#submitBranch'),
+            submitForm = $('#editBranch'),
+            hiddenInputResults = $('#OperationListForm'),
+            checkedItems = @Json.Serialize(Model.OperationListForm),
+            cheсkboxTemplate = @Json.Serialize(ViewBag.OperationListJson);
+
+        mt.buildContentTree(cheсkboxTemplate, checkedItems, resultContainer, hiddenInputResults, submitForm, submitBtn, null);
+    </script>
+
+    <script>
+        function translit() {
+            var city = $("#CityName").val().split(', ').reverse().join(', ');
+            var street = $("#StreetName").val();
+            var building = $("#Building").val();
+
+            if (city === "" || street === "" || building === "") {
+                alert("Заповніть обов'язкові поля");
+                return false;
+            } else {
+                $("#AdressEng").removeClass("empty").addClass("not-empty"); // <label>
+
+                var concatAddress = building + ', ' + street + ', ' + city;
+
+                $("#AdressEng").val(cyrillicToLatin(concatAddress)); //css-template/libs/transliteration.js
+            }
+        }
+    </script>
+    <script>
+        $(document).ready(function() {
+            
+            var pharmacy = $(".branch-type option[value = Pharmacy]");
+            var pharmacyItem = $(".branch-type option[value ='PharmacyItem']");
+            var pharmacyStorage = $(".branch-type option[value='PharmacyStorage']");
+
+            var prlInPharmacies = $(".activity-type").find("li[data-value = PrlInPharmacies]");
+            var retailOfMedicines = $(".activity-type").find("li[data-value = RetailOfMedicines]");
+            var wholesaleOfMedicines = $(".activity-type").find("li[data-value = WholesaleOfMedicines]");
+
+            var prlInPharmaciesOption = $("#TrlActivityType option[value = PrlInPharmacies]");
+
+            if ('@Model.Id' === '00000000-0000-0000-0000-000000000000') {
+                $(".asepticConditions").hide();
+                $(".activity-type").find("li").hide();
+            } else {
+                $(".asepticConditions").hide();
+                if (pharmacy.is(':selected')) {
+                    wholesaleOfMedicines.hide();
+                    prlInPharmacies.show();
+                    retailOfMedicines.show();
+
+                    if (prlInPharmaciesOption.is(':selected')) {
+                        $(".asepticConditions").show();
+                    }
+                }
+                if (pharmacyItem.is(':selected')) {
+                    prlInPharmacies.hide();
+                    wholesaleOfMedicines.hide();
+                    retailOfMedicines.show();
+                }
+                if (pharmacyStorage.is(':selected')) {
+                    prlInPharmacies.hide();
+                    retailOfMedicines.hide();
+                    wholesaleOfMedicines.show();
+                }
+            }
+
+            $("#BranchType").on('change',
+                function() {
+       
+                    if (pharmacy.is(':selected')) {
+                        $(".activity-type .select-gap").empty();
+                        asepticConditionsClear();
+                        prlInPharmacies.show();
+                        retailOfMedicines.show();
+                        wholesaleOfMedicines.hide();
+                    }
+
+                    if (pharmacyItem.is(':selected')) {
+                        $(".activity-type .select-gap").empty();
+                        asepticConditionsClear();
+                        prlInPharmacies.hide();
+                        wholesaleOfMedicines.hide();
+                        retailOfMedicines.show();
+                    }
+
+                    if (pharmacyStorage.is(':selected')) {
+                        $(".activity-type .select-gap").empty();
+                        asepticConditionsClear();
+                        prlInPharmacies.hide();
+                        retailOfMedicines.hide();
+                        wholesaleOfMedicines.show();
+                    }
+                });
+
+            $("#TrlActivityType").on('change',
+                function() {
+                    if (prlInPharmaciesOption.is(':selected')) {
+                        $(".asepticConditions").show();
+                    } else {
+                        asepticConditionsClear();
+                    }
+
+
+                });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+
+            var pharmrcyList = $(".pharmrcy-list");
+
+            if ('@Model.Id' === '00000000-0000-0000-0000-000000000000') {
+                pharmrcyList.hide();
+            } else if ('@Model.Id' !== '00000000-0000-0000-0000-000000000000' &&
+                '@Model.BranchType' === 'PharmacyItem') {
+
+                pharmrcyList.show();
+            } else {
+                pharmrcyList.hide();
+            }
+
+            $("#BranchType").on('change',
+                function() {
+                    var optionVal = $(this).find("option:selected").val();
+
+                    if (optionVal === 'PharmacyItem') {
+                        pharmrcyList.show();
+                    } else {
+                        farmacyListClear();
+                    }
+                });
+        });
+    </script>
+
+    <script>
+        var asepticConditionsClear = function () {
+            $(".asepticConditions option[value='']").attr('selected', 'selected');
+            $(".asepticConditions li[data-value='']").attr('selected', 'selected');
+            $(".asepticConditions .select-gap").empty();
+            $(".asepticConditions").hide();
+        }
+        var farmacyListClear = function () {
+            $(".pharmrcy-list option[value='']").attr('selected', 'selected');
+            $(".pharmrcy-list li[data-value='']").attr('selected', 'selected');
+            $(".pharmrcy-list .select-gap").empty();
+            $(".pharmrcy-list").hide();
+        }
+    </script>
+}
+<div class="content-item-holder">
+    <div class="content-item">
+        <div class="content-item-header">
+
+            @if (Model.Id == Guid.Empty)
+            {
+                <i class="icon-xlg icon-add-file"></i>
+                <h2>Створення місця провадження діяльності</h2>
+            }
+            else
+            {
+                <i class="icon-xlg icon-edit-list"></i>
+                <h2>Редагування місця провадження діяльності</h2>
+            }
+
+        </div>
+
+        <form asp-action="Edit" method="post" class="content-item-edit no-validate" id="editBranch">
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="AppType" />
+            <input type="hidden" asp-for="ApplicationId" />
+            <input type="hidden" asp-for="OrganizationId" />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="content-item-inner">
+                <div class="content-edit">
+                    <div class="input-group">
+                        <input asp-for="Name"
+                               class="input"
+                               autocomplete="nope" />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="Name"></label>
+                        <span asp-validation-for="Name"
+                              class="asp-validation"></span>
+                    </div>
+                </div>
+                <div class="content-edit">
+                    <div class="input-group">
+                        <input asp-for="EMail"
+                               class="input"
+                               autocomplete="nope" />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="EMail"></label>
+                        <span asp-validation-for="EMail"
+                              class="asp-validation"></span>
+                    </div>
+                </div>
+                <div class="content-edit">
+                    <div class="input-group">
+                        <input asp-for="PhoneNumber"
+                               class="input phone"
+                               autocomplete="nope" />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="PhoneNumber"></label>
+                        <span asp-validation-for="PhoneNumber"
+                              class="asp-validation"></span>
+                    </div>
+                </div>
+                <div class="content-edit">
+                    <div class="input-group">
+                        <input asp-for="FaxNumber"
+                               class="input phone"
+                               autocomplete="nope" />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="FaxNumber"></label>
+                        <span asp-validation-for="FaxNumber"
+                              class="asp-validation"></span>
+                    </div>
+                </div>
+
+            </div>
+            @if (Model.AppType == "TRL")
+            {
+                <div class="content-item-inner">
+                    <div class="content-edit">
+                        <div class="select-group branch-type">
+                            <select asp-for="BranchType"
+                                    class="select"
+                                    asp-items='@Sel.Enum("BranchType")'
+                                    autocomplete="off">
+                                <option value=""></option> добавить пустой option
+                            </select>
+                            <label asp-for="BranchType"></label>
+                            <span asp-validation-for="BranchType" class="asp-validation"></span>
+                        </div>
+                    </div>
+
+                    <div class="content-edit activity-type">
+                        <div class="select-group">
+                            <select asp-for="TrlActivityType"
+                                    class="select"
+                                    asp-items='@ViewBag.trlActivityTypeList'
+                                    autocomplete="off">
+                                <option value=""></option>
+                            </select>
+                            <label asp-for="TrlActivityType"></label>
+                            <span asp-validation-for="TrlActivityType"></span>
+                        </div>
+                    </div>
+
+                    <div class="content-edit pharmrcy-list">
+                        <div class="select-group">
+                            <select asp-for="PharmacyId"
+                                    class="select"
+                                    asp-items='@ViewBag.PharmacyList'
+                                    autocomplete="off">
+                                <option value=""></option>
+                            </select>
+                            <label asp-for="PharmacyId"></label>
+                            <span asp-validation-for="PharmacyId"></span>
+                        </div>
+                    </div>
+                </div>
+            }
+            <div class="content-item-inner">
+                <!--ATU START-->
+                <input type="hidden" asp-for="AddressId" />
+                <input type="hidden" id="OldCityName" />
+                <input type="hidden" id="OldStreetName" />
+                <div class="content-edit content-edit">
+                    <div class="input-group">
+                        <input class="input" id="CityName"
+                               autocomplete-allowcreate
+                               autocomplete-idinput-name="CityId"
+                               autocomplete-init-id="CityId"
+                               autocomplete-url="@Url.Action("AutoCompleteDistrictFull", "Atu", new {Area = ""})"
+                               autocomplete-params="RegionId"
+                               autocomplete-onselect="OnSelectCity(item)"
+                               value="@Model.CityFullName" />
+                        <span class="input-group-bar"></span>
+                        <input asp-for="CityId" type="hidden" />
+                        <label>Населений пункт або знайти за допомогою коду КОАТУУ</label>
+                        <span class="asp-validation"></span>
+                    </div>
+                </div>
+
+                <div class="content-edit content-edit">
+                    <div class="input-group">
+                        <input asp-for="Building"
+                               class="input"
+                               autocomplete="off" />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="Building">@Html.DisplayNameFor(p => p.Building)</label>
+                        <span class="asp-validation"></span>
+                    </div>
+                </div>
+
+                <div class="content-edit content-edit">
+                    <div class="input-group">
+                        <input class="input" asp-for="StreetName"
+                               autocomplete-allowcreate
+                               autocomplete-idinput-name="StreetId"
+                               autocomplete-init-id="StreetId"
+                               autocomplete-url="@Url.Action("AutoCompleteStreet", "Atu", new {Area = ""})"
+                               autocomplete-params="CityId"
+                               autocomplete-onselect="OnSelectStreet(item)" />
+                        <span class="input-group-bar"></span>
+                        <input asp-for="StreetId" type="hidden" />
+                        <label>Вулиця</label>
+                        <span class="asp-validation"></span>
+                    </div>
+                    <button id="btn-street"
+                            type="button"
+                            data-modal="modal-center"
+                            data-tab-container-url="@Url.Action("AtuModalStreet", "Atu", new { Area = "" })"
+                            class="btn btn-secondary btn-fill btn-square btn-tiny icon-sm icon-add"></button>
+                </div>
+
+                <div class="content-edit content-edit">
+                    <div class="input-group">
+                        <input asp-for="PostIndex"
+                               class="input"
+                               autocomplete="off" />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="PostIndex">@Html.DisplayNameFor(p => p.PostIndex)</label>
+                        <span class="asp-validation"></span>
+                    </div>
+                </div>
+                
+                @if (Model.AppType == "TRL")
+                {
+                    <div class="content-edit">
+                        <div class="input-group">
+                            <input asp-for="Lpz"
+                                   class="input"
+                                   autocomplete="nope" />
+                            <span class="input-group-bar"></span>
+                            <label asp-for="Lpz"></label>
+                        </div>
+                    </div>
+                }
+                <!--ATU END-->
+                @if (Model.AppType == "PRL")
+                {
+                    <div class="content-edit">
+                        <div class="input-group">
+                            <input asp-for="AdressEng"
+                                   class="input"
+                                   autocomplete="nope" />
+                            <span class="input-group-bar"></span>
+                            <label asp-for="AdressEng"></label>
+                            <span asp-validation-for="AdressEng"
+                                  class="asp-validation"></span>
+                        </div>
+                        <button id="btn-street"
+                                type="button"
+                                class="btn btn-secondary btn-fill btn-square btn-tiny icon-sm icon-globe"
+                                onclick="translit()"
+                                data-title="Транслітерація"
+                                data-tooltipleft='1'></button>
+                    </div>
+                }
+            </div>
+
+            @if (Model.AppType == "PRL")
+            {
+                <div class="content-item-inner">
+                    <div class="content-edit">
+                        <input class="checkbox" asp-for="PRLIsAvailiableProdSites" />
+                        <label asp-for="PRLIsAvailiableProdSites"></label>
+                    </div>
+                    <div class="content-edit">
+                        <input class="checkbox" asp-for="PRLIsAvailiableQualityZone" />
+                        <label asp-for="PRLIsAvailiableQualityZone"></label>
+                    </div>
+                    <div class="content-edit">
+                        <input class="checkbox" asp-for="PRLIsAvailiableStorageZone" />
+                        <label asp-for="PRLIsAvailiableStorageZone"></label>
+                    </div>
+                    <div class="content-edit">
+                        <input class="checkbox" asp-for="PRLIsAvailiablePickupZone" />
+                        <label asp-for="PRLIsAvailiablePickupZone"></label>
+                    </div>
+                </div>
+
+                <div class="content-inner-header">
+                    <label asp-for="OperationListForm" class=""></label>
+                    <span asp-validation-for="OperationListForm" class="text-danger"></span>
+                    <input asp-for="OperationListForm" type="hidden" value="@Model.OperationListForm">
+                </div>
+                <div class="content-item-inner">
+                    <p>
+                        Якщо підприємство здійснює виробництво лікарських засобів з використанням субстанції та/або
+                        продукції “іn-bulk”, які вважаються високосенсибілізуючими, сильнодіючими або високотоксичними
+                        (наприклад, лікарські засоби, які містять живі клітини, гормони, сульфаніламіди, бета-лактамні
+                        антибіотики, такі як пеніциліни, цефалоспорини, пенеми, карбацефеми, монобактами, інші високосенсибілізуючі
+                        матеріали, патогенні організми, цитотоксини) або які мають певну небезпеку (наприклад, радіофармацевтичні),
+                        про це повинно бути зазначено як обмеження або пояснення, що стосується цієї ліцензії.
+                    </p>
+                </div>
+                <div id="content-tree" class="content-tree"></div>
+            }
+
+            else if (Model.AppType == "TRL")
+            {
+                <div class="content-item-inner">
+                    <div class="content-edit">
+                        <div class="input-group">
+                            <input asp-for="TotalArea"
+                                   class="input"
+                                   autocomplete="nope" />
+                            <span class="input-group-bar"></span>
+                            <label asp-for="TotalArea"></label>
+                        </div>
+                    </div>
+                    <div class="content-edit">
+                        <div class="input-group">
+                            <input asp-for="AreaOfCommonPremises"
+                                   class="input"
+                                   autocomplete="nope" />
+                            <span class="input-group-bar"></span>
+                            <label asp-for="AreaOfCommonPremises"></label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-item-inner">
+                    <div class="content-edit">
+                        <div class="input-group">
+                            <input asp-for="SpecialConditions"
+                                   class="input"
+                                   autocomplete="off" />
+                            <span class="input-group-bar"></span>
+                            <label asp-for="SpecialConditions"></label>
+                            <span asp-validation-for="SpecialConditions"
+                                  class="asp-validation"></span>
+                        </div>
+                    </div>
+                    <div class="content-edit">
+                        <div class="select-group asepticConditions">
+                            <select asp-for="AsepticConditions"
+                                    class="select"
+                                    asp-items='@Sel.Enum("AsepticConditions")'
+                                    autocomplete="off">
+                                <option value=""></option><!-- добавить пустой option -->
+                            </select>
+                            <label asp-for="AsepticConditions"></label>
+                            <span asp-validation-for="AsepticConditions" class="asp-validation"></span>
+                        </div>
+                    </div>
+                </div>
+
+            }
+            else if (Model.AppType == "IML")
+            {
+                <div class="content-item-inner">
+                    <div class="content-edit">
+                        <div class="checkbox-group">
+                            <div class="checkbox-group-inner">
+                                <input class="checkbox" asp-for="IMLIsAvailiableStorageZone" />
+                                <label asp-for="IMLIsAvailiableStorageZone"></label>
+                            </div>
+                            <span class="checkbox-group-bar"></span>
+                        </div>
+                    </div>
+                    <div class="content-edit">
+                        <div class="checkbox-group">
+                            <div class="checkbox-group-inner">
+                                <input class="checkbox" asp-for="IMLIsAvailiablePermitIssueZone" />
+                                <label asp-for="IMLIsAvailiablePermitIssueZone"></label>
+                            </div>
+                            <span class="checkbox-group-bar"></span>
+                        </div>
+                    </div>
+                    <div class="content-edit">
+                        <div class="checkbox-group">
+                            <div class="checkbox-group-inner">
+                                <input class="checkbox" asp-for="IMLIsAvailiableQuality" />
+                                <label asp-for="IMLIsAvailiableQuality"></label>
+                            </div>
+                            <span class="checkbox-group-bar"></span>
+                        </div>
+                    </div>
+                </div>
+            }
+
+            <div class="content-submit-holder btn-holder btn-holder-right">
+                <a href="#" onclick="mt.goStepBack()" class="btn btn-text btn-danger">Відмінити</a>
+                <input type="button" value="Зберегти" id="submitBranch" class="btn btn-secondary btn-fill" />
+            </div>
+        </form>
+    </div>
+</div>

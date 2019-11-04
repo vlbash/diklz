@@ -1,0 +1,18 @@
+﻿@model App.Data.DTO.DOS.EDocumentDetailsDTO
+
+<script>
+    var fileListLink = "@(Url.Action("List", "FileStore", new {Area = "", EntityId = Model.Id, EntityName = "EDocument", pg_PartialViewName = "ListDetails"}))",
+        fileListContainer = $("#fileList");
+
+    mt.getAjaxContainer(fileListContainer, fileListLink);
+
+</script>
+
+<div class="content-partial" data-tab-empty>
+    <div class="upload-edit">
+
+        <div id="fileList" class="fileList">
+
+        </div>
+    </div>
+</div>

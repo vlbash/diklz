@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Dto\BaseCityListDto.sql" />
+    <None Remove="Dto\BaseCitySelectDto.sql" />
+    <None Remove="Dto\BaseRegionListDto.sql" />
+    <None Remove="Dto\BaseRegionSelectDto.sql" />
+    <None Remove="Dto\BaseSubjectAddressDto.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Dto\pgsql\BaseCityListDto.sql" />
+    <EmbeddedResource Include="Dto\pgsql\BaseCitySelectDto.sql" />
+    <EmbeddedResource Include="Dto\pgsql\BaseRegionListDto.sql" />
+    <EmbeddedResource Include="Dto\pgsql\BaseRegionSelectDto.sql" />
+    <EmbeddedResource Include="Dto\pgsql\BaseSubjectAddressDto.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.ComponentModel.Annotations" Version="4.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Core.Base">
+      <HintPath>..\Shared\lib\netstandard2.0\Core.Base.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

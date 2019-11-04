@@ -1,0 +1,90 @@
+﻿@model App.Data.DTO.TRL.TrlAppDetailDTO
+
+@{
+    ViewData["Title"] = "Заява про внесення змін до ЄДР у зв’язку з припиненням діяльності за певним місцем провадження - Видалення МПД(торгівля)";
+    var uploadFormLink = Html.Raw(ViewBag.IsEditable == true ?
+        Url.Action("UploadForm", "FileStore", new { Area = "", EntityId = Model.Id }) + "&EntityName=TrlApplication" : "");
+    var fileListLink = ViewBag.IsEditable == true ? Url.Action("List", "FileStore", new { Area = "", EntityId = Model.Id, EntityName = "TrlApplication" }) :
+        Url.Action("List", "FileStore", new { Area = "", EntityId = Model.Id, EntityName = "TrlApplication", pg_PartialViewName = "ListDetails" });
+}
+@section Scripts
+    {
+    <script>
+        var uploadFormContainer = $("#uploadForm"),
+            uploadFormLink = "@uploadFormLink",
+            fileListLink = "@fileListLink",
+            fileListContainer = $("#fileList");
+        if (uploadFormLink != "")
+            mt.getAjaxContainer(uploadFormContainer, uploadFormLink);
+        mt.getAjaxContainer(fileListContainer, fileListLink);
+    </script>
+    <script>
+        $(document).ready(function () {
+
+            mt.currentTab();
+
+        });
+    </script>
+}
+@section Buttons
+{
+    @if (Model.IsCreatedOnPortal)
+    {
+        <a class="content-item-btn icon-md icon-person-card-check"
+           asp-action="VerificationSignedFiles"
+           asp-controller="EuSign"
+           asp-area=""
+           asp-route-entityId="@Model.Id"
+           asp-route-entityName="TrlApplication"
+           data-tab-main
+           data-title="Перевірка підписаних файлів"
+           data-tooltipleft='1'>
+        </a>
+    }
+}
+@section HiperLinks{
+    <p>@Html.DisplayFor(model => model.BackOfficeAppStateString)</p>
+}
+<div class="content-item-holder">
+    @Html.Partial($"_ApplicationPartial", Model)
+
+    <div class="content-item">
+        <div class="content-item-header">
+            <i class="icon icon-xlg icon-timeline-pin"></i>
+            <h2 id="branch">Місця провадження діяльності</h2>
+        </div>
+        <div class="content-partial" data-tab-container-url="@Url.Action("List", "Branch", new { Area = "BRN" })?appId=@Model.Id&sort=RemBranchApplication"></div>
+    </div>
+
+    <div class="content-item">
+        <div class="content-item-header">
+            <i class="icon icon-xlg icon-list-paperclip"></i>
+            <h2 id="additionalDoc">Завантаження додаткових файлів до заяви</h2>
+        </div>
+        <div class="content-partial" data-tab-empty>
+            <div class="upload-edit">
+                <div id="uploadForm">
+
+                </div>
+                <div id="fileList" class="fileList">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @Html.Partial($"_ApplicationAltChecksPartial", Model)
+
+    @Html.Partial("../TrlProcessing/_TrlProcessingDetails", Model)
+
+    @if (Model.BackOfficeAppState != "Project" && Model.AppState != "Project")
+    {
+    <div class="content-item">
+        <div class="content-item-header">
+            <i class="icon icon-xlg icon-clipboard-file"></i>
+            <h2 id="eDocument">Додаткові документи до заяви (додаються співробітниками ДЛС)</h2>
+        </div>
+        <div class="content-partial" data-tab-container-url="@Url.Action("ListAdditionDocuments", "EDocument", new { Area = "DOC" })?appId=@Model.Id"></div>
+    </div>
+    }
+</div>

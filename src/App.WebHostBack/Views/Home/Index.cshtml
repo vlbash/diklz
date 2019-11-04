@@ -1,0 +1,145 @@
+﻿@model App.Data.DTO.Common.Widget.WidgetBackDTO
+@{
+    ViewData["Title"] = "Головна сторінка бєк-офіс системи Держлікслужби";
+}
+
+    <div class="widget-wrapper">
+
+        <div class="widget-container">
+            <div class="col-lg-6">
+                <div class="widget-inner">
+                    <div class="widget-header">
+                        @(Model.ImlNewApplications + Model.PrlNewApplications + Model.TrlNewApplications) | Заяви в стані "ПОДАНО" (створено СГД)
+                    </div>
+                    <div class="widget-datalist">
+                        <a class="widget-datalist-item" href="@Url.Action("IndexAppState", "Application", new {area = "PRL", appState="Submitted"})">
+                            <span class="col-lg-9">
+                                Заяви блоку ліцензування виробництва
+                            </span>
+                            <span class="update-data col-lg-3">
+                                <span class="update-time">@Model.PrlNewApplications</span>
+                            </span>
+                        </a>
+                        <a class="widget-datalist-item" href="@Url.Action("IndexAppState", "Application", new {area = "IML", appState="Submitted"})">
+                            <span class="col-lg-9">
+                                Заяви блоку ліцензування імпорту
+                            </span>
+                            <span class="update-data col-lg-3">
+                                <span class="update-time">@Model.ImlNewApplications</span>
+                            </span>
+                        </a>
+                        <a class="widget-datalist-item" href="@Url.Action("IndexAppState", "Application", new {area = "TRL", appState="Submitted"})">
+                            <span class="col-lg-9">
+                                Заяви блоку ліцензування торгівлі
+                            </span>
+                            <span class="update-data col-lg-3">
+                                <span class="update-time">@Model.TrlNewApplications</span>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="widget-inner">
+                    <div class="widget-header">
+                        @(Model.PrlReviewApplication + Model.ImlReviewApplication + Model.TrlReviewApplication) | Заяви в стані "ОБРОБКА"
+                    </div>
+                    <div class="widget-datalist">
+                        <a class="widget-datalist-item" href="@Url.Action("IndexAppState", "Application", new {area = "PRL", appState="InReview"})">
+                            <span class="col-lg-9">
+                                Заяви блоку ліцензування виробництва
+                            </span>
+                            <span class="update-data col-lg-3">
+                                <span class="update-time">@Model.PrlReviewApplication</span>
+                            </span>
+                        </a>
+                        <a class="widget-datalist-item" href="@Url.Action("IndexAppState", "Application", new {area = "IML", appState="InReview"})">
+                            <span class="col-lg-9">
+                                Заяви блоку ліцензування імпорту
+                            </span>
+                            <span class="update-data col-lg-3">
+                                <span class="update-time">@Model.ImlReviewApplication</span>
+                            </span>
+                        </a>
+                        <a class="widget-datalist-item" href="@Url.Action("IndexAppState", "Application", new {area = "TRL", appState="InReview"})">
+                            <span class="col-lg-9">
+                                Заяви блоку ліцензування торгівлі
+                            </span>
+                            <span class="update-data col-lg-3">
+                                <span class="update-time">@Model.TrlReviewApplication</span>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="widget-container">
+            <div class="col-lg-6">
+                <div class="widget-inner">
+                    <div class="widget-header">
+                        @(Model.PrlNewMessage + Model.ImlNewMessage + Model.TrlNewMessage) | Повідомлень в статусі "ПОДАНО"
+                    </div>
+                    <div class="widget-datalist">
+                        <a class="widget-datalist-item" href="@Url.Action("Index", "Message", new {area = "MSG", appState = "Submitted", ActivityType="PRL"})">
+                            <span class="col-lg-9">
+                                Повідомлення блоку ліцензування виробництва
+                            </span>
+                            <span class="update-data col-lg-3">
+                                <span class="update-time">@Model.PrlNewMessage</span>
+                            </span>
+                        </a>
+                        <a class="widget-datalist-item" href="@Url.Action("Index", "Message", new {area = "MSG", appState = "Submitted", ActivityType="IML"})">
+                            <span class="col-lg-9">
+                                Повідомлення блоку ліцензування імпорту
+                            </span>
+                            <span class="update-data col-lg-3">
+                                <span class="update-time">@Model.ImlNewMessage</span>
+                            </span>
+                        </a>
+                        <a class="widget-datalist-item" href="@Url.Action("Index", "Message", new {area = "MSG", appState = "Submitted", ActivityType="TRL"})">
+                            <span class="col-lg-9">
+                                Повідомлення блоку ліцензування торгівлі
+                            </span>
+                            <span class="update-data col-lg-3">
+                                <span class="update-time">@Model.TrlNewMessage</span>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="widget-inner">
+                    <div class="widget-header">
+                        @(Model.PrlProjectApplication + Model.ImlProjectApplication + Model.TrlProjectApplication) | Заяви в стані "ПРОЕКТ" (створено ДЛС)
+                    </div>
+                    <div class="widget-datalist">
+                        <a class="widget-datalist-item" href="@Url.Action("IndexAppState", "Application", new {area = "PRL", appState="Project"})">
+                            <span class="col-lg-9">
+                                Заяви блоку ліцензування виробництва
+                            </span>
+                            <span class="update-data col-lg-3">
+                                <span class="update-time">@Model.PrlProjectApplication</span>
+                            </span>
+                        </a>
+                        <a class="widget-datalist-item" href="@Url.Action("IndexAppState", "Application", new {area = "IML", appState="Project"})">
+                            <span class="col-lg-9">
+                                Заяви блоку ліцензування імпорту
+                            </span>
+                            <span class="update-data col-lg-3">
+                                <span class="update-time">@Model.ImlProjectApplication</span>
+                            </span>
+                        </a>
+                        <a class="widget-datalist-item" href="@Url.Action("IndexAppState", "Application", new {area = "TRL", appState="Project"})">
+                            <span class="col-lg-9">
+                                Заяви блоку ліцензування торгівлі
+                            </span>
+                            <span class="update-data col-lg-3">
+                                <span class="update-time">@Model.TrlProjectApplication</span>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 

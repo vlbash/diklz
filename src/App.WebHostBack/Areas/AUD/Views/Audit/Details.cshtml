@@ -1,0 +1,64 @@
+﻿@model App.Data.DTO.LOG.LogAuditEntryListDTO
+@{
+    ViewData["Title"] = "Аудит таблиці";
+}
+@section Scripts
+{
+    <script>
+        fileListLink = "@Url.Action("AuditPropertiesList", "Audit", new { Area = "AUD" })?auditId=@Model.AuditEntryId&filterDate=@ViewBag.FilterDate",
+            fileListContainer = $("#audList");
+        mt.getAjaxContainer(fileListContainer, fileListLink);
+    </script>
+
+}
+<div class="content-item-holder">
+    <div class="content-item">
+        <div class="content-item-header">
+            <i class="icon icon-xlg icon-person-edit-card"></i>
+            <h2>Опис змін</h2>
+        </div>
+        <div class="content-item-details">
+            <div class="content-item-inner content-details-wrapper col-2">
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.CreatedDate)</label>
+                        <p>@Html.DisplayFor(model => model.CreatedDate)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.CreatedBy)</label>
+                        <p>@Html.DisplayFor(model => model.CreatedBy)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.EntityTypeName)</label>
+                        <p>@Html.DisplayFor(model => model.EntityTypeName)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.EntityTypeNameCode)</label>
+                        <p>@Html.DisplayFor(model => model.EntityTypeNameCode)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.StateNameUa)</label>
+                        <p>@Html.DisplayFor(model => model.StateNameUa)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+        <h2>Зміни</h2>
+        <br />
+        <div class="upload-edit">
+            <div id="audList">
+
+            </div>
+        </div>
+    </div>
+
+</div>

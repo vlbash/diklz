@@ -1,0 +1,153 @@
+﻿@model App.Data.DTO.APP.AppDecisionDTO
+@inject App.Core.Mvc.Helpers.SelectListHelper Sel
+<h3>Рішення за заявою №@ViewBag.RegNumber</h3>
+
+<form method="post"
+      data-ajax-url="@Url.Action("SaveDecision", "TrlProcessing")"
+      data-ajax="true"
+      data-ajax-method="post"
+      data-ajax-complete="completed" class="content-item-edit">
+    <input type="hidden" asp-for="Id" value="@Model.Id" />
+    <input type="hidden" asp-for="AppId" />
+
+    <div class="select-group">
+        <select asp-for="DecisionType"
+                class="select"
+                asp-items='@Sel.Enum("DecisionType")'
+                autocomplete="off">
+            <option></option>
+        </select>
+        <label asp-for="DecisionType"></label>
+        <span asp-validation-for="DecisionType" class="asp-validation"></span>
+    </div>
+
+    <div id="reasonGroup" class="select-group">
+        <select asp-for="ListOfDecisionReason"
+                data-placeholder="Підстава"
+                class="select multiselect"
+                multiple
+                asp-items="@Sel.Enum("DecisionReason")"
+                autocomplete="off"></select>
+
+        <span asp-validation-for="ListOfDecisionReason" class="asp-validation"></span>
+    </div>
+
+    <div class="input-group datepicker-group">
+        <input class="input datepicker"
+               asp-for="DateOfStart"
+               type="text"
+               autocomplete="off" />
+        <span class="input-group-bar"></span>
+        <label asp-for="DateOfStart"></label>
+        <span asp-validation-for="DateOfStart" class="asp-validation"></span>
+    </div>
+
+    <div class="select-group">
+        <select asp-for="ProtocolId"
+                class="select"
+                asp-items='@ViewBag.Protocols'
+                autocomplete="off">
+            <option></option>
+        </select>
+        <label asp-for="ProtocolId"></label>
+        <span asp-validation-for="ProtocolId" class="asp-validation"></span>
+    </div>
+
+    <div class="textarea-group">
+        <textarea asp-for="DecisionDescription"
+                  class="textarea"
+                  autocomplete="off">
+                                </textarea>
+        <span class="input-group-bar"></span>
+        <label asp-for="DecisionDescription"></label>
+        <span asp-validation-for="DecisionDescription" class="asp-validation"></span>
+    </div>
+
+    <div class="input-group">
+        <input class="input"
+               asp-for="Notes"
+               type="text"
+               autocomplete="off" />
+        <span class="input-group-bar"></span>
+        <label asp-for="Notes"></label>
+        <span asp-validation-for="Notes" class="asp-validation"></span>
+    </div>
+
+    <div class="content-submit-holder btn-holder btn-holder-right">
+        <a href="#" onclick="mt.closeModal()" class="btn btn-text btn-danger">Відмінити</a>
+        <input type="submit" value="Зберегти" class="btn btn-secondary btn-fill" />
+    </div>
+</form>
+
+<script>
+    completed = function (xhr, status) {
+        var json = JSON.parse(xhr.responseText);
+        if (status === "success" && json.success === true) {
+            var containers = [$('#decisionPart'), $('#licenseMsgPart')];
+            mt.closeModal();
+            containers.forEach(function(el) {
+                mt.tryLoadContainer(el, el.attr('data-tab-container-url'));
+                location.reload();
+            });
+        }
+    }
+
+    $(document).ready(function () {
+        var decisionType = $('#DecisionType option:selected').val();
+        checkDecisionType(decisionType);
+    });
+
+    $('#DecisionType').change(function () {
+        var decisionType = $(this).val();
+        checkDecisionType(decisionType);
+    });
+
+    function checkDecisionType(decisionType) {
+        if (decisionType === 'Accepted' || decisionType === '') {
+            hideReasonGroup(true, decisionType);
+        } else {
+            hideReasonGroup(false, decisionType);
+        }
+    }
+
+    function hideReasonGroup(isHide, decisionType) {
+        if (isHide) {
+            $('#reasonGroup').attr('hidden', true);
+        } else {
+            $('#reasonGroup').attr('hidden', false);
+            switch (decisionType) {
+                case 'WithoutConsideration':
+                    $('#reasonGroup li').each(function (index, value) {
+                        switch ($(value).find('input').val()) {
+                            case "Incomplete":
+                            case "Disordered":
+                            case "WithBreachOfTime":
+                            case "SGDMissingEDG":
+                                $(this).attr('hidden', false);
+                                break;
+                            default:
+                                $(this).attr('hidden', true);
+                                break;
+                        }
+                    });
+                    break;
+                case 'Denied':
+                    $('#reasonGroup li').each(function (index, value) {
+                        switch ($(value).find('input').val()) {
+                            case "Incomplete":
+                            case "Disordered":
+                            case "WithBreachOfTime":
+                            case "SGDMissingEDG":
+                                $(this).attr('hidden', true);
+                                break;
+                            default:
+                                $(this).attr('hidden', false);
+                                break;
+                        }
+                    });
+                    break;
+                default:
+            }
+        }
+    }
+</script>

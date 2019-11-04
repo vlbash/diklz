@@ -1,0 +1,286 @@
+﻿@using ReflectionIT.Mvc.Paging
+@model ReflectionIT.Mvc.Paging.PagingList<App.Data.DTO.IML.ImlMedicineListMsgDTO>
+@addTagHelper *, ReflectionIT.Mvc.Paging
+
+<input type="hidden" id="msgId" value="@ViewBag.MsgId" />
+<input type="hidden" id="appId" value="@ViewBag.AppId" />
+<div class="content-list-wrapper" data-pgparams="@ViewBag.FormParamList">
+    <div class="content-list content-list-header">
+        <div class="content-list-item grid-container">
+            <div class="grid" data-grid="1">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.SortableHeaderFor(model => model.MedicineName)
+                    </p>
+                </div>
+            </div>
+            <div class="grid" data-grid="1">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.SortableHeaderFor(model => model.RegisterNumber)
+                    </p>
+                </div>
+            </div>
+            <div class="grid" data-grid="1">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.SortableHeaderFor(model => model.MedicineNameEng)
+                    </p>
+                </div>
+            </div>
+            <div class="grid" data-grid="2">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.SortableHeaderFor(model => model.ProducerName)
+                    </p>
+                </div>
+            </div>
+            @if (ViewBag.MessageState == "Accepted")
+            {
+                <div class="grid" data-grid="2">
+                    <div class="grid-inner">
+                        <p>
+                            Новий постачальник
+                        </p>
+                    </div>
+                </div>
+                <div class="grid" data-grid="3">
+                    <div class="grid-inner">
+                        <p class="content-list-sortable">
+                            Попередній постачальник
+                        </p>
+                    </div>
+                </div>
+            }
+            else
+            {
+                @if (ViewBag.MessageState != "Project")
+                {
+                    <div class="grid" data-grid="2">
+                        <div class="grid-inner">
+                            <p>
+                                Попередній постачальник
+                            </p>
+                        </div>
+                    </div>
+                }
+
+                <div class="grid" data-grid="3">
+                    <div class="grid-inner">
+                        <p class="content-list-sortable">
+                            Постачальник
+                        </p>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="content-list-edit"></div>
+    </div>
+    @foreach (var item in Model)
+    {
+        <div class="content-list">
+            <div class="content-list-item grid-container-nested">
+                <div class="grid">
+                    <div class="grid-inner">
+                        <p>
+                            @Html.DisplayFor(modelItem => item.MedicineName)
+                        </p>
+                    </div>
+                </div>
+                <div class="grid">
+                    <div class="grid-inner">
+                        <p>
+                            @Html.DisplayFor(modelItem => item.RegisterNumber)
+                        </p>
+                    </div>
+                </div>
+                <div class="grid">
+                    <div class="grid-inner">
+                        <p>
+                            @Html.DisplayFor(modelItem => item.MedicineNameEng)
+                        </p>
+                    </div>
+                </div>
+                <div class="grid">
+                    <div class="grid-inner">
+                        <p>
+                            @Html.DisplayFor(modelItem => item.ProducerName)
+                        </p>
+                    </div>
+                </div>
+                @if (ViewBag.MessageState != "Accepted")
+                {
+                    if (ViewBag.MessageState != "Project")
+                    {
+                        <div class="grid">
+                            <div class="grid-inner">
+                                <p>
+                                    @Html.DisplayFor(modelItem => item.NewName)
+                                </p>
+                            </div>
+                        </div>
+                    }
+
+                }
+                else
+                {
+                    <div class="grid">
+                        <div class="grid-inner">
+                            <p>
+                                @Html.DisplayFor(modelItem => item.OldName)
+                            </p>
+                        </div>
+                    </div>
+                }
+                <div class="grid">
+                    <div class="grid-inner">
+                        <p class="txt-supplier" data-id="@item.Id">
+                            @Html.DisplayFor(modelItem => item.SupplierName)
+                        </p>
+                        <div hidden="hidden" class="content-edit edit-supplier" data-id="@item.Id" style="padding: 0; max-width: 70%">
+                            <div class="input-group">
+                                <input class="input"
+                                       autocomplete="off" value="@item.SupplierName" />
+                                <span class="input-group-bar"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @if (ViewBag.MessageState == "Project")
+            {
+                <div class="content-list-edit" style="left: unset; right: 30px">
+                    <a class="btn btn-icon btn-square icon-md icon-edit-line btn-change"
+                       data-id="@item.Id"
+                       data-title="Змінити"
+                       data-tooltipleft='1'>
+                    </a>
+                </div>
+                <div class="content-list-edit" hidden="hidden" style="left: unset; right: 30px">
+                    <a class="btn btn-icon btn-square icon-md icon-save-edit btn-save"
+                       data-id="@item.Id"
+                       data-title="Зберегти"
+                       data-tooltipleft='1'>
+                    </a>
+                </div>
+                <div class="content-list-edit"
+                     @if (item.ParentId == null) { @: hidden="hidden"
+                     }
+                     style="left: unset; right: 0">
+                    <a class="btn btn-icon btn-square icon-md icon-remove btn-remove" data-id="@item.Id" data-title="Відмінити" data-tooltipleft='1'> </a>
+                </div>
+            }
+        </div>
+    }
+</div>
+<nav>
+    <vc:pager paging-list="@Model" />
+</nav>
+<script>
+    $(document).ready(function() {
+        $(".btn-change").click(function() {
+            var id = $(this).attr("data-id");
+            var txt_supplier = $(`.txt-supplier[data-id='${id}']`);
+            var edit_supplier = $(`.edit-supplier[data-id='${id}']`);
+            var btn_save = $(`.btn-save[data-id='${id}']`).parent();
+            var btn_remove = $(`.btn-remove[data-id='${id}']`).parent();
+
+            txt_supplier.hide();
+            edit_supplier.show();
+
+            $(this).parent().hide();
+            btn_save.show();
+            btn_remove.hide();
+        });
+
+        $(".btn-save").click(function() {
+            var id = $(this).attr("data-id");
+            var txt_supplier = $(`.txt-supplier[data-id='${id}']`);
+            var edit_supplier = $(`.edit-supplier[data-id='${id}']`);
+            var btn_change = $(`.btn-change[data-id='${id}']`).parent();
+            var btn_remove = $(`.btn-remove[data-id='${id}']`).parent();
+
+            txt_supplier.show();
+            edit_supplier.hide();
+
+            $(this).parent().hide();
+            btn_change.show();
+            btn_remove.show();
+
+            sendChange(id, edit_supplier.children().children(".input").val());
+        });
+
+        $(".btn-remove").click(function (e) {
+            var id = $(this).attr("data-id");
+            var txt_supplier = $(`.txt-supplier[data-id='${id}']`);
+
+            removeChange(id, $(this));
+        });
+
+        function sendChange(medId, newName) {
+            var msgId = $("#msgId").val();
+            var appId = $("#appId").val();
+            $.ajax({
+                url: '@Url.Action("UpdateSupplierName", "ImlMedicine", new {Area="Iml"})',
+                type: "POST",
+                data: `appId=${appId}&msgId=${msgId}&medId=${medId}&newName=${newName}`,
+                success: function(data) {
+                    if (data.success === false) {
+                        alert("Error");
+                        return;
+                    }
+
+                    var txt_supplier = $(`.txt-supplier[data-id='${medId}']`);
+                    txt_supplier.text(newName);
+                    updateMedId(medId, data.newMedId);
+                },
+                error: function(data) {
+                    alert("Дія не може бути виконана. Спробуйте пізніше.");
+                }
+            });
+        }
+
+        function removeChange(medId, btnElement) {
+            var msgId = $("#msgId").val();
+            $.ajax({
+                url: '@Url.Action("RemoveMedicineMsg", "ImlMedicine", new {Area="Iml"})',
+                type: "POST",
+                data: `medId=${medId}&msgId=${msgId}`,
+                success: function(data) {
+                    if (data.success === false) {
+                        alert("Error");
+                        return;
+                    }
+
+                    var txt_supplier = $(`.txt-supplier[data-id='${medId}']`);
+                    var edit_supplier = $(`.edit-supplier[data-id='${medId}']`).children().children("input");
+                    var btn_change = $(`.btn-change[data-id='${medId}']`).parent();
+
+                    $(btnElement).parent().hide();
+                    btn_change.show();
+
+                    txt_supplier.text(data.oldName);
+                    edit_supplier.val(data.oldName);
+                    updateMedId(medId, data.oldId);
+                },
+                error: function(data) {
+                    alert("Дія не може бути виконана. Спробуйте пізніше.");
+                }
+            });
+        }
+
+        function updateMedId(from, to) {
+            var txt_supplier = $(`.txt-supplier[data-id='${from}']`);
+            var edit_supplier = $(`.edit-supplier[data-id='${from}']`);
+            var btn_change = $(`.btn-change[data-id='${from}']`);
+            var btn_remove = $(`.btn-remove[data-id='${from}']`);
+            var btn_save = $(`.btn-save[data-id='${from}']`);
+
+            txt_supplier.attr("data-id", to);
+            edit_supplier.attr("data-id", to);
+            btn_change.attr("data-id", to);
+            btn_remove.attr("data-id", to);
+            btn_save.attr("data-id", to);
+        }
+    });
+</script>

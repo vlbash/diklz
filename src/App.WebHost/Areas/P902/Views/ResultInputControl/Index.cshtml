@@ -1,0 +1,101 @@
+﻿@using Newtonsoft.Json
+@inject App.Core.Mvc.Helpers.SelectListHelper Sel
+
+@{
+    ViewData["Title"] = "Подання заяв";
+}
+
+@section Buttons {
+    <a class="btn btn-round icon-add"
+       asp-area="P902"
+       asp-controller="ResultInputControl"
+       asp-action="Edit"
+       data-tooltipleft='1'
+       data-title="Створити заяву">
+    </a>
+}
+
+<div class="content-search-wrapper">
+    <partial name="_Searchform" />
+</div>
+
+<div class="results" id="results">
+
+</div>
+
+@section Scripts {
+
+    <script>
+        var searchFormControls = {
+            controlsConfig: [
+                {
+                    labelName: 'Дата подачі заяви',
+                    name: 'CreatedOn',
+                    type: 'dataGroup',
+                    children: [
+                        {
+                            labelName: 'з: ',
+                            name: 'CreatedOn_From',
+                            type: 'datepicker'
+                        },
+                        {
+                            labelName: 'по: ',
+                            name: 'CreatedOn_To',
+                            type: 'datepicker'
+                        }
+                    ]
+                },
+                {
+                    labelName: 'Стан відправки',
+                    name: 'State',
+                    type: 'select',
+                    selectOptions: @Html.Raw(JsonConvert.SerializeObject(Sel.Enum("ResultInputControlState")))
+                },
+                {
+                    labelName: 'Вид діяльності',
+                    name: 'InputControlResult',
+                    type: 'select',
+                    selectOptions: @Html.Raw(JsonConvert.SerializeObject(Sel.Enum("InputControlResult")))
+                },
+                {
+                    labelName: '№ серії',
+                    name: 'MedicineSeries',
+                    type: 'text'
+                },
+                {
+                    labelName: '№ РП ЛЗ',
+                    name: 'LimsRPNumber',
+                    type: 'text'
+                },
+                {
+                    labelName: 'Назва ЛЗ',
+                    name: 'DrugName',
+                    type: 'text'
+                }
+            ]
+        };
+
+        var searchFormConfig = {
+            formConfig: {
+                formName: 'form0',
+                formDataAjaxUpdate: '#results',
+                formMethod: 'post',
+                controls: searchFormControls
+            },
+            presetFiltersUrl: {
+                //controllerName: '@ViewContext.RouteData.Values["Controller"].ToString()',
+                //actionName: '@ViewContext.RouteData.Values["Action"].ToString()'
+            },
+            mainInputConfig: {
+                labelName: 'Назва ЛЗ',
+                type: 'text',
+                mainInputLookUp: ['DrugName']
+            }
+        };
+
+        //console.log('searchFormConfig', searchFormConfig)
+        mt.createContentSearchForm(searchFormConfig);
+
+    </script>
+
+}

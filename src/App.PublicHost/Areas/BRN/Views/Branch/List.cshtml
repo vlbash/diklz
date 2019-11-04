@@ -1,0 +1,104 @@
+﻿@using ReflectionIT.Mvc.Paging
+@model ReflectionIT.Mvc.Paging.PagingList<App.Data.DTO.BRN.BranchRegisterListDTO>
+@addTagHelper *, ReflectionIT.Mvc.Paging
+
+<div class="content-list-wrapper" data-pgparams="@ViewBag.FormParamList">
+    <div class="content-list content-list-header">
+        <div class="content-list-item grid-container">
+            <div class="grid" data-grid="2">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.SortableHeaderFor(model => model.Name)
+                    </p>
+                </div>
+            </div>
+            <div class="grid" data-grid="2">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.SortableHeaderFor(model => model.Address)
+                    </p>
+                </div>
+            </div>
+            <div class="grid" data-grid="2">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.SortableHeaderFor(model => model.PhoneNumber)
+                    </p>
+                </div>
+            </div>
+            <div class="grid" data-grid="2">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.SortableHeaderFor(model => model.FaxNumber)
+                    </p>
+                </div>
+            </div>
+            <div class="grid" data-grid="2">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.SortableHeaderFor(model => model.Email)
+                    </p>
+                </div>
+            </div>
+            @if (ViewBag.AppType == "PRL")
+            {
+            <div class="grid" data-grid="2">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.SortableHeaderFor(model => model.OperationListForm)
+                    </p>
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+    @foreach (var item in Model)
+    {
+    <div class="content-list">
+        <a class="content-list-link">
+            <div class="content-list-item grid-container-nested">
+                <div class="grid">
+                    <div class="grid-inner">
+                        <p>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </p>
+                    </div>
+                </div>
+                <div class="grid">
+                    <div class="grid-inner">
+                        <p>
+                            @Html.DisplayFor(modelItem => item.Address)
+                        </p>
+                    </div>
+                </div>
+                <div class="grid">
+                    <div class="grid-inner">
+                        @Html.DisplayFor(modelItem => item.PhoneNumber)
+                    </div>
+                </div>
+                <div class="grid">
+                    <div class="grid-inner">
+                        @Html.DisplayFor(modelItem => item.FaxNumber)
+                    </div>
+                </div>
+                <div class="grid">
+                    <div class="grid-inner">
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </div>
+                </div>
+                @if (ViewBag.AppType == "PRL")
+                {
+                    <div class="grid">
+                        <div class="grid-inner">
+                            @Html.Raw(item.OperationListForm)
+                        </div>
+                    </div>
+                }
+            </div>
+        </a>
+    </div>
+    }
+</div>
+<nav>
+    <vc:pager paging-list="@Model" />
+</nav>

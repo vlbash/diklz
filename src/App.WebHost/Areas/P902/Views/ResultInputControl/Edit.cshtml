@@ -1,0 +1,333 @@
+﻿@inject App.Core.Mvc.Helpers.SelectListHelper Sel
+@model App.Data.DTO.P902.ResultInputControlDetailsDTO
+@{
+    ViewData["Title"] = "Результат вхідного контролю субстанцій";
+}
+<div class="content-item-holder">
+    <div class="content-item">
+        <div class="content-item-header">
+
+            @if (Model.Id == Guid.Empty)
+            {<i class="icon-xlg icon-add-user"></i>
+                <h2>Створення результату вхідного контролю субстанцій</h2>
+            }
+            else
+            { <i class="icon-xlg icon-person-edit-bold"></i>
+                <h2>Редагування результату вхідного контролю субстанцій</h2>
+            }
+
+        </div>
+
+        <form asp-action="Edit" class="content-item-edit">
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="LicenseId" />
+            <input type="hidden" asp-for="CreatedOn" />
+            <input type="hidden" asp-for="OrgUnitId" />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="content-item-inner">
+                <div class="content-edit">
+                    <div class="select-group">
+                        <select asp-for="State"
+                                class="select"
+                                asp-items='@Sel.Enum("ResultInputControlState")'
+                                autocomplete="off"
+                                readonly></select>
+                        <label asp-for="State"></label>
+                        <span asp-validation-for="State" class="asp-validation"></span>
+                    </div>
+                </div>
+                <div class="content-edit">
+                    <div class="select-group">
+                        <select asp-for="TeritorialService"
+                                class="select"
+                                asp-items='@Sel.Enum("TeritorialService")'
+                                autocomplete="off">
+                            <option></option>
+                        </select>
+                        <label asp-for="TeritorialService"></label>
+                        <span asp-validation-for="TeritorialService" class="asp-validation"></span>
+                    </div>
+                </div>
+                <div class="content-edit">
+                    <div class="input-group">
+                        <input asp-for="LicenseString"
+                               class="input"
+                               autocomplete="off"
+                               readonly />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="LicenseString"></label>
+                        <span asp-validation-for="LicenseString"
+                              class="asp-validation"></span>
+                    </div>
+                </div>
+                <div class="content-edit">
+                    <div class="input-group">
+                        <input asp-for="Edrpou"
+                               class="input"
+                               autocomplete="off"
+                               readonly />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="Edrpou"></label>
+                        <span asp-validation-for="Edrpou"
+                              class="asp-validation"></span>
+                    </div>
+                </div>
+                <div class="content-edit">
+                    <div class="input-group">
+                        <input asp-for="OrgName"
+                               class="input"
+                               autocomplete="off"
+                               readonly />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="OrgName"></label>
+                        <span asp-validation-for="OrgName"
+                              class="asp-validation"></span>
+                    </div>
+                </div>
+                <div class="content-edit">
+                    <div class="input-group">
+                        <input asp-for="Address"
+                               class="input"
+                               autocomplete="off"
+                               readonly />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="Address"></label>
+                        <span asp-validation-for="Address"
+                              class="asp-validation"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="content-item-inner">
+                <div class="content-edit content-edit">
+                    <div class="input-group">
+                        <input class="input" asp-for="RegisterNumber"
+                               autocomplete-allowcreate
+                               autocomplete-idinput-name="LimsRPId"
+                               autocomplete-init-id="LimsRPId"
+                               autocomplete-url="@Url.Action("AutoCompleteRp", "ResultInputControl", new {Area = "P902"})"
+                               autocomplete-onselect="OnSelectLimsRP(item)" />
+                        <span class="input-group-bar"></span>
+                        <input asp-for="LimsRPId" type="hidden" />
+                        <label asp-for="LimsRPId"></label>
+                        <span asp-validation-for="LimsRPId" class="asp-validation"></span>
+                    </div>
+                </div>
+                <div class="content-edit">
+                    <div class="input-group datepicker-group">
+                        <input asp-for="EndDate"
+                               class="input datepicker"
+                               autocomplete="off"
+                               type="text" />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="EndDate"></label>
+                        <span asp-validation-for="EndDate"
+                              class="asp-validation"></span>
+                    </div>
+                </div>
+                <div class="content-edit">
+                    <div class="input-group">
+                        <input asp-for="DrugName"
+                               class="input"
+                               autocomplete="off" />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="DrugName"></label>
+                        <span asp-validation-for="DrugName"
+                              class="asp-validation"></span>
+                    </div>
+                </div>
+                <div class="content-edit">
+                    <div class="input-group">
+                        <input asp-for="DrugForm"
+                               class="input"
+                               autocomplete="off" />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="DrugForm"></label>
+                        <span asp-validation-for="DrugForm"
+                              class="asp-validation"></span>
+                    </div>
+                </div>
+                <div class="content-edit">
+                    <div class="input-group">
+                        <input asp-for="ProducerName"
+                               class="input"
+                               autocomplete="off" />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="ProducerName"></label>
+                        <span asp-validation-for="ProducerName"
+                              class="asp-validation"></span>
+                    </div>
+                </div>
+                <div class="content-edit">
+                    <div class="input-group">
+                        <input asp-for="ProducerCountry"
+                               class="input"
+                               autocomplete="off" />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="ProducerCountry"></label>
+                        <span asp-validation-for="ProducerCountry"
+                              class="asp-validation"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="content-item-inner">
+                <div class="content-edit">
+                    <div class="input-group">
+                        <input asp-for="MedicineSeries"
+                               class="input"
+                               autocomplete="off" />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="MedicineSeries"></label>
+                        <span asp-validation-for="MedicineSeries"
+                              class="asp-validation"></span>
+                    </div>
+                </div>
+                <div class="content-edit">
+                    <div class="input-group datepicker-group">
+                        <input asp-for="MedicineExpirationDate"
+                               class="input datepicker"
+                               autocomplete="off"
+                               type="text" />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="MedicineExpirationDate"></label>
+                        <span asp-validation-for="MedicineExpirationDate"
+                              class="asp-validation"></span>
+                    </div>
+                </div>
+                <div class="content-edit">
+                    <div class="input-group">
+                        <input asp-for="SizeOfSeries"
+                               class="input"
+                               autocomplete="off" />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="SizeOfSeries"></label>
+                        <span asp-validation-for="SizeOfSeries"
+                              class="asp-validation"></span>
+                    </div>
+                </div>
+                <div class="content-edit">
+                    <div class="select-group">
+                        <select asp-for="UnitOfMeasurement"
+                                class="select"
+                                asp-items='@Sel.Enum("UnitOfMeasurement")'
+                                autocomplete="off">
+                            <option></option>
+                        </select>
+                        <label asp-for="UnitOfMeasurement"></label>
+                        <span asp-validation-for="UnitOfMeasurement" class="asp-validation"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="content-item-inner">
+                <div class="content-edit">
+                    <div class="input-group">
+                        <input asp-for="AmountOfImportedMedicine"
+                               class="input"
+                               autocomplete="off" />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="AmountOfImportedMedicine"></label>
+                        <span asp-validation-for="AmountOfImportedMedicine"
+                              class="asp-validation"></span>
+                    </div>
+                </div>
+                <div class="content-edit">
+                    <div class="input-group">
+                        <input asp-for="WinNumber"
+                               class="input"
+                               autocomplete="off" />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="WinNumber"></label>
+                        <span asp-validation-for="WinNumber"
+                              class="asp-validation"></span>
+                    </div>
+                </div>
+                <div class="content-edit">
+                    <div class="input-group datepicker-group">
+                        <input asp-for="DateWin"
+                               class="input datepicker"
+                               autocomplete="off"
+                               type="text" />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="DateWin"></label>
+                        <span asp-validation-for="DateWin"
+                              class="asp-validation"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="content-item-inner">
+                <div class="content-edit">
+                    <div class="select-group">
+                        <select asp-for="InputControlResult"
+                                class="select"
+                                asp-items='@Sel.Enum("InputControlResult")'
+                                autocomplete="off">
+                            <option></option>
+                        </select>
+                        <label asp-for="InputControlResult"></label>
+                        <span asp-validation-for="InputControlResult" class="asp-validation"></span>
+                    </div>
+                </div>
+                <div class="content-edit">
+                    <div class="input-group">
+                        <input asp-for="NameOfMismatch"
+                               class="input"
+                               autocomplete="off" />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="NameOfMismatch"></label>
+                        <span asp-validation-for="NameOfMismatch"
+                              class="asp-validation"></span>
+                    </div>
+                </div>
+                <div class="content-edit">
+                    <div class="input-group">
+                        <input asp-for="Comment"
+                               class="input"
+                               autocomplete="off" />
+                        <span class="input-group-bar"></span>
+                        <label asp-for="Comment"></label>
+                        <span asp-validation-for="Comment"
+                              class="asp-validation"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="content-submit-holder btn-holder btn-holder-right">
+                <a href="#" onclick="mt.goStepBack()" class="btn btn-text btn-danger">Відмінити</a>
+                <input type="submit" value="Зберегти" class="btn btn-secondary btn-fill" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        function OnSelectLimsRP(item) {
+            $.ajax({
+                type: 'get',
+                url: '@Url.Action("GetLimsRp", "ResultInputControl")',
+                data: {
+                    id: item.option
+                },
+                success: function (data) {
+                    var endDate = new Date(data.endDate);
+                    var monthString = (endDate.getMonth() + 1).toString();
+                    if (monthString.length == 1)
+                        monthString = "0" + monthString;
+                    var dayString = endDate.getDate().toString();
+                    if (dayString.length == 1)
+                        dayString = "0" + dayString;
+                    document.getElementById("EndDate").value = dayString + '.' + monthString + '.' + endDate.getFullYear();
+                    $('input[name=EndDate]').val(endDate.getFullYear() + '-' + monthString + '-' + dayString + 'T00:00:00.000Z');
+                    $("#EndDate").removeClass("empty").addClass("not-empty");
+                    document.getElementById("DrugName").value = data.drugNameUkr;
+                    $("#DrugName").removeClass("empty").addClass("not-empty");
+                    document.getElementById("DrugForm").value = data.formTypeDesc;
+                    $("#DrugForm").removeClass("empty").addClass("not-empty");
+                    document.getElementById("ProducerCountry").value = data.prodCountryName;
+                    $("#ProducerCountry").removeClass("empty").addClass("not-empty");
+                    document.getElementById("ProducerName").value = data.producerName;
+                    $("#ProducerName").removeClass("empty").addClass("not-empty");
+                }
+            });
+        }
+    </script>
+
+}

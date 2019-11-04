@@ -1,0 +1,135 @@
+﻿@model App.Data.DTO.PRL.PrlAppDetailDTO
+
+@{
+    ViewData["Title"] = "Заява про внесення змін до ЄДР у зв’язку з припиненням діяльності за певним місцем провадження - Видалення МПД(виробництво)";
+    var fileListLink = ViewBag.IsEditable == true ? Url.Action("List", "FileStore", new { Area = "", EntityId = Model.Id, EntityName = "PrlApplication" }) :
+        Url.Action("List", "FileStore", new { Area = "", EntityId = Model.Id, EntityName = "EDocument", pg_PartialViewName = "ListDetails" });
+    var uploadFormLink = Html.Raw(ViewBag.IsEditable == true ?
+        Url.Action("UploadForm", "FileStore", new {Area = "", EntityId = Model.Id}) + "&EntityName=PrlApplication" : "");
+}
+
+@section Scripts
+{
+
+    <script>
+        var uploadFormContainer = $("#uploadForm"),
+            fileListLink = "@fileListLink",
+            uploadFormLink = "@uploadFormLink",
+            fileListContainer = $("#fileList");
+        if (uploadFormLink != "")
+            mt.getAjaxContainer(uploadFormContainer, uploadFormLink);
+        mt.getAjaxContainer(fileListContainer, fileListLink);
+    </script>
+    <script>
+       
+       $('#signButton').click(function() {
+           var agreeChecks = $('.license_check_agree');
+           try {
+               agreeChecks.each(function() {
+                   if (!this.checked) {
+                       throw store;
+                   }
+               });
+           } catch (e) {
+               alert("Вам потрібно погодитись з ліцензійними умовами перед підписанням заяви");
+               $(".btn-tab[title='Сповіщення та ліцензійні умови']").trigger("click");
+               return;
+           }
+           //var optionalAgreeChecks = $('.optional_agree');
+           //var countOfChecks = 0;
+           //optionalAgreeChecks.each(function() {
+           //    if (this.checked)
+           //        countOfChecks ++;
+           //});
+           //if (countOfChecks == 0) {
+           //    alert("Вам потрібно відмітити хоча б один варіант отримання результатів розгляду заяви");
+           //    $(".btn-tab[title='Сповіщення та ліцензійні умови']").trigger("click");
+           //    return false;
+           //}
+                $.ajax({
+                    type: 'get',
+                    url: '@Url.Action("Verification_RemBranchApplication", "PrlVerification")',
+                    data: {
+                        jsonData: true,
+                        appId: '@Model.Id'
+                    },
+                    success: function(data) {
+                        if (Object.keys(data)[0] == null) {
+                            window.location.replace(
+                                "@Html.Raw(Url.Action("Sign", "EuSign", new {Area = "", urlAction = Url.Action("GetFilesForSign", "PrlApp", new {id = Model.Id}), urlActionSave = Url.Action("SaveSignedFiles", "PrlApp") }))");
+                        } else {
+                            alert(
+                                "Перед підписанням та відправкою заяви Вам потрібно заповнити заяву згідно з екпертизою комплектності заяви.");
+                            $(".btn-tab[title='Перевірка комплектності']").trigger("click");
+                        }
+                    }
+                });
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+
+            mt.currentTab();
+
+        });
+    </script>
+}
+
+<div class="content-item-holder">
+    @Html.Partial($"_ApplicationPartial", Model)
+
+    <div class="content-item">
+        <div class="content-item-header">
+            <i class="icon icon-xlg icon-timeline-pin"></i>
+            <h2 id="branch">Місця провадження діяльності</h2>
+        </div>
+        <div class="content-partial" data-tab-container-url="@Url.Action("List", "Branch", new { Area = "BRN" })?appId=@Model.Id&sort=RemBranchApplication"></div>
+    </div>
+
+    <div class="content-item">
+        <div class="content-item-header">
+            <i class="icon icon-xlg icon-data-cube"></i>
+            <h2 id="prlVerification">Перевірка комплектності</h2>
+        </div>
+        <div class="content-partial" data-tab-container-url="@Url.Action("Verification_RemBranchApplication", "PrlVerification", new { Area = "PRL" })?appId=@Model.Id"></div>
+    </div>
+    <div class="content-item">
+        <div class="content-item-header">
+            <i class="icon icon-xlg icon-list-paperclip"></i>
+            <h2 id="additionalDoc">Вміст (в т. ч. довіреність, у разі необхідності)</h2>
+        </div>
+        <div class="content-partial" data-tab-empty>
+            <div class="upload-edit">
+                <div id="uploadForm">
+
+                </div>
+                <div id="fileList" class="fileList">
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    @Html.Partial($"_ApplicationAltChecksPartial", Model)
+
+    <div class="content-item">
+        <div class="content-partial" data-tab-empty>
+            <div class="content-item-outer">
+                <div class="content-item-header">
+                    <i class="icon icon-xlg icon-clipboard-data"></i>
+                    <h2 id="applyApp">Подання заяви</h2>
+                </div>
+                <div class="content-submit-holder btn-holder">
+                    <a class="btn btn-secondary btn-panel"
+                       id="signButton"
+                       data-tab>
+                        <span class="icon icon-huge icon-document"></span>
+                        <span>Підписати і відправити заявy</span>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>

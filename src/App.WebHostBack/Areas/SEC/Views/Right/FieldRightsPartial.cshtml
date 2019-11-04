@@ -1,0 +1,114 @@
+﻿<div id="jsGridFieldRights"></div>
+
+<script>
+    
+    var jsGridContainer = $("#jsGridFieldRights")
+
+    var fieldList = '' || '@Html.Raw(ViewBag.FieldList)';
+    if (!fieldList) {
+        fieldList = [];
+    } else {
+        fieldList = JSON.parse(fieldList);
+    }
+
+    var accessList = '' || '@Html.Raw(ViewBag.AccesList)';
+    if (!accessList) {
+        accessList = [];
+    } else {
+        accessList = JSON.parse(accessList);
+    }
+    var fieldRights = [];
+
+    jsGridContainer.jsGrid({
+        width: "100%",
+        inserting: true,
+        editing: true,
+        sorting: true,
+        autoload: true,
+        paging: true,
+        pageSize: 10,
+        pageIndex: 1,
+        deleteConfirm: "Ви впевнені, що хочете видалити елемент?",
+        controller: {
+            loadData: function (filter) {
+                return $.ajax({
+                    type: "GET",
+                    url: "/Sec/Right/GetFieldRights?rightId=" + "@Html.Raw(ViewBag.RightId)",
+                    dataType: "json"
+                });
+                return null;
+            },
+            insertItem: function (item) {
+                item.id = "00000000-0000-0000-0000-000000000000";      
+                item.RightId = "@Html.Raw(ViewBag.RightId)"
+                return $.ajax({
+                    type: "POST",
+                    url: "/Sec/Right/InsertFieldRight",
+                    contentType: "application/json",
+                    data: JSON.stringify(item),
+                    error: function (xhr, httpStatusMessage, customErrorMessage) {
+                        mt.createDialog(false, xhr.responseText);
+                    },
+                    dataType: "json"
+                });
+            },
+            updateItem: function (item) {
+                return $.ajax({
+                    type: "PUT",
+                    url: "/Sec/Right/UpdateFieldRight",
+                    contentType: "application/json",
+                    data: JSON.stringify(item),
+                    error: function (xhr, httpStatusMessage, customErrorMessage) {
+                        mt.createDialog(false, xhr.responseText);
+                    },
+                    dataType: "json"
+                });
+            },
+            deleteItem: function (item) {
+                return $.ajax({
+                    type: "DELETE",
+                    url: "/Sec/Right/DeleteFieldRight?id=" + item.id
+                });
+            }
+        },
+        onDataLoaded: mt.updateNiceScroll,
+        fields: [
+            { name: "id", visible: false, width: 0, id: "id" },
+            { name: "rightId", visible: false, width: 0, id: "rightId" },
+            {
+                title: "Назва поля",
+                name: "fieldName",
+                type: "select",
+                validate: "required",
+                items: fieldList,
+                valueField: "id",
+                id: "fieldName",
+                textField: "caption",
+                search: false,
+                insertTemplate: function () {
+                    var $insertControl = jsGrid.fields.select.prototype.insertTemplate.call(this);
+                    $insertControl.val('');
+                    return $insertControl;
+                }
+            },
+            {
+                title: "Рівень доступу",
+                name: "accessLevel",
+                type: "select",
+                validate: "required",
+                items: accessList,
+                valueField: "id",
+                id: "accessLevel",
+                textField: "name",
+                search: false,
+                insertTemplate: function () {
+                    var $insertControl = jsGrid.fields.select.prototype.insertTemplate.call(this);
+                    $insertControl.val('');
+                    return $insertControl;
+                }
+            },
+            { type: "control" }
+        ]
+    });
+
+</script>

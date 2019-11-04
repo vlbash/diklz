@@ -1,0 +1,170 @@
+﻿@using ReflectionIT.Mvc.Paging
+@model ReflectionIT.Mvc.Paging.PagingList<App.Data.DTO.MTR.MtrAppListDTO>
+@addTagHelper *, ReflectionIT.Mvc.Paging
+
+
+<div class="content-list-wrapper" data-pgparams="@ViewBag.FormParamList">
+    <div class="content-list content-list-header">
+        <div class="content-list-edit"></div>
+        <div class="content-list-item grid-container">
+            <div class="grid" data-grid="1">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.SortableHeaderFor(model => model.ModifiedOn)
+                    </p>
+                </div>
+            </div>
+            <div class="grid" data-grid="2">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.SortableHeaderFor(model => model.AppType)
+                    </p>
+                </div>
+            </div>
+
+            <div class="grid" data-grid="2">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.SortableHeaderFor(model => model.AppSort)
+                    </p>
+                </div>
+            </div>
+
+            <div class="grid" data-grid="1">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.SortableHeaderFor(model => model.AppState)
+                    </p>
+                </div>
+            </div>
+            <div class="grid" data-grid="1">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.SortableHeaderFor(model => model.DecisionEnum)
+                    </p>
+                </div>
+            </div>
+            <div class="grid" data-grid="1">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.SortableHeaderFor(model => model.RegDate)
+                    </p>
+                </div>
+            </div>
+            <div class="grid" data-grid="1">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.SortableHeaderFor(model => model.RegNumber)
+                    </p>
+                </div>
+            </div>
+            <div class="grid" data-grid="1">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.SortableHeaderFor(model => model.PaymentStatus)
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @foreach (var item in Model)
+    {
+        <div class="content-list">
+            <div class="content-list-edit">
+                <a class="btn-link btn btn-icon btn-square icon-md icon-eye"
+                   asp-action="Details"
+                   asp-route-id="@item.Id"
+                   asp-route-sort="@item.AppSortEnum"
+                   asp-route-apptype="@item.AppTypeEnum"
+                   data-tab-main
+                   data-title="Переглянути заяву"
+                   target="_blank"
+                   data-tooltipleft='1'>
+                </a>
+            </div>
+            <a class="content-list-link">
+                <div class="content-list-item grid-container-nested">
+                    <div class="grid">
+                        <div class="grid-inner">
+                            <p class="col">
+                                @if (item.ReturnCheck == true)
+                                {
+                                    <i class="icon icon-xs icon-close mb-sm danger-font"></i>
+                                }
+                                @Html.DisplayFor(modelItem => item.ModifiedOn)
+                            </p>
+                        </div>
+                    </div>
+                    <div class="grid">
+                        <div class="grid-inner">
+                            <p>@Html.DisplayFor(modelItem => item.AppType)</p>
+                        </div>
+                    </div>
+                    <div class="grid">
+                        <div class="grid-inner">
+                            <p>@Html.DisplayFor(modelItem => item.AppSort)</p>
+                        </div>
+                    </div>
+                    <div class="grid">
+                        <div class="grid-inner">
+                            <p>@Html.DisplayFor(modelItem => item.AppStateString)</p>
+                        </div>
+                    </div>
+                    <div class="grid">
+                        <div class="grid-inner">
+                            <p>
+                                @if (item.ProtocolStatusNameCheck)
+                                {
+                                    @Html.DisplayFor(modelItem => item.Decision)
+                                    if (!string.IsNullOrEmpty(item.Decision))
+                                    {
+                                        <i class="icon-md icon icon-msg-info" style="margin-left: 1.5em;"
+                                           title="@item.DecisionReason@item.DecisionDescription">
+                                        </i>
+                                    }
+                                }
+                            </p>
+
+                        </div>
+                    </div>
+                    <div class="grid">
+                        <div class="grid-inner">
+                            <p>@Html.DisplayFor(modelItem => item.RegDate)</p>
+                        </div>
+                    </div>
+                    @*<div class="grid">
+                        <div class="grid-inner">
+                            <p>@Html.DisplayFor(modelItem => item.RegNumber)</p>
+                        </div>
+                    </div>*@
+                    <div class="grid">
+                        <div class="grid-inner">
+                            <p>
+                                @Html.DisplayFor(modelItem => item.RegNumber)
+                                @if (item.ReturnCheck)
+                                {
+                                    <i class="icon-md icon icon-msg-info" style="margin-left: 1.5em;"
+                                       title="@item.ReturnComment">
+                                    </i>
+                                }
+                            </p>
+
+                        </div>
+                    </div>
+                    <div class="grid">
+                        <div class="grid-inner">
+                            <p>@Html.DisplayFor(modelItem => item.PaymentStatus)</p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    }
+
+</div>
+
+<nav>
+    <vc:pager paging-list="@Model" />
+</nav>
+

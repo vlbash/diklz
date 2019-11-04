@@ -1,0 +1,182 @@
+﻿@model App.Core.Data.DTO.Common.PersonDetailDTO
+@*@{
+        ViewData["Title"] = "Картка фізичної особи";
+    }*@
+
+@section Buttons {
+    <a class="content-item-btn icon-md icon-edit-line"
+       asp-action="Edit"
+       asp-route-id="@Model.Id"
+       data-tab-main
+       data-title="Редагувати"
+       data-tooltipleft='1'>
+    </a>
+}
+
+<div class="content-item-holder">
+    <div class="content-item">
+        <div class="content-item-header">
+            <i class="icon icon-xlg icon-person-edit-bold"></i>
+            <h2>Картка фізичної особи</h2>
+        </div>
+        <div class="content-item-details">
+            <div class="content-item-inner content-details-wrapper col-2">
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>
+                            @Html.DisplayNameFor(model => model.LastName)
+                        </label>
+                        <p>
+                            @Html.DisplayFor(model => model.LastName)
+                        </p>
+                    </div>
+                </div>
+
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>
+                            @Html.DisplayNameFor(model => model.Name)
+                        </label>
+                        <p>
+                            @Html.DisplayFor(model => model.Name)
+                        </p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>
+                            @Html.DisplayNameFor(model => model.MiddleName)
+                        </label>
+                        <p>
+                            @Html.DisplayFor(model => model.MiddleName)
+                        </p>
+                    </div>
+                </div>
+
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>
+                            @Html.DisplayNameFor(model => model.Birthday)
+                        </label>
+                        <p>
+                            @Html.DisplayFor(model => model.Birthday)
+                        </p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>
+                            @Html.DisplayNameFor(model => model.GenderName)
+                        </label>
+                        <p>
+                            @Html.DisplayFor(model => model.GenderName)
+                        </p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>
+                            @Html.DisplayNameFor(model => model.Email)
+                        </label>
+                        <p>
+                            @Html.DisplayFor(model => model.Email)
+                        </p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>
+                            @Html.DisplayNameFor(model => model.Phone)
+                        </label>
+                        <p>
+                            @Html.DisplayFor(model => model.Phone)
+                        </p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>
+                            @Html.DisplayNameFor(model => model.NoIPN)
+                        </label>
+                        <p>
+                            @Html.DisplayFor(model => model.NoIPN)
+                        </p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>
+                            @Html.DisplayNameFor(model => model.IPN)
+                        </label>
+                        <p>
+                            @Html.DisplayFor(model => model.IPN)
+                        </p>
+                    </div>
+                </div>
+
+
+
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>
+                            @Html.DisplayNameFor(model => model.IdentityDocumentTypeEnum)
+                        </label>
+                        <p>
+                            @Html.DisplayFor(model => model.IdentityDocumentTypeEnum)
+                        </p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>
+                            @Html.DisplayNameFor(model => model.DocPrefix)
+                        </label>
+                        <p>
+                            @Html.DisplayFor(model => model.DocPrefix)
+                        </p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>
+                            @Html.DisplayNameFor(model => model.PersonalDocumentNumber)
+                        </label>
+                        <p>
+                            @Html.DisplayFor(model => model.PersonalDocumentNumber)
+                        </p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>
+                            @Html.DisplayNameFor(model => model.PersonalDocumentAuthority)
+                        </label>
+                        <p>
+                            @Html.DisplayFor(model => model.PersonalDocumentAuthority)
+                        </p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>
+                            @Html.DisplayNameFor(model => model.DocumentIssueDate)
+                        </label>
+                        <p>
+                            @Html.DisplayFor(model => model.DocumentIssueDate)
+                        </p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>
+                            @Html.DisplayNameFor(model => model.ExpirationDate)
+                        </label>
+                        <p>
+                            @Html.DisplayFor(model => model.ExpirationDate)
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

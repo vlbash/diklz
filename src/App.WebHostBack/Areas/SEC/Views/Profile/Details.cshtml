@@ -1,0 +1,78 @@
+﻿@model App.Data.DTO.SEC.ProfileDetailDTO
+
+@section Buttons {
+    <a class="content-item-btn icon-md icon-edit-line" asp-action="Edit" asp-route-id="@Model.Id" data-title="Редагувати" data-tooltipleft="1"></a>
+}
+
+@*<div class="content-item-btn btn-holder btn-holder-right"></div>*@
+<div class="content-item-holder">
+    <div class="content-item">
+        <div class="content-item-header">
+            <i class="icon-xlg icon-admin-control"></i>
+            <h2>Профіль (перегляд)</h2>
+        </div>
+        <div class="content-item-details">
+            <div class="content-details">
+                <div class="content-details-group">
+                    <label>
+                        @Html.DisplayNameFor(model => model.Caption)
+                    </label>
+                    <p>
+                        @Html.DisplayFor(model => model.Caption)
+                    </p>
+                </div>
+            </div>
+            <div class="content-details">
+                <div class="content-details-group">
+                    <label>
+                        @Html.DisplayNameFor(model => model.IsActive)
+                    </label>
+                    <p>
+                        @Html.DisplayFor(model => model.IsActive)
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-item">
+        <div class="content-item-header">
+            <i class="icon-xlg icon-workers"></i>
+            <h2>Співробітники даного профілю</h2>
+        </div>
+        <div class="content-partial" data-tab-container-url="@Url.Action("ProfileEmployees")?profileId=@Model.Id"></div>
+    </div>
+
+    <div class="content-item">
+        <div class="content-item-header">
+            <i class="icon-xlg icon-user-table"></i>
+            <h2>Ролі даного профілю</h2>
+        </div>
+
+        <div class="content-partial" data-tab-container-url="@Url.Action("ProfileRoles")?profileId=@Model.Id"></div>
+    </div>
+
+    <div class="content-item">
+        <div class="content-item-header">
+            <i class="icon-xlg icon-user-security"></i>
+            <h2>Права даного профілю</h2>
+        </div>
+        <div class="content-partial" data-tab-container-url="@Url.Action("ProfileRights")?profileId=@Model.Id"></div>
+    </div>
+
+    @*<div class="content-item">
+        <div class="content-item-header">
+            <i class="icon-xlg icon-building"></i>
+            <h2>Організації даного профілю</h2>
+        </div>
+        <div class="content-partial" data-tab-container-url="@Url.Action("ProfileOrganizations")?profileId=@Model.Id"></div>
+    </div>
+
+    <div class="content-item">
+        <div class="content-item-header">
+            <i class="icon-xlg icon-location-map-pin"></i>
+            <h2>Регіони даного профілю</h2>
+        </div>
+        <div class="content-partial" data-tab-container-url="@Url.Action("ProfileRegions")?profileId=@Model.Id"></div>
+    </div>*@
+</div>

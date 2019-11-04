@@ -1,0 +1,94 @@
+﻿@model App.Data.DTO.PRL.PrlAppExpertiseDTO
+@inject App.Core.Mvc.Helpers.SelectListHelper Sel
+
+<h3>Створення/Редагування експертизи</h3>
+
+<form method="post"
+      data-ajax-url="@Url.Action("SaveExpertise", "PrlProcessing")"
+      data-ajax="true"
+      data-ajax-method="post"
+      data-ajax-complete="completed" class="content-item-edit">
+    <input type="hidden" asp-for="Id" value="@Model.Id" />
+
+
+    <div class="select-group expertiseResult">
+        <select asp-for="ExpertiseResultEnum"
+                class="select"
+                asp-items='@Sel.Enum("ExpertiseResult",initialSelectedValue: Model.ExpertiseResultEnum)'
+                autocomplete="off">
+            <option value=""></option>
+        </select>
+        <label asp-for="ExpertiseResultEnum"></label>
+        <span asp-validation-for="ExpertiseResultEnum" class="asp-validation"></span>
+    </div>
+
+    <div class="input-group datepicker-group">
+        <input class="input datepicker"
+               asp-for="ExpertiseDate"
+               type="text"
+               autocomplete="off" />
+        <span class="input-group-bar"></span>
+        <label asp-for="ExpertiseDate"></label>
+        <span asp-validation-for="ExpertiseDate" class="asp-validation"></span>
+    </div>
+
+    <div class="input-group">
+        <input class="input" asp-for="PerformerOfExpertiseName"
+               validate-not-empty
+               autocomplete-allowcreate
+               autocomplete-idinput-name="PerformerOfExpertiseId"
+               autocomplete-init-id="PerformerOfExpertiseId"
+               autocomplete-url="@Url.Action("AutoCompletePerformer", "Application", new {Area = "PRL"})"
+               autocomplete-onselect="mt.onChangeUrl($('#PerformerOfExpertiseId'))"
+               autocomplete-onblur="if (!value) { mt.onChangeUrl($('#PerformerOfExpertiseId')) }" />
+        <span class="input-group-bar"></span>
+        <input asp-for="PerformerOfExpertiseId" type="hidden" onchange-url="@Url.Action("AutoCompletePerformer", "Application")" />
+        <label>@Html.DisplayNameFor(p => p.PerformerOfExpertiseName)</label>
+        <span class="asp-validation"></span>
+    </div>
+
+    <div class="textarea-group">
+        <textarea asp-for="ExpertiseComment"
+                  class="textarea"
+                  autocomplete="off">
+                                </textarea>
+        <span class="input-group-bar"></span>
+        <label asp-for="ExpertiseComment"></label>
+        <span asp-validation-for="ExpertiseComment" class="asp-validation"></span>
+    </div>
+
+    <div class="content-submit-holder btn-holder btn-holder-right">
+        <a href="#" onclick="mt.closeModal()" class="btn btn-text btn-danger">Відмінити</a>
+        <input type="submit" value="Зберегти" class="btn btn-secondary btn-fill" />
+    </div>
+</form>
+
+<script>
+    completed = function (xhr, status) {
+        var json = JSON.parse(xhr.responseText);
+        if (status === "success" && json.success === true) {
+            var containers = [$('#expertisePart'), $('#preLicensePart'), $('#decisionPart')];
+            mt.closeModal();
+            containers.forEach(function(el) {
+                mt.tryLoadContainer(el, el.attr('data-tab-container-url'));
+            });
+        }
+    }
+
+    $(document).ready(function () {
+        if ($('*').is('[autocomplete-url]')) {
+            $('[autocomplete-url]').each(function () {
+                mt.autocompleteEl($(this));
+                mt.onLoadCheckAllInputs();
+            });
+        }
+        var option = $('#ExpertiseResultEnum option[value=""]');
+        var li = $('.expertiseResult li[data-value=""]');
+
+        if (option.length === 2 && li.length === 2) {
+            option[0].remove();
+            li[0].remove();
+
+        }
+    });
+</script>

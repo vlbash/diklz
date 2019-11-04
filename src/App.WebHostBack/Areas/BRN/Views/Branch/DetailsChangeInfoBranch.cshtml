@@ -1,0 +1,196 @@
+﻿@model App.Data.DTO.BRN.BranchAltDetailsDTO
+
+@{
+    ViewData["Title"] = "МПД";
+}
+
+
+@section Scripts
+{
+
+    <script>
+        //to check or uncheck
+        var deleteCheckBoxes;
+        if ("@Model.AppSort" == "RemBranchInfoApplication")
+            deleteCheckBoxes = true;
+        else if ("@Model.AppSort" == "AddBranchInfoApplication")
+            deleteCheckBoxes = false;
+        var newOperationListForm = @Json.Serialize(Model.OperationListFormChanging);
+     
+        var resultContainer = $('#content-tree'),
+            submitForm = $('#editBranch2'),
+            submitBtn = $('#submitBranch2'),
+            hiddenInputResults = $('#OperationListFormChanging'),
+            checkedItems = @Json.Serialize(Model.OperationListForm),
+            cheсkboxTemplate = @Json.Serialize(ViewBag.OperationListJson);
+
+        mt.buildContentTree(cheсkboxTemplate, checkedItems, resultContainer, hiddenInputResults, submitForm, submitBtn, deleteCheckBoxes, newOperationListForm);
+
+    </script>
+}
+
+<div class="content-item-holder">
+    <div class="content-item">
+        <div class="content-item-header">
+            <i class="icon icon-xlg icon-building"></i>
+            <h2>Місце провадження діяльності</h2>
+        </div>
+
+            <div class="content-item-details">
+                <div class="content-item-inner content-details-wrapper col-2">
+                    <div class="content-details">
+                        <div class="content-details-group">
+                            <label>@Html.DisplayNameFor(model => model.Name)</label>
+                            <p>@Html.DisplayFor(model => model.Name)</p>
+                        </div>
+                    </div>
+                    <div class="content-details">
+                        <div class="content-details-group">
+                            <label>@Html.DisplayNameFor(model => model.EMail)</label>
+                            <p>@Html.DisplayFor(model => model.EMail)</p>
+                        </div>
+                    </div>
+                    <div class="content-details">
+                        <div class="content-details-group">
+                            <label>@Html.DisplayNameFor(model => model.PhoneNumber)</label>
+                            <p>@Html.DisplayFor(model => model.PhoneNumber)</p>
+                        </div>
+                    </div>
+                    <div class="content-details">
+                        <div class="content-details-group">
+                            <label>@Html.DisplayNameFor(model => model.FaxNumber)</label>
+                            <p>@Html.DisplayFor(model => model.FaxNumber)</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-item-inner content-details-wrapper col-2">
+                    <div class="content-details">
+                        <div class="content-details-group">
+                            <label>@Html.DisplayNameFor(model => model.PostIndex)</label>
+                            <p>@Html.DisplayFor(model => model.PostIndex)</p>
+                        </div>
+                    </div>
+                    <div class="content-details">
+                        <div class="content-details-group">
+                            <label>@Html.DisplayNameFor(model => model.Address)</label>
+                            <p>@Html.DisplayFor(model => model.Address)</p>
+                        </div>
+                    </div>
+                    <div class="content-details">
+                        <div class="content-details-group">
+                            <label>@Html.DisplayNameFor(model => model.AdressEng)</label>
+                            <p>@Html.DisplayFor(model => model.AdressEng)</p>
+                        </div>
+                    </div>
+                    <div class="content-details">
+                        <div class="content-details-group">
+                            <label>@Html.DisplayNameFor(model => model.KoatuuCode)</label>
+                            <p>@Html.DisplayFor(model => model.KoatuuCode)</p>
+                        </div>
+                    </div>
+                </div>
+
+                @if (Model.AppType == "PRL")
+                {
+                    <div class="content-item-inner content-readonly">
+                        <div class="checkbox-group-details">
+                            <input class="checkbox" asp-for="PRLIsAvailiableProdSites" />
+                            <label asp-for="PRLIsAvailiableProdSites"></label>
+                        </div>
+                        <div class="checkbox-group-details">
+                            <input class="checkbox" asp-for="PRLIsAvailiableQualityZone" />
+                            <label asp-for="PRLIsAvailiableQualityZone"></label>
+                        </div>
+                        <div class="checkbox-group-details">
+                            <input class="checkbox" asp-for="PRLIsAvailiableStorageZone" />
+                            <label asp-for="PRLIsAvailiableStorageZone"></label>
+                        </div>
+                        <div class="checkbox-group-details">
+                            <input class="checkbox" asp-for="PRLIsAvailiablePickupZone" />
+                            <label asp-for="PRLIsAvailiablePickupZone"></label>
+                        </div>
+                    </div>
+                    <form asp-action="SaveChangingInfoBranch" method="post" class="content-item-edit" id="editBranch2">
+                        <div class="content-inner-header">
+                            <label asp-for="OperationListFormChanging" class="">
+                                Перелік лікарських форм та виробничих операцій, які заплановані до виробництва за певним місцем провадження діяльності та потребують ліцензування
+                            </label>
+                            <span asp-validation-for="OperationListFormChanging" class="text-danger"></span>
+                            <input asp-for="OperationListFormChanging" type="hidden" value="@Model.OperationListFormChanging">
+                            <input asp-for="Id" type="hidden" />
+                        </div>
+                        <div id="content-tree" class="content-tree"></div>
+                    </form>
+
+                }
+                else if (Model.AppType == "TRL")
+                {
+                    <div class="content-details">
+                        <div class="checkbox-group">
+                            <div class="checkbox-group-inner">
+                                <label>@Html.DisplayNameFor(model => model.TRLIsManufacture)</label>
+                                <input class="checkbox" value="@Html.DisplayFor(model => model.TRLIsManufacture)" />
+                            </div>
+                            <span class="checkbox-group-bar"></span>
+                        </div>
+                    </div>
+                    <div class="content-details">
+                        <div class="checkbox-group">
+                            <div class="checkbox-group-inner">
+                                <label>@Html.DisplayNameFor(model => model.TRLIsWholesale)</label>
+                                <input class="checkbox" value="@Html.DisplayFor(model => model.TRLIsWholesale)" />
+                            </div>
+                            <span class="checkbox-group-bar"></span>
+                        </div>
+                    </div>
+                    <div class="content-details">
+                        <div class="checkbox-group">
+                            <div class="checkbox-group-inner">
+                                <label>@Html.DisplayNameFor(model => model.TRLIsRetail)</label>
+                                <input class="checkbox" value="@Html.DisplayFor(model => model.TRLIsRetail)" />
+                            </div>
+                            <span class="checkbox-group-bar"></span>
+                        </div>
+                    </div>
+                }
+                else if (Model.AppType == "IML")
+                {
+                    <div class="content-details">
+                        <div class="checkbox-group">
+                            <div class="checkbox-group-inner">
+                                <label>@Html.DisplayNameFor(model => model.IMLIsAvailiableStorageZone)</label>
+                                <input class="checkbox" value="@Html.DisplayFor(model => model.IMLIsAvailiableStorageZone)" />
+                            </div>
+                            <span class="checkbox-group-bar"></span>
+                        </div>
+                    </div>
+                    <div class="content-details">
+                        <div class="checkbox-group">
+                            <div class="checkbox-group-inner">
+                                <label>@Html.DisplayNameFor(model => model.IMLIsAvailiablePermitIssueZone)</label>
+                                <input class="checkbox" value="@Html.DisplayFor(model => model.IMLIsAvailiablePermitIssueZone)" />
+                            </div>
+                            <span class="checkbox-group-bar"></span>
+                        </div>
+                    </div>
+                    <div class="content-details">
+                        <div class="checkbox-group">
+                            <div class="checkbox-group-inner">
+                                <label>@Html.DisplayNameFor(model => model.IMLIsAvailiableQuality)</label>
+                                <input class="checkbox" value="@Html.DisplayFor(model => model.IMLIsAvailiableQuality)" />
+                            </div>
+                            <span class="checkbox-group-bar"></span>
+                        </div>
+                    </div>
+                    
+                }
+
+            </div>
+
+    </div>
+    
+    <div class="content-submit-holder btn-holder btn-holder-right">
+        <a href="#" onclick="mt.goStepBack()" class="btn btn-text btn-danger">Відмінити</a>
+        <input type="button" value="Зберегти" id="submitBranch2" class="btn btn-secondary btn-fill" />
+    </div>
+</div>

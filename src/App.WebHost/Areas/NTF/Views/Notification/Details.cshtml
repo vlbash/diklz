@@ -1,0 +1,104 @@
+﻿@using System.Globalization
+@using Newtonsoft.Json
+@model App.Data.DTO.NTF.NotificationDetailsDTO
+
+@{
+    ViewData["Title"] = "Сповіщення по дії з заявою/повідомленням";
+}
+
+@section Scripts
+    {}
+
+<div class="content-item">
+    <div class="content-item-header">
+        <i class="icon icon-xlg icon-person-edit-card"></i>
+        <h2>Інформація про сповіщення</h2>
+    </div>
+    <div class="content-item-details">
+        <div class="content-item-inner content-details-wrapper col-2">
+            <div class="content-details">
+                <div class="content-details-group">
+                    <label>Дата створення та користувач, після дії якого було створено повідомлення</label>
+                    <p>
+                        @{
+                            @Html.Raw(Model.DateOfCreate.Value.ToString("D", CultureInfo.CreateSpecificCulture("uk")) + " (" + Model.DateOfCreate.Value.ToString("T", CultureInfo.CreateSpecificCulture("uk")) + ")");
+                            if (string.IsNullOrEmpty(Model.UserCreate))
+                            {
+                                @Html.Raw("<br/> автоматично створене сповіщення");
+                            }
+                            else
+                            {
+                                @Html.Raw("<br/> користувачем");
+                                @Html.DisplayFor(model => model.UserCreate)
+                            }
+
+                        }
+                    </p>
+                </div>
+            </div>
+
+            <div class="content-details">
+                <div class="content-details-group">
+                    <label>Тип та тема сповіщення</label>
+                    <p>@Html.DisplayFor(model => model.NotificationType)</p>
+                    <p>@Html.DisplayFor(model => model.NotificationSubject)</p>
+                </div>
+            </div>
+
+            <div class="content-details">
+                <div class="content-details-group">
+                    <label>Посилання на заяву/повідомлення, по якому створено сповіщення</label>
+                    <p>
+                        <a href="http://localhost:5060/PRL/PrlAppAlt/AltAppDetails/24609050-4299-4551-88a4-e59f2ad7ede6?sort=RemBranchInfoApplication">Заява на отримання ліцензії</a>
+                    </p>
+                </div>
+            </div>
+
+            <div class="content-details">
+                <div class="content-details-group">
+                    <label>Стан відправки сповіщення</label>
+                    <p>
+                        @{
+                            if (Model.IsSend == true)
+                            {
+                                @Html.Raw("Відправлено");
+                            }
+                            else
+                            {
+                                @Html.Raw("Не відправлено");
+                            }
+                        }
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-item-inner content-details-wrapper col-2">
+            <div class="content-details">
+                <div class="content-details-group">
+                    <label>Отримувачі</label>
+                    <p>
+                        @{
+                            List<string> maillist = new List<string>();
+                            maillist = JsonConvert.DeserializeObject<List<string>>(Model.RecipientJsonList);
+
+                            var strHtml = "";
+                            foreach (var elem in maillist)
+                            {
+                                strHtml += elem + "<br />";
+                            }
+                            @Html.Raw(strHtml);
+
+                        }
+                </div>
+            </div>
+
+            <div class="content-details">
+                <div class="content-details-group">
+                    <label>Текст</label>
+                    <p>@Html.Raw(Model.NotificationText)</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

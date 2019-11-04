@@ -1,0 +1,436 @@
+div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+caption,  {
+	margin: 0;
+	padding: 0;
+	font-size: 100%;
+	vertical-align: top;
+	background: transparent;
+}
+/*table, tbody, tfoot, thead, tr, th, td */
+
+html {
+	margin:0;
+	padding:0;
+	z-index:0;
+	background-color:#FFFFFF;
+	height:100%;
+	display: inline;}
+
+body {
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:13px;
+	margin: 0px;
+	color: rgb(0, 0, 0);
+	min-width: 680px;
+	font-size-adjust: none;
+	font-stretch: normal;
+	line-height:12px;
+	text-decoration:none;
+	font-weight:normal;
+	text-align:center;
+}
+
+a {
+	color: #062C57;
+	text-decoration: underline;}
+
+a:hover {
+	color: #062C57;
+	text-decoration: underline;}
+
+a:visited {
+	color: #062C57;
+	text-decoration: underline;}
+
+a img {
+    border: none;}
+
+input {
+	font: 100%/normal Arial, Helvetica, sans-serif;
+	vertical-align: middle;
+	font-size-adjust: none;
+	font-stretch: normal;}
+
+textarea {
+	font: 100%/normal Arial, Helvetica, sans-serif;
+	vertical-align: middle;
+	font-size-adjust: none;
+	font-stretch: normal;}
+
+select {
+	font: 100%/normal Arial, Helvetica, sans-serif;
+	vertical-align: middle;
+	font-size-adjust: none;
+	font-stretch: normal;}
+
+q {
+	quotes: none;}
+
+q::before {
+	content: "";}
+
+q::after {
+	content: "";}
+
+ul {
+	/*list-style-image: url(../Images/ul.gif);*/
+	list-style: square; /* outside;*/
+	padding: 2px 0px 0px 15px;
+	margin: 2px 0px 2px 15px;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:12px;
+}
+
+ul li {
+	padding: 3px 0px 0px 0px;
+	color:#0C2349;
+}
+
+td.header {
+	color:#0C2349;
+	font-size:21px;
+	font-weight:bold;
+	line-height:25px;
+	background:url(Images/Keys.png) top left no-repeat;}
+
+.header35 {
+	color:#0C2349;
+	font-size:25px;
+	font-weight:bold;
+	line-height:27px;}
+
+.header13 {
+	color:#0C2349;
+	font-size:19px;
+	font-weight:bold;
+	line-height:22px;}
+
+.header12 {
+	color:#0C2349;
+	font-size:14px;
+	font-weight:bold;
+	line-height:16px;}
+
+td.footer {
+	min-height:80px;
+	padding:0px 0px 0px 0px;}
+
+td.iitfooter {
+	background: #FFFFFF url(Images/iitfooter.jpg) no-repeat top left;
+	padding:0px 0px 33px 0px;}
+
+td.shadow {
+	background:url(Images/shadow.gif) repeat-x;
+	background-color:#FFFFFF;
+	height:8px;
+}
+
+/*----------------------------------------------------------------------------*/
+
+#iit {
+	margin: 0 auto;
+	width: 680px;
+	text-align: left;
+	position:relative;
+	z-index: 10;
+}
+
+#iit_background {
+	position:absolute;
+	height: 100%;
+	width: 100%;
+	min-width:680px;
+	top:128px;
+	z-index:1;
+}
+
+#iit_gradient_line1 {
+	transform-origin: 0 100%;
+	height: 360px;
+	/*background:linear-gradient(to right, rgba(3, 35, 74, 1), rgba(3, 67, 129, 1)) no-repeat;
+	background: -webkit-linear-gradient(left, rgba(3, 35, 74, 1), rgba(3, 67, 129, 1)) no-repeat;*/
+	background-size:100% 360px;
+}
+
+#iit_gradient_shadow_line1 {
+	transform-origin: 0 100%;
+	height: 360px;
+	background:linear-gradient(to bottom, rgba(255, 255, 255, 0.1), transparent) no-repeat;
+	background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.1), transparent) no-repeat;
+	background-size:100% 360px;
+}
+
+/*----------------------------------------------------------------------------*/
+
+#iit_line0 {
+	font-size:14px;
+	text-decoration:none;
+	font-weight:normal;
+	width:680px;
+	height:128px;
+	display:block;
+	margin:0px;
+	top:0px;
+	padding:0px;
+	overflow:hidden;
+	z-index:100;
+}
+
+/*----------------------------------------------------------------------------*/
+
+#iit_line1 {
+	font-size:14px;
+	text-decoration:none;
+	font-weight:normal;
+	width:680px;
+	height:100%;
+	display:block;
+	background-size:100% 360px;
+	margin:0px;
+	top:0px;
+	padding:0px;
+	overflow:hidden;
+	z-index:100;
+	text-align:left;
+}
+
+#iit_line1 .headerwhite1 {
+	color:#FFFFFF;
+	font-size:28px;
+	line-height:28px;
+	text-decoration:none;
+	font-weight:bold;
+	padding:20px 0px 0px 0px;
+	text-align:left;
+}
+
+#iit_line1 output {
+	line-height: 16px;
+	display:inline-table;
+}
+
+#iit_line1 output ul {
+	padding-top: 0px;
+	margin: 0px;
+}
+
+#iit_line1 .styled-select1 select {
+	background: transparent;
+	width: 300px;
+	border: 0;
+	border-radius: 0;
+	-webkit-appearance: none;
+	overflow:hidden;
+}
+
+#iit_line1 .styled-select1 {
+	width: 300px;
+	height: 18px;
+	overflow: hidden;
+	padding:0px 0px 0px 0px;
+	border:1px solid;
+}
+
+div.SeparatorLine{
+	transform-origin: 0 100%;
+	height: 0px;
+	border-top: 1px solid #0C234B;
+	border-bottom: 1px solid #FFFFFF;
+	margin-top:10px;
+}
+
+div.SmoothGradient{
+	transform-origin: 0 100%;
+	height: 4px;
+	margin-bottom:10px;
+	background:linear-gradient(to bottom, rgba(255, 255, 255, 0.1), transparent);
+	background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.1), transparent);
+}
+
+href {
+	color: white;
+}
+
+.MainPageMenuBlock {
+	width:185px;
+}
+.MainPageMenuContent {
+	background-color:#FFFFFF;
+	min-width:455px;
+	min-height:800px;
+	margin: 4px 0px 0px 0px;
+	padding-left:20px;
+	padding-right:20px;
+}
+.SelectFile {
+	width:99%;
+}
+#MainPageHeaderTitle {
+	margin-bottom:0px;
+	z-index:100;
+}
+
+ul.MainPageMenuTabs {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	color:#FFFFFF;
+}
+
+ul.MainPageMenuTabs li a {
+	text-decoration: none;
+	display: block;
+	padding: 12px;
+	color:#FFFFFF;
+}
+
+.MainPageMenuTabs li.MainPageMenuTab {
+	height:49px;
+	margin:3px 0px 0px 0px;
+	background:url('Images/ButtonTab.png') no-repeat;
+	background-size:100%;
+	font-family:Arial;
+	color:#FFFFFF;
+}
+
+.MainPageMenuTabs li.MainPageMenuTab a {
+	display:block;
+	background-size:100%;
+	text-decoration:none;
+	color:#FFFFFF;
+}
+
+.MainPageMenuTabs li.MainPageMenuTab a:hover {
+	background-size:100%;
+	text-decoration:underline;
+	color:#FFFFFF;
+}
+
+.MainPageMenuTabs li.MainPageMenuSelectedTab {
+	height:49px;
+	margin:3px 0px 0px 0px;
+	background:url('Images/ButtonTabLight.png') no-repeat;
+	background-size:100%;
+	color:#0C234B;
+}
+
+.MainPageMenuTabs li.MainPageMenuSelectedTab A {
+	display:block;
+	color:#0C234B;
+}
+
+
+.MainPageMenuPanelSelected {
+	display:block;
+}
+
+.ImageInTextImageContainer {
+	float: left;
+}
+
+.TextInTextImageContainer {
+	display: block;
+	vertical-align:text-top;
+	line-height:normal;
+	padding-left: 18px;
+}
+
+.SubMenuContent {
+	padding-left: 18px;
+	padding-right: 18px;
+	padding-top: 1em;
+}
+
+.TextHeaderH3 {
+	font-size:18px;
+	font-weight:bold;
+	color:#0C234B;
+	margin:0px;
+	padding:10px 0px 0px 0px;
+}
+
+.TextLabel {
+	line-height: 16px;
+}
+
+.TextEdit {
+	width:99%;
+	margin-bottom: 1em;
+}
+
+.TextArea {
+	min-height:5em;
+	width:99%;
+	resize:vertical; 
+}
+
+.PasswordEdit {
+}
+
+.Checkbox {
+}
+
+/*----------------------------------------------------------------------------*/
+
+.FileDropZoneMessage {
+	padding: 15px 25px;
+	text-align:center;
+}
+
+.FileDropZoneBorder {
+	border: 2px dashed #0C234B;
+	border-radius: 5px;
+	color: #0C234B;
+	height: 145px;
+	margin:15px;
+}
+
+.FileDropZone {
+	margin-top: 3px;
+	border: 1px solid #0C234B;
+}
+
+/*----------------------------------------------------------------------------*/
+
+#iit_line1 #buttonitem {
+	vertical-align:top;
+	text-align:center;
+	width:136px;
+	height:32px;
+	border:0px solid #FF0000;
+	overflow:hidden;
+	font-size:13px;
+	line-height:14px;
+	font-family:Arial,Tahoma,Helvetica;
+	text-decoration:none;
+	font-weight:bold;
+}
+
+#iit_line1 #buttonitem a {
+	display: block;
+	padding: 6px 7px 14px 5px;
+	color: #FFFFFF;
+	text-decoration:none;
+	background:url(Images/Button.png) no-repeat;
+	background-size: 100% 100%;
+}
+
+#iit_line1 #buttonitem a:hover {
+	padding: 6px 7px 14px 5px;
+	color: #FFFFFF;
+	text-decoration:none;
+	background:url(Images/ButtonHover.png) no-repeat;
+	background-size: 100% 100%;
+}
+
+/*----------------------------------------------------------------------------*/

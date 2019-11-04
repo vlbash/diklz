@@ -1,0 +1,163 @@
+﻿@model IEnumerable<App.Data.DTO.BRN.BranchListDTO>
+
+<script>
+    $(document).ready(function () {
+        $("#create-tds").on("click",
+            function(e) {
+                e.preventDefault();
+                debugger;
+                $.ajax({
+                    url: '@Url.Action("CreateTds", "Branch")',
+                    data: {
+                        appId: '@ViewBag.ApplicationId',
+                    },
+
+                    success: function(data) {
+                        if (data.success) {
+
+                        } else {
+                            alert(data.ErrorMessage);
+                        }
+                    }
+                });
+            });
+
+        $("#confirm").on("click",
+            function(e) {
+                e.preventDefault();
+
+                var activityTypeItems = [];
+
+                $('.branch li.selected input').each(function(index, value) {
+                    activityTypeItems.push($(value).val());
+                });
+                var selectedItemId = JSON.stringify(activityTypeItems);
+
+                $.ajax({
+                    url: '@Url.Action("CreateDls", "Branch")',
+                    data: {
+                        selectedItemId
+                    },
+
+                    success: function(data) {
+                        if (data.success) {
+                            $(".multiSelectBranchList").hide();
+                            $("#create-tds").show();
+                            $("#create-dls").show();
+                        } else {
+                            alert(data.ErrorMessage);
+                        }
+
+                    }
+                });
+            });
+
+        $("#create-dls").on("click",
+            function() {
+                $(this).hide();
+                $("#create-tds").hide();
+                $(".multiSelectBranchList").show();
+            });
+    })
+</script>
+
+
+
+<div class="content-partial-header">
+    @{
+        if (ViewBag.IsAddable)
+        {
+            <a class="content-item-btn data-tab icon-sm icon-add"
+               data-tab
+               href="@Url.Action("Edit", "Branch", new {Area = "BRN"})?appId=@ViewBag.ApplicationId&sort=@ViewBag.sort"
+               data-title="Додати МПД"
+               data-tooltipleft="1">
+            </a>
+        }
+    }
+</div>
+<div class="content-list-wrapper" data-pgparams="@ViewBag.FormParamList">
+    <div class="content-list content-list-header">
+        <div class="content-list-edit"></div>
+        <div class="content-list-item grid-container">
+            <div class="grid" data-grid="2">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.DisplayNameFor(model => model.Name)
+                    </p>
+                </div>
+            </div>
+            <div class="grid" data-grid="2">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.DisplayNameFor(model => model.PhoneNumber)
+                    </p>
+                </div>
+            </div>
+            @*<div class="grid" data-grid="2">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.DisplayNameFor(model => model.Status)
+                    </p>
+                </div>
+            </div>*@
+        </div>
+        <div class="content-list-delete"></div>
+    </div>
+    @foreach (var item in Model)
+    {
+
+        <div class="content-list">
+            <div class="content-list-edit">
+                <a class="btn-link btn btn-icon btn-square icon-md icon-eye"
+                   asp-area="BRN"
+                   asp-action="Details"
+                   asp-controller="Branch"
+                   asp-route-id="@item.Id"
+                   data-title="Перегляд"
+                   data-tooltipright='1'>
+                </a>
+
+            </div>
+            <a class="content-list-link">
+                <div class="content-list-item grid-container-nested">
+                    <div class="grid">
+                        <div class="grid-inner">
+                            <p>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </p>
+                        </div>
+                    </div>
+                    <div class="grid">
+                        <div class="grid-inner">
+                            <p>
+                                @Html.DisplayFor(modelItem => item.PhoneNumber)
+                            </p>
+                        </div>
+                    </div>
+                    @*<div class="grid">
+                        <div class="grid-inner">
+                            <p>
+                                @Html.DisplayFor(modelItem => item.Status)
+                            </p>
+                        </div>
+                    </div>*@
+                </div>
+            </a>
+            <div class="content-list-delete">
+                @if (item.isEditable == true)
+                {
+                    <a class="btn btn-icon btn-square icon-md icon-remove"
+                       asp-area="BRN"
+                       asp-action="DeleteBranch"
+                       asp-controller="Branch"
+                       data-title="Видалити"
+                       data-tooltipleft='1'
+                       asp-route-id="@item.Id">
+                    </a>
+                }
+            </div>
+        </div>
+
+    }
+</div>

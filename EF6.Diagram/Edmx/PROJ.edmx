@@ -1,0 +1,2636 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Edmx Version="3.0" xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <Runtime>
+    <ConceptualModels>
+      <Schema Namespace="EF6.Diagram.Cost" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CplCalendarPlan" customannotation:ClrType="EF6.Diagram.Cost.Entities.CPL.CplCalendarPlan, EF6.Diagram, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DocStatusEnumCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Number" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CalendarPlanDate" Type="DateTime" Nullable="false" />
+          <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ProjectId" Type="Guid" Nullable="false" />
+          <Property Name="RecordState" Type="Self.RecordState" Nullable="false" />
+          <Property Name="Caption" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedBy_Id" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedOn" Type="DateTime" />
+          <Property Name="CreatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy_Id" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="CalendarPlanStages" Relationship="Self.CplCalendarPlanStage_CalendarPlan" FromRole="CplCalendarPlanStage_CalendarPlan_Target" ToRole="CplCalendarPlanStage_CalendarPlan_Source" />
+          <NavigationProperty Name="Project" Relationship="Self.CplCalendarPlan_Project" FromRole="CplCalendarPlan_Project_Source" ToRole="CplCalendarPlan_Project_Target" />
+        </EntityType>
+        <EntityType Name="CplCalendarPlanStage" customannotation:ClrType="EF6.Diagram.Cost.Entities.CPL.CplCalendarPlanStage, EF6.Diagram, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Number" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DateBegin" Type="DateTime" Nullable="false" />
+          <Property Name="DateEnd" Type="DateTime" Nullable="false" />
+          <Property Name="Price" Type="Double" Nullable="false" />
+          <Property Name="CalendarPlanId" Type="Guid" Nullable="false" />
+          <Property Name="RecordState" Type="Self.RecordState" Nullable="false" />
+          <Property Name="Caption" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedBy_Id" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedOn" Type="DateTime" />
+          <Property Name="CreatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy_Id" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="CalendarPlan" Relationship="Self.CplCalendarPlanStage_CalendarPlan" FromRole="CplCalendarPlanStage_CalendarPlan_Source" ToRole="CplCalendarPlanStage_CalendarPlan_Target" />
+          <NavigationProperty Name="CalendarPlanWorks" Relationship="Self.CplCalendarPlanWork_CalendarPlanStage" FromRole="CplCalendarPlanWork_CalendarPlanStage_Target" ToRole="CplCalendarPlanWork_CalendarPlanStage_Source" />
+        </EntityType>
+        <EntityType Name="CplCalendarPlanWork" customannotation:ClrType="EF6.Diagram.Cost.Entities.CPL.CplCalendarPlanWork, EF6.Diagram, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Number" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DateBegin" Type="DateTime" Nullable="false" />
+          <Property Name="DateEnd" Type="DateTime" Nullable="false" />
+          <Property Name="Price" Type="Double" Nullable="false" />
+          <Property Name="NumberOfUnits" Type="Double" Nullable="false" />
+          <Property Name="TargetValue" Type="Double" Nullable="false" />
+          <Property Name="CalendarPlanStageId" Type="Guid" Nullable="false" />
+          <Property Name="WorkTypeId" Type="Guid" Nullable="false" />
+          <Property Name="ContractId" Type="Guid" Nullable="false" />
+          <Property Name="RecordState" Type="Self.RecordState" Nullable="false" />
+          <Property Name="Caption" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedBy_Id" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedOn" Type="DateTime" />
+          <Property Name="CreatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy_Id" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="CalendarPlanStage" Relationship="Self.CplCalendarPlanWork_CalendarPlanStage" FromRole="CplCalendarPlanWork_CalendarPlanStage_Source" ToRole="CplCalendarPlanWork_CalendarPlanStage_Target" />
+          <NavigationProperty Name="Contract" Relationship="Self.CplCalendarPlanWork_Contract" FromRole="CplCalendarPlanWork_Contract_Source" ToRole="CplCalendarPlanWork_Contract_Target" />
+          <NavigationProperty Name="PlannedResources" Relationship="Self.ResPlannedResource_CalendarPlanWork" FromRole="ResPlannedResource_CalendarPlanWork_Target" ToRole="ResPlannedResource_CalendarPlanWork_Source" />
+          <NavigationProperty Name="WorkType" Relationship="Self.DictionaryWorkType_CalendarPlanWorks" FromRole="DictionaryWorkType_CalendarPlanWorks_Target" ToRole="DictionaryWorkType_CalendarPlanWorks_Source" />
+        </EntityType>
+        <EntityType Name="ProjContract" customannotation:ClrType="EF6.Diagram.Cost.Entities.PROJ.ProjContract, EF6.Diagram, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ParentId" Type="Guid" />
+          <Property Name="ContractDate" Type="DateTime" Nullable="false" />
+          <Property Name="Number" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ContractStatusEnumCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ContractTypeEnumCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerId" Type="Guid" Nullable="false" />
+          <Property Name="ExecutorId" Type="Guid" Nullable="false" />
+          <Property Name="SignerСustomerId" Type="Guid" Nullable="false" />
+          <Property Name="SignerExecutorId" Type="Guid" Nullable="false" />
+          <Property Name="ProjectId" Type="Guid" Nullable="false" />
+          <Property Name="RecordState" Type="Self.RecordState" Nullable="false" />
+          <Property Name="Caption" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedBy_Id" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedOn" Type="DateTime" />
+          <Property Name="CreatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy_Id" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Children" Relationship="Self.ProjContract_Children" FromRole="ProjContract_Children_Source" ToRole="ProjContract_Children_Target" />
+          <NavigationProperty Name="Customer" Relationship="Self.ProjContract_Customer" FromRole="ProjContract_Customer_Source" ToRole="ProjContract_Customer_Target" />
+          <NavigationProperty Name="Executor" Relationship="Self.ProjContract_Executor" FromRole="ProjContract_Executor_Source" ToRole="ProjContract_Executor_Target" />
+          <NavigationProperty Name="Parent" Relationship="Self.ProjContract_Children" FromRole="ProjContract_Children_Target" ToRole="ProjContract_Children_Source" />
+          <NavigationProperty Name="Project" Relationship="Self.ProjContract_Project" FromRole="ProjContract_Project_Source" ToRole="ProjContract_Project_Target" />
+          <NavigationProperty Name="SignerExecutor" Relationship="Self.ProjContract_SignerExecutor" FromRole="ProjContract_SignerExecutor_Source" ToRole="ProjContract_SignerExecutor_Target" />
+          <NavigationProperty Name="SignerСustomer" Relationship="Self.ProjContract_SignerСustomer" FromRole="ProjContract_SignerСustomer_Source" ToRole="ProjContract_SignerСustomer_Target" />
+        </EntityType>
+        <EntityType Name="OrgUnit" customannotation:ClrType="EF6.Diagram.Cost.Entities.ORG.OrgUnit, EF6.Diagram, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DerivedClass" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Code" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ParentId" Type="Guid" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Category" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RecordState" Type="Self.RecordState" Nullable="false" />
+          <Property Name="Caption" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedBy_Id" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedOn" Type="DateTime" />
+          <Property Name="CreatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy_Id" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="ExtraProperties" Relationship="Self.OrgUnit_ExtraProperties" FromRole="OrgUnit_ExtraProperties_Source" ToRole="OrgUnit_ExtraProperties_Target" />
+          <NavigationProperty Name="OrgUnitAtuAddresses" Relationship="Self.OrgUnit_OrgUnitAtuAddresses" FromRole="OrgUnit_OrgUnitAtuAddresses_Source" ToRole="OrgUnit_OrgUnitAtuAddresses_Target" />
+          <NavigationProperty Name="Participants" Relationship="Self.ProjParticipant_OrgUnit" FromRole="ProjParticipant_OrgUnit_Target" ToRole="ProjParticipant_OrgUnit_Source" />
+        </EntityType>
+        <EntityType Name="OrgExtraProperty" customannotation:ClrType="EF6.Diagram.Cost.Entities.ORG.OrgExtraProperty, EF6.Diagram, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EnumCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RecordState" Type="Self.RecordState" Nullable="false" />
+          <Property Name="Caption" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedBy_Id" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedOn" Type="DateTime" />
+          <Property Name="CreatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy_Id" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OrgUnitAtuAddress" customannotation:ClrType="EF6.Diagram.Cost.Entities.ORG.OrgUnitAtuAddress, EF6.Diagram, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AtuAddressId" Type="Guid" Nullable="false" />
+          <Property Name="RecordState" Type="Self.RecordState" Nullable="false" />
+          <Property Name="Caption" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedBy_Id" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedOn" Type="DateTime" />
+          <Property Name="CreatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy_Id" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProjParticipant" customannotation:ClrType="EF6.Diagram.Cost.Entities.PROJ.ProjParticipant, EF6.Diagram, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectId" Type="Guid" Nullable="false" />
+          <Property Name="ParticipantRoleEnumCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="OrgUnitId" Type="Guid" Nullable="false" />
+          <Property Name="RecordState" Type="Self.RecordState" Nullable="false" />
+          <Property Name="Caption" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedBy_Id" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedOn" Type="DateTime" />
+          <Property Name="CreatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy_Id" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="OrgUnit" Relationship="Self.ProjParticipant_OrgUnit" FromRole="ProjParticipant_OrgUnit_Source" ToRole="ProjParticipant_OrgUnit_Target" />
+          <NavigationProperty Name="Project" Relationship="Self.ProjProject_Participants" FromRole="ProjProject_Participants_Target" ToRole="ProjProject_Participants_Source" />
+        </EntityType>
+        <EntityType Name="ProjProject" customannotation:ClrType="EF6.Diagram.Cost.Entities.PROJ.ProjProject, EF6.Diagram, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DateBegin" Type="DateTime" Nullable="false" />
+          <Property Name="DateEnd" Type="DateTime" Nullable="false" />
+          <Property Name="Price" Type="Double" Nullable="false" />
+          <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RegionId" Type="Guid" Nullable="false" />
+          <Property Name="WorkTypeEnumCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FinansingTypeEnumCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ProjectStatusEnumCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ObjectCharacteristicId" Type="Guid" Nullable="false" />
+          <Property Name="RecordState" Type="Self.RecordState" Nullable="false" />
+          <Property Name="Caption" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedBy_Id" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedOn" Type="DateTime" />
+          <Property Name="CreatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy_Id" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Coordinates" Relationship="Self.ProjProjectAtuCoordinate_Project" FromRole="ProjProjectAtuCoordinate_Project_Target" ToRole="ProjProjectAtuCoordinate_Project_Source" />
+          <NavigationProperty Name="ObjectCharacteristic" Relationship="Self.ProjObjectCharacteristic_Projects" FromRole="ProjObjectCharacteristic_Projects_Target" ToRole="ProjObjectCharacteristic_Projects_Source" />
+          <NavigationProperty Name="Participants" Relationship="Self.ProjProject_Participants" FromRole="ProjProject_Participants_Source" ToRole="ProjProject_Participants_Target" />
+          <NavigationProperty Name="Region" Relationship="Self.ProjProject_Region" FromRole="ProjProject_Region_Source" ToRole="ProjProject_Region_Target" />
+        </EntityType>
+        <EntityType Name="ProjProjectAtuCoordinate" customannotation:ClrType="EF6.Diagram.Cost.Entities.PROJ.JoinTables.ProjProjectAtuCoordinate, EF6.Diagram, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectId" Type="Guid" Nullable="false" />
+          <Property Name="CoordinatesId" Type="Guid" Nullable="false" />
+          <Property Name="RecordState" Type="Self.RecordState" Nullable="false" />
+          <Property Name="Caption" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedBy_Id" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedOn" Type="DateTime" />
+          <Property Name="CreatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy_Id" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Coordinate" Relationship="Self.AtuCoordinate_Projects" FromRole="AtuCoordinate_Projects_Target" ToRole="AtuCoordinate_Projects_Source" />
+          <NavigationProperty Name="Project" Relationship="Self.ProjProjectAtuCoordinate_Project" FromRole="ProjProjectAtuCoordinate_Project_Source" ToRole="ProjProjectAtuCoordinate_Project_Target" />
+        </EntityType>
+        <EntityType Name="AtuCoordinate" customannotation:ClrType="EF6.Diagram.Cost.Entities.ATU.AtuCoordinate, EF6.Diagram, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Latitude" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Longitude" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RecordState" Type="Self.RecordState" Nullable="false" />
+          <Property Name="Caption" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedBy_Id" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedOn" Type="DateTime" />
+          <Property Name="CreatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy_Id" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Projects" Relationship="Self.AtuCoordinate_Projects" FromRole="AtuCoordinate_Projects_Source" ToRole="AtuCoordinate_Projects_Target" />
+        </EntityType>
+        <EntityType Name="ProjObjectCharacteristic" customannotation:ClrType="EF6.Diagram.Cost.Entities.PROJ.ProjObjectCharacteristic, EF6.Diagram, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Number" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ConstObjTypeEnumCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ObjectTypeEnumCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ObjectCategoryEnumCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RecordState" Type="Self.RecordState" Nullable="false" />
+          <Property Name="Caption" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedBy_Id" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedOn" Type="DateTime" />
+          <Property Name="CreatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy_Id" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Projects" Relationship="Self.ProjObjectCharacteristic_Projects" FromRole="ProjObjectCharacteristic_Projects_Source" ToRole="ProjObjectCharacteristic_Projects_Target" />
+        </EntityType>
+        <EntityType Name="AtuRegion" customannotation:ClrType="EF6.Diagram.Cost.Entities.ATU.AtuRegion, EF6.Diagram, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Code" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="AtuCountryId" Type="Guid" Nullable="false" />
+          <Property Name="RecordState" Type="Self.RecordState" Nullable="false" />
+          <Property Name="Caption" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedBy_Id" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedOn" Type="DateTime" />
+          <Property Name="CreatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy_Id" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="AtuCountry" Relationship="Self.AtuCountry_AtuRegions" FromRole="AtuCountry_AtuRegions_Target" ToRole="AtuCountry_AtuRegions_Source" />
+          <NavigationProperty Name="Cities" Relationship="Self.AtuCity_AtuRegion" FromRole="AtuCity_AtuRegion_Target" ToRole="AtuCity_AtuRegion_Source" />
+        </EntityType>
+        <EntityType Name="AtuCountry" customannotation:ClrType="EF6.Diagram.Cost.Entities.ATU.AtuCountry, EF6.Diagram, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Code" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="RecordState" Type="Self.RecordState" Nullable="false" />
+          <Property Name="Caption" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedBy_Id" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedOn" Type="DateTime" />
+          <Property Name="CreatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy_Id" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="AtuRegions" Relationship="Self.AtuCountry_AtuRegions" FromRole="AtuCountry_AtuRegions_Source" ToRole="AtuCountry_AtuRegions_Target" />
+        </EntityType>
+        <EntityType Name="AtuCity" customannotation:ClrType="EF6.Diagram.Cost.Entities.ATU.AtuCity, EF6.Diagram, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="AtuRegionGuid" Type="Guid" Nullable="false" />
+          <Property Name="RecordState" Type="Self.RecordState" Nullable="false" />
+          <Property Name="Caption" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedBy_Id" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedOn" Type="DateTime" />
+          <Property Name="CreatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy_Id" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="AtuRegion" Relationship="Self.AtuCity_AtuRegion" FromRole="AtuCity_AtuRegion_Source" ToRole="AtuCity_AtuRegion_Target" />
+          <NavigationProperty Name="Dictrict" Relationship="Self.AtuDistrict_City" FromRole="AtuDistrict_City_Target" ToRole="AtuDistrict_City_Source" />
+          <NavigationProperty Name="Streets" Relationship="Self.AtuStreet_City" FromRole="AtuStreet_City_Target" ToRole="AtuStreet_City_Source" />
+        </EntityType>
+        <EntityType Name="AtuDistrict" customannotation:ClrType="EF6.Diagram.Cost.Entities.ATU.AtuDistrict, EF6.Diagram, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CityId" Type="Guid" Nullable="false" />
+          <Property Name="Code" Type="Int32" Nullable="false" />
+          <Property Name="RecordState" Type="Self.RecordState" Nullable="false" />
+          <Property Name="Caption" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedBy_Id" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedOn" Type="DateTime" />
+          <Property Name="CreatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy_Id" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="City" Relationship="Self.AtuDistrict_City" FromRole="AtuDistrict_City_Source" ToRole="AtuDistrict_City_Target" />
+        </EntityType>
+        <EntityType Name="AtuStreet" customannotation:ClrType="EF6.Diagram.Cost.Entities.ATU.AtuStreet, EF6.Diagram, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CityId" Type="Guid" Nullable="false" />
+          <Property Name="RecordState" Type="Self.RecordState" Nullable="false" />
+          <Property Name="Caption" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedBy_Id" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedOn" Type="DateTime" />
+          <Property Name="CreatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy_Id" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="City" Relationship="Self.AtuStreet_City" FromRole="AtuStreet_City_Source" ToRole="AtuStreet_City_Target" />
+        </EntityType>
+        <EntityType Name="OrgEmployee" customannotation:ClrType="EF6.Diagram.Cost.Entities.ORG.OrgEmployee, EF6.Diagram, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrgUnitSpecializationId" Type="Guid" />
+          <Property Name="PersonId" Type="Guid" Nullable="false" />
+          <Property Name="RecordState" Type="Self.RecordState" Nullable="false" />
+          <Property Name="Caption" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedBy_Id" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedOn" Type="DateTime" />
+          <Property Name="CreatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy_Id" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="OrgUnitSpecialization" Relationship="Self.OrgEmployee_OrgUnitSpecialization" FromRole="OrgEmployee_OrgUnitSpecialization_Source" ToRole="OrgEmployee_OrgUnitSpecialization_Target" />
+          <NavigationProperty Name="Person" Relationship="Self.OrgEmployee_Person" FromRole="OrgEmployee_Person_Source" ToRole="OrgEmployee_Person_Target" />
+        </EntityType>
+        <EntityType Name="OrgUnitSpecialization" customannotation:ClrType="EF6.Diagram.Cost.Entities.ORG.OrgUnitSpecialization, EF6.Diagram, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RecordState" Type="Self.RecordState" Nullable="false" />
+          <Property Name="Caption" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedBy_Id" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedOn" Type="DateTime" />
+          <Property Name="CreatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy_Id" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Person" customannotation:ClrType="EF6.Diagram.Cost.Entities.Person, EF6.Diagram, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MiddleName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FullName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Location" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Birthday" Type="DateTime" Nullable="false" />
+          <Property Name="GenderEnumCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Photo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" />
+          <Property Name="IPN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NoIPN" Type="Boolean" Nullable="false" />
+          <Property Name="IdentityDocumentTypeEnumCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DocPrefix" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PersonalDocumentNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="PersonalDocumentAuthority" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DocumentIssueDate" Type="DateTime" />
+          <Property Name="ExpirationDate" Type="DateTime" />
+          <Property Name="RecordState" Type="Self.RecordState" Nullable="false" />
+          <Property Name="Caption" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedBy_Id" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedOn" Type="DateTime" />
+          <Property Name="CreatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy_Id" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ResPlannedResource" customannotation:ClrType="EF6.Diagram.Cost.Entities.RES.ResPlannedResource, EF6.Diagram, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ResourceStatementId" Type="Guid" Nullable="false" />
+          <Property Name="CalendarPlanWorkId" Type="Guid" Nullable="false" />
+          <Property Name="ResourceId" Type="Guid" Nullable="false" />
+          <Property Name="TotalVolume" Type="Double" Nullable="false" />
+          <Property Name="RecordState" Type="Self.RecordState" Nullable="false" />
+          <Property Name="Caption" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedBy_Id" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedOn" Type="DateTime" />
+          <Property Name="CreatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy_Id" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="CalendarPlanWork" Relationship="Self.ResPlannedResource_CalendarPlanWork" FromRole="ResPlannedResource_CalendarPlanWork_Source" ToRole="ResPlannedResource_CalendarPlanWork_Target" />
+          <NavigationProperty Name="Resource" Relationship="Self.DictionaryResource_PlannedResources" FromRole="DictionaryResource_PlannedResources_Target" ToRole="DictionaryResource_PlannedResources_Source" />
+          <NavigationProperty Name="ResourceStatement" Relationship="Self.ResResourceStatement_PlannedResources" FromRole="ResResourceStatement_PlannedResources_Target" ToRole="ResResourceStatement_PlannedResources_Source" />
+        </EntityType>
+        <EntityType Name="DictionaryResource" customannotation:ClrType="EF6.Diagram.Cost.Entities.RES.DictionaryResource, EF6.Diagram, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ConstObjTypeEnumCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ResursTypeEnumCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Code" Type="Double" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MinPrice" Type="Double" Nullable="false" />
+          <Property Name="MaxPrice" Type="Double" Nullable="false" />
+          <Property Name="Characteristic" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ITP" Type="Boolean" Nullable="false" />
+          <Property Name="Enabled" Type="Boolean" Nullable="false" />
+          <Property Name="RecordState" Type="Self.RecordState" Nullable="false" />
+          <Property Name="Caption" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedBy_Id" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedOn" Type="DateTime" />
+          <Property Name="CreatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy_Id" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="PlannedResources" Relationship="Self.DictionaryResource_PlannedResources" FromRole="DictionaryResource_PlannedResources_Source" ToRole="DictionaryResource_PlannedResources_Target" />
+        </EntityType>
+        <EntityType Name="ResResourceStatement" customannotation:ClrType="EF6.Diagram.Cost.Entities.RES.ResResourceStatement, EF6.Diagram, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DocStatusEnumCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CalendarPlanId" Type="Guid" Nullable="false" />
+          <Property Name="Number" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ResourceStatementDate" Type="DateTime" Nullable="false" />
+          <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RecordState" Type="Self.RecordState" Nullable="false" />
+          <Property Name="Caption" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedBy_Id" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedOn" Type="DateTime" />
+          <Property Name="CreatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy_Id" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="CalendarPlan" Relationship="Self.ResResourceStatement_CalendarPlan" FromRole="ResResourceStatement_CalendarPlan_Source" ToRole="ResResourceStatement_CalendarPlan_Target" />
+          <NavigationProperty Name="PlannedResources" Relationship="Self.ResResourceStatement_PlannedResources" FromRole="ResResourceStatement_PlannedResources_Source" ToRole="ResResourceStatement_PlannedResources_Target" />
+        </EntityType>
+        <EntityType Name="DictionaryWorkType" customannotation:ClrType="EF6.Diagram.Cost.Entities.CPL.DictionaryWorkType, EF6.Diagram, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ConstObjTypeEnumCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RecordStatusEnumCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Code" Type="Double" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" />
+          <Property Name="RecordState" Type="Self.RecordState" Nullable="false" />
+          <Property Name="Caption" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedBy_Id" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedOn" Type="DateTime" />
+          <Property Name="CreatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy_Id" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="CalendarPlanWorks" Relationship="Self.DictionaryWorkType_CalendarPlanWorks" FromRole="DictionaryWorkType_CalendarPlanWorks_Source" ToRole="DictionaryWorkType_CalendarPlanWorks_Target" />
+        </EntityType>
+        <EnumType Name="RecordState" IsFlags="false" customannotation:ClrType="Astum.Core.Common.Enums.RecordState, EF6.Diagram, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" UnderlyingType="Byte">
+          <Member Name="P" Value="1" />
+          <Member Name="N" Value="2" />
+          <Member Name="Arc" Value="3" />
+          <Member Name="D" Value="4" />
+          <Member Name="A" Value="5" />
+        </EnumType>
+        <Association Name="CplCalendarPlanStage_CalendarPlan">
+          <End Role="CplCalendarPlanStage_CalendarPlan_Source" Type="Self.CplCalendarPlanStage" Multiplicity="*" />
+          <End Role="CplCalendarPlanStage_CalendarPlan_Target" Type="Self.CplCalendarPlan" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <ReferentialConstraint>
+            <Principal Role="CplCalendarPlanStage_CalendarPlan_Target">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CplCalendarPlanStage_CalendarPlan_Source">
+              <PropertyRef Name="CalendarPlanId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CplCalendarPlanWork_CalendarPlanStage">
+          <End Role="CplCalendarPlanWork_CalendarPlanStage_Source" Type="Self.CplCalendarPlanWork" Multiplicity="*" />
+          <End Role="CplCalendarPlanWork_CalendarPlanStage_Target" Type="Self.CplCalendarPlanStage" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <ReferentialConstraint>
+            <Principal Role="CplCalendarPlanWork_CalendarPlanStage_Target">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CplCalendarPlanWork_CalendarPlanStage_Source">
+              <PropertyRef Name="CalendarPlanStageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ProjContract_Children">
+          <End Role="ProjContract_Children_Source" Type="Self.ProjContract" Multiplicity="0..1" />
+          <End Role="ProjContract_Children_Target" Type="Self.ProjContract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProjContract_Children_Source">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjContract_Children_Target">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="OrgUnit_ExtraProperties">
+          <End Role="OrgUnit_ExtraProperties_Source" Type="Self.OrgUnit" Multiplicity="0..1" />
+          <End Role="OrgUnit_ExtraProperties_Target" Type="Self.OrgExtraProperty" Multiplicity="*" />
+        </Association>
+        <Association Name="OrgUnit_OrgUnitAtuAddresses">
+          <End Role="OrgUnit_OrgUnitAtuAddresses_Source" Type="Self.OrgUnit" Multiplicity="0..1" />
+          <End Role="OrgUnit_OrgUnitAtuAddresses_Target" Type="Self.OrgUnitAtuAddress" Multiplicity="*" />
+        </Association>
+        <Association Name="ProjParticipant_OrgUnit">
+          <End Role="ProjParticipant_OrgUnit_Source" Type="Self.ProjParticipant" Multiplicity="*" />
+          <End Role="ProjParticipant_OrgUnit_Target" Type="Self.OrgUnit" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <ReferentialConstraint>
+            <Principal Role="ProjParticipant_OrgUnit_Target">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjParticipant_OrgUnit_Source">
+              <PropertyRef Name="OrgUnitId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AtuCoordinate_Projects">
+          <End Role="AtuCoordinate_Projects_Source" Type="Self.AtuCoordinate" Multiplicity="0..1" />
+          <End Role="AtuCoordinate_Projects_Target" Type="Self.ProjProjectAtuCoordinate" Multiplicity="*" />
+        </Association>
+        <Association Name="ProjProjectAtuCoordinate_Project">
+          <End Role="ProjProjectAtuCoordinate_Project_Source" Type="Self.ProjProjectAtuCoordinate" Multiplicity="*" />
+          <End Role="ProjProjectAtuCoordinate_Project_Target" Type="Self.ProjProject" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <ReferentialConstraint>
+            <Principal Role="ProjProjectAtuCoordinate_Project_Target">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjProjectAtuCoordinate_Project_Source">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ProjObjectCharacteristic_Projects">
+          <End Role="ProjObjectCharacteristic_Projects_Source" Type="Self.ProjObjectCharacteristic" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ProjObjectCharacteristic_Projects_Target" Type="Self.ProjProject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProjObjectCharacteristic_Projects_Source">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjObjectCharacteristic_Projects_Target">
+              <PropertyRef Name="ObjectCharacteristicId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ProjProject_Participants">
+          <End Role="ProjProject_Participants_Source" Type="Self.ProjProject" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ProjProject_Participants_Target" Type="Self.ProjParticipant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProjProject_Participants_Source">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjProject_Participants_Target">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AtuCountry_AtuRegions">
+          <End Role="AtuCountry_AtuRegions_Source" Type="Self.AtuCountry" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AtuCountry_AtuRegions_Target" Type="Self.AtuRegion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AtuCountry_AtuRegions_Source">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AtuCountry_AtuRegions_Target">
+              <PropertyRef Name="AtuCountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AtuCity_AtuRegion">
+          <End Role="AtuCity_AtuRegion_Source" Type="Self.AtuCity" Multiplicity="*" />
+          <End Role="AtuCity_AtuRegion_Target" Type="Self.AtuRegion" Multiplicity="0..1" />
+        </Association>
+        <Association Name="AtuDistrict_City">
+          <End Role="AtuDistrict_City_Source" Type="Self.AtuDistrict" Multiplicity="*" />
+          <End Role="AtuDistrict_City_Target" Type="Self.AtuCity" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <ReferentialConstraint>
+            <Principal Role="AtuDistrict_City_Target">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AtuDistrict_City_Source">
+              <PropertyRef Name="CityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AtuStreet_City">
+          <End Role="AtuStreet_City_Source" Type="Self.AtuStreet" Multiplicity="*" />
+          <End Role="AtuStreet_City_Target" Type="Self.AtuCity" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <ReferentialConstraint>
+            <Principal Role="AtuStreet_City_Target">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AtuStreet_City_Source">
+              <PropertyRef Name="CityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ProjProject_Region">
+          <End Role="ProjProject_Region_Source" Type="Self.ProjProject" Multiplicity="*" />
+          <End Role="ProjProject_Region_Target" Type="Self.AtuRegion" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <ReferentialConstraint>
+            <Principal Role="ProjProject_Region_Target">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjProject_Region_Source">
+              <PropertyRef Name="RegionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ProjContract_Customer">
+          <End Role="ProjContract_Customer_Source" Type="Self.ProjContract" Multiplicity="*" />
+          <End Role="ProjContract_Customer_Target" Type="Self.OrgUnit" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <ReferentialConstraint>
+            <Principal Role="ProjContract_Customer_Target">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjContract_Customer_Source">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ProjContract_Executor">
+          <End Role="ProjContract_Executor_Source" Type="Self.ProjContract" Multiplicity="*" />
+          <End Role="ProjContract_Executor_Target" Type="Self.OrgUnit" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <ReferentialConstraint>
+            <Principal Role="ProjContract_Executor_Target">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjContract_Executor_Source">
+              <PropertyRef Name="ExecutorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ProjContract_Project">
+          <End Role="ProjContract_Project_Source" Type="Self.ProjContract" Multiplicity="*" />
+          <End Role="ProjContract_Project_Target" Type="Self.ProjProject" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <ReferentialConstraint>
+            <Principal Role="ProjContract_Project_Target">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjContract_Project_Source">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="OrgEmployee_OrgUnitSpecialization">
+          <End Role="OrgEmployee_OrgUnitSpecialization_Source" Type="Self.OrgEmployee" Multiplicity="*" />
+          <End Role="OrgEmployee_OrgUnitSpecialization_Target" Type="Self.OrgUnitSpecialization" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="OrgEmployee_OrgUnitSpecialization_Target">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrgEmployee_OrgUnitSpecialization_Source">
+              <PropertyRef Name="OrgUnitSpecializationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="OrgEmployee_Person">
+          <End Role="OrgEmployee_Person_Source" Type="Self.OrgEmployee" Multiplicity="*" />
+          <End Role="OrgEmployee_Person_Target" Type="Self.Person" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <ReferentialConstraint>
+            <Principal Role="OrgEmployee_Person_Target">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrgEmployee_Person_Source">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ProjContract_SignerExecutor">
+          <End Role="ProjContract_SignerExecutor_Source" Type="Self.ProjContract" Multiplicity="*" />
+          <End Role="ProjContract_SignerExecutor_Target" Type="Self.OrgEmployee" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <ReferentialConstraint>
+            <Principal Role="ProjContract_SignerExecutor_Target">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjContract_SignerExecutor_Source">
+              <PropertyRef Name="SignerExecutorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ProjContract_SignerСustomer">
+          <End Role="ProjContract_SignerСustomer_Source" Type="Self.ProjContract" Multiplicity="*" />
+          <End Role="ProjContract_SignerСustomer_Target" Type="Self.OrgEmployee" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <ReferentialConstraint>
+            <Principal Role="ProjContract_SignerСustomer_Target">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjContract_SignerСustomer_Source">
+              <PropertyRef Name="SignerСustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CplCalendarPlanWork_Contract">
+          <End Role="CplCalendarPlanWork_Contract_Source" Type="Self.CplCalendarPlanWork" Multiplicity="*" />
+          <End Role="CplCalendarPlanWork_Contract_Target" Type="Self.ProjContract" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <ReferentialConstraint>
+            <Principal Role="CplCalendarPlanWork_Contract_Target">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CplCalendarPlanWork_Contract_Source">
+              <PropertyRef Name="ContractId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ResPlannedResource_CalendarPlanWork">
+          <End Role="ResPlannedResource_CalendarPlanWork_Source" Type="Self.ResPlannedResource" Multiplicity="*" />
+          <End Role="ResPlannedResource_CalendarPlanWork_Target" Type="Self.CplCalendarPlanWork" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <ReferentialConstraint>
+            <Principal Role="ResPlannedResource_CalendarPlanWork_Target">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ResPlannedResource_CalendarPlanWork_Source">
+              <PropertyRef Name="CalendarPlanWorkId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DictionaryResource_PlannedResources">
+          <End Role="DictionaryResource_PlannedResources_Source" Type="Self.DictionaryResource" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DictionaryResource_PlannedResources_Target" Type="Self.ResPlannedResource" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DictionaryResource_PlannedResources_Source">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DictionaryResource_PlannedResources_Target">
+              <PropertyRef Name="ResourceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ResResourceStatement_CalendarPlan">
+          <End Role="ResResourceStatement_CalendarPlan_Source" Type="Self.ResResourceStatement" Multiplicity="*" />
+          <End Role="ResResourceStatement_CalendarPlan_Target" Type="Self.CplCalendarPlan" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <ReferentialConstraint>
+            <Principal Role="ResResourceStatement_CalendarPlan_Target">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ResResourceStatement_CalendarPlan_Source">
+              <PropertyRef Name="CalendarPlanId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ResResourceStatement_PlannedResources">
+          <End Role="ResResourceStatement_PlannedResources_Source" Type="Self.ResResourceStatement" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ResResourceStatement_PlannedResources_Target" Type="Self.ResPlannedResource" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ResResourceStatement_PlannedResources_Source">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ResResourceStatement_PlannedResources_Target">
+              <PropertyRef Name="ResourceStatementId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DictionaryWorkType_CalendarPlanWorks">
+          <End Role="DictionaryWorkType_CalendarPlanWorks_Source" Type="Self.DictionaryWorkType" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DictionaryWorkType_CalendarPlanWorks_Target" Type="Self.CplCalendarPlanWork" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DictionaryWorkType_CalendarPlanWorks_Source">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DictionaryWorkType_CalendarPlanWorks_Target">
+              <PropertyRef Name="WorkTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CplCalendarPlan_Project">
+          <End Role="CplCalendarPlan_Project_Source" Type="Self.CplCalendarPlan" Multiplicity="*" />
+          <End Role="CplCalendarPlan_Project_Target" Type="Self.ProjProject" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <ReferentialConstraint>
+            <Principal Role="CplCalendarPlan_Project_Target">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CplCalendarPlan_Project_Source">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TRCDbContext" customannotation:UseClrTypes="true">
+          <EntitySet Name="CplCalendarPlans" EntityType="Self.CplCalendarPlan" />
+          <EntitySet Name="CplCalendarPlanStages" EntityType="Self.CplCalendarPlanStage" />
+          <EntitySet Name="CplCalendarPlanWorks" EntityType="Self.CplCalendarPlanWork" />
+          <EntitySet Name="ProjContracts" EntityType="Self.ProjContract" />
+          <EntitySet Name="OrgUnits" EntityType="Self.OrgUnit" />
+          <EntitySet Name="OrgExtraProperties" EntityType="Self.OrgExtraProperty" />
+          <EntitySet Name="OrgUnitAtuAddresses" EntityType="Self.OrgUnitAtuAddress" />
+          <EntitySet Name="ProjParticipants" EntityType="Self.ProjParticipant" />
+          <EntitySet Name="ProjProjects" EntityType="Self.ProjProject" />
+          <EntitySet Name="ProjProjectAtuCoordinates" EntityType="Self.ProjProjectAtuCoordinate" />
+          <EntitySet Name="AtuCoordinates" EntityType="Self.AtuCoordinate" />
+          <EntitySet Name="ProjObjectCharacteristics" EntityType="Self.ProjObjectCharacteristic" />
+          <EntitySet Name="AtuRegions" EntityType="Self.AtuRegion" />
+          <EntitySet Name="AtuCountries" EntityType="Self.AtuCountry" />
+          <EntitySet Name="AtuCities" EntityType="Self.AtuCity" />
+          <EntitySet Name="AtuDistricts" EntityType="Self.AtuDistrict" />
+          <EntitySet Name="AtuStreets" EntityType="Self.AtuStreet" />
+          <EntitySet Name="OrgEmployees" EntityType="Self.OrgEmployee" />
+          <EntitySet Name="OrgUnitSpecializations" EntityType="Self.OrgUnitSpecialization" />
+          <EntitySet Name="People" EntityType="Self.Person" />
+          <EntitySet Name="ResPlannedResources" EntityType="Self.ResPlannedResource" />
+          <EntitySet Name="DictionaryResources" EntityType="Self.DictionaryResource" />
+          <EntitySet Name="ResResourceStatements" EntityType="Self.ResResourceStatement" />
+          <EntitySet Name="WorkTypeDictionary" EntityType="Self.DictionaryWorkType" />
+          <AssociationSet Name="CplCalendarPlanStage_CalendarPlan" Association="Self.CplCalendarPlanStage_CalendarPlan">
+            <End Role="CplCalendarPlanStage_CalendarPlan_Source" EntitySet="CplCalendarPlanStages" />
+            <End Role="CplCalendarPlanStage_CalendarPlan_Target" EntitySet="CplCalendarPlans" />
+          </AssociationSet>
+          <AssociationSet Name="CplCalendarPlanWork_CalendarPlanStage" Association="Self.CplCalendarPlanWork_CalendarPlanStage">
+            <End Role="CplCalendarPlanWork_CalendarPlanStage_Source" EntitySet="CplCalendarPlanWorks" />
+            <End Role="CplCalendarPlanWork_CalendarPlanStage_Target" EntitySet="CplCalendarPlanStages" />
+          </AssociationSet>
+          <AssociationSet Name="ProjContract_Children" Association="Self.ProjContract_Children">
+            <End Role="ProjContract_Children_Source" EntitySet="ProjContracts" />
+            <End Role="ProjContract_Children_Target" EntitySet="ProjContracts" />
+          </AssociationSet>
+          <AssociationSet Name="OrgUnit_ExtraProperties" Association="Self.OrgUnit_ExtraProperties">
+            <End Role="OrgUnit_ExtraProperties_Source" EntitySet="OrgUnits" />
+            <End Role="OrgUnit_ExtraProperties_Target" EntitySet="OrgExtraProperties" />
+          </AssociationSet>
+          <AssociationSet Name="OrgUnit_OrgUnitAtuAddresses" Association="Self.OrgUnit_OrgUnitAtuAddresses">
+            <End Role="OrgUnit_OrgUnitAtuAddresses_Source" EntitySet="OrgUnits" />
+            <End Role="OrgUnit_OrgUnitAtuAddresses_Target" EntitySet="OrgUnitAtuAddresses" />
+          </AssociationSet>
+          <AssociationSet Name="ProjParticipant_OrgUnit" Association="Self.ProjParticipant_OrgUnit">
+            <End Role="ProjParticipant_OrgUnit_Source" EntitySet="ProjParticipants" />
+            <End Role="ProjParticipant_OrgUnit_Target" EntitySet="OrgUnits" />
+          </AssociationSet>
+          <AssociationSet Name="AtuCoordinate_Projects" Association="Self.AtuCoordinate_Projects">
+            <End Role="AtuCoordinate_Projects_Source" EntitySet="AtuCoordinates" />
+            <End Role="AtuCoordinate_Projects_Target" EntitySet="ProjProjectAtuCoordinates" />
+          </AssociationSet>
+          <AssociationSet Name="ProjProjectAtuCoordinate_Project" Association="Self.ProjProjectAtuCoordinate_Project">
+            <End Role="ProjProjectAtuCoordinate_Project_Source" EntitySet="ProjProjectAtuCoordinates" />
+            <End Role="ProjProjectAtuCoordinate_Project_Target" EntitySet="ProjProjects" />
+          </AssociationSet>
+          <AssociationSet Name="ProjObjectCharacteristic_Projects" Association="Self.ProjObjectCharacteristic_Projects">
+            <End Role="ProjObjectCharacteristic_Projects_Source" EntitySet="ProjObjectCharacteristics" />
+            <End Role="ProjObjectCharacteristic_Projects_Target" EntitySet="ProjProjects" />
+          </AssociationSet>
+          <AssociationSet Name="ProjProject_Participants" Association="Self.ProjProject_Participants">
+            <End Role="ProjProject_Participants_Source" EntitySet="ProjProjects" />
+            <End Role="ProjProject_Participants_Target" EntitySet="ProjParticipants" />
+          </AssociationSet>
+          <AssociationSet Name="AtuCountry_AtuRegions" Association="Self.AtuCountry_AtuRegions">
+            <End Role="AtuCountry_AtuRegions_Source" EntitySet="AtuCountries" />
+            <End Role="AtuCountry_AtuRegions_Target" EntitySet="AtuRegions" />
+          </AssociationSet>
+          <AssociationSet Name="AtuCity_AtuRegion" Association="Self.AtuCity_AtuRegion">
+            <End Role="AtuCity_AtuRegion_Source" EntitySet="AtuCities" />
+            <End Role="AtuCity_AtuRegion_Target" EntitySet="AtuRegions" />
+          </AssociationSet>
+          <AssociationSet Name="AtuDistrict_City" Association="Self.AtuDistrict_City">
+            <End Role="AtuDistrict_City_Source" EntitySet="AtuDistricts" />
+            <End Role="AtuDistrict_City_Target" EntitySet="AtuCities" />
+          </AssociationSet>
+          <AssociationSet Name="AtuStreet_City" Association="Self.AtuStreet_City">
+            <End Role="AtuStreet_City_Source" EntitySet="AtuStreets" />
+            <End Role="AtuStreet_City_Target" EntitySet="AtuCities" />
+          </AssociationSet>
+          <AssociationSet Name="ProjProject_Region" Association="Self.ProjProject_Region">
+            <End Role="ProjProject_Region_Source" EntitySet="ProjProjects" />
+            <End Role="ProjProject_Region_Target" EntitySet="AtuRegions" />
+          </AssociationSet>
+          <AssociationSet Name="ProjContract_Customer" Association="Self.ProjContract_Customer">
+            <End Role="ProjContract_Customer_Source" EntitySet="ProjContracts" />
+            <End Role="ProjContract_Customer_Target" EntitySet="OrgUnits" />
+          </AssociationSet>
+          <AssociationSet Name="ProjContract_Executor" Association="Self.ProjContract_Executor">
+            <End Role="ProjContract_Executor_Source" EntitySet="ProjContracts" />
+            <End Role="ProjContract_Executor_Target" EntitySet="OrgUnits" />
+          </AssociationSet>
+          <AssociationSet Name="ProjContract_Project" Association="Self.ProjContract_Project">
+            <End Role="ProjContract_Project_Source" EntitySet="ProjContracts" />
+            <End Role="ProjContract_Project_Target" EntitySet="ProjProjects" />
+          </AssociationSet>
+          <AssociationSet Name="OrgEmployee_OrgUnitSpecialization" Association="Self.OrgEmployee_OrgUnitSpecialization">
+            <End Role="OrgEmployee_OrgUnitSpecialization_Source" EntitySet="OrgEmployees" />
+            <End Role="OrgEmployee_OrgUnitSpecialization_Target" EntitySet="OrgUnitSpecializations" />
+          </AssociationSet>
+          <AssociationSet Name="OrgEmployee_Person" Association="Self.OrgEmployee_Person">
+            <End Role="OrgEmployee_Person_Source" EntitySet="OrgEmployees" />
+            <End Role="OrgEmployee_Person_Target" EntitySet="People" />
+          </AssociationSet>
+          <AssociationSet Name="ProjContract_SignerExecutor" Association="Self.ProjContract_SignerExecutor">
+            <End Role="ProjContract_SignerExecutor_Source" EntitySet="ProjContracts" />
+            <End Role="ProjContract_SignerExecutor_Target" EntitySet="OrgEmployees" />
+          </AssociationSet>
+          <AssociationSet Name="ProjContract_SignerСustomer" Association="Self.ProjContract_SignerСustomer">
+            <End Role="ProjContract_SignerСustomer_Source" EntitySet="ProjContracts" />
+            <End Role="ProjContract_SignerСustomer_Target" EntitySet="OrgEmployees" />
+          </AssociationSet>
+          <AssociationSet Name="CplCalendarPlanWork_Contract" Association="Self.CplCalendarPlanWork_Contract">
+            <End Role="CplCalendarPlanWork_Contract_Source" EntitySet="CplCalendarPlanWorks" />
+            <End Role="CplCalendarPlanWork_Contract_Target" EntitySet="ProjContracts" />
+          </AssociationSet>
+          <AssociationSet Name="ResPlannedResource_CalendarPlanWork" Association="Self.ResPlannedResource_CalendarPlanWork">
+            <End Role="ResPlannedResource_CalendarPlanWork_Source" EntitySet="ResPlannedResources" />
+            <End Role="ResPlannedResource_CalendarPlanWork_Target" EntitySet="CplCalendarPlanWorks" />
+          </AssociationSet>
+          <AssociationSet Name="DictionaryResource_PlannedResources" Association="Self.DictionaryResource_PlannedResources">
+            <End Role="DictionaryResource_PlannedResources_Source" EntitySet="DictionaryResources" />
+            <End Role="DictionaryResource_PlannedResources_Target" EntitySet="ResPlannedResources" />
+          </AssociationSet>
+          <AssociationSet Name="ResResourceStatement_CalendarPlan" Association="Self.ResResourceStatement_CalendarPlan">
+            <End Role="ResResourceStatement_CalendarPlan_Source" EntitySet="ResResourceStatements" />
+            <End Role="ResResourceStatement_CalendarPlan_Target" EntitySet="CplCalendarPlans" />
+          </AssociationSet>
+          <AssociationSet Name="ResResourceStatement_PlannedResources" Association="Self.ResResourceStatement_PlannedResources">
+            <End Role="ResResourceStatement_PlannedResources_Source" EntitySet="ResResourceStatements" />
+            <End Role="ResResourceStatement_PlannedResources_Target" EntitySet="ResPlannedResources" />
+          </AssociationSet>
+          <AssociationSet Name="DictionaryWorkType_CalendarPlanWorks" Association="Self.DictionaryWorkType_CalendarPlanWorks">
+            <End Role="DictionaryWorkType_CalendarPlanWorks_Source" EntitySet="WorkTypeDictionary" />
+            <End Role="DictionaryWorkType_CalendarPlanWorks_Target" EntitySet="CplCalendarPlanWorks" />
+          </AssociationSet>
+          <AssociationSet Name="CplCalendarPlan_Project" Association="Self.CplCalendarPlan_Project">
+            <End Role="CplCalendarPlan_Project_Source" EntitySet="CplCalendarPlans" />
+            <End Role="CplCalendarPlan_Project_Target" EntitySet="ProjProjects" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </ConceptualModels>
+    <Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CodeFirstDatabase" CdmEntityContainer="TRCDbContext">
+          <EntitySetMapping Name="CplCalendarPlans">
+            <EntityTypeMapping TypeName="EF6.Diagram.Cost.CplCalendarPlan">
+              <MappingFragment StoreEntitySet="CplCalendarPlan">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="DocStatusEnumCode" ColumnName="DocStatusEnumCode" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="CalendarPlanDate" ColumnName="CalendarPlanDate" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="RecordState" ColumnName="RecordState" />
+                <ScalarProperty Name="Caption" ColumnName="Caption" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedBy_Id" ColumnName="ModifiedBy_Id" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedBy_Id" ColumnName="CreatedBy_Id" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CplCalendarPlanStages">
+            <EntityTypeMapping TypeName="EF6.Diagram.Cost.CplCalendarPlanStage">
+              <MappingFragment StoreEntitySet="CplCalendarPlanStage">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="DateBegin" ColumnName="DateBegin" />
+                <ScalarProperty Name="DateEnd" ColumnName="DateEnd" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="CalendarPlanId" ColumnName="CalendarPlanId" />
+                <ScalarProperty Name="RecordState" ColumnName="RecordState" />
+                <ScalarProperty Name="Caption" ColumnName="Caption" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedBy_Id" ColumnName="ModifiedBy_Id" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedBy_Id" ColumnName="CreatedBy_Id" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CplCalendarPlanWorks">
+            <EntityTypeMapping TypeName="EF6.Diagram.Cost.CplCalendarPlanWork">
+              <MappingFragment StoreEntitySet="CplCalendarPlanWork">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="DateBegin" ColumnName="DateBegin" />
+                <ScalarProperty Name="DateEnd" ColumnName="DateEnd" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="NumberOfUnits" ColumnName="NumberOfUnits" />
+                <ScalarProperty Name="TargetValue" ColumnName="TargetValue" />
+                <ScalarProperty Name="CalendarPlanStageId" ColumnName="CalendarPlanStageId" />
+                <ScalarProperty Name="WorkTypeId" ColumnName="WorkTypeId" />
+                <ScalarProperty Name="ContractId" ColumnName="ContractId" />
+                <ScalarProperty Name="RecordState" ColumnName="RecordState" />
+                <ScalarProperty Name="Caption" ColumnName="Caption" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedBy_Id" ColumnName="ModifiedBy_Id" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedBy_Id" ColumnName="CreatedBy_Id" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProjContracts">
+            <EntityTypeMapping TypeName="EF6.Diagram.Cost.ProjContract">
+              <MappingFragment StoreEntitySet="ProjContract">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="ContractDate" ColumnName="ContractDate" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="ContractStatusEnumCode" ColumnName="ContractStatusEnumCode" />
+                <ScalarProperty Name="ContractTypeEnumCode" ColumnName="ContractTypeEnumCode" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="ExecutorId" ColumnName="ExecutorId" />
+                <ScalarProperty Name="SignerСustomerId" ColumnName="SignerСustomerId" />
+                <ScalarProperty Name="SignerExecutorId" ColumnName="SignerExecutorId" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="RecordState" ColumnName="RecordState" />
+                <ScalarProperty Name="Caption" ColumnName="Caption" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedBy_Id" ColumnName="ModifiedBy_Id" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedBy_Id" ColumnName="CreatedBy_Id" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrgUnits">
+            <EntityTypeMapping TypeName="EF6.Diagram.Cost.OrgUnit">
+              <MappingFragment StoreEntitySet="OrgUnit">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="DerivedClass" ColumnName="DerivedClass" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="RecordState" ColumnName="RecordState" />
+                <ScalarProperty Name="Caption" ColumnName="Caption" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedBy_Id" ColumnName="ModifiedBy_Id" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedBy_Id" ColumnName="CreatedBy_Id" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrgExtraProperties">
+            <EntityTypeMapping TypeName="EF6.Diagram.Cost.OrgExtraProperty">
+              <MappingFragment StoreEntitySet="OrgExtraProperty">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="EnumCode" ColumnName="EnumCode" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="RecordState" ColumnName="RecordState" />
+                <ScalarProperty Name="Caption" ColumnName="Caption" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedBy_Id" ColumnName="ModifiedBy_Id" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedBy_Id" ColumnName="CreatedBy_Id" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrgUnitAtuAddresses">
+            <EntityTypeMapping TypeName="EF6.Diagram.Cost.OrgUnitAtuAddress">
+              <MappingFragment StoreEntitySet="OrgUnitAtuAddress">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="AtuAddressId" ColumnName="AtuAddressId" />
+                <ScalarProperty Name="RecordState" ColumnName="RecordState" />
+                <ScalarProperty Name="Caption" ColumnName="Caption" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedBy_Id" ColumnName="ModifiedBy_Id" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedBy_Id" ColumnName="CreatedBy_Id" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProjParticipants">
+            <EntityTypeMapping TypeName="EF6.Diagram.Cost.ProjParticipant">
+              <MappingFragment StoreEntitySet="ProjParticipant">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="ParticipantRoleEnumCode" ColumnName="ParticipantRoleEnumCode" />
+                <ScalarProperty Name="OrgUnitId" ColumnName="OrgUnitId" />
+                <ScalarProperty Name="RecordState" ColumnName="RecordState" />
+                <ScalarProperty Name="Caption" ColumnName="Caption" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedBy_Id" ColumnName="ModifiedBy_Id" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedBy_Id" ColumnName="CreatedBy_Id" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProjProjects">
+            <EntityTypeMapping TypeName="EF6.Diagram.Cost.ProjProject">
+              <MappingFragment StoreEntitySet="ProjProject">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="DateBegin" ColumnName="DateBegin" />
+                <ScalarProperty Name="DateEnd" ColumnName="DateEnd" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="RegionId" ColumnName="RegionId" />
+                <ScalarProperty Name="WorkTypeEnumCode" ColumnName="WorkTypeEnumCode" />
+                <ScalarProperty Name="FinansingTypeEnumCode" ColumnName="FinansingTypeEnumCode" />
+                <ScalarProperty Name="ProjectStatusEnumCode" ColumnName="ProjectStatusEnumCode" />
+                <ScalarProperty Name="ObjectCharacteristicId" ColumnName="ObjectCharacteristicId" />
+                <ScalarProperty Name="RecordState" ColumnName="RecordState" />
+                <ScalarProperty Name="Caption" ColumnName="Caption" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedBy_Id" ColumnName="ModifiedBy_Id" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedBy_Id" ColumnName="CreatedBy_Id" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProjProjectAtuCoordinates">
+            <EntityTypeMapping TypeName="EF6.Diagram.Cost.ProjProjectAtuCoordinate">
+              <MappingFragment StoreEntitySet="ProjProjectAtuCoordinate">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="CoordinatesId" ColumnName="CoordinatesId" />
+                <ScalarProperty Name="RecordState" ColumnName="RecordState" />
+                <ScalarProperty Name="Caption" ColumnName="Caption" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedBy_Id" ColumnName="ModifiedBy_Id" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedBy_Id" ColumnName="CreatedBy_Id" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AtuCoordinates">
+            <EntityTypeMapping TypeName="EF6.Diagram.Cost.AtuCoordinate">
+              <MappingFragment StoreEntitySet="AtuCoordinate">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="RecordState" ColumnName="RecordState" />
+                <ScalarProperty Name="Caption" ColumnName="Caption" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedBy_Id" ColumnName="ModifiedBy_Id" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedBy_Id" ColumnName="CreatedBy_Id" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProjObjectCharacteristics">
+            <EntityTypeMapping TypeName="EF6.Diagram.Cost.ProjObjectCharacteristic">
+              <MappingFragment StoreEntitySet="ProjObjectCharacteristic">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="ConstObjTypeEnumCode" ColumnName="ConstObjTypeEnumCode" />
+                <ScalarProperty Name="ObjectTypeEnumCode" ColumnName="ObjectTypeEnumCode" />
+                <ScalarProperty Name="ObjectCategoryEnumCode" ColumnName="ObjectCategoryEnumCode" />
+                <ScalarProperty Name="RecordState" ColumnName="RecordState" />
+                <ScalarProperty Name="Caption" ColumnName="Caption" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedBy_Id" ColumnName="ModifiedBy_Id" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedBy_Id" ColumnName="CreatedBy_Id" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AtuRegions">
+            <EntityTypeMapping TypeName="EF6.Diagram.Cost.AtuRegion">
+              <MappingFragment StoreEntitySet="AtuRegion">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="AtuCountryId" ColumnName="AtuCountryId" />
+                <ScalarProperty Name="RecordState" ColumnName="RecordState" />
+                <ScalarProperty Name="Caption" ColumnName="Caption" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedBy_Id" ColumnName="ModifiedBy_Id" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedBy_Id" ColumnName="CreatedBy_Id" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AtuCountries">
+            <EntityTypeMapping TypeName="EF6.Diagram.Cost.AtuCountry">
+              <MappingFragment StoreEntitySet="AtuCountry">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="RecordState" ColumnName="RecordState" />
+                <ScalarProperty Name="Caption" ColumnName="Caption" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedBy_Id" ColumnName="ModifiedBy_Id" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedBy_Id" ColumnName="CreatedBy_Id" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AtuCities">
+            <EntityTypeMapping TypeName="EF6.Diagram.Cost.AtuCity">
+              <MappingFragment StoreEntitySet="AtuCity">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="AtuRegionGuid" ColumnName="AtuRegionGuid" />
+                <ScalarProperty Name="RecordState" ColumnName="RecordState" />
+                <ScalarProperty Name="Caption" ColumnName="Caption" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedBy_Id" ColumnName="ModifiedBy_Id" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedBy_Id" ColumnName="CreatedBy_Id" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AtuDistricts">
+            <EntityTypeMapping TypeName="EF6.Diagram.Cost.AtuDistrict">
+              <MappingFragment StoreEntitySet="AtuDistrict">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CityId" ColumnName="CityId" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="RecordState" ColumnName="RecordState" />
+                <ScalarProperty Name="Caption" ColumnName="Caption" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedBy_Id" ColumnName="ModifiedBy_Id" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedBy_Id" ColumnName="CreatedBy_Id" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AtuStreets">
+            <EntityTypeMapping TypeName="EF6.Diagram.Cost.AtuStreet">
+              <MappingFragment StoreEntitySet="AtuStreet">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CityId" ColumnName="CityId" />
+                <ScalarProperty Name="RecordState" ColumnName="RecordState" />
+                <ScalarProperty Name="Caption" ColumnName="Caption" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedBy_Id" ColumnName="ModifiedBy_Id" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedBy_Id" ColumnName="CreatedBy_Id" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrgEmployees">
+            <EntityTypeMapping TypeName="EF6.Diagram.Cost.OrgEmployee">
+              <MappingFragment StoreEntitySet="OrgEmployee">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="OrgUnitSpecializationId" ColumnName="OrgUnitSpecializationId" />
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="RecordState" ColumnName="RecordState" />
+                <ScalarProperty Name="Caption" ColumnName="Caption" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedBy_Id" ColumnName="ModifiedBy_Id" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedBy_Id" ColumnName="CreatedBy_Id" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrgUnitSpecializations">
+            <EntityTypeMapping TypeName="EF6.Diagram.Cost.OrgUnitSpecialization">
+              <MappingFragment StoreEntitySet="OrgUnitSpecialization">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="RecordState" ColumnName="RecordState" />
+                <ScalarProperty Name="Caption" ColumnName="Caption" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedBy_Id" ColumnName="ModifiedBy_Id" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedBy_Id" ColumnName="CreatedBy_Id" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="People">
+            <EntityTypeMapping TypeName="EF6.Diagram.Cost.Person">
+              <MappingFragment StoreEntitySet="Person">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+                <ScalarProperty Name="GenderEnumCode" ColumnName="GenderEnumCode" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="IPN" ColumnName="IPN" />
+                <ScalarProperty Name="NoIPN" ColumnName="NoIPN" />
+                <ScalarProperty Name="IdentityDocumentTypeEnumCode" ColumnName="IdentityDocumentTypeEnumCode" />
+                <ScalarProperty Name="DocPrefix" ColumnName="DocPrefix" />
+                <ScalarProperty Name="PersonalDocumentNumber" ColumnName="PersonalDocumentNumber" />
+                <ScalarProperty Name="PersonalDocumentAuthority" ColumnName="PersonalDocumentAuthority" />
+                <ScalarProperty Name="DocumentIssueDate" ColumnName="DocumentIssueDate" />
+                <ScalarProperty Name="ExpirationDate" ColumnName="ExpirationDate" />
+                <ScalarProperty Name="RecordState" ColumnName="RecordState" />
+                <ScalarProperty Name="Caption" ColumnName="Caption" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedBy_Id" ColumnName="ModifiedBy_Id" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedBy_Id" ColumnName="CreatedBy_Id" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ResPlannedResources">
+            <EntityTypeMapping TypeName="EF6.Diagram.Cost.ResPlannedResource">
+              <MappingFragment StoreEntitySet="ResPlannedResource">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ResourceStatementId" ColumnName="ResourceStatementId" />
+                <ScalarProperty Name="CalendarPlanWorkId" ColumnName="CalendarPlanWorkId" />
+                <ScalarProperty Name="ResourceId" ColumnName="ResourceId" />
+                <ScalarProperty Name="TotalVolume" ColumnName="TotalVolume" />
+                <ScalarProperty Name="RecordState" ColumnName="RecordState" />
+                <ScalarProperty Name="Caption" ColumnName="Caption" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedBy_Id" ColumnName="ModifiedBy_Id" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedBy_Id" ColumnName="CreatedBy_Id" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DictionaryResources">
+            <EntityTypeMapping TypeName="EF6.Diagram.Cost.DictionaryResource">
+              <MappingFragment StoreEntitySet="DictionaryResource">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ConstObjTypeEnumCode" ColumnName="ConstObjTypeEnumCode" />
+                <ScalarProperty Name="ResursTypeEnumCode" ColumnName="ResursTypeEnumCode" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="MinPrice" ColumnName="MinPrice" />
+                <ScalarProperty Name="MaxPrice" ColumnName="MaxPrice" />
+                <ScalarProperty Name="Characteristic" ColumnName="Characteristic" />
+                <ScalarProperty Name="ITP" ColumnName="ITP" />
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="RecordState" ColumnName="RecordState" />
+                <ScalarProperty Name="Caption" ColumnName="Caption" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedBy_Id" ColumnName="ModifiedBy_Id" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedBy_Id" ColumnName="CreatedBy_Id" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ResResourceStatements">
+            <EntityTypeMapping TypeName="EF6.Diagram.Cost.ResResourceStatement">
+              <MappingFragment StoreEntitySet="ResResourceStatement">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="DocStatusEnumCode" ColumnName="DocStatusEnumCode" />
+                <ScalarProperty Name="CalendarPlanId" ColumnName="CalendarPlanId" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="ResourceStatementDate" ColumnName="ResourceStatementDate" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="RecordState" ColumnName="RecordState" />
+                <ScalarProperty Name="Caption" ColumnName="Caption" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedBy_Id" ColumnName="ModifiedBy_Id" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedBy_Id" ColumnName="CreatedBy_Id" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkTypeDictionary">
+            <EntityTypeMapping TypeName="EF6.Diagram.Cost.DictionaryWorkType">
+              <MappingFragment StoreEntitySet="DictionaryWorkType">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ConstObjTypeEnumCode" ColumnName="ConstObjTypeEnumCode" />
+                <ScalarProperty Name="RecordStatusEnumCode" ColumnName="RecordStatusEnumCode" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="RecordState" ColumnName="RecordState" />
+                <ScalarProperty Name="Caption" ColumnName="Caption" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedBy_Id" ColumnName="ModifiedBy_Id" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedBy_Id" ColumnName="CreatedBy_Id" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="OrgUnit_ExtraProperties" TypeName="EF6.Diagram.Cost.OrgUnit_ExtraProperties" StoreEntitySet="OrgExtraProperty">
+            <EndProperty Name="OrgUnit_ExtraProperties_Source">
+              <ScalarProperty Name="Id" ColumnName="OrgUnit_Id" />
+            </EndProperty>
+            <EndProperty Name="OrgUnit_ExtraProperties_Target">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+            <Condition IsNull="false" ColumnName="OrgUnit_Id" />
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="OrgUnit_OrgUnitAtuAddresses" TypeName="EF6.Diagram.Cost.OrgUnit_OrgUnitAtuAddresses" StoreEntitySet="OrgUnitAtuAddress">
+            <EndProperty Name="OrgUnit_OrgUnitAtuAddresses_Source">
+              <ScalarProperty Name="Id" ColumnName="OrgUnit_Id" />
+            </EndProperty>
+            <EndProperty Name="OrgUnit_OrgUnitAtuAddresses_Target">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+            <Condition IsNull="false" ColumnName="OrgUnit_Id" />
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="AtuCoordinate_Projects" TypeName="EF6.Diagram.Cost.AtuCoordinate_Projects" StoreEntitySet="ProjProjectAtuCoordinate">
+            <EndProperty Name="AtuCoordinate_Projects_Source">
+              <ScalarProperty Name="Id" ColumnName="Coordinate_Id" />
+            </EndProperty>
+            <EndProperty Name="AtuCoordinate_Projects_Target">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+            <Condition IsNull="false" ColumnName="Coordinate_Id" />
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="AtuCity_AtuRegion" TypeName="EF6.Diagram.Cost.AtuCity_AtuRegion" StoreEntitySet="AtuCity">
+            <EndProperty Name="AtuCity_AtuRegion_Target">
+              <ScalarProperty Name="Id" ColumnName="AtuRegion_Id" />
+            </EndProperty>
+            <EndProperty Name="AtuCity_AtuRegion_Source">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+            <Condition IsNull="false" ColumnName="AtuRegion_Id" />
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </Mappings>
+    <StorageModels>
+      <Schema Namespace="CodeFirstDatabaseSchema" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CplCalendarPlan">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DocStatusEnumCode" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="Number" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="CalendarPlanDate" Type="datetime" Nullable="false" />
+          <Property Name="Comment" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="ProjectId" Type="uniqueidentifier" customannotation:Index="{ Name: IX_ProjectId, Order: 0 }" Nullable="false" />
+          <Property Name="RecordState" Type="tinyint" Nullable="false" />
+          <Property Name="Caption" Type="nvarchar" MaxLength="128" Nullable="true" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="128" Nullable="true" />
+          <Property Name="ModifiedBy_Id" Type="nvarchar" MaxLength="64" Nullable="true" />
+          <Property Name="ModifiedOn" Type="datetime" Nullable="true" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="128" Nullable="true" />
+          <Property Name="CreatedBy_Id" Type="nvarchar" MaxLength="64" Nullable="true" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CplCalendarPlanStage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="Number" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="DateBegin" Type="datetime" Nullable="false" />
+          <Property Name="DateEnd" Type="datetime" Nullable="false" />
+          <Property Name="Price" Type="float" Nullable="false" />
+          <Property Name="CalendarPlanId" Type="uniqueidentifier" customannotation:Index="{ Name: IX_CalendarPlanId, Order: 0 }" Nullable="false" />
+          <Property Name="RecordState" Type="tinyint" Nullable="false" />
+          <Property Name="Caption" Type="nvarchar" MaxLength="128" Nullable="true" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="128" Nullable="true" />
+          <Property Name="ModifiedBy_Id" Type="nvarchar" MaxLength="64" Nullable="true" />
+          <Property Name="ModifiedOn" Type="datetime" Nullable="true" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="128" Nullable="true" />
+          <Property Name="CreatedBy_Id" Type="nvarchar" MaxLength="64" Nullable="true" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CplCalendarPlanWork">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Number" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="DateBegin" Type="datetime" Nullable="false" />
+          <Property Name="DateEnd" Type="datetime" Nullable="false" />
+          <Property Name="Price" Type="float" Nullable="false" />
+          <Property Name="NumberOfUnits" Type="float" Nullable="false" />
+          <Property Name="TargetValue" Type="float" Nullable="false" />
+          <Property Name="CalendarPlanStageId" Type="uniqueidentifier" customannotation:Index="{ Name: IX_CalendarPlanStageId, Order: 0 }" Nullable="false" />
+          <Property Name="WorkTypeId" Type="uniqueidentifier" customannotation:Index="{ Name: IX_WorkTypeId, Order: 0 }" Nullable="false" />
+          <Property Name="ContractId" Type="uniqueidentifier" customannotation:Index="{ Name: IX_ContractId, Order: 0 }" Nullable="false" />
+          <Property Name="RecordState" Type="tinyint" Nullable="false" />
+          <Property Name="Caption" Type="nvarchar" MaxLength="128" Nullable="true" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="128" Nullable="true" />
+          <Property Name="ModifiedBy_Id" Type="nvarchar" MaxLength="64" Nullable="true" />
+          <Property Name="ModifiedOn" Type="datetime" Nullable="true" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="128" Nullable="true" />
+          <Property Name="CreatedBy_Id" Type="nvarchar" MaxLength="64" Nullable="true" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProjContract">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ParentId" Type="uniqueidentifier" customannotation:Index="{ Name: IX_ParentId, Order: 0 }" Nullable="true" />
+          <Property Name="ContractDate" Type="datetime" Nullable="false" />
+          <Property Name="Number" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="Comment" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="ContractStatusEnumCode" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="ContractTypeEnumCode" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="CustomerId" Type="uniqueidentifier" customannotation:Index="{ Name: IX_CustomerId, Order: 0 }" Nullable="false" />
+          <Property Name="ExecutorId" Type="uniqueidentifier" customannotation:Index="{ Name: IX_ExecutorId, Order: 0 }" Nullable="false" />
+          <Property Name="SignerСustomerId" Type="uniqueidentifier" customannotation:Index="{ Name: IX_SignerСustomerId, Order: 0 }" Nullable="false" />
+          <Property Name="SignerExecutorId" Type="uniqueidentifier" customannotation:Index="{ Name: IX_SignerExecutorId, Order: 0 }" Nullable="false" />
+          <Property Name="ProjectId" Type="uniqueidentifier" customannotation:Index="{ Name: IX_ProjectId, Order: 0 }" Nullable="false" />
+          <Property Name="RecordState" Type="tinyint" Nullable="false" />
+          <Property Name="Caption" Type="nvarchar" MaxLength="128" Nullable="true" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="128" Nullable="true" />
+          <Property Name="ModifiedBy_Id" Type="nvarchar" MaxLength="64" Nullable="true" />
+          <Property Name="ModifiedOn" Type="datetime" Nullable="true" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="128" Nullable="true" />
+          <Property Name="CreatedBy_Id" Type="nvarchar" MaxLength="64" Nullable="true" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OrgUnit">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DerivedClass" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="Code" Type="nvarchar" MaxLength="20" Nullable="true" />
+          <Property Name="ParentId" Type="uniqueidentifier" Nullable="true" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="State" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="Category" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="RecordState" Type="tinyint" Nullable="false" />
+          <Property Name="Caption" Type="nvarchar" MaxLength="128" Nullable="true" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="128" Nullable="true" />
+          <Property Name="ModifiedBy_Id" Type="nvarchar" MaxLength="64" Nullable="true" />
+          <Property Name="ModifiedOn" Type="datetime" Nullable="true" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="128" Nullable="true" />
+          <Property Name="CreatedBy_Id" Type="nvarchar" MaxLength="64" Nullable="true" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OrgExtraProperty">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EnumCode" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="Value" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="RecordState" Type="tinyint" Nullable="false" />
+          <Property Name="Caption" Type="nvarchar" MaxLength="128" Nullable="true" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="128" Nullable="true" />
+          <Property Name="ModifiedBy_Id" Type="nvarchar" MaxLength="64" Nullable="true" />
+          <Property Name="ModifiedOn" Type="datetime" Nullable="true" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="128" Nullable="true" />
+          <Property Name="CreatedBy_Id" Type="nvarchar" MaxLength="64" Nullable="true" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="OrgUnit_Id" Type="uniqueidentifier" customannotation:Index="{ Name: IX_OrgUnit_Id, Order: 0 }" Nullable="true" />
+        </EntityType>
+        <EntityType Name="OrgUnitAtuAddress">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AtuAddressId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RecordState" Type="tinyint" Nullable="false" />
+          <Property Name="Caption" Type="nvarchar" MaxLength="128" Nullable="true" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="128" Nullable="true" />
+          <Property Name="ModifiedBy_Id" Type="nvarchar" MaxLength="64" Nullable="true" />
+          <Property Name="ModifiedOn" Type="datetime" Nullable="true" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="128" Nullable="true" />
+          <Property Name="CreatedBy_Id" Type="nvarchar" MaxLength="64" Nullable="true" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="OrgUnit_Id" Type="uniqueidentifier" customannotation:Index="{ Name: IX_OrgUnit_Id, Order: 0 }" Nullable="true" />
+        </EntityType>
+        <EntityType Name="ProjParticipant">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProjectId" Type="uniqueidentifier" customannotation:Index="{ Name: IX_ProjectId, Order: 0 }" Nullable="false" />
+          <Property Name="ParticipantRoleEnumCode" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="OrgUnitId" Type="uniqueidentifier" customannotation:Index="{ Name: IX_OrgUnitId, Order: 0 }" Nullable="false" />
+          <Property Name="RecordState" Type="tinyint" Nullable="false" />
+          <Property Name="Caption" Type="nvarchar" MaxLength="128" Nullable="true" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="128" Nullable="true" />
+          <Property Name="ModifiedBy_Id" Type="nvarchar" MaxLength="64" Nullable="true" />
+          <Property Name="ModifiedOn" Type="datetime" Nullable="true" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="128" Nullable="true" />
+          <Property Name="CreatedBy_Id" Type="nvarchar" MaxLength="64" Nullable="true" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProjProject">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="DateBegin" Type="datetime" Nullable="false" />
+          <Property Name="DateEnd" Type="datetime" Nullable="false" />
+          <Property Name="Price" Type="float" Nullable="false" />
+          <Property Name="Comment" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="RegionId" Type="uniqueidentifier" customannotation:Index="{ Name: IX_RegionId, Order: 0 }" Nullable="false" />
+          <Property Name="WorkTypeEnumCode" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="FinansingTypeEnumCode" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="ProjectStatusEnumCode" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="ObjectCharacteristicId" Type="uniqueidentifier" customannotation:Index="{ Name: IX_ObjectCharacteristicId, Order: 0 }" Nullable="false" />
+          <Property Name="RecordState" Type="tinyint" Nullable="false" />
+          <Property Name="Caption" Type="nvarchar" MaxLength="128" Nullable="true" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="128" Nullable="true" />
+          <Property Name="ModifiedBy_Id" Type="nvarchar" MaxLength="64" Nullable="true" />
+          <Property Name="ModifiedOn" Type="datetime" Nullable="true" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="128" Nullable="true" />
+          <Property Name="CreatedBy_Id" Type="nvarchar" MaxLength="64" Nullable="true" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProjProjectAtuCoordinate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProjectId" Type="uniqueidentifier" customannotation:Index="{ Name: IX_ProjectId, Order: 0 }" Nullable="false" />
+          <Property Name="CoordinatesId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RecordState" Type="tinyint" Nullable="false" />
+          <Property Name="Caption" Type="nvarchar" MaxLength="128" Nullable="true" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="128" Nullable="true" />
+          <Property Name="ModifiedBy_Id" Type="nvarchar" MaxLength="64" Nullable="true" />
+          <Property Name="ModifiedOn" Type="datetime" Nullable="true" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="128" Nullable="true" />
+          <Property Name="CreatedBy_Id" Type="nvarchar" MaxLength="64" Nullable="true" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="Coordinate_Id" Type="uniqueidentifier" customannotation:Index="{ Name: IX_Coordinate_Id, Order: 0 }" Nullable="true" />
+        </EntityType>
+        <EntityType Name="AtuCoordinate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Latitude" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="Longitude" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="RecordState" Type="tinyint" Nullable="false" />
+          <Property Name="Caption" Type="nvarchar" MaxLength="128" Nullable="true" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="128" Nullable="true" />
+          <Property Name="ModifiedBy_Id" Type="nvarchar" MaxLength="64" Nullable="true" />
+          <Property Name="ModifiedOn" Type="datetime" Nullable="true" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="128" Nullable="true" />
+          <Property Name="CreatedBy_Id" Type="nvarchar" MaxLength="64" Nullable="true" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProjObjectCharacteristic">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="Number" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="ConstObjTypeEnumCode" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="ObjectTypeEnumCode" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="ObjectCategoryEnumCode" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="RecordState" Type="tinyint" Nullable="false" />
+          <Property Name="Caption" Type="nvarchar" MaxLength="128" Nullable="true" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="128" Nullable="true" />
+          <Property Name="ModifiedBy_Id" Type="nvarchar" MaxLength="64" Nullable="true" />
+          <Property Name="ModifiedOn" Type="datetime" Nullable="true" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="128" Nullable="true" />
+          <Property Name="CreatedBy_Id" Type="nvarchar" MaxLength="64" Nullable="true" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AtuRegion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="true" />
+          <Property Name="Code" Type="nvarchar" MaxLength="64" Nullable="true" />
+          <Property Name="AtuCountryId" Type="uniqueidentifier" customannotation:Index="{ Name: IX_AtuCountryId, Order: 0 }" Nullable="false" />
+          <Property Name="RecordState" Type="tinyint" Nullable="false" />
+          <Property Name="Caption" Type="nvarchar" MaxLength="128" Nullable="true" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="128" Nullable="true" />
+          <Property Name="ModifiedBy_Id" Type="nvarchar" MaxLength="64" Nullable="true" />
+          <Property Name="ModifiedOn" Type="datetime" Nullable="true" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="128" Nullable="true" />
+          <Property Name="CreatedBy_Id" Type="nvarchar" MaxLength="64" Nullable="true" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AtuCountry">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="true" />
+          <Property Name="Code" Type="nvarchar" MaxLength="64" Nullable="true" />
+          <Property Name="RecordState" Type="tinyint" Nullable="false" />
+          <Property Name="Caption" Type="nvarchar" MaxLength="128" Nullable="true" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="128" Nullable="true" />
+          <Property Name="ModifiedBy_Id" Type="nvarchar" MaxLength="64" Nullable="true" />
+          <Property Name="ModifiedOn" Type="datetime" Nullable="true" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="128" Nullable="true" />
+          <Property Name="CreatedBy_Id" Type="nvarchar" MaxLength="64" Nullable="true" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AtuCity">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="128" Nullable="true" />
+          <Property Name="AtuRegionGuid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RecordState" Type="tinyint" Nullable="false" />
+          <Property Name="Caption" Type="nvarchar" MaxLength="128" Nullable="true" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="128" Nullable="true" />
+          <Property Name="ModifiedBy_Id" Type="nvarchar" MaxLength="64" Nullable="true" />
+          <Property Name="ModifiedOn" Type="datetime" Nullable="true" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="128" Nullable="true" />
+          <Property Name="CreatedBy_Id" Type="nvarchar" MaxLength="64" Nullable="true" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="AtuRegion_Id" Type="uniqueidentifier" customannotation:Index="{ Name: IX_AtuRegion_Id, Order: 0 }" Nullable="true" />
+        </EntityType>
+        <EntityType Name="AtuDistrict">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="128" Nullable="true" />
+          <Property Name="CityId" Type="uniqueidentifier" customannotation:Index="{ Name: IX_CityId, Order: 0 }" Nullable="false" />
+          <Property Name="Code" Type="int" Nullable="false" />
+          <Property Name="RecordState" Type="tinyint" Nullable="false" />
+          <Property Name="Caption" Type="nvarchar" MaxLength="128" Nullable="true" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="128" Nullable="true" />
+          <Property Name="ModifiedBy_Id" Type="nvarchar" MaxLength="64" Nullable="true" />
+          <Property Name="ModifiedOn" Type="datetime" Nullable="true" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="128" Nullable="true" />
+          <Property Name="CreatedBy_Id" Type="nvarchar" MaxLength="64" Nullable="true" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AtuStreet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="CityId" Type="uniqueidentifier" customannotation:Index="{ Name: IX_CityId, Order: 0 }" Nullable="false" />
+          <Property Name="RecordState" Type="tinyint" Nullable="false" />
+          <Property Name="Caption" Type="nvarchar" MaxLength="128" Nullable="true" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="128" Nullable="true" />
+          <Property Name="ModifiedBy_Id" Type="nvarchar" MaxLength="64" Nullable="true" />
+          <Property Name="ModifiedOn" Type="datetime" Nullable="true" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="128" Nullable="true" />
+          <Property Name="CreatedBy_Id" Type="nvarchar" MaxLength="64" Nullable="true" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OrgEmployee">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrgUnitSpecializationId" Type="uniqueidentifier" customannotation:Index="{ Name: IX_OrgUnitSpecializationId, Order: 0 }" Nullable="true" />
+          <Property Name="PersonId" Type="uniqueidentifier" customannotation:Index="{ Name: IX_PersonId, Order: 0 }" Nullable="false" />
+          <Property Name="RecordState" Type="tinyint" Nullable="false" />
+          <Property Name="Caption" Type="nvarchar" MaxLength="128" Nullable="true" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="128" Nullable="true" />
+          <Property Name="ModifiedBy_Id" Type="nvarchar" MaxLength="64" Nullable="true" />
+          <Property Name="ModifiedOn" Type="datetime" Nullable="true" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="128" Nullable="true" />
+          <Property Name="CreatedBy_Id" Type="nvarchar" MaxLength="64" Nullable="true" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OrgUnitSpecialization">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="Code" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="RecordState" Type="tinyint" Nullable="false" />
+          <Property Name="Caption" Type="nvarchar" MaxLength="128" Nullable="true" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="128" Nullable="true" />
+          <Property Name="ModifiedBy_Id" Type="nvarchar" MaxLength="64" Nullable="true" />
+          <Property Name="ModifiedOn" Type="datetime" Nullable="true" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="128" Nullable="true" />
+          <Property Name="CreatedBy_Id" Type="nvarchar" MaxLength="64" Nullable="true" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="MiddleName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Location" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="Birthday" Type="datetime" Nullable="false" />
+          <Property Name="GenderEnumCode" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="Phone" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="Email" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="UserId" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="200" Nullable="true" />
+          <Property Name="Photo" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="Description" Type="nvarchar" MaxLength="1024" Nullable="true" />
+          <Property Name="IPN" Type="nvarchar" MaxLength="50" Nullable="true" />
+          <Property Name="NoIPN" Type="bit" Nullable="false" />
+          <Property Name="IdentityDocumentTypeEnumCode" Type="nvarchar" MaxLength="50" Nullable="true" />
+          <Property Name="DocPrefix" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="PersonalDocumentNumber" Type="nvarchar" MaxLength="20" Nullable="true" />
+          <Property Name="PersonalDocumentAuthority" Type="nvarchar" MaxLength="100" Nullable="true" />
+          <Property Name="DocumentIssueDate" Type="datetime" Nullable="true" />
+          <Property Name="ExpirationDate" Type="datetime" Nullable="true" />
+          <Property Name="RecordState" Type="tinyint" Nullable="false" />
+          <Property Name="Caption" Type="nvarchar" MaxLength="128" Nullable="true" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="128" Nullable="true" />
+          <Property Name="ModifiedBy_Id" Type="nvarchar" MaxLength="64" Nullable="true" />
+          <Property Name="ModifiedOn" Type="datetime" Nullable="true" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="128" Nullable="true" />
+          <Property Name="CreatedBy_Id" Type="nvarchar" MaxLength="64" Nullable="true" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ResPlannedResource">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ResourceStatementId" Type="uniqueidentifier" customannotation:Index="{ Name: IX_ResourceStatementId, Order: 0 }" Nullable="false" />
+          <Property Name="CalendarPlanWorkId" Type="uniqueidentifier" customannotation:Index="{ Name: IX_CalendarPlanWorkId, Order: 0 }" Nullable="false" />
+          <Property Name="ResourceId" Type="uniqueidentifier" customannotation:Index="{ Name: IX_ResourceId, Order: 0 }" Nullable="false" />
+          <Property Name="TotalVolume" Type="float" Nullable="false" />
+          <Property Name="RecordState" Type="tinyint" Nullable="false" />
+          <Property Name="Caption" Type="nvarchar" MaxLength="128" Nullable="true" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="128" Nullable="true" />
+          <Property Name="ModifiedBy_Id" Type="nvarchar" MaxLength="64" Nullable="true" />
+          <Property Name="ModifiedOn" Type="datetime" Nullable="true" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="128" Nullable="true" />
+          <Property Name="CreatedBy_Id" Type="nvarchar" MaxLength="64" Nullable="true" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DictionaryResource">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ConstObjTypeEnumCode" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="ResursTypeEnumCode" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="Code" Type="float" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="MinPrice" Type="float" Nullable="false" />
+          <Property Name="MaxPrice" Type="float" Nullable="false" />
+          <Property Name="Characteristic" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="ITP" Type="bit" Nullable="false" />
+          <Property Name="Enabled" Type="bit" Nullable="false" />
+          <Property Name="RecordState" Type="tinyint" Nullable="false" />
+          <Property Name="Caption" Type="nvarchar" MaxLength="128" Nullable="true" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="128" Nullable="true" />
+          <Property Name="ModifiedBy_Id" Type="nvarchar" MaxLength="64" Nullable="true" />
+          <Property Name="ModifiedOn" Type="datetime" Nullable="true" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="128" Nullable="true" />
+          <Property Name="CreatedBy_Id" Type="nvarchar" MaxLength="64" Nullable="true" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ResResourceStatement">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DocStatusEnumCode" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="CalendarPlanId" Type="uniqueidentifier" customannotation:Index="{ Name: IX_CalendarPlanId, Order: 0 }" Nullable="false" />
+          <Property Name="Number" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="ResourceStatementDate" Type="datetime" Nullable="false" />
+          <Property Name="Comment" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="RecordState" Type="tinyint" Nullable="false" />
+          <Property Name="Caption" Type="nvarchar" MaxLength="128" Nullable="true" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="128" Nullable="true" />
+          <Property Name="ModifiedBy_Id" Type="nvarchar" MaxLength="64" Nullable="true" />
+          <Property Name="ModifiedOn" Type="datetime" Nullable="true" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="128" Nullable="true" />
+          <Property Name="CreatedBy_Id" Type="nvarchar" MaxLength="64" Nullable="true" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DictionaryWorkType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ConstObjTypeEnumCode" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="RecordStatusEnumCode" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="Code" Type="float" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="128" Nullable="true" />
+          <Property Name="Description" Type="nvarchar" MaxLength="1024" Nullable="true" />
+          <Property Name="RecordState" Type="tinyint" Nullable="false" />
+          <Property Name="Caption" Type="nvarchar" MaxLength="128" Nullable="true" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="128" Nullable="true" />
+          <Property Name="ModifiedBy_Id" Type="nvarchar" MaxLength="64" Nullable="true" />
+          <Property Name="ModifiedOn" Type="datetime" Nullable="true" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="128" Nullable="true" />
+          <Property Name="CreatedBy_Id" Type="nvarchar" MaxLength="64" Nullable="true" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="CplCalendarPlanStage_CalendarPlan">
+          <End Role="CplCalendarPlan" Type="Self.CplCalendarPlan" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CplCalendarPlanStage" Type="Self.CplCalendarPlanStage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CplCalendarPlan">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CplCalendarPlanStage">
+              <PropertyRef Name="CalendarPlanId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CplCalendarPlanWork_CalendarPlanStage">
+          <End Role="CplCalendarPlanStage" Type="Self.CplCalendarPlanStage" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CplCalendarPlanWork" Type="Self.CplCalendarPlanWork" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CplCalendarPlanStage">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CplCalendarPlanWork">
+              <PropertyRef Name="CalendarPlanStageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ProjContract_Children">
+          <End Role="ProjContract" Type="Self.ProjContract" Multiplicity="0..1" />
+          <End Role="ProjContractSelf" Type="Self.ProjContract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProjContract">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjContractSelf">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="OrgUnit_ExtraProperties">
+          <End Role="OrgUnit" Type="Self.OrgUnit" Multiplicity="0..1" />
+          <End Role="OrgExtraProperty" Type="Self.OrgExtraProperty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrgUnit">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrgExtraProperty">
+              <PropertyRef Name="OrgUnit_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="OrgUnit_OrgUnitAtuAddresses">
+          <End Role="OrgUnit" Type="Self.OrgUnit" Multiplicity="0..1" />
+          <End Role="OrgUnitAtuAddress" Type="Self.OrgUnitAtuAddress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrgUnit">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrgUnitAtuAddress">
+              <PropertyRef Name="OrgUnit_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ProjParticipant_OrgUnit">
+          <End Role="OrgUnit" Type="Self.OrgUnit" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ProjParticipant" Type="Self.ProjParticipant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrgUnit">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjParticipant">
+              <PropertyRef Name="OrgUnitId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AtuCoordinate_Projects">
+          <End Role="AtuCoordinate" Type="Self.AtuCoordinate" Multiplicity="0..1" />
+          <End Role="ProjProjectAtuCoordinate" Type="Self.ProjProjectAtuCoordinate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AtuCoordinate">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjProjectAtuCoordinate">
+              <PropertyRef Name="Coordinate_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ProjProjectAtuCoordinate_Project">
+          <End Role="ProjProject" Type="Self.ProjProject" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ProjProjectAtuCoordinate" Type="Self.ProjProjectAtuCoordinate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProjProject">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjProjectAtuCoordinate">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ProjObjectCharacteristic_Projects">
+          <End Role="ProjObjectCharacteristic" Type="Self.ProjObjectCharacteristic" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ProjProject" Type="Self.ProjProject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProjObjectCharacteristic">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjProject">
+              <PropertyRef Name="ObjectCharacteristicId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ProjProject_Participants">
+          <End Role="ProjProject" Type="Self.ProjProject" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ProjParticipant" Type="Self.ProjParticipant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProjProject">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjParticipant">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AtuCountry_AtuRegions">
+          <End Role="AtuCountry" Type="Self.AtuCountry" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AtuRegion" Type="Self.AtuRegion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AtuCountry">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AtuRegion">
+              <PropertyRef Name="AtuCountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AtuCity_AtuRegion">
+          <End Role="AtuRegion" Type="Self.AtuRegion" Multiplicity="0..1" />
+          <End Role="AtuCity" Type="Self.AtuCity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AtuRegion">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AtuCity">
+              <PropertyRef Name="AtuRegion_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AtuDistrict_City">
+          <End Role="AtuCity" Type="Self.AtuCity" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AtuDistrict" Type="Self.AtuDistrict" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AtuCity">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AtuDistrict">
+              <PropertyRef Name="CityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AtuStreet_City">
+          <End Role="AtuCity" Type="Self.AtuCity" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AtuStreet" Type="Self.AtuStreet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AtuCity">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AtuStreet">
+              <PropertyRef Name="CityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ProjProject_Region">
+          <End Role="AtuRegion" Type="Self.AtuRegion" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ProjProject" Type="Self.ProjProject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AtuRegion">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjProject">
+              <PropertyRef Name="RegionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ProjContract_Customer">
+          <End Role="OrgUnit" Type="Self.OrgUnit" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ProjContract" Type="Self.ProjContract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrgUnit">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjContract">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ProjContract_Executor">
+          <End Role="OrgUnit" Type="Self.OrgUnit" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ProjContract" Type="Self.ProjContract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrgUnit">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjContract">
+              <PropertyRef Name="ExecutorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ProjContract_Project">
+          <End Role="ProjProject" Type="Self.ProjProject" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ProjContract" Type="Self.ProjContract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProjProject">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjContract">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="OrgEmployee_OrgUnitSpecialization">
+          <End Role="OrgUnitSpecialization" Type="Self.OrgUnitSpecialization" Multiplicity="0..1" />
+          <End Role="OrgEmployee" Type="Self.OrgEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrgUnitSpecialization">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrgEmployee">
+              <PropertyRef Name="OrgUnitSpecializationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="OrgEmployee_Person">
+          <End Role="Person" Type="Self.Person" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="OrgEmployee" Type="Self.OrgEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrgEmployee">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ProjContract_SignerExecutor">
+          <End Role="OrgEmployee" Type="Self.OrgEmployee" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ProjContract" Type="Self.ProjContract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrgEmployee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjContract">
+              <PropertyRef Name="SignerExecutorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ProjContract_SignerСustomer">
+          <End Role="OrgEmployee" Type="Self.OrgEmployee" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ProjContract" Type="Self.ProjContract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrgEmployee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjContract">
+              <PropertyRef Name="SignerСustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CplCalendarPlanWork_Contract">
+          <End Role="ProjContract" Type="Self.ProjContract" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CplCalendarPlanWork" Type="Self.CplCalendarPlanWork" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProjContract">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CplCalendarPlanWork">
+              <PropertyRef Name="ContractId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ResPlannedResource_CalendarPlanWork">
+          <End Role="CplCalendarPlanWork" Type="Self.CplCalendarPlanWork" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ResPlannedResource" Type="Self.ResPlannedResource" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CplCalendarPlanWork">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ResPlannedResource">
+              <PropertyRef Name="CalendarPlanWorkId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DictionaryResource_PlannedResources">
+          <End Role="DictionaryResource" Type="Self.DictionaryResource" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ResPlannedResource" Type="Self.ResPlannedResource" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DictionaryResource">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ResPlannedResource">
+              <PropertyRef Name="ResourceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ResResourceStatement_CalendarPlan">
+          <End Role="CplCalendarPlan" Type="Self.CplCalendarPlan" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ResResourceStatement" Type="Self.ResResourceStatement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CplCalendarPlan">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ResResourceStatement">
+              <PropertyRef Name="CalendarPlanId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ResResourceStatement_PlannedResources">
+          <End Role="ResResourceStatement" Type="Self.ResResourceStatement" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ResPlannedResource" Type="Self.ResPlannedResource" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ResResourceStatement">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ResPlannedResource">
+              <PropertyRef Name="ResourceStatementId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DictionaryWorkType_CalendarPlanWorks">
+          <End Role="DictionaryWorkType" Type="Self.DictionaryWorkType" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CplCalendarPlanWork" Type="Self.CplCalendarPlanWork" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DictionaryWorkType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CplCalendarPlanWork">
+              <PropertyRef Name="WorkTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CplCalendarPlan_Project">
+          <End Role="ProjProject" Type="Self.ProjProject" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CplCalendarPlan" Type="Self.CplCalendarPlan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProjProject">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CplCalendarPlan">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CodeFirstDatabase">
+          <EntitySet Name="CplCalendarPlan" EntityType="Self.CplCalendarPlan" Schema="dbo" Table="CplCalendarPlans" />
+          <EntitySet Name="CplCalendarPlanStage" EntityType="Self.CplCalendarPlanStage" Schema="dbo" Table="CplCalendarPlanStages" />
+          <EntitySet Name="CplCalendarPlanWork" EntityType="Self.CplCalendarPlanWork" Schema="dbo" Table="CplCalendarPlanWorks" />
+          <EntitySet Name="ProjContract" EntityType="Self.ProjContract" Schema="dbo" Table="ProjContracts" />
+          <EntitySet Name="OrgUnit" EntityType="Self.OrgUnit" Schema="dbo" Table="OrgUnits" />
+          <EntitySet Name="OrgExtraProperty" EntityType="Self.OrgExtraProperty" Schema="dbo" Table="OrgExtraProperties" />
+          <EntitySet Name="OrgUnitAtuAddress" EntityType="Self.OrgUnitAtuAddress" Schema="dbo" Table="OrgUnitAtuAddresses" />
+          <EntitySet Name="ProjParticipant" EntityType="Self.ProjParticipant" Schema="dbo" Table="ProjParticipants" />
+          <EntitySet Name="ProjProject" EntityType="Self.ProjProject" Schema="dbo" Table="ProjProjects" />
+          <EntitySet Name="ProjProjectAtuCoordinate" EntityType="Self.ProjProjectAtuCoordinate" Schema="dbo" Table="ProjProjectAtuCoordinates" />
+          <EntitySet Name="AtuCoordinate" EntityType="Self.AtuCoordinate" Schema="dbo" Table="AtuCoordinates" />
+          <EntitySet Name="ProjObjectCharacteristic" EntityType="Self.ProjObjectCharacteristic" Schema="dbo" Table="ProjObjectCharacteristics" />
+          <EntitySet Name="AtuRegion" EntityType="Self.AtuRegion" Schema="dbo" Table="AtuRegions" />
+          <EntitySet Name="AtuCountry" EntityType="Self.AtuCountry" Schema="dbo" Table="AtuCountries" />
+          <EntitySet Name="AtuCity" EntityType="Self.AtuCity" Schema="dbo" Table="AtuCities" />
+          <EntitySet Name="AtuDistrict" EntityType="Self.AtuDistrict" Schema="dbo" Table="AtuDistricts" />
+          <EntitySet Name="AtuStreet" EntityType="Self.AtuStreet" Schema="dbo" Table="AtuStreets" />
+          <EntitySet Name="OrgEmployee" EntityType="Self.OrgEmployee" Schema="dbo" Table="OrgEmployees" />
+          <EntitySet Name="OrgUnitSpecialization" EntityType="Self.OrgUnitSpecialization" Schema="dbo" Table="OrgUnitSpecializations" />
+          <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" Table="People" />
+          <EntitySet Name="ResPlannedResource" EntityType="Self.ResPlannedResource" Schema="dbo" Table="ResPlannedResources" />
+          <EntitySet Name="DictionaryResource" EntityType="Self.DictionaryResource" Schema="dbo" Table="DictionaryResources" />
+          <EntitySet Name="ResResourceStatement" EntityType="Self.ResResourceStatement" Schema="dbo" Table="ResResourceStatements" />
+          <EntitySet Name="DictionaryWorkType" EntityType="Self.DictionaryWorkType" Schema="dbo" Table="DictionaryWorkTypes" />
+          <AssociationSet Name="CplCalendarPlanStage_CalendarPlan" Association="Self.CplCalendarPlanStage_CalendarPlan">
+            <End Role="CplCalendarPlan" EntitySet="CplCalendarPlan" />
+            <End Role="CplCalendarPlanStage" EntitySet="CplCalendarPlanStage" />
+          </AssociationSet>
+          <AssociationSet Name="CplCalendarPlanWork_CalendarPlanStage" Association="Self.CplCalendarPlanWork_CalendarPlanStage">
+            <End Role="CplCalendarPlanStage" EntitySet="CplCalendarPlanStage" />
+            <End Role="CplCalendarPlanWork" EntitySet="CplCalendarPlanWork" />
+          </AssociationSet>
+          <AssociationSet Name="ProjContract_Children" Association="Self.ProjContract_Children">
+            <End Role="ProjContract" EntitySet="ProjContract" />
+            <End Role="ProjContractSelf" EntitySet="ProjContract" />
+          </AssociationSet>
+          <AssociationSet Name="OrgUnit_ExtraProperties" Association="Self.OrgUnit_ExtraProperties">
+            <End Role="OrgUnit" EntitySet="OrgUnit" />
+            <End Role="OrgExtraProperty" EntitySet="OrgExtraProperty" />
+          </AssociationSet>
+          <AssociationSet Name="OrgUnit_OrgUnitAtuAddresses" Association="Self.OrgUnit_OrgUnitAtuAddresses">
+            <End Role="OrgUnit" EntitySet="OrgUnit" />
+            <End Role="OrgUnitAtuAddress" EntitySet="OrgUnitAtuAddress" />
+          </AssociationSet>
+          <AssociationSet Name="ProjParticipant_OrgUnit" Association="Self.ProjParticipant_OrgUnit">
+            <End Role="OrgUnit" EntitySet="OrgUnit" />
+            <End Role="ProjParticipant" EntitySet="ProjParticipant" />
+          </AssociationSet>
+          <AssociationSet Name="AtuCoordinate_Projects" Association="Self.AtuCoordinate_Projects">
+            <End Role="AtuCoordinate" EntitySet="AtuCoordinate" />
+            <End Role="ProjProjectAtuCoordinate" EntitySet="ProjProjectAtuCoordinate" />
+          </AssociationSet>
+          <AssociationSet Name="ProjProjectAtuCoordinate_Project" Association="Self.ProjProjectAtuCoordinate_Project">
+            <End Role="ProjProject" EntitySet="ProjProject" />
+            <End Role="ProjProjectAtuCoordinate" EntitySet="ProjProjectAtuCoordinate" />
+          </AssociationSet>
+          <AssociationSet Name="ProjObjectCharacteristic_Projects" Association="Self.ProjObjectCharacteristic_Projects">
+            <End Role="ProjObjectCharacteristic" EntitySet="ProjObjectCharacteristic" />
+            <End Role="ProjProject" EntitySet="ProjProject" />
+          </AssociationSet>
+          <AssociationSet Name="ProjProject_Participants" Association="Self.ProjProject_Participants">
+            <End Role="ProjProject" EntitySet="ProjProject" />
+            <End Role="ProjParticipant" EntitySet="ProjParticipant" />
+          </AssociationSet>
+          <AssociationSet Name="AtuCountry_AtuRegions" Association="Self.AtuCountry_AtuRegions">
+            <End Role="AtuCountry" EntitySet="AtuCountry" />
+            <End Role="AtuRegion" EntitySet="AtuRegion" />
+          </AssociationSet>
+          <AssociationSet Name="AtuCity_AtuRegion" Association="Self.AtuCity_AtuRegion">
+            <End Role="AtuRegion" EntitySet="AtuRegion" />
+            <End Role="AtuCity" EntitySet="AtuCity" />
+          </AssociationSet>
+          <AssociationSet Name="AtuDistrict_City" Association="Self.AtuDistrict_City">
+            <End Role="AtuCity" EntitySet="AtuCity" />
+            <End Role="AtuDistrict" EntitySet="AtuDistrict" />
+          </AssociationSet>
+          <AssociationSet Name="AtuStreet_City" Association="Self.AtuStreet_City">
+            <End Role="AtuCity" EntitySet="AtuCity" />
+            <End Role="AtuStreet" EntitySet="AtuStreet" />
+          </AssociationSet>
+          <AssociationSet Name="ProjProject_Region" Association="Self.ProjProject_Region">
+            <End Role="AtuRegion" EntitySet="AtuRegion" />
+            <End Role="ProjProject" EntitySet="ProjProject" />
+          </AssociationSet>
+          <AssociationSet Name="ProjContract_Customer" Association="Self.ProjContract_Customer">
+            <End Role="OrgUnit" EntitySet="OrgUnit" />
+            <End Role="ProjContract" EntitySet="ProjContract" />
+          </AssociationSet>
+          <AssociationSet Name="ProjContract_Executor" Association="Self.ProjContract_Executor">
+            <End Role="OrgUnit" EntitySet="OrgUnit" />
+            <End Role="ProjContract" EntitySet="ProjContract" />
+          </AssociationSet>
+          <AssociationSet Name="ProjContract_Project" Association="Self.ProjContract_Project">
+            <End Role="ProjProject" EntitySet="ProjProject" />
+            <End Role="ProjContract" EntitySet="ProjContract" />
+          </AssociationSet>
+          <AssociationSet Name="OrgEmployee_OrgUnitSpecialization" Association="Self.OrgEmployee_OrgUnitSpecialization">
+            <End Role="OrgUnitSpecialization" EntitySet="OrgUnitSpecialization" />
+            <End Role="OrgEmployee" EntitySet="OrgEmployee" />
+          </AssociationSet>
+          <AssociationSet Name="OrgEmployee_Person" Association="Self.OrgEmployee_Person">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="OrgEmployee" EntitySet="OrgEmployee" />
+          </AssociationSet>
+          <AssociationSet Name="ProjContract_SignerExecutor" Association="Self.ProjContract_SignerExecutor">
+            <End Role="OrgEmployee" EntitySet="OrgEmployee" />
+            <End Role="ProjContract" EntitySet="ProjContract" />
+          </AssociationSet>
+          <AssociationSet Name="ProjContract_SignerСustomer" Association="Self.ProjContract_SignerСustomer">
+            <End Role="OrgEmployee" EntitySet="OrgEmployee" />
+            <End Role="ProjContract" EntitySet="ProjContract" />
+          </AssociationSet>
+          <AssociationSet Name="CplCalendarPlanWork_Contract" Association="Self.CplCalendarPlanWork_Contract">
+            <End Role="ProjContract" EntitySet="ProjContract" />
+            <End Role="CplCalendarPlanWork" EntitySet="CplCalendarPlanWork" />
+          </AssociationSet>
+          <AssociationSet Name="ResPlannedResource_CalendarPlanWork" Association="Self.ResPlannedResource_CalendarPlanWork">
+            <End Role="CplCalendarPlanWork" EntitySet="CplCalendarPlanWork" />
+            <End Role="ResPlannedResource" EntitySet="ResPlannedResource" />
+          </AssociationSet>
+          <AssociationSet Name="DictionaryResource_PlannedResources" Association="Self.DictionaryResource_PlannedResources">
+            <End Role="DictionaryResource" EntitySet="DictionaryResource" />
+            <End Role="ResPlannedResource" EntitySet="ResPlannedResource" />
+          </AssociationSet>
+          <AssociationSet Name="ResResourceStatement_CalendarPlan" Association="Self.ResResourceStatement_CalendarPlan">
+            <End Role="CplCalendarPlan" EntitySet="CplCalendarPlan" />
+            <End Role="ResResourceStatement" EntitySet="ResResourceStatement" />
+          </AssociationSet>
+          <AssociationSet Name="ResResourceStatement_PlannedResources" Association="Self.ResResourceStatement_PlannedResources">
+            <End Role="ResResourceStatement" EntitySet="ResResourceStatement" />
+            <End Role="ResPlannedResource" EntitySet="ResPlannedResource" />
+          </AssociationSet>
+          <AssociationSet Name="DictionaryWorkType_CalendarPlanWorks" Association="Self.DictionaryWorkType_CalendarPlanWorks">
+            <End Role="DictionaryWorkType" EntitySet="DictionaryWorkType" />
+            <End Role="CplCalendarPlanWork" EntitySet="CplCalendarPlanWork" />
+          </AssociationSet>
+          <AssociationSet Name="CplCalendarPlan_Project" Association="Self.CplCalendarPlan_Project">
+            <End Role="ProjProject" EntitySet="ProjProject" />
+            <End Role="CplCalendarPlan" EntitySet="CplCalendarPlan" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </StorageModels>
+  </Runtime>
+  <Designer>
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="ProcessDependentTemplatesOnSave" Value="False" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <Diagrams >
+      <Diagram DiagramId="e94d34464a19497aba00873c0e81a66a" Name="Diagram1">
+        <EntityTypeShape EntityType="EF6.Diagram.Cost.CplCalendarPlan" Width="1.5" PointX="3" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="EF6.Diagram.Cost.CplCalendarPlanStage" Width="1.5" PointX="13.5" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="EF6.Diagram.Cost.CplCalendarPlanWork" Width="1.5" PointX="11.25" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EF6.Diagram.Cost.ProjContract" Width="1.5" PointX="13.5" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="EF6.Diagram.Cost.OrgUnit" Width="1.5" PointX="15.75" PointY="21.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="EF6.Diagram.Cost.OrgExtraProperty" Width="1.5" PointX="18" PointY="25.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="EF6.Diagram.Cost.OrgUnitAtuAddress" Width="1.5" PointX="18" PointY="29.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="EF6.Diagram.Cost.ProjParticipant" Width="1.5" PointX="10.5" PointY="20.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="EF6.Diagram.Cost.ProjProject" Width="1.5" PointX="8.25" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="EF6.Diagram.Cost.ProjProjectAtuCoordinate" Width="1.5" PointX="6" PointY="19" IsExpanded="true" />
+        <EntityTypeShape EntityType="EF6.Diagram.Cost.AtuCoordinate" Width="1.5" PointX="3.75" PointY="19.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="EF6.Diagram.Cost.ProjObjectCharacteristic" Width="1.5" PointX="6" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="EF6.Diagram.Cost.AtuRegion" Width="1.5" PointX="10.5" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="EF6.Diagram.Cost.AtuCountry" Width="1.5" PointX="8.25" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="EF6.Diagram.Cost.AtuCity" Width="1.5" PointX="8.25" PointY="25.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="EF6.Diagram.Cost.AtuDistrict" Width="1.5" PointX="6" PointY="23.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="EF6.Diagram.Cost.AtuStreet" Width="1.5" PointX="6" PointY="27.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="EF6.Diagram.Cost.OrgEmployee" Width="1.5" PointX="15.75" PointY="16.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="EF6.Diagram.Cost.OrgUnitSpecialization" Width="1.5" PointX="18" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="EF6.Diagram.Cost.Person" Width="1.5" PointX="18" PointY="17.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="EF6.Diagram.Cost.ResPlannedResource" Width="1.5" PointX="6" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="EF6.Diagram.Cost.DictionaryResource" Width="1.5" PointX="3.75" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="EF6.Diagram.Cost.ResResourceStatement" Width="1.5" PointX="0.75" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="EF6.Diagram.Cost.DictionaryWorkType" Width="1.5" PointX="9" PointY="3.375" IsExpanded="true" />
+        <AssociationConnector Association="EF6.Diagram.Cost.CplCalendarPlanStage_CalendarPlan" ManuallyRouted="false" />
+        <AssociationConnector Association="EF6.Diagram.Cost.CplCalendarPlanWork_CalendarPlanStage" ManuallyRouted="false" />
+        <AssociationConnector Association="EF6.Diagram.Cost.ProjContract_Children" ManuallyRouted="false" />
+        <AssociationConnector Association="EF6.Diagram.Cost.OrgUnit_ExtraProperties" ManuallyRouted="false" />
+        <AssociationConnector Association="EF6.Diagram.Cost.OrgUnit_OrgUnitAtuAddresses" ManuallyRouted="false" />
+        <AssociationConnector Association="EF6.Diagram.Cost.ProjParticipant_OrgUnit" ManuallyRouted="false" />
+        <AssociationConnector Association="EF6.Diagram.Cost.AtuCoordinate_Projects" ManuallyRouted="false" />
+        <AssociationConnector Association="EF6.Diagram.Cost.ProjProjectAtuCoordinate_Project" ManuallyRouted="false" />
+        <AssociationConnector Association="EF6.Diagram.Cost.ProjObjectCharacteristic_Projects" ManuallyRouted="false" />
+        <AssociationConnector Association="EF6.Diagram.Cost.ProjProject_Participants" ManuallyRouted="false" />
+        <AssociationConnector Association="EF6.Diagram.Cost.AtuCountry_AtuRegions" ManuallyRouted="false" />
+        <AssociationConnector Association="EF6.Diagram.Cost.AtuCity_AtuRegion" ManuallyRouted="false" />
+        <AssociationConnector Association="EF6.Diagram.Cost.AtuDistrict_City" ManuallyRouted="false" />
+        <AssociationConnector Association="EF6.Diagram.Cost.AtuStreet_City" ManuallyRouted="false" />
+        <AssociationConnector Association="EF6.Diagram.Cost.ProjProject_Region" ManuallyRouted="false" />
+        <AssociationConnector Association="EF6.Diagram.Cost.ProjContract_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="EF6.Diagram.Cost.ProjContract_Executor" ManuallyRouted="false" />
+        <AssociationConnector Association="EF6.Diagram.Cost.ProjContract_Project" ManuallyRouted="false" />
+        <AssociationConnector Association="EF6.Diagram.Cost.OrgEmployee_OrgUnitSpecialization" ManuallyRouted="false" />
+        <AssociationConnector Association="EF6.Diagram.Cost.OrgEmployee_Person" ManuallyRouted="false" />
+        <AssociationConnector Association="EF6.Diagram.Cost.ProjContract_SignerExecutor" ManuallyRouted="false" />
+        <AssociationConnector Association="EF6.Diagram.Cost.ProjContract_SignerСustomer" ManuallyRouted="false" />
+        <AssociationConnector Association="EF6.Diagram.Cost.CplCalendarPlanWork_Contract" ManuallyRouted="false" />
+        <AssociationConnector Association="EF6.Diagram.Cost.ResPlannedResource_CalendarPlanWork" ManuallyRouted="false" />
+        <AssociationConnector Association="EF6.Diagram.Cost.DictionaryResource_PlannedResources" ManuallyRouted="false" />
+        <AssociationConnector Association="EF6.Diagram.Cost.ResResourceStatement_CalendarPlan" ManuallyRouted="false" />
+        <AssociationConnector Association="EF6.Diagram.Cost.ResResourceStatement_PlannedResources" ManuallyRouted="false" />
+        <AssociationConnector Association="EF6.Diagram.Cost.DictionaryWorkType_CalendarPlanWorks" ManuallyRouted="false" />
+        <AssociationConnector Association="EF6.Diagram.Cost.CplCalendarPlan_Project" ManuallyRouted="false" />
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</Edmx>

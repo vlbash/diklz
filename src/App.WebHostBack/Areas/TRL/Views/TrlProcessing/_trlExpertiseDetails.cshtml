@@ -1,0 +1,56 @@
+﻿@model App.Data.DTO.TRL.TrlAppExpertiseDTO
+@inject App.Core.Mvc.Helpers.SelectListHelper Sel
+@if (Model.PerformerOfExpertiseId != Guid.Empty)
+{
+    <div class="content-item-details">
+        <div class="content-item-inner content-details-wrapper col-2">
+            <div class="content-details">
+                <div class="content-details-group">
+                    <label>@Html.DisplayNameFor(model => model.ExpertiseResultEnum)</label>
+                    <p>@Html.DisplayFor(model => model.ExpertiseResult)</p>
+                </div>
+            </div>
+            <div class="content-details">
+                <div class="content-details-group">
+                    <label>@Html.DisplayNameFor(model => model.ExpertiseDate)</label>
+                    <p>@Html.DisplayFor(model => model.ExpertiseDate)</p>
+                </div>
+            </div>
+            <div class="content-details">
+                <div class="content-details-group">
+                    <label>@Html.DisplayNameFor(model => model.PerformerName)</label>
+                    <p>@Html.DisplayFor(model => model.PerformerName)</p>
+                </div>
+            </div>
+            <div class="content-details">
+                <div class="content-details-group">
+                    <label>@Html.DisplayNameFor(model => model.ExpertiseComment)</label>
+                    <p>@Html.DisplayFor(model => model.ExpertiseComment)</p>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@if (ViewBag.IsEditable == true)
+{
+    <div class="content-submit-holder btn-holder">
+        @if (Model.PerformerOfExpertiseId == Guid.Empty)
+        {
+            <button type="button" class="btn btn-secondary btn-panel"
+                    data-modal="modal-center"
+                    data-tab-container-url="@Url.Action("ModalExpertise", "TrlProcessing", new {appId = Model.Id})">
+                <span class="icon icon-huge icon-document"></span>
+                <span> Створити експертизу </span>
+            </button>
+        }
+        else
+        {
+            <button type="button" class="btn btn-secondary btn-panel"
+                    data-modal="modal-center"
+                    data-tab-container-url="@Url.Action("ModalExpertise", "TrlProcessing", new {appId = Model.Id})">
+                <span class="icon icon-huge icon-document"></span>
+                <span> Редагувати експертизу </span>
+            </button>
+        }
+    </div>
+}

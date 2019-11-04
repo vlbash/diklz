@@ -1,0 +1,64 @@
+﻿@model App.Data.DTO.Common.ProtocolListDTO
+@{
+    ViewData["Title"] = "Протокол засідання";
+}
+@section Scripts
+{
+    <script>
+        fileListLink = "@Url.Action("ProtocolPartialList", "Application", new { Area = ViewBag.appType })?protocolId=@Model.Id",
+            fileListContainer = $("#appList");
+        mt.getAjaxContainer(fileListContainer, fileListLink);
+    </script>
+
+}
+<div class="content-item-holder">
+    <div class="content-item">
+        <div class="content-item-header">
+            <i class="icon icon-xlg icon-person-edit-card"></i>
+            <h2>Протокол</h2>
+        </div>
+        <div class="content-item-details">
+            <div class="content-item-inner content-details-wrapper col-2">
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.StatusName)</label>
+                        <p>@Html.DisplayFor(model => model.StatusName)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.ProtocolNumber)</label>
+                        <p>@Html.DisplayFor(model => model.ProtocolNumber)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.ProtocolDate)</label>
+                        <p>@Html.DisplayFor(model => model.ProtocolDate)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.OrderNumber)</label>
+                        <p>@Html.DisplayFor(model => model.OrderNumber)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.OrderDate)</label>
+                        <p>@Html.DisplayFor(model => model.OrderDate)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+        <h2>Заяви, прикріплені до даного протоколу</h2>
+        <br />
+        <div class="upload-edit">
+            <div id="appList">
+
+            </div>
+        </div>
+    </div>
+
+</div>

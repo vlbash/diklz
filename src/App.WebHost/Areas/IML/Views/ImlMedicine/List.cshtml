@@ -1,0 +1,233 @@
+﻿@using ReflectionIT.Mvc.Paging
+@model ReflectionIT.Mvc.Paging.PagingList<App.Data.DTO.IML.ImlMedicineListDTO>
+@addTagHelper *, ReflectionIT.Mvc.Paging
+    <div class="content-partial-header">
+        @if (ViewBag.IsAddable == true)
+        {
+            <a class="content-item-btn data-tab icon-sm icon-download"
+               data-tab
+               asp-area=""
+               asp-action="GetMedicineTemplate"
+               asp-controller="FileStore"
+               target="_blank"
+               data-title="Завантажити шаблон переліку лікарських засобів"
+               data-tooltipleft="1">
+            </a>
+            if (ViewBag.FileCheck == false)
+            {
+                <a class="content-item-btn data-tab icon-sm icon-add" id="seedLZ"
+                   data-tab
+                   href="#"
+                   data-title="Завантажити перелік лікарських засобів з шаблону, Увага! Тип файлу лише .xlsx"
+                   data-tooltipleft="1">
+                </a>
+                <input type="file" id="uploadLZ" style="position: absolute; top: -100px;">
+            }
+
+            if (ViewBag.FileCheck == true)
+            {
+                <a class="content-item-btn data-tab icon-sm icon-delete" id="deleteAll"
+                   data-tab
+                   href="#"
+                   data-title="Видалення всіх лікарських засобів"
+                   data-tooltipleft="1">
+                </a>
+                <a class="content-item-btn data-tab icon-sm icon-download"
+                   data-tab
+                   asp-area="IML"
+                   asp-action="GetExcellFile"
+                   asp-controller="ImlMedicine"
+                   asp-route-appId="@ViewBag.ApplicationId"
+                   target="_blank"
+                   data-title="Завантажити файл лікарських засобів"
+                   data-tooltipleft="1">
+                </a>
+            }
+        }
+    </div>
+<div class="content-list-wrapper" data-pgparams="@ViewBag.FormParamList">
+    <div class="content-list content-list-header">
+        <div class="content-list-edit"></div>
+        <div class="content-list-item grid-container">
+            <div class="grid" data-grid="1">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.SortableHeaderFor(model => model.MedicineName)
+                    </p>
+                </div>
+            </div>
+            <div class="grid" data-grid="1">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.SortableHeaderFor(model => model.RegisterNumber)
+                    </p>
+                </div>
+            </div>
+            <div class="grid" data-grid="1">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.SortableHeaderFor(model => model.MedicineNameEng)
+                    </p>
+                </div>
+            </div>
+            <div class="grid" data-grid="2">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.SortableHeaderFor(model => model.ProducerName)
+                    </p>
+                </div>
+            </div>
+            <div class="grid" data-grid="2">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.SortableHeaderFor(model => model.SupplierName)
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="content-list-delete"></div>
+    </div>
+    @foreach (var item in Model)
+    {
+        <div class="content-list">
+            <div class="content-list-edit">
+                @if (item.IsEditable == true)
+                {
+                    <a class="btn-link btn btn-icon btn-square icon-md icon-edit-line"
+                       asp-area="IML"
+                       asp-action="Edit"
+                       asp-controller="ImlMedicine"
+                       asp-route-id="@item.Id"
+                       asp-route-appId="@ViewBag.ApplicationId"
+                       data-title="Редагування"
+                       data-tooltipright='1'>
+                    </a>
+                }
+                else
+                {
+                    <a class="btn-link btn btn-icon btn-square icon-md icon-eye"
+                       asp-area="IML"
+                       asp-action="Details"
+                       asp-controller="ImlMedicine"
+                       asp-route-id="@item.Id"
+                       data-title="Перегляд"
+                       data-tooltipright='1'>
+                    </a>
+                }
+            </div>
+            <a class="content-list-link">
+                <div class="content-list-item grid-container-nested">
+                    <div class="grid">
+                        <div class="grid-inner">
+                            <p>
+                                @Html.DisplayFor(modelItem => item.MedicineName)
+                            </p>
+                        </div>
+                    </div>
+                    <div class="grid">
+                        <div class="grid-inner">
+                            <p>
+                                @Html.DisplayFor(modelItem => item.RegisterNumber)
+                            </p>
+                        </div>
+                    </div>
+                    <div class="grid">
+                        <div class="grid-inner">
+                            <p>
+                                @Html.DisplayFor(modelItem => item.MedicineNameEng)
+                            </p>
+                        </div>
+                    </div>
+                    <div class="grid">
+                        <div class="grid-inner">
+                            <p>
+                                @Html.DisplayFor(modelItem => item.ProducerName)
+                            </p>
+                        </div>
+                    </div>
+                    <div class="grid">
+                        <div class="grid-inner">
+                            <p>
+                                @Html.DisplayFor(modelItem => item.SupplierName)
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </a>
+            <div class="content-list-delete">
+                @if (item.IsEditable == true)
+                {
+                    <a class="btn btn-icon btn-square icon-md icon-remove"
+                       asp-area="IML"
+                       asp-action="Delete"
+                       asp-controller="ImlMedicine"
+                       data-title="Видалити"
+                       data-tooltipleft='1'
+                       asp-route-id="@item.Id">
+                    </a>
+                }
+            </div>
+        </div>
+    }
+</div>
+<nav>
+    <vc:pager paging-list="@Model" />
+</nav>
+<script>
+    $(document).on("click",
+        "#seedLZ",
+        function() {
+            $("#uploadLZ").trigger("click");
+        });
+    $(document).on("change",
+        "#uploadLZ",
+        function () {
+            mt.showLoader(".wrapper-content");
+            var formData = new FormData();
+            formData.append('formData', this.files[0]);
+            formData.append('appId', '@ViewBag.ApplicationId');
+            $.ajax({
+                url: '@Url.Action("UploadMedicine", "ImlMedicine")',
+                type: 'POST',
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function(data) {
+                    if (data.success == false) {
+                        mt.hideLoader(".wrapper-content");
+                        alert(data.errorText);
+                    } else {
+                        if (data.errors.length > 0)
+                            alert("Увага! Файл містить помилки у рядках: " +
+                                data.errors.join(', '));
+                        mt.hideLoader(".wrapper-content");
+                        var container = $('#imlMedicinePartial');
+                        mt.tryLoadContainer(container, container.attr('data-tab-container-url'));
+                    }
+                }
+        });
+        });
+
+    $(document).on("click","#deleteAll" ,function () {
+            mt.showLoader(".wrapper-content");
+            $.ajax({
+                url: '@Url.Action("DeleteAll", "ImlMedicine", new {appId = ViewBag.ApplicationId})',
+                type: 'POST',
+                contentType: false,
+                processData: false,
+                success: function(data) {
+                    if (data.success == false) {
+                        mt.hideLoader(".wrapper-content");
+                        alert("Помилка серверу, перезагрузіть сторінку");
+                    } else {
+                        mt.hideLoader(".wrapper-content");
+                        var container = $('#imlMedicinePartial');
+                        mt.tryLoadContainer(container, container.attr('data-tab-container-url'));
+                    }
+                }
+            });
+        });
+
+
+</script>

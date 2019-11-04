@@ -1,0 +1,316 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <!--<TargetFramework>netstandard2.0</TargetFramework>-->
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <AssemblyName>App.Business</AssemblyName>
+    <RootNamespace>App.Business</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="Lookups\**" />
+    <Compile Remove="Reports\**" />
+    <EmbeddedResource Remove="Lookups\**" />
+    <EmbeddedResource Remove="Reports\**" />
+    <None Remove="Lookups\**" />
+    <None Remove="Reports\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="EPPlus" Version="4.5.3.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Antiforgery" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="2.2.0" />
+    <PackageReference Include="NCrontab" Version="3.3.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
+    <PackageReference Include="System.Text.Encoding.CodePages" Version="4.5.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\submodule\App.Core\src\App.Core.Business\App.Core.Business.csproj" />
+    <ProjectReference Include="..\..\submodule\App.Core\src\App.Core.Mvc\App.Core.Mvc.csproj" />
+    <ProjectReference Include="..\..\submodule\App.Core\src\Customized\ReflectionIT.Mvc.Paging\ReflectionIT.Mvc.Paging.csproj" />
+    <ProjectReference Include="..\App.Data\App.Data.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Templates\Emails\NotificationAppRegister_Org.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Emails\NotificationAppRegister_User.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Emails\NotificationAppResolvePay_User.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Emails\NotificationAppResolvePay_Org.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Emails\NotificationAppResolve_Org.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Emails\NotificationAppResolve_User.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Emails\NotificationAppSend_Org.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Emails\NotificationAppSend_User.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Emails\NotificationMsgResolve_Org.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Emails\NotificationMsgResolve_User.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Emails\NotificationMsgSend_Org.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Emails\NotificationMsgSend_User.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Htmls\IML\Docs\07\PDFTemplate_CancelLicenseAppIML_FOP.doc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Htmls\IML\Docs\07\PDFTemplate_CancelLicenseAppIML_ORG.doc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Htmls\IML\Htmls\AddBranchApp\PDFTemplate_AddBranchAppIML_FOP.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Htmls\IML\Htmls\AddBranchApp\PDFTemplate_AddBranchAppIML_ORG.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Htmls\IML\Htmls\AddMedicineListApp\PDFTemplate_AddMedicineListAppIML_FOP.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Htmls\IML\Htmls\AddMedicineListApp\PDFTemplate_AddMedicineListAppIML_ORG.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Htmls\IML\Htmls\CancelLicenseApp\PDFTemplate_CancelLicenseAppIML_FOP.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Htmls\IML\Htmls\CancelLicenseApp\PDFTemplate_CancelLicenseAppIML_ORG.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Htmls\IML\Htmls\ChangeAutPersonApp\PDFTemplate_ChangeAutPersonAppIML_FOP.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Htmls\IML\Htmls\ChangeAutPersonApp\PDFTemplate_ChangeAutPersonAppIML_ORG.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Htmls\IML\Htmls\ChangeMedicineListApp\PDFTemplate_ChangeMedicineListAppIML_FOP.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Htmls\IML\Htmls\ChangeMedicineListApp\PDFTemplate_ChangeMedicineListAppIML_ORG.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Htmls\IML\Htmls\CreateLicenseApp\PDFTemplate_CreateLicenseAppIML_FOP.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Htmls\IML\Htmls\CreateLicenseApp\PDFTemplate_CreateLicenseAppIML_ORG.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Htmls\IML\Htmls\PDFTemplate_IML_AutPersonList.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Htmls\IML\Htmls\PDFTemplate_IML_INF.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Htmls\IML\Htmls\PDFTemplate_IML_MPD.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Htmls\IML\Htmls\RemBranchApp\PDFTemplate_RemBranchAppIML_FOP.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Htmls\IML\Htmls\RemBranchApp\PDFTemplate_RemBranchAppIML_MDP.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Htmls\IML\Htmls\RemBranchApp\PDFTemplate_RemBranchAppIML_ORG.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Htmls\PRL\Htmls\PDFTemplate_AddBranchApp_FOP.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Htmls\PRL\Htmls\PDFTemplate_AddBranchApp_MPD.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Htmls\PRL\Htmls\PDFTemplate_AddBranchApp_ORG.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Htmls\PRL\Htmls\PDFTemplate_AddBranchInfoApp_FOP.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Htmls\PRL\Htmls\PDFTemplate_AddBranchInfoApp_MPD.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Htmls\PRL\Htmls\PDFTemplate_AddBranchInfoApp_ORG.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Htmls\PRL\Htmls\PDFTemplate_AppAddon.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Htmls\PRL\Htmls\PDFTemplate_CancelLicenseApp_FOP.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Htmls\PRL\Htmls\PDFTemplate_CancelLicenseApp_ORG.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Htmls\PRL\Htmls\PDFTemplate_ChangeAutPersonApp_FOP.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Htmls\PRL\Htmls\PDFTemplate_ChangeAutPersonApp_ORG.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Htmls\PRL\Htmls\PDFTemplate_ChangeContrApp_FOP.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Htmls\PRL\Htmls\PDFTemplate_ChangeContrApp_ORG.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Htmls\PRL\Htmls\PDFTemplate_CreateLicenseApp_FOP.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Htmls\PRL\Htmls\PDFTemplate_CreateLicenseApp_MPD.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Htmls\PRL\Htmls\PDFTemplate_CreateLicenseApp_ORG.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Htmls\PRL\Htmls\PDFTemplate_Footer.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Htmls\PRL\Htmls\PDFTemplate_RemBranchApp_FOP.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Htmls\PRL\Htmls\PDFTemplate_RemBranchApp_MPD.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Htmls\PRL\Htmls\PDFTemplate_RemBranchApp_ORG.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Htmls\PRL\Htmls\PDFTemplate_RemBranchInfoApp_FOP.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Htmls\PRL\Htmls\PDFTemplate_RemBranchInfoApp_MPD.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Htmls\PRL\Htmls\PDFTemplate_RemBranchInfoApp_ORG.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Htmls\PRL\Htmls\PDFTemplate_RenewLicenseApp_FOP.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Htmls\PRL\Htmls\PDFTemplate_RenewLicenseApp_ORG.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Htmls\TRL\Docs\CancelLicenseApp\PDFTemplate_CancelLicenseAppIML_FOP.doc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Htmls\TRL\Docs\CancelLicenseApp\PDFTemplate_CancelLicenseAppIML_ORG.doc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Htmls\TRL\Htmls\AddBranchApp\PDFTemplate_AddBranchAppTRL_FOP.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Htmls\TRL\Htmls\AddBranchApp\PDFTemplate_AddBranchAppTRL_ORG.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Htmls\TRL\Htmls\CancelLicenseApp\PDFTemplate_CancelLicenseAppTRL_FOP.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Htmls\TRL\Htmls\CancelLicenseApp\PDFTemplate_CancelLicenseAppTRL_ORG.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Htmls\TRL\Htmls\ChangeAutPersonApp\PDFTemplate_ChangeAutPersonAppTRL_FOP.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Htmls\TRL\Htmls\ChangeAutPersonApp\PDFTemplate_ChangeAutPersonAppTRL_ORG.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Htmls\TRL\Htmls\CreateLicenseApp\PDFTemplate_CreateLicenseAppTRL.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Htmls\TRL\Htmls\CreateLicenseApp\PDFTemplate_CreateLicenseAppTRL.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Htmls\TRL\Htmls\CreateLicenseApp\PDFTemplate_CreateLicenseAppTRL_FOP.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Htmls\TRL\Htmls\CreateLicenseApp\PDFTemplate_CreateLicenseAppTRL_ORG.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Htmls\TRL\Htmls\PDFTemplate_TRL_AutPersonList.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Htmls\TRL\Htmls\PDFTemplate_TRL_INF.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Htmls\TRL\Htmls\PDFTemplate_TRL_MPD.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Htmls\TRL\Htmls\PDFTemplate_TRL_MPD_License.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Htmls\TRL\Htmls\PDFTemplate_TRL_MPD_License.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Htmls\TRL\Htmls\PDFTemplate_TRL_MPD_License.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Htmls\TRL\Htmls\PDFTemplate_TRL_MPD_License.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Htmls\TRL\Htmls\RemBranchApp\PDFTemplate_RemBranchAppTRL_FOP.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Htmls\TRL\Htmls\RemBranchApp\PDFTemplate_RemBranchAppTRL_MDP.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Htmls\TRL\Htmls\RemBranchApp\PDFTemplate_RemBranchAppTRL_ORG.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Messages\PDFTemplate_AnotherEvent.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Messages\PDFTemplate_MessageComment.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Messages\PDFTemplate_MPDActivityRestoration.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Messages\PDFTemplate_MPDActivitySuspension.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Messages\PDFTemplate_MPDClosingForSomeActivity.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Messages\PDFTemplate_MPDLocationRatification.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Messages\PDFTemplate_MPDRestorationAfterSomeActivity.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Messages\PDFTemplate_MsgList.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Messages\PDFTemplate_OrgFopLocationChange.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Messages\PDFTemplate_ProductionDossierChange.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Messages\PDFTemplate_SgdChiefNameChange.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Messages\PDFTemplate_SgdNameChange.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\DrugList\Template_DrugList.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Templates\DrugList\" />
+    <Folder Include="Templates\Htmls\IML\Htmls\ChangeAutPersonApp\" />
+    <Folder Include="Templates\Htmls\IML\Htmls\CreateLicenseApp\" />
+    <Folder Include="Templates\Htmls\IML\Htmls\CancelLicenseApp\" />
+    <Folder Include="Templates\Htmls\IML\Htmls\RemBranchApp\" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,803 @@
+﻿@{
+    ViewData["Title"] = "Перелік досьє місць провадження діяльності (МПД) та відомостей" +
+                        " про наявність матеріально-технічної бази та кваліфікованого " +
+                        "персоналу";
+}
+
+@section Scripts {
+
+    <script>
+        var searchFormControls1 = {
+            controlsConfig: [
+                {
+                    labelName: 'Номер картки',
+                    name: 'CardNumber',
+                    type: 'text'
+                },
+                {
+                    labelName: 'Назва/Версія',
+                    name: 'Version',
+                    type: 'text'
+                },
+                {
+                    labelName: 'Назва/Версія',
+                    name: 'Version',
+                    type: 'text'
+                },
+                {
+                    labelName: 'Дата з',
+                    name: 'DateFrom',
+                    type: 'dataGroup',
+                    children: [
+                        {
+                            labelName: 'з: ',
+                            name: 'DateFrom_From',
+                            type: 'datepicker'
+                        }, {
+                            labelName: 'по: ',
+                            name: 'DateFrom_To',
+                            type: 'datepicker'
+                        }
+                    ]
+                },
+                {
+                    labelName: 'Дата до',
+                    name: 'DateTo',
+                    type: 'dataGroup',
+                    children: [
+                        {
+                            labelName: 'з: ',
+                            name: 'DateTo_From',
+                            type: 'datepicker'
+                        }, {
+                            labelName: 'по: ',
+                            name: 'DateTo_To',
+                            type: 'datepicker'
+                        }
+                    ]
+                }
+            ]
+        };
+
+        var searchFormConfig1 = {
+            formConfig: {
+                formName: 'form0',
+                formDataAjaxUpdate: '#results',
+                formMethod: 'post',
+                controls: searchFormControls1
+            },
+            presetFiltersUrl: {
+            },
+            mainInputConfig: {
+                labelName: 'Назва/Версія',
+                type: 'text',
+                mainInputLookUp: ['Version']
+            }
+        };
+
+
+        var searchFormControls2 = {
+            controlsConfig: [
+                {
+                    labelName: 'Номер картки',
+                    name: 'CardNumber',
+                    type: 'text'
+                },
+                {
+                    labelName: 'Назва/Версія',
+                    name: 'Version',
+                    type: 'text'
+                },
+                {
+                    labelName: 'Назва/Версія',
+                    name: 'Version',
+                    type: 'text'
+                },
+                {
+                    labelName: 'Дата з',
+                    name: 'DateFrom',
+                    type: 'dataGroup',
+                    children: [
+                        {
+                            labelName: 'з: ',
+                            name: 'DateFrom_From',
+                            type: 'datepicker'
+                        }, {
+                            labelName: 'по: ',
+                            name: 'DateFrom_To',
+                            type: 'datepicker'
+                        }
+                    ]
+                },
+                {
+                    labelName: 'Дата до',
+                    name: 'DateTo',
+                    type: 'dataGroup',
+                    children: [
+                        {
+                            labelName: 'з: ',
+                            name: 'DateTo_From',
+                            type: 'datepicker'
+                        }, {
+                            labelName: 'по: ',
+                            name: 'DateTo_To',
+                            type: 'datepicker'
+                        }
+                    ]
+                }
+            ]
+        };
+
+        var searchFormConfig2 = {
+            formConfig: {
+                formName: 'form1',
+                formDataAjaxUpdate: '#results1',
+                formMethod: 'post',
+                controls: searchFormControls2
+            },
+            presetFiltersUrl: {
+            },
+            mainInputConfig: {
+                labelName: 'Назва/Версія',
+                type: 'text',
+                mainInputLookUp: ['Version']
+            }
+        };
+
+
+        var searchFormControls3 = {
+            controlsConfig: [
+                {
+                    labelName: 'Номер картки',
+                    name: 'CardNumber',
+                    type: 'text'
+                },
+                {
+                    labelName: 'Назва/Версія',
+                    name: 'Version',
+                    type: 'text'
+                },
+                {
+                    labelName: 'Назва/Версія',
+                    name: 'Version',
+                    type: 'text'
+                },
+                {
+                    labelName: 'Дата з',
+                    name: 'DateFrom',
+                    type: 'dataGroup',
+                    children: [
+                        {
+                            labelName: 'з: ',
+                            name: 'DateFrom_From',
+                            type: 'datepicker'
+                        }, {
+                            labelName: 'по: ',
+                            name: 'DateFrom_To',
+                            type: 'datepicker'
+                        }
+                    ]
+                },
+                {
+                    labelName: 'Дата до',
+                    name: 'DateTo',
+                    type: 'dataGroup',
+                    children: [
+                        {
+                            labelName: 'з: ',
+                            name: 'DateTo_From',
+                            type: 'datepicker'
+                        }, {
+                            labelName: 'по: ',
+                            name: 'DateTo_To',
+                            type: 'datepicker'
+                        }
+                    ]
+                }
+            ]
+        };
+
+        var searchFormConfig3 = {
+            formConfig: {
+                formName: 'form2',
+                formDataAjaxUpdate: '#results2',
+                formMethod: 'post',
+                controls: searchFormControls3
+            },
+            presetFiltersUrl: {
+            },
+            mainInputConfig: {
+                labelName: 'Назва/Версія',
+                type: 'text',
+                mainInputLookUp: ['Version']
+            }
+        };
+
+
+        var searchFormControls4 = {
+            controlsConfig: [
+                {
+                    labelName: 'Номер картки',
+                    name: 'CardNumber',
+                    type: 'text'
+                },
+                {
+                    labelName: 'Назва/Версія',
+                    name: 'Version',
+                    type: 'text'
+                },
+                {
+                    labelName: 'Назва/Версія',
+                    name: 'Version',
+                    type: 'text'
+                },
+                {
+                    labelName: 'Дата з',
+                    name: 'DateFrom',
+                    type: 'dataGroup',
+                    children: [
+                        {
+                            labelName: 'з: ',
+                            name: 'DateFrom_From',
+                            type: 'datepicker'
+                        }, {
+                            labelName: 'по: ',
+                            name: 'DateFrom_To',
+                            type: 'datepicker'
+                        }
+                    ]
+                },
+                {
+                    labelName: 'Дата до',
+                    name: 'DateTo',
+                    type: 'dataGroup',
+                    children: [
+                        {
+                            labelName: 'з: ',
+                            name: 'DateTo_From',
+                            type: 'datepicker'
+                        }, {
+                            labelName: 'по: ',
+                            name: 'DateTo_To',
+                            type: 'datepicker'
+                        }
+                    ]
+                }
+            ]
+        };
+
+        var searchFormConfig4 = {
+            formConfig: {
+                formName: 'form3',
+                formDataAjaxUpdate: '#results3',
+                formMethod: 'post',
+                controls: searchFormControls4
+            },
+            presetFiltersUrl: {
+            },
+            mainInputConfig: {
+                labelName: 'Назва/Версія',
+                type: 'text',
+                mainInputLookUp: ['Version']
+            }
+        };
+
+
+        var searchFormControls5 = {
+            controlsConfig: [
+                {
+                    labelName: 'Номер картки',
+                    name: 'CardNumber',
+                    type: 'text'
+                },
+                {
+                    labelName: 'Назва/Версія',
+                    name: 'Version',
+                    type: 'text'
+                },
+                {
+                    labelName: 'Назва/Версія',
+                    name: 'Version',
+                    type: 'text'
+                },
+                {
+                    labelName: 'Дата з',
+                    name: 'DateFrom',
+                    type: 'dataGroup',
+                    children: [
+                        {
+                            labelName: 'з: ',
+                            name: 'DateFrom_From',
+                            type: 'datepicker'
+                        }, {
+                            labelName: 'по: ',
+                            name: 'DateFrom_To',
+                            type: 'datepicker'
+                        }
+                    ]
+                },
+                {
+                    labelName: 'Дата до',
+                    name: 'DateTo',
+                    type: 'dataGroup',
+                    children: [
+                        {
+                            labelName: 'з: ',
+                            name: 'DateTo_From',
+                            type: 'datepicker'
+                        }, {
+                            labelName: 'по: ',
+                            name: 'DateTo_To',
+                            type: 'datepicker'
+                        }
+                    ]
+                }
+            ]
+        };
+
+        var searchFormConfig5 = {
+            formConfig: {
+                formName: 'form4',
+                formDataAjaxUpdate: '#results4',
+                formMethod: 'post',
+                controls: searchFormControls5
+            },
+            presetFiltersUrl: {
+            },
+            mainInputConfig: {
+                labelName: 'Назва/Версія',
+                type: 'text',
+                mainInputLookUp: ['Version']
+            }
+        };
+
+        $(document).ready(function () {
+            mt.createContentSearchForm(searchFormConfig1);
+            sleep(500);
+            mt.createContentSearchForm(searchFormConfig2);
+            sleep(500);
+            mt.createContentSearchForm(searchFormConfig3);
+            sleep(500);
+            mt.createContentSearchForm(searchFormConfig4);
+            sleep(500);
+            mt.createContentSearchForm(searchFormConfig5);
+        });
+        
+
+        function sleep(milliseconds) {
+            var start = new Date().getTime();
+            for (var i = 0; i < 1e7; i++) {
+                if ((new Date().getTime() - start) > milliseconds) {
+                    break;
+                }
+            }
+        }
+    </script>
+}
+
+<div class="content-item-holder">
+    <div class="content-item">
+        <div class="content-item-header">
+            <i class="icon icon-xlg icon-clipboard-chart-round"></i>
+            <h2>Досьє з виробництва</h2>
+        </div>
+        <div class="content-search-wrapper">
+            <div class="content-search search-form-partial">
+                <div class="content-search-top">
+                    <div class="input-wrapper">
+                        <i class="content-search-submit-main-input icon-md icon-search"></i>
+                        <input class="input content-search-main-input" type="text" autocomplete="off" />
+                    </div>
+                    <div class="content-search-switcher-wrapper">
+                        <div class="content-search-switcher" data-tooltipleft="1" data-title="Налаштування пошуку">
+                            <i class="icon-lg icon-control-panel"></i>
+                        </div>
+                        <div class="content-preset-switcher" data-tooltipleft="1" data-title="Збереженні фільтри">
+                            <i class="icon-lg icon-filters"></i>
+                        </div>
+                    </div>
+
+                </div>
+                <form id="content-search-form"
+                      name="form0"
+                      class="content-search-form"
+                      action="@Url.Action("PrlDossierList")">
+                    <div class="content-search-form-ul-container">
+                        <div class="content-search-form-preset">
+                            <div class="content-search-form-preset-header">
+                                <p>Збережені фільтри:</p>
+                                <button type="button" class="preset-filters-settings btn btn-secondary-border btn-tiny" data-tooltipleft="1" data-title="Налаштування збережених фільтрів">
+                                    <i class="icon-lg icon-settings"></i>
+                                </button>
+                                <button type="button" class="preset-filters-settings-cancel btn btn-secondary-border btn-tiny" data-tooltipleft="1" data-title="Вийти з налаштування">
+                                    <i class="icon-lg icon-close"></i>
+                                </button>
+                            </div>
+                            <ul></ul>
+                        </div>
+                        <div class="content-search-form-holder">
+                            <ul></ul>
+                            <div class="content-search-form-submit btn-wrapper">
+                                <button type="button" class="search-form-btn-clean btn btn-text btn-danger">Очистити</button>
+                                <button type="button" class="search-form-btn-submit btn btn-fill btn-secondary">Знайти</button>
+                                <button type="button" class="search-form-btn-save-filter btn btn-text disabled">
+                                    <i class="icon-md icon-save"></i>
+                                    Зберегти фільтр
+                                </button>
+                                <div class="preset-filter-wrapper">
+                                    <div class="preset-filter-inner">
+                                        <div class="input-group">
+                                            <input class="input empty preset-filter-name-input" type="text" name="presetFilterName" validate validate-not-empty />
+                                            <span class="input-group-bar"></span>
+                                            <label>Назва фільтру</label>
+                                            <span class="js-validation"></span>
+                                        </div>
+                                        <div class="checkbox-group">
+                                            <div class="checkbox-group-inner">
+                                                <input class="checkbox preset-filter-default-checkbox" type="checkbox" id="presetFilterDefault" name="presetFilterDefault" />
+
+                                                <label for="presetFilterDefault">Фільтр за замовчуванням</label>
+                                            </div>
+                                            <span class="checkbox-group-bar"></span>
+                                        </div>
+                                        <div class="preset-filter-btn-holder btn-holder">
+                                            <button type=button class="btn btn-text btn-danger preset-filter-cancel">Відмінити</button>
+                                            <button type="button" class="btn btn-fill btn-secondary preset-filter-save">Зберігти фільтр</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="content-filter-parameters">
+                    <ul></ul>
+                    <div class="content-filter-parameters-clear-all">очистити фільтр</div>
+                </div>
+
+            </div>
+        </div>
+        <div class="results" id="results">
+
+        </div>
+    </div><div class="content-item">
+        <div class="content-item-header">
+            <i class="icon icon-xlg icon-clipboard-data"></i>
+            <h2>Досьє з імпорту</h2>
+        </div>
+        <div class="content-search-wrapper">
+            <div class="content-search search-form-partial">
+                <div class="content-search-top">
+                    <div class="input-wrapper">
+                        <i class="content-search-submit-main-input icon-md icon-search"></i>
+                        <input class="input content-search-main-input" type="text" autocomplete="off" />
+                    </div>
+                    <div class="content-search-switcher-wrapper">
+                        <div class="content-search-switcher" data-tooltipleft="1" data-title="Налаштування пошуку">
+                            <i class="icon-lg icon-control-panel"></i>
+                        </div>
+                        <div class="content-preset-switcher" data-tooltipleft="1" data-title="Збереженні фільтри">
+                            <i class="icon-lg icon-filters"></i>
+                        </div>
+                    </div>
+
+                </div>
+                <form id="content-search-form"
+                      name="form1"
+                      class="content-search-form"
+                      action="@Url.Action("ImlDossierList")">
+                    <div class="content-search-form-ul-container">
+                        <div class="content-search-form-preset">
+                            <div class="content-search-form-preset-header">
+                                <p>Збережені фільтри:</p>
+                                <button type="button" class="preset-filters-settings btn btn-secondary-border btn-tiny" data-tooltipleft="1" data-title="Налаштування збережених фільтрів">
+                                    <i class="icon-lg icon-settings"></i>
+                                </button>
+                                <button type="button" class="preset-filters-settings-cancel btn btn-secondary-border btn-tiny" data-tooltipleft="1" data-title="Вийти з налаштування">
+                                    <i class="icon-lg icon-close"></i>
+                                </button>
+                            </div>
+                            <ul></ul>
+                        </div>
+                        <div class="content-search-form-holder">
+                            <ul></ul>
+                            <div class="content-search-form-submit btn-wrapper">
+                                <button type="button" class="search-form-btn-clean btn btn-text btn-danger">Очистити</button>
+                                <button type="button" class="search-form-btn-submit btn btn-fill btn-secondary">Знайти</button>
+                                <button type="button" class="search-form-btn-save-filter btn btn-text disabled">
+                                    <i class="icon-md icon-save"></i>
+                                    Зберегти фільтр
+                                </button>
+                                <div class="preset-filter-wrapper">
+                                    <div class="preset-filter-inner">
+                                        <div class="input-group">
+                                            <input class="input empty preset-filter-name-input" type="text" name="presetFilterName" validate validate-not-empty />
+                                            <span class="input-group-bar"></span>
+                                            <label>Назва фільтру</label>
+                                            <span class="js-validation"></span>
+                                        </div>
+                                        <div class="checkbox-group">
+                                            <div class="checkbox-group-inner">
+                                                <input class="checkbox preset-filter-default-checkbox" type="checkbox" id="presetFilterDefault" name="presetFilterDefault" />
+
+                                                <label for="presetFilterDefault">Фільтр за замовчуванням</label>
+                                            </div>
+                                            <span class="checkbox-group-bar"></span>
+                                        </div>
+                                        <div class="preset-filter-btn-holder btn-holder">
+                                            <button type=button class="btn btn-text btn-danger preset-filter-cancel">Відмінити</button>
+                                            <button type="button" class="btn btn-fill btn-secondary preset-filter-save">Зберігти фільтр</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="content-filter-parameters">
+                    <ul></ul>
+                    <div class="content-filter-parameters-clear-all">очистити фільтр</div>
+                </div>
+
+            </div>
+        </div>
+        <div class="results" id="results1">
+
+        </div>
+    </div>
+    <div class="content-item">
+        <div class="content-item-header">
+            <i class="icon icon-xlg icon-user-table"></i>
+            <h2>Відомості МТБ та персоналу (виробництво в умовах аптеки)</h2>
+        </div>
+        <div class="content-search-wrapper">
+            <div class="content-search search-form-partial">
+                <div class="content-search-top">
+                    <div class="input-wrapper">
+                        <i class="content-search-submit-main-input icon-md icon-search"></i>
+                        <input class="input content-search-main-input" type="text" autocomplete="off" />
+                    </div>
+                    <div class="content-search-switcher-wrapper">
+                        <div class="content-search-switcher" data-tooltipleft="1" data-title="Налаштування пошуку">
+                            <i class="icon-lg icon-control-panel"></i>
+                        </div>
+                        <div class="content-preset-switcher" data-tooltipleft="1" data-title="Збереженні фільтри">
+                            <i class="icon-lg icon-filters"></i>
+                        </div>
+                    </div>
+
+                </div>
+                <form id="content-search-form"
+                      name="form2"
+                      class="content-search-form"
+                      action="@Url.Action("PayrollPharmacyProductionList")">
+                    <div class="content-search-form-ul-container">
+                        <div class="content-search-form-preset">
+                            <div class="content-search-form-preset-header">
+                                <p>Збережені фільтри:</p>
+                                <button type="button" class="preset-filters-settings btn btn-secondary-border btn-tiny" data-tooltipleft="1" data-title="Налаштування збережених фільтрів">
+                                    <i class="icon-lg icon-settings"></i>
+                                </button>
+                                <button type="button" class="preset-filters-settings-cancel btn btn-secondary-border btn-tiny" data-tooltipleft="1" data-title="Вийти з налаштування">
+                                    <i class="icon-lg icon-close"></i>
+                                </button>
+                            </div>
+                            <ul></ul>
+                        </div>
+                        <div class="content-search-form-holder">
+                            <ul></ul>
+                            <div class="content-search-form-submit btn-wrapper">
+                                <button type="button" class="search-form-btn-clean btn btn-text btn-danger">Очистити</button>
+                                <button type="button" class="search-form-btn-submit btn btn-fill btn-secondary">Знайти</button>
+                                <button type="button" class="search-form-btn-save-filter btn btn-text disabled">
+                                    <i class="icon-md icon-save"></i>
+                                    Зберегти фільтр
+                                </button>
+                                <div class="preset-filter-wrapper">
+                                    <div class="preset-filter-inner">
+                                        <div class="input-group">
+                                            <input class="input empty preset-filter-name-input" type="text" name="presetFilterName" validate validate-not-empty />
+                                            <span class="input-group-bar"></span>
+                                            <label>Назва фільтру</label>
+                                            <span class="js-validation"></span>
+                                        </div>
+                                        <div class="checkbox-group">
+                                            <div class="checkbox-group-inner">
+                                                <input class="checkbox preset-filter-default-checkbox" type="checkbox" id="presetFilterDefault" name="presetFilterDefault" />
+
+                                                <label for="presetFilterDefault">Фільтр за замовчуванням</label>
+                                            </div>
+                                            <span class="checkbox-group-bar"></span>
+                                        </div>
+                                        <div class="preset-filter-btn-holder btn-holder">
+                                            <button type=button class="btn btn-text btn-danger preset-filter-cancel">Відмінити</button>
+                                            <button type="button" class="btn btn-fill btn-secondary preset-filter-save">Зберігти фільтр</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="content-filter-parameters">
+                    <ul></ul>
+                    <div class="content-filter-parameters-clear-all">очистити фільтр</div>
+                </div>
+
+            </div>
+        </div>
+        <div class="results" id="results2">
+
+        </div>
+    </div>
+    <div class="content-item">
+        <div class="content-item-header">
+            <i class="icon icon-xlg icon-person-edit-card"></i>
+            <h2>Відомості МТБ та персоналу (роздрібна торгівля)</h2>
+        </div>
+        <div class="content-search-wrapper">
+            <div class="content-search search-form-partial">
+                <div class="content-search-top">
+                    <div class="input-wrapper">
+                        <i class="content-search-submit-main-input icon-md icon-search"></i>
+                        <input class="input content-search-main-input" type="text" autocomplete="off" />
+                    </div>
+                    <div class="content-search-switcher-wrapper">
+                        <div class="content-search-switcher" data-tooltipleft="1" data-title="Налаштування пошуку">
+                            <i class="icon-lg icon-control-panel"></i>
+                        </div>
+                        <div class="content-preset-switcher" data-tooltipleft="1" data-title="Збереженні фільтри">
+                            <i class="icon-lg icon-filters"></i>
+                        </div>
+                    </div>
+
+                </div>
+                <form id="content-search-form"
+                      name="form3"
+                      class="content-search-form"
+                      action="@Url.Action("PayrollRetailList")">
+                    <div class="content-search-form-ul-container">
+                        <div class="content-search-form-preset">
+                            <div class="content-search-form-preset-header">
+                                <p>Збережені фільтри:</p>
+                                <button type="button" class="preset-filters-settings btn btn-secondary-border btn-tiny" data-tooltipleft="1" data-title="Налаштування збережених фільтрів">
+                                    <i class="icon-lg icon-settings"></i>
+                                </button>
+                                <button type="button" class="preset-filters-settings-cancel btn btn-secondary-border btn-tiny" data-tooltipleft="1" data-title="Вийти з налаштування">
+                                    <i class="icon-lg icon-close"></i>
+                                </button>
+                            </div>
+                            <ul></ul>
+                        </div>
+                        <div class="content-search-form-holder">
+                            <ul></ul>
+                            <div class="content-search-form-submit btn-wrapper">
+                                <button type="button" class="search-form-btn-clean btn btn-text btn-danger">Очистити</button>
+                                <button type="button" class="search-form-btn-submit btn btn-fill btn-secondary">Знайти</button>
+                                <button type="button" class="search-form-btn-save-filter btn btn-text disabled">
+                                    <i class="icon-md icon-save"></i>
+                                    Зберегти фільтр
+                                </button>
+                                <div class="preset-filter-wrapper">
+                                    <div class="preset-filter-inner">
+                                        <div class="input-group">
+                                            <input class="input empty preset-filter-name-input" type="text" name="presetFilterName" validate validate-not-empty />
+                                            <span class="input-group-bar"></span>
+                                            <label>Назва фільтру</label>
+                                            <span class="js-validation"></span>
+                                        </div>
+                                        <div class="checkbox-group">
+                                            <div class="checkbox-group-inner">
+                                                <input class="checkbox preset-filter-default-checkbox" type="checkbox" id="presetFilterDefault" name="presetFilterDefault" />
+
+                                                <label for="presetFilterDefault">Фільтр за замовчуванням</label>
+                                            </div>
+                                            <span class="checkbox-group-bar"></span>
+                                        </div>
+                                        <div class="preset-filter-btn-holder btn-holder">
+                                            <button type=button class="btn btn-text btn-danger preset-filter-cancel">Відмінити</button>
+                                            <button type="button" class="btn btn-fill btn-secondary preset-filter-save">Зберігти фільтр</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="content-filter-parameters">
+                    <ul></ul>
+                    <div class="content-filter-parameters-clear-all">очистити фільтр</div>
+                </div>
+
+            </div>
+        </div>
+        <div class="results" id="results3">
+
+        </div>
+    </div>
+    <div class="content-item">
+        <div class="content-item-header">
+            <i class="icon icon-xlg icon-person-card-case"></i>
+            <h2>Відомості МТБ та персоналу (оптова торгівля)</h2>
+        </div>
+        <div class="content-search-wrapper">
+            <div class="content-search search-form-partial">
+                <div class="content-search-top">
+                    <div class="input-wrapper">
+                        <i class="content-search-submit-main-input icon-md icon-search"></i>
+                        <input class="input content-search-main-input" type="text" autocomplete="off" />
+                    </div>
+                    <div class="content-search-switcher-wrapper">
+                        <div class="content-search-switcher" data-tooltipleft="1" data-title="Налаштування пошуку">
+                            <i class="icon-lg icon-control-panel"></i>
+                        </div>
+                        <div class="content-preset-switcher" data-tooltipleft="1" data-title="Збереженні фільтри">
+                            <i class="icon-lg icon-filters"></i>
+                        </div>
+                    </div>
+
+                </div>
+                <form id="content-search-form"
+                      name="form4"
+                      class="content-search-form"
+                      action="@Url.Action("PayrollWholesaleList")">
+                    <div class="content-search-form-ul-container">
+                        <div class="content-search-form-preset">
+                            <div class="content-search-form-preset-header">
+                                <p>Збережені фільтри:</p>
+                                <button type="button" class="preset-filters-settings btn btn-secondary-border btn-tiny" data-tooltipleft="1" data-title="Налаштування збережених фільтрів">
+                                    <i class="icon-lg icon-settings"></i>
+                                </button>
+                                <button type="button" class="preset-filters-settings-cancel btn btn-secondary-border btn-tiny" data-tooltipleft="1" data-title="Вийти з налаштування">
+                                    <i class="icon-lg icon-close"></i>
+                                </button>
+                            </div>
+                            <ul></ul>
+                        </div>
+                        <div class="content-search-form-holder">
+                            <ul></ul>
+                            <div class="content-search-form-submit btn-wrapper">
+                                <button type="button" class="search-form-btn-clean btn btn-text btn-danger">Очистити</button>
+                                <button type="button" class="search-form-btn-submit btn btn-fill btn-secondary">Знайти</button>
+                                <button type="button" class="search-form-btn-save-filter btn btn-text disabled">
+                                    <i class="icon-md icon-save"></i>
+                                    Зберегти фільтр
+                                </button>
+                                <div class="preset-filter-wrapper">
+                                    <div class="preset-filter-inner">
+                                        <div class="input-group">
+                                            <input class="input empty preset-filter-name-input" type="text" name="presetFilterName" validate validate-not-empty />
+                                            <span class="input-group-bar"></span>
+                                            <label>Назва фільтру</label>
+                                            <span class="js-validation"></span>
+                                        </div>
+                                        <div class="checkbox-group">
+                                            <div class="checkbox-group-inner">
+                                                <input class="checkbox preset-filter-default-checkbox" type="checkbox" id="presetFilterDefault" name="presetFilterDefault" />
+
+                                                <label for="presetFilterDefault">Фільтр за замовчуванням</label>
+                                            </div>
+                                            <span class="checkbox-group-bar"></span>
+                                        </div>
+                                        <div class="preset-filter-btn-holder btn-holder">
+                                            <button type=button class="btn btn-text btn-danger preset-filter-cancel">Відмінити</button>
+                                            <button type="button" class="btn btn-fill btn-secondary preset-filter-save">Зберігти фільтр</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="content-filter-parameters">
+                    <ul></ul>
+                    <div class="content-filter-parameters-clear-all">очистити фільтр</div>
+                </div>
+
+            </div>
+        </div>
+        <div class="results" id="results4">
+
+        </div>
+    </div>
+</div>

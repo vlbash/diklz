@@ -1,0 +1,139 @@
+﻿@model IEnumerable<App.Data.DTO.DOS.EDocumentListDTO>
+
+<div class="content-partial-header">
+    @if (ViewBag.IsAddable == true)
+    {
+        <a class="content-item-btn data-tab icon-sm icon-add"
+           data-tab
+           asp-area="DOC"
+           asp-action="CreateOnOpen"
+           asp-controller="EDocument"
+           asp-route-sort="@ViewBag.AppSort"
+           asp-route-appId="@ViewBag.appId"
+           asp-route-documentType="ManufactureDossier"
+           asp-route-msgId="@ViewBag.msgId"
+           data-title="Додати досьє"
+           data-tooltipleft="1">
+        </a>
+    }
+</div>
+<div class="content-list-wrapper" data-pgparams="@ViewBag.FormParamList">
+    <div class="content-list content-list-header">
+        <div class="content-list-edit"></div>
+        <div class="content-list-item grid-container">
+            <div class="grid" data-grid="1">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.DisplayNameFor(model => model.Version)
+                    </p>
+                </div>
+            </div>
+            <div class="grid" data-grid="2">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.DisplayNameFor(model => model.ListOfBranches)
+                    </p>
+                </div>
+            </div>
+            <div class="grid" data-grid="3">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.DisplayNameFor(model => model.Description)
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="content-list-delete"></div>
+    </div>
+    @foreach (var item in Model)
+    {
+    <div class="content-list">
+        <div class="content-list-edit">
+            @if (item.IsEditable)
+            {
+                <a class="btn-link btn btn-icon btn-square icon-md icon-edit-line"
+                   asp-area="DOC"
+                   asp-action="EditMsg"
+                   asp-controller="EDocument"
+                   asp-route-id="@item.Id"
+                   asp-route-msgId="@ViewBag.msgId"
+                   data-title="Редагування"
+                   data-tooltipright='1'>
+                </a>
+            }
+            else if(!item.IsFromMessage)
+            {
+                <a class="btn-link btn btn-icon btn-square icon-md icon-eye"
+                   asp-area="DOC"
+                   asp-action="Details"
+                   asp-controller="EDocument"
+                   asp-route-id="@item.Id"
+                   asp-route-appId="@ViewBag.appId"
+                   data-title="Перегляд"
+                   data-tooltipright='1'>
+                </a>
+            }
+            else if (item.IsFromMessage)
+            {
+                <a class="btn-link btn btn-icon btn-square icon-md icon-eye"
+                   asp-area="DOC"
+                   asp-action="DetailsMsg"
+                   asp-controller="EDocument"
+                   asp-route-id="@item.Id"
+                   asp-route-msgId="@ViewBag.msgId"
+                   data-title="Перегляд"
+                   data-tooltipright='1'>
+                </a>
+            }
+        </div>
+        <a class="content-list-link">
+            <div class="content-list-item grid-container-nested">
+                <div class="grid">
+                    <div class="grid-inner">
+                        <p>
+                            @Html.DisplayFor(modelItem => item.Version)
+                        </p>
+                    </div>
+                </div>
+                <div class="grid">
+                    <div class="grid-inner">
+                        <p>
+                            @{int count = item.ListOfBranches.Count();}
+                            @foreach (var branch in item.ListOfBranches)
+                            {
+                                @Html.DisplayFor(modelItem => branch)
+
+                                if (count > 1)
+                                {
+                                    @:<br />
+                                    count--;
+                                }
+                            }
+                        </p>
+                    </div>
+                </div>
+                <div class="grid">
+                    <div class="grid-inner">
+                        <p>                       
+                                @Html.DisplayFor(modelItem => item.Description)                         
+                        </p>
+                    </div>
+                </div>
+              </div>
+        </a>
+        <div class="content-list-delete">
+            @if (item.IsEditable)
+            {
+                <a class="btn btn-icon btn-square icon-md icon-remove"
+                   asp-area="DOC"
+                   asp-action="Delete"
+                   asp-controller="EDocument"
+                   data-title="Видалити"
+                   data-tooltipleft='1'
+                   asp-route-id="@item.Id">
+                </a>
+            }
+        </div>
+    </div>
+    }
+</div>

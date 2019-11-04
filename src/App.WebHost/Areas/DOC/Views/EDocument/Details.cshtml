@@ -1,0 +1,65 @@
+﻿@model App.Data.DTO.DOS.EDocumentDetailsDTO
+@{
+    ViewData["Title"] = "Досьє";
+}
+@section Scripts
+{
+    <script>
+        fileListLink = "@(Url.Action("List", "FileStore", new {Area = "", EntityId = Model.Id, EntityName = "EDocument", pg_PartialViewName = "ListDetails"}))",
+        fileListContainer = $("#fileList");
+        mt.getAjaxContainer(fileListContainer, fileListLink);
+    </script>
+
+}
+<div class="content-item-holder">
+    <div class="content-item">
+        <div class="content-item-header">
+            <i class="icon icon-xlg icon-list-edit"></i>
+            <h2>Досьє</h2>
+        </div>
+        <div class="content-item-details">
+            <div class="content-item-inner content-details-wrapper col-2">
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.Version)</label>
+                        <p>@Html.DisplayFor(model => model.Version)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.Comment)</label>
+                        <p>@Html.DisplayFor(model => model.Comment)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.DateFrom)</label>
+                        <p>@Html.DisplayFor(model => model.DateFrom)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.DateTo)</label>
+                        <p>@Html.DisplayFor(model => model.DateTo)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.ListOfBranchsNames)</label>
+
+                        @foreach (var br in Model.ListOfBranchsNames)
+                        {
+                        <p>@Html.Raw(br)</p>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="upload-edit">
+        <div id="fileList" class="fileList">
+
+        </div>
+    </div>
+</div>

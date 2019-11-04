@@ -1,0 +1,12 @@
+node_modules
+build
+PlanToDo.xlsx
+package-lock.json
+/package-lock.json
+.vscode/settings.json
+src/less/abstracts/palette_custom.less
+src/less/abstracts/palette.less
+src/less/abstracts/variables.less
+src/less/abstracts/custom-icons.less
+src/fonts/custom_icons
+/package-lock.json

@@ -1,0 +1,97 @@
+﻿@using Newtonsoft.Json
+@inject App.Core.Mvc.Helpers.SelectListHelper Sel
+
+@{
+    ViewData["Title"] = "Журнал повідомлень";
+}
+
+
+@section Buttons {
+    <a class="btn btn-round icon-add"
+       asp-area="Msg"
+       asp-controller="MessageTypes"
+       asp-action="Index"
+       data-tooltipleft='1'
+       data-title="Створити повідомлення">
+    </a>
+}
+
+<div class="content-search-wrapper">
+    <partial name="_Searchform" />
+</div>
+
+<div class="results" id="results">
+
+</div>
+
+@section Scripts { 
+    <script>
+            var searchFormControls = {
+                controlsConfig: [
+                    {
+                        labelName: 'Дата створення',
+                        name: 'CreatedOn',
+                        type: 'dataGroup',
+                        children: [
+                            {
+                                labelName: 'з: ',
+                                name: 'CreatedOn_From',
+                                type: 'datepicker'
+                            }, {
+                                labelName: 'по: ',
+                                name: 'CreatedOn_To',
+                                type: 'datepicker'
+                            }
+                        ]
+                    },
+                    {
+                        labelName: 'Тип',
+                        name: 'MessageTypeName',
+                        type: 'text'
+                    },
+                    {
+                        labelName: 'Стан повідомлення',
+                        name: 'MessageStateEnum',
+                        type: 'select',
+                        selectOptions: @Html.Raw(JsonConvert.SerializeObject(Sel.Enum("MessageState")))
+                    },
+                    {
+                        labelName: 'Вид діяльності',
+                        name: 'LicenseTypes',
+                        type: 'select',
+                        selectOptions: @Html.Raw(JsonConvert.SerializeObject(new SelectList(new List<SelectListItem>
+                                       {
+                                           new SelectListItem {Text = "Виробництва", Value = "Виробництва"},
+                                           new SelectListItem {Text = "Імпорту", Value = "Імпорту"},
+                                           new SelectListItem {Text = "Торгівлі", Value = "Торгівлі"},
+                                       }, "Value", "Text")))
+                    }
+                ]
+            };
+
+            var searchFormConfig = {
+                formConfig: {
+                    formName: 'form0',
+                    formDataAjaxUpdate: '#results',
+                    formMethod: 'post',
+                    controls: searchFormControls
+                },
+                
+                presetFiltersUrl: {
+                    //controllerName: '@ViewContext.RouteData.Values["Controller"].ToString()',
+                    //actionName: '@ViewContext.RouteData.Values["Action"].ToString()'
+                },
+    
+                mainInputConfig: {
+                    labelName: 'Тип повідомлення',
+                    type: 'text',
+                    mainInputLookUp: ['MessageTypeName']
+                }
+            };
+
+
+            mt.createContentSearchForm(searchFormConfig);
+
+    </script>
+
+}

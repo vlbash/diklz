@@ -1,0 +1,130 @@
+@import "../abstracts/_bundle";
+
+.content {
+  &-details {
+    flex-direction: row;
+    width: calc(~'33.333% - 2*@{xs}');
+    margin: 0 @xs;
+    padding-top: @xs;
+    padding-bottom: @xxxs;
+    overflow: hidden;
+    border-bottom: @input-border-width solid @border-color;
+
+    &-wrapper {
+      flex-direction: row;
+      flex-wrap: wrap;
+      width: 100%;
+      &.col-2 {
+        .content-details {
+          width: calc(~'50% - 2*@{xs}');
+        }
+      }
+      &.col-3 {
+        .content-details {
+          width: calc(~'33.333% - 2*@{xs}');
+        }
+      }
+    }
+
+    &-wide {
+      width: 100%;
+    }
+
+    &-group {
+      flex-direction: column;
+      padding-top: @xxxs;
+      padding-right: 0;
+      padding-bottom: @lg;
+      padding-left: 0;
+
+      label {
+        padding-bottom: @xxs;
+        color: @font-black;
+        font-size: @font-size-small;
+        font-weight: @semibold;
+      }
+
+      p {
+        font-size: @font-size-big;
+      }
+
+      &-link {
+        color: @bg-secondary;
+        text-decoration: underline;
+      }
+
+      &-checkbox {
+        flex-direction: row;
+
+        .checkbox+label {
+          &::before {
+            top: 0;
+            transform: translateY(0);
+          }
+
+          &::after {
+            top: 0;
+            transform: translateX(55%) translateY(-25%);
+          }
+        }
+
+        label {
+          padding-bottom: 0;
+        }
+      }
+    }
+
+    &-header {
+      position: relative;
+      align-items: center;
+      padding-right: @xl + @btn-height;
+      padding-bottom: @xxs;
+      padding-left: @xs;
+      font-size: @font-size-h3;
+      font-weight: @bold;
+
+      h2 {
+        font-size: @font-size-main;
+        font-weight: @bold;
+      }
+
+    }
+
+    &-links {
+      align-items: center;
+      margin-right: @xs;
+      margin-left: @xs;
+      padding-top: @md;
+      padding-bottom: @xxxs;
+
+      p {
+        min-width: 25%;
+      }
+
+      a {
+        margin: 0 @xxxs;
+      }
+    }
+
+    &.grid-hover:hover {
+      overflow: visible;
+      .transition-fast;
+
+      .content-details-group.content-item-hover {
+
+        p,
+        a {
+          position: relative;
+          z-index: 400;
+          top: 0;
+          left: 0;
+          margin-bottom: calc(-2*@xxxs);
+          padding: @xxxs;
+          background-color: @bg-white;
+          .shadow-round;
+          .transition-fast;
+        }
+      }
+    }
+  }
+}

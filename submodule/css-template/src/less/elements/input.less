@@ -1,0 +1,126 @@
+@import "../abstracts/_bundle";
+
+.textarea,
+.input {
+  &-file {
+    position: absolute;
+    z-index: -1;
+    width: 0.1px;
+    height: 0.1px;
+    overflow: hidden;
+    opacity: 0;
+
+    &+label {
+      justify-content: flex-start;
+      max-width: 100%;
+      overflow: hidden;
+
+      * {
+        pointer-events: none;
+      }
+
+      i:not(.icon) {
+        position: relative;
+        left: -.5em;
+        font-size: 2em;
+      }
+    }
+
+    &-group {
+      width: 100%;
+      margin-top: @xxs;
+      margin-bottom: @xxs;
+    }
+
+  }
+
+  &-desc {
+    font-size: @font-size-small;
+    color: @border-color;
+    margin: @xxxs 0;
+  }
+
+  &-wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+
+    &:before,
+    &:after {
+      position: absolute;
+    }
+  }
+
+  &-group {
+
+    textarea,
+    input {
+      border-bottom: @input-border-width solid @border-color;
+    }
+
+    &-bar {
+      top: -@input-bar-height/2;
+
+      &::before,
+      &:after {
+        bottom: 0;
+      }
+    }
+
+    &-autocomplete {
+      .light;
+      padding-right: @sm;
+      padding-bottom: @xs;
+      padding-left: @sm;
+      border: 1px solid @border-color;
+      line-height: 1.5;
+    }
+  }
+
+  &-col-2 {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-top: @xxs;
+    margin-bottom: @xxs;
+
+    &>label {
+      width: 15%;
+      padding-right: @sm;
+      padding-left: @sm;
+
+      &+.input-col-2-inner {
+        width: 85%;
+      }
+    }
+
+    &-inner {
+      width: 100%;
+
+      .select-group,
+      .input-group {
+        &:not(:first-of-type) {
+          margin-left: @sm;
+        }
+
+      }
+    }
+
+  }
+
+  &-readonly {
+    width: 100%;
+    height: @xxs;
+    padding-top: @sm;
+    padding-right: @sm;
+    padding-bottom: @sm;
+    padding-left: @sm;
+    background: @input-readonly;
+    pointer-events: none;
+    cursor: default;
+
+    &~.input-group-bar {
+      opacity: 0;
+    }
+  }
+}

@@ -1,0 +1,73 @@
+﻿@model (Guid entityId, string entityName);
+@{
+    ViewData["Title"] = "Перевірка підпису файлів";
+}
+@section Scripts
+{
+    <script type="text/JavaScript" src="~/custom_js/clearJs2/JS/common.js"></script>
+    <script type="text/JavaScript" src="~/custom_js/clearJs2/JS/euutils.js"></script>
+    <script type="text/JavaScript" src="~/custom_js/clearJs2/JS/euscpt.js"></script>
+    <script type="text/JavaScript" src="~/custom_js/clearJs2/JS/euscpm.js"></script>
+    <script async=async type="text/javascript" src="~/custom_js/clearJs2/JS/euscp.js"></script>
+    <script type="text/JavaScript" src="~/custom_js/clearJs2/JS/euscptest.js"></script>
+    <script type="text/javascript" src="~/custom_js/clearJs2/JS/qr/qrcodedecode.js"></script>
+    <script type="text/javascript" src="~/custom_js/clearJs2/JS/qr/reedsolomon.js"></script>
+    <script type="text/javascript" src="~/custom_js/clearJs2/JS/fs/Blob.min.js"></script>
+    <script type="text/javascript" src="~/custom_js/clearJs2/JS/fs/FileSaver.js"></script>
+    <script type="text/JavaScript">
+        $(document).ready(
+            function() {
+                mt.showLoader(".wrapper-content");
+                $.ajax({
+                    url: "@Url.Action("GetFiles")",
+                    method: "POST",
+                    data: {
+                        entityId: "@Model.entityId",
+                        entityName: "@Model.entityName"
+                    },
+                    success: function (data) {
+                        if (data.success == true) {
+                            pageLoaded(data.model);
+                        } else {
+                            alert("Помилка серверу, спробуйте пізніше");
+                            window.history.back();
+                        }
+                    }
+                });
+            }
+        );
+    </script>
+}
+
+<div class="content-item-holder">
+
+    <div class="content-item">
+        <div class="content-item-header">
+            <i class="icon icon-xlg icon-timeline-pin"></i>
+            <h2>Файли заяви</h2>
+        </div>
+        <div class="content-partial">
+            <div class="content-list-wrapper" data-pgparams="@ViewBag.FormParamList" id="result">
+                <div class="content-list content-list-header">
+                    <div class="content-list-edit"></div>
+                    <div class="content-list-item grid-container">
+                        <div class="grid" data-grid="3">
+                            <div class="grid-inner">
+                                <p class="content-list-sortable">
+                                    Назва файлів
+                                </p>
+                            </div>
+                        </div>
+                        <div class="grid" data-grid="2">
+                            <div class="grid-inner">
+                                <p class="content-list-sortable">
+                                    Відомості про ЕЦП
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

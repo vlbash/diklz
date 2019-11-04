@@ -1,0 +1,259 @@
+﻿@model App.Data.DTO.APP.BaseAppDetailDTO
+
+
+<div class="content-item">
+    <div class="content-item-header">
+        <i class="icon icon-xlg icon-person-edit-card"></i>
+        <h2 id="prlAppDetail">Інформація про заявника</h2>
+    </div>
+    <div class="content-item-details">
+        @if (!string.IsNullOrEmpty(Model.RegNumber))
+        {
+            <div class="content-item-inner content-details-wrapper col-2">
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.RegNumber)</label>
+                        <p>@Html.DisplayFor(model => model.RegNumber)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.RegDate)</label>
+                        <p>@Html.DisplayFor(model => model.RegDate)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.IsCreatedOnPortal)</label>
+                        <p>
+                            @if (Model.IsCreatedOnPortal)
+                            {
+                                @:Заява ліцензіата (Веб-портал)
+                            }
+                            else
+                            {
+                                @:Заява ліцензіата (Паперова)
+                            }
+                        </p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.PerformerId)</label>
+                        <p>@ViewBag.PerformerName</p>
+                    </div>
+                </div>
+            </div>
+        }
+        <div class="content-item-inner content-details-wrapper col-2">
+            <div class="content-details">
+                <div class="content-details-group">
+                    @if (!string.IsNullOrEmpty(Model.EDRPOU))
+                    {
+                        <label>Найменування юридичної особи</label>
+                    }
+                    else
+                    {
+                        <label>ПІБ ФОП</label>
+                    }
+                    <p>@Html.DisplayFor(model => model.OrgName)</p>
+                </div>
+            </div>
+
+            @if (!string.IsNullOrEmpty(Model.EDRPOU))
+            {
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.EDRPOU)</label>
+                        <p>@Html.DisplayFor(model => model.EDRPOU)</p>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.PassportFull)</label>
+                        <p>@Html.DisplayFor(model => model.PassportFull)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.PassportDate)</label>
+                        <p>@Html.DisplayFor(model => model.PassportDate)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.PassportIssueUnit)</label>
+                        <p>@Html.DisplayFor(model => model.PassportIssueUnit)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.INN)</label>
+                        <p>@Html.DisplayFor(model => model.INN)</p>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="content-item-inner content-details-wrapper col-2">
+            <div class="content-details">
+                <div class="content-details-group">
+                    <label>@Html.DisplayNameFor(model => model.LegalFormName)</label>
+                    <p>@Html.DisplayFor(model => model.LegalFormName)</p>
+                </div>
+            </div>
+            <div class="content-details">
+                <div class="content-details-group">
+                    <label>@Html.DisplayNameFor(model => model.OwnershipTypeName)</label>
+                    <p>@Html.DisplayFor(model => model.OwnershipTypeName)</p>
+                </div>
+            </div>
+            <div class="content-details">
+                <div class="content-details-group">
+                    <label>@Html.DisplayNameFor(model => model.EconomicClassificationTypeName)</label>
+                    <p>@Html.DisplayFor(model => model.EconomicClassificationTypeName)</p>
+                </div>
+            </div>
+            <div class="content-details">
+                <div class="content-details-group">
+                    <label>@Html.DisplayNameFor(model => model.Address)</label>
+                    <p>@Html.DisplayFor(model => model.Address)</p>
+                </div>
+            </div>
+            <div class="content-details">
+                <div class="content-details-group">
+                    <label>@Html.DisplayNameFor(model => model.PostIndex)</label>
+                    <p>@Html.DisplayFor(model => model.PostIndex)</p>
+                </div>
+            </div>
+            <div class="content-details">
+                <div class="content-details-group">
+                    <label>@Html.DisplayNameFor(model => model.KoatuuCode)</label>
+                    <p>@Html.DisplayFor(model => model.KoatuuCode)</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-item-inner content-details-wrapper col-2">
+            @if (!string.IsNullOrEmpty(Model.EDRPOU))
+            {
+                <div class="content-details">
+                    <div class="content-details-group">
+
+                        <label>Прізвище, ім’я, по батькові керівника юридичної особи</label>
+                        <p>@Model.OrgDirector</p>
+                    </div>
+                </div>
+            }
+            <div class="content-details">
+                <div class="content-details-group">
+                    <label>@Html.DisplayNameFor(model => model.PhoneNumber)</label>
+                    <p>@Html.DisplayFor(model => model.PhoneNumber)</p>
+                </div>
+            </div>
+
+            <div class="content-details">
+                <div class="content-details-group">
+                    <label>@Html.DisplayNameFor(model => model.FaxNumber)</label>
+                    <p>@Html.DisplayFor(model => model.FaxNumber)</p>
+                </div>
+            </div>
+            <div class="content-details">
+                <div class="content-details-group">
+                    <label>@Html.DisplayNameFor(model => model.EMail)</label>
+                    <p>@Html.DisplayFor(model => model.EMail)</p>
+                </div>
+            </div>
+        </div>
+        @if (Model.AppType == "IML")
+        {
+    <div class="content-item-inner content-readonly content-details-wrapper col-2">
+        <div class="content-details">
+            <div class="checkbox-group-details">
+                <input class="checkbox" asp-for="IMLIsImportingFinished" />
+                <label readonly asp-for="IMLIsImportingFinished"></label>
+            </div>
+        </div>
+        <div class="content-details">
+            <div class="checkbox-group-details">
+                <input class="checkbox" asp-for="IMLIsImportingInBulk" />
+                <label readonly asp-for="IMLIsImportingInBulk"></label>
+            </div>
+        </div>
+        <div class="content-details">
+            <div class="checkbox-group-details">
+                <input class="checkbox" asp-for="IsConditionsForControl" />
+                <label readonly asp-for="IsConditionsForControl"></label>
+            </div>
+        </div>
+        <div class="content-details">
+            <div class="checkbox-group-details">
+                <input class="checkbox" asp-for="IsGoodManufacturingPractice" />
+                <label readonly asp-for="IsGoodManufacturingPractice"></label>
+            </div>
+        </div>
+        <div class="content-details">
+            <div class="content-details-group">
+                <label>@Html.DisplayNameFor(model => model.IMLAnotherActivity)</label>
+                <p>@Html.DisplayFor(model => model.IMLAnotherActivity)</p>
+            </div>
+        </div>
+    </div>
+        }
+        @if (Model.AppType == "TRL")
+        {
+            <div class="content-item-inner content-readonly content-details-wrapper col-2">
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.EconomicClassificationTypeName)</label>
+                        <p>@Html.DisplayFor(model => model.EconomicClassificationTypeName)</p>
+                    </div>
+                </div>
+            </div>
+            <div class="content-item-inner content-readonly content-details-wrapper col-2">
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.ActivityTypeName)</label>
+                        <p>@Html.DisplayFor(model => model.ActivityTypeName)</p>
+                    </div>
+                </div>
+            </div>
+        }
+        <div class="content-item-inner content-details-wrapper col-2">
+            <div class="content-details">
+                <div class="content-details-group">
+                    <label>@Html.DisplayNameFor(model => model.NationalAccount)</label>
+                    <p>@Html.DisplayFor(model => model.NationalAccount)</p>
+                </div>
+            </div>
+            <div class="content-details">
+                <div class="content-details-group">
+                    <label>@Html.DisplayNameFor(model => model.InternationalAccount)</label>
+                    <p>@Html.DisplayFor(model => model.InternationalAccount)</p>
+                </div>
+            </div>
+            <div class="content-details">
+                <div class="content-details-group">
+                    <label>@Html.DisplayNameFor(model => model.NationalBankRequisites)</label>
+                    <p>@Html.DisplayFor(model => model.NationalBankRequisites)</p>
+                </div>
+            </div>
+            <div class="content-details">
+                <div class="content-details-group">
+                    <label>@Html.DisplayNameFor(model => model.InternationalBankRequisites)</label>
+                    <p>@Html.DisplayFor(model => model.InternationalBankRequisites)</p>
+                </div>
+            </div>
+        </div>
+        <div class="content-item-inner content-details-wrapper col-2">
+            <div class="content-details">
+                <div class="content-details-group">
+                    <label>@Html.DisplayNameFor(model => model.Duns)</label>
+                    <p>@Html.DisplayFor(model => model.Duns)</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

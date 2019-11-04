@@ -1,0 +1,1 @@
+sed -i 's/diklz-dev/diklz-stage/' submodule/python.migrations/config.py

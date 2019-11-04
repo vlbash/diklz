@@ -1,0 +1,152 @@
+﻿
+<div class="content-edit-wrapper" style="width: 400px">
+    <div class="content-edit">
+        <div class="checkbox-group" id="orgAll">
+            <label><input type="checkbox" />Будь-яка</label>
+        </div>
+    </div>
+</div>
+
+
+<div class="content-edit-wrapper " style="width: 400px">
+    <div class="content-edit">
+        <div class="checkbox-group" id="orgDefault">
+            <label><input type="checkbox" />Своя</label>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div id="jsGridProfileOrganizations"></div>
+
+<script>
+    $(document).ready(function () {
+        var orgAccess = "@Html.Raw(ViewBag.OrgAccessLevel)";
+        if (orgAccess === "Default") {
+            var orgDefault = $("#orgDefault")[0].children[0].children[0];
+            orgDefault.checked = true;
+            $("#jsGridProfileOrganizations").hide();
+        }
+        if (orgAccess === "All") {
+            var orgAll = $("#orgAll")[0].children[0].children[0];
+            orgAll.checked = true;
+            $("#jsGridProfileOrganizations").hide();
+        }
+    });
+
+    $("#orgAll").change(function() {
+        var orgDefault = $("#orgDefault")[0].children[0].children[0];
+        orgDefault.checked = false;
+        levelUpdate();
+       
+    });
+
+    $("#orgDefault").change(function() {
+        var orgAll = $("#orgAll")[0].children[0].children[0];
+        orgAll.checked = false;
+        levelUpdate();
+    });
+
+    function levelUpdate() {
+        var orgDefault = $("#orgDefault")[0].children[0].children[0];
+        var orgAll = $("#orgAll")[0].children[0].children[0];
+
+        var orgAccess = "Specified";
+        if (!orgDefault.checked && orgAll.checked) {
+            orgAccess = "All";
+            $("#jsGridProfileOrganizations").hide();
+        }
+        if (orgDefault.checked && !orgAll.checked) {
+            orgAccess = "Default";
+            $("#jsGridProfileOrganizations").hide();
+        }
+        if (!orgDefault.checked && !orgAll.checked) {
+            $("#jsGridProfileOrganizations").show();
+        }
+        $.ajax({
+            type: "POST",
+            url: "/Sec/Profile/UpdateLevelOrganizations?profileId=" + "@Html.Raw(ViewBag.ProfileId)" + "&access=" + orgAccess,
+            dataType: "json"
+        });
+    }
+
+
+    var jsGridContainer = $("#jsGridProfileOrganizations");
+
+    var roleRights = [];
+
+    var OrganizationList = '' || '@Html.Raw(ViewBag.OrganizationList)';
+    if (!OrganizationList) {
+        OrganizationList = [];
+    } else {
+        OrganizationList = JSON.parse(OrganizationList);
+    }
+
+    jsGridContainer.jsGrid({
+        width: "100%",
+        inserting: true,
+        editing: false,
+        sorting: true,
+        autoload: true,
+        paging: true,
+        pageSize: 10,
+        pageIndex: 1,
+        deleteConfirm: "Ви впевнені, що хочете видалити елемент?",
+        controller: {
+            loadData: function (filter) {
+                return $.ajax({
+                    type: "GET",
+                    url: "/Sec/Profile/GetProfileOrganizations?profileId=" + "@Html.Raw(ViewBag.ProfileId)",
+                    dataType: "json"
+                });
+                return null;
+            },
+            insertItem: function (item) {
+                item.id = "@Html.Raw(ViewBag.RowLvl)";
+                item.ProfileId = "@Html.Raw(ViewBag.ProfileId)";
+                return $.ajax({
+                    type: "POST",
+                    url: "/Sec/Profile/InsertProfileOrganization",
+                    contentType: "application/json",
+                    data: JSON.stringify(item),
+                    error: function (xhr, httpStatusMessage, customErrorMessage) {
+                        mt.createDialog(false, xhr.responseText);
+                        //alert(xhr.responseText);
+                    },
+                    dataType: "json"
+                });
+            },
+            deleteItem: function (item) {
+                return $.ajax({
+                    type: "DELETE",
+                    url: "/Sec/Profile/DeleteProfileOrganization?id=" + item.id
+                });
+            }
+        },
+        onDataLoaded: mt.updateNiceScroll,
+        fields: [
+            {
+                title: "Організація",
+                name: "entityId",
+                type: "select",
+                validate: "required",
+                items: OrganizationList,
+                valueField: "organizationId",
+                textField: "name",
+                search: false,
+                insertTemplate: function () {
+                    var $insertControl = jsGrid.fields.select.prototype.insertTemplate.call(this);
+                    $insertControl.val('');
+                    return $insertControl;
+                }
+            },
+            {
+                type: "control",
+                editButton: false
+            }
+        ]
+    });
+
+</script>

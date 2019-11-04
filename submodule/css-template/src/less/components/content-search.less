@@ -1,0 +1,234 @@
+@import "../abstracts/_bundle";
+
+.content-filter {
+  .content-search {
+    &-switcher {
+      &.open {
+        transform: rotate3d(1, 0, 0, 180deg);
+      }
+    }
+  }
+}
+
+.content-search {
+  position: relative;
+  flex-direction: column;
+  width: 100%;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  .material-transition;
+
+  &.active {
+    max-height: none;
+    overflow: visible;
+    opacity: 1;
+  }
+
+  &-wrapper {
+    z-index: 10;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    margin-bottom: @lg;
+    padding-right: @sm;
+    padding-left: @sm;
+
+  }
+
+  &-top {
+    position: relative;
+    padding-top: @xxxs;
+    padding-bottom: @xxxs;
+
+    i {
+      align-items: center;
+      align-self: center;
+      justify-content: center;
+      opacity: .55;
+
+      cursor: pointer;
+      .material-transition;
+
+      &:hover {
+        opacity: 0.85;
+      }
+    }
+
+    .input-wrapper {
+      border-bottom: @input-border-width solid @border-color;
+    }
+  }
+
+  &-switcher {
+    &-wrapper {
+      position: absolute;
+      z-index: 30;
+      top: @xxxs;
+      right: 0;
+      align-items: center;
+      margin-right: @xxxs;
+      justify-content: space-between;
+      height: @lg;
+      background-color: @font-white;
+
+      div {
+        width: auto;
+        max-width: 0;
+        height: 100%;
+        margin-right: @xxs;
+        overflow: hidden;
+        opacity: 0;
+        cursor: pointer;
+        .material-transition;
+
+        &.active {
+          max-width: @search-switcher-width;
+          opacity: .55;
+        }
+
+        &:hover {
+          opacity: 0.85;
+        }
+      }
+      .content-preset-switcher{
+        margin-right: 0;
+      }
+    }
+  }
+
+  &-form {
+    position: absolute;
+    z-index: 20;
+    top: @input-height + (@input-border-width*4);
+    left: 0;
+    flex-direction: column;
+    width: 100%;
+    background: @bg-light;
+
+    &-ul-container {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      flex-direction: column;
+      width: 100%;
+      transform: scaleY(0);
+      transform-origin: top;
+      background-color: @bg-light;
+      .material-transition;
+
+      &.open,
+      &.active {
+        padding: 0 @sm;
+        transform: scaleY(1);
+        border-top: @input-border-width solid @border-color;
+        .material-shadow(1);
+      }
+    }
+
+    &-preset,
+    &-holder {
+      visibility: hidden;
+      width: 100%;
+      max-height: 0;
+      overflow: hidden;
+      transform: scaleY(0);
+      transform-origin: top;
+      opacity: 0;
+      .material-transition;
+
+      &.open {
+        visibility: visible;
+        margin: @sm 0;
+        transform: scaleY(1);
+        opacity: 1;
+      }
+    }
+
+    &-holder {
+      flex-direction: column;
+
+      &.has-presettings {
+        .search-form-btn-save-filter {
+          display: inline-flex;
+        }
+      }
+
+      ul {
+        flex-direction: column;
+        width: 100%;
+        margin-bottom: @xxs;
+      }
+
+      &.open {
+        max-height: 100%;
+        overflow: visible;
+
+        +.content-search-form-preset {
+          display: none;
+        }
+      }
+    }
+
+    &-preset {
+      &.open {
+        +.content-search-form-holder {
+          display: none;
+        }
+      }
+    }
+
+    &-inner {
+      color: @font-black;
+
+      &:first-of-type {
+        padding-top: @xxs;
+      }
+    }
+
+    &-submit {
+      @submitHolderPaddingTop: @sm;
+      position: relative;
+
+      .search-form-btn-save-filter {
+        display: none;
+        order: 1;
+        margin-right: 0;
+        padding-right: @xs;
+        padding-left: @xs;
+
+        i {
+          margin-right: @xs;
+        }
+      }
+    }
+
+    &.active {
+      max-height: 100vh;
+      overflow: visible;
+    }
+
+    &-default {
+      width: 100%;
+    }
+  }
+}
+
+.content-search-form-holder.open+.content-search-form-preset {
+  display: none;
+}
+
+.search {
+  &-form {
+    &-btn {
+      &-clean {
+        order: 2;
+        margin-left: auto;
+      }
+
+      &-submit {
+        order: 3;
+      }
+    }
+  }
+}

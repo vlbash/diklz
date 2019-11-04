@@ -1,0 +1,24 @@
+﻿@model App.Data.DTO.DOS.EDocumentDetailsDTO
+
+<script>
+    var uploadFormContainer = $("#uploadForm1"),
+        uploadFormLink = "@(Url.Action("UploadForm", "FileStore", new {Area = "", EntityId = Model.Id}))&EntityName=EDocument",
+        fileListLink = "@(Url.Action("List", "FileStore", new {Area = "", EntityId = Model.Id, EntityName = "EDocument",  pg_PartialViewName = "List"}))",
+        fileListContainer = $("#fileList1");
+
+    mt.getAjaxContainer(uploadFormContainer, uploadFormLink);
+    mt.getAjaxContainer(fileListContainer, fileListLink);
+
+</script>
+
+<div class="content-partial" data-tab-empty>
+    <div class="upload-edit">
+        <div id="uploadForm1">
+
+        </div>
+
+        <div id="fileList1" class="fileList">
+
+        </div>
+    </div>
+</div>

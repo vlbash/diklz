@@ -1,0 +1,185 @@
+@import "../abstracts/_bundle";
+
+.content {
+  &-edit {
+    flex-direction: row;
+    align-self: flex-start;
+    padding: @xs @xs @xxxs;
+
+    &-wrapper {
+      flex-direction: row;
+      flex-wrap: wrap;
+      width: 100%;
+      margin-top: @xs;
+    }
+
+    &-group {
+      flex-direction: column;
+      width: 100%;
+      padding-top: @xxxs;
+      padding-right: 0;
+      padding-bottom: @xxxs;
+      padding-left: 0;
+      border-bottom: @input-border-width solid @border-color;
+
+      label {
+        padding-bottom: @xxxs;
+        color: @border-color-main;
+        font-size: @font-size-smallest;
+      }
+
+      p {
+        align-items: center;
+        min-height: @input-height;
+      }
+
+      &-checkbox {
+        flex-direction: row;
+        align-items: center;
+
+        label {
+          padding-bottom: 0;
+        }
+      }
+    }
+
+    .select-group-inner+label,
+    .textarea.empty~label,
+    .input.empty~label {
+      color: @font-light;
+      font-size: calc(@font-size-main - 2px);
+    }
+
+    .datepicker-group.not-empty label,
+    .select-group-inner.on+label,
+    .select-group-inner.not-empty+label,
+    .textarea:focus~label,
+    .input:focus~label,
+    .input-readonly.not-empty~label,
+    .textarea.not-empty~label,
+    .input.not-empty~label {
+      color: @input-bar-color;
+      font-size: @font-size-smallest;
+    }
+  }
+
+  &-upload {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    margin: 0;
+
+    &-file {
+      margin-right: @sm;
+
+      label {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+
+    &-desc {
+      position: relative;
+      width: 100%;
+      padding-top: @sm;
+    }
+
+    &-filename {
+      position: absolute;
+      top: 0;
+      right: 0;
+      color: @bg-secondary;
+      font-size: @font-size-small;
+      font-weight: @semibold;
+    }
+
+    &-save {
+      width: auto;
+      padding: 0 0 0 @xs;
+    }
+
+    &-delete {
+      width: auto;
+      padding: 0 0 0 @xs;
+    }
+  }
+}
+
+.wrapper {
+  &-column {
+    .content {
+      &-edit {
+        flex: 1 0 50%;
+        max-width: 50%;
+
+        &-wrapper {
+          flex-direction: row;
+          flex-wrap: wrap;
+        }
+
+        &-wide {
+          flex: 1 0 100%;
+          max-width: 100%;
+
+          i {
+            left: 0;
+            transform: rotate(90deg);
+          }
+        }
+      }
+    }
+  }
+
+  &-list {
+    .content {
+      &-edit {
+        flex: none;
+        width: 100%;
+        max-width: 100%;
+
+        &-wrapper {
+          flex-direction: column;
+        }
+      }
+    }
+  }
+}
+
+.content-edit-wide {
+  .checkbox-default {
+    &~label {
+      min-height: @input-height;
+      margin-right: @xxs;
+      padding: 0 @btn-tiny 0 @md;
+    }
+
+  }
+}
+
+.upload-edit {
+  flex-direction: column;
+}
+
+.content-upload {
+  width: 100%;
+}
+
+#uploadForm,
+#fileList {
+  flex-direction: column;
+}
+
+#fileList {
+  .content-list-wrapper {
+    padding: 0;
+
+    .content-list-header {
+      background-color: @font-light;
+    }
+  }
+
+  .grid-inner {
+    word-break: break-word;
+  }
+}

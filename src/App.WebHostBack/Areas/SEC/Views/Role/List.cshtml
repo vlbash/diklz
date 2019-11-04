@@ -1,0 +1,74 @@
+﻿@using ReflectionIT.Mvc.Paging
+@model ReflectionIT.Mvc.Paging.PagingList<App.Data.DTO.SEC.RoleListDTO>
+@addTagHelper *, ReflectionIT.Mvc.Paging
+
+<div class="content-list-wrapper" data-pgparams="@ViewBag.FormParamList">
+    <div class="content-list content-list-header">
+        <div class="content-list-edit"></div>
+        <div class="content-list-item grid-container">
+            <div class="grid" data-grid="1">
+                <div class = "grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.SortableHeaderFor(model => model.Caption)
+                    </p>
+                </div>
+            </div>
+            <div class="grid" data-grid="1">
+                <div class = "grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.SortableHeaderFor(model => model.IsActive)
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div> </div>
+        <div class="content-list-delete"></div>
+    </div>
+   @foreach (var item in Model)
+    {
+    <div class="content-list">
+        <div class="content-list-edit">
+            <a asp-action="Details"
+               asp-route-id="@item.Id"
+               class="btn btn-secondary-inverse btn-secondary-border btn-square btn-tiny icon-md icon-eye">
+            </a>
+        </div>
+        <div class="content-list-item grid-container-nested">
+            <div class="grid">
+                <div class = "grid-inner">
+                    <p>
+                        @Html.DisplayFor(modelItem => item.Caption)
+                    </p>
+                </div>
+            </div>
+            <div class="grid">
+                <div class = "grid-inner">
+                    <p>
+                        @Html.DisplayFor(modelItem => item.IsActive)
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div >
+            <a asp-action="MakeCopy"
+               data-title="Зробити копію"
+               data-tooltipleft="2"
+               asp-route-id="@item.Id"
+               class="btn btn-success-inverse btn-success-border btn-square btn-tiny icon-md icon-files">
+            </a>
+        </div>
+        <div class="content-list-delete">
+            <a asp-action="Delete"
+               data-title="Видалити"
+               data-tooltipleft="1"
+               asp-route-id="@item.Id"
+               class="btn btn-danger-inverse btn-danger-border btn-square btn-tiny icon-md icon-remove">
+            </a>
+        </div>
+    </div>
+    }
+</div>
+<nav>
+    <vc:pager paging-list="@Model" />
+</nav>
+

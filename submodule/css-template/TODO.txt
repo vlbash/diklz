@@ -1,0 +1,93 @@
+GLOBAL
+
+1. Пресет Фильтры //done
+2. Мобильная версия(гриды)
+3. Переключения табами //part done
+4. Настройки пользователя
+5. мультиязычность //??
+6. Страница загрузки файла //done
+7. предусмотреть возможность редактирования предустановленных фильтров
+8. хлебные крошки
+9. кнопка "назад" перезоды по локалСтораджу //??
+10. редактирование пресетфильтров
+
+
+0. на Листе не отрабатывает маска денежек //done
+
+
+1. readonly на создании проектов не отрабатывает \Справочники - картка персони //??
+
+1.5. вендор уменьшить //done
+
+1.6. мультиязычность //??
+
+1.7 переход по табами в форме и внутри селекта // part done
+
+2. select не закрывается при клике на форму поиска // done
+
+3. поиск главный - селекты наполнять только при открытии формы поиска (ajax)
+
+5. _queryParamsSaver.js
+
+6. jsGrid - пройтись по всем, установить формат даты
+
+7,5. range label
+
+8. validation // done
+
+11. Иконки //done icon-font => do svg sprite
+
+13. delete // done
+
+14. disposble //??
+
+15. selectBeforeAfter - создание оптимизировать //??
+
+16. предусмотреть датапикер ввод даты с клавиатуры
+
+17. табуляция по селепкт листам переход
+
+18. почистить var && palette стили  //part done
+
+19. Project Create doesn`t work Sergiy S //??
+
+23. при переключении табов сохранять номер табы
+
+24. сайдбар для скроллбара создать абсолютно позиционированный элемент  с высотой 100% и на него повесить скроллбар - обходим оверфлоу
+
+28. оптимизировать код под initTextareaAfterLoad и initInputAfterLoad 
+
+29. inputFileCustomization
+
+6. select - height //ready, but need testing
+
+30. set timeOutIntervar - function (example)=> self.checkboxGroupAnimation(), remove timeOutInterval in vars
+
+31. on partial doesnt work readonly indication
+
+32. убирати лишні пробіли на формах при сабміті //part done
+
+
+
+new TODO list
+
+1. new design for block http://prntscr.com/n9gmky
+2. aside, header responsive
+3. list responsive
+4. multiselect optimize
+5. check new design for all checkboxes
+6. check new design for all buttons
+7. layout: content-details, content-edit responsive&design
+8. header dropdown new design&animation effect
+9. preset filters design& responsive
+10. set links for all content-list-items
+11. clean vars & palette => rename variables, set new rules for them
+12. clean mixin
+13. icon svg sprite instead of icon-font
+14. css-template-guide
+15. aside animation&hover effect
+16. delete list-item => refresh list&pagination
+17. design datepicker
+18. input mask for datepicker
+19. compare two datepickers on page if it need
+20. lookup - autocomplete

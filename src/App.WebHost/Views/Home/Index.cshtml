@@ -1,0 +1,318 @@
+﻿@using DocumentFormat.OpenXml.Math
+@model List<(string type, bool isActive)>
+@{
+    //ViewData["Title"] = "Home Page";
+}
+@{
+    //var userRoles = _RoleManager.GetUserRoles();
+    var modelManufacture = Model.FirstOrDefault(x=>x.type == "PRL"); /*Model.Licenses.FirstOrDefault(x => x.LicenseType == 1);*/
+    var modelImport = Model.FirstOrDefault(x=>x.type == "IML"); /*Model.Licenses.FirstOrDefault(x => x.LicenseType == 3);*/
+    var modelCommerce = Model.FirstOrDefault(x=>x.type == "TRL"); /*Model.Licenses.FirstOrDefault(x => x.LicenseType == 2);*/
+    var manufactureSent = 5; /* Model.Applications.Count(x => x.AppType == "Manufacture" && x.ApplicationState == "Sent");*/
+    var manufactureReview = 6; /* Model.Applications.Count(x=> x.AppType == "Manufacture" && x.ApplicationState == "InReview");*/
+    var importProj = 7; /* Model.Applications.Count(x => x.AppType == "Import" && x.ApplicationState == "Sent");*/
+    var importReview = 8; /*Model.Applications.Count(x => x.AppType == "Import" && x.ApplicationState == "InReview");*/
+    var commerceProj = 9; /*Model.Applications.Count(x => x.AppType == "Commerce" && x.ApplicationState == "Sent");*/
+    var commerceReview = 10; /*Model.Applications.Count(x => x.AppType == "Commerce" && x.ApplicationState == "InReview");*/
+}
+
+@{
+    //ViewData["Title"] = ViewBag.OrganizationName;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Scripts
+{
+    <script>
+        $(document).ready(function() {
+            initWidget();
+        });
+
+        function initWidget() {
+            var widgets = [$('#widgetPayment')];
+
+            widgets.forEach(function(el) {
+                mt.tryLoadContainer(el, el.attr('data-tab-container-url'));
+            });
+        }
+    </script>
+}
+
+<div class="widget-wrapper">
+    <div class="widget-container widget-btn-holder">
+        <div class="widget-btn col-lg-4 col-md-6">
+            @if (modelManufacture.isActive)
+            {
+            <a class="widget-btn-link widget-btn-success " href="@Url.Action("Index", "PrlLicense", new {Area = "PRL"})">
+                <i class="icon icon-huge icon-production"></i>
+                <span>Ліцензія на промислове виробництво</span>
+            </a>
+            }
+            else
+            {
+            <a class="widget-btn-link widget-btn-error" href="#">
+                <i class="icon icon-huge icon-production"></i>
+                <span>Ліцензія на промислове виробництво</span>
+            </a>
+
+            }
+        </div>
+        <div class="widget-btn col-lg-4 col-md-6">
+            @if (modelImport.isActive)
+            {
+            <a class="widget-btn-link widget-btn-success" href="@Url.Action("Index", "ImlLicense", new {Area="IML"})">
+                <i class="icon icon-huge icon-material"></i>
+                <span>Ліцензія на імпорт</span>
+            </a>
+
+            }
+            else
+            {
+            <a class="widget-btn-link widget-btn-error" href="#">
+                <i class="icon icon-huge icon-material"></i>
+                <span>Ліцензія на імпорт</span>
+
+            </a>
+            }
+        </div>
+        <div class="widget-btn col-lg-4 col-md-6">
+            @if (modelCommerce.isActive)
+            {
+            <a class="widget-btn-link widget-btn-success" href="@Url.Action("Index", "TrlLicense", new {Area="TRL"})">
+                <i class="icon icon-huge icon-purchasing"></i>
+                <span>Ліцензія на торгівлю</span>
+            </a>
+            }
+            else
+            {
+            <a class="widget-btn-link widget-btn-error" href="#">
+                <i class="icon icon-huge icon-purchasing"></i>
+                <span>Ліцензія на торгівлю</span>
+            </a>
+            }
+
+        </div>
+    </div>
+
+    <div class="widget-container">
+        <div id="widgetPayment" class="content-partial" data-tab-container-url="@Url.Action("GetPaymentInfo", "Widget")"></div>
+    </div>
+</div> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*<header class="page__header">
+        <div class="header__btn btn__info btn__disabled"></div>
+        <span class="header__label">@ViewBag.OrganizationName</span>
+    </header>*@
+
+
+@*
+        <ul class="license__list">
+
+            @if (modelManufacture != null)
+            {
+                <li class="license__item license__item--green">
+                    <a class="license__link" href="#">Ліцензія на промислове виробництво</a>
+                </li>
+            }
+            else
+            {
+                <li class="license__item license__item--red">
+                    <a class="license__link" href="#">Ліцензія на промислове виробництво</a>
+                </li>
+            }
+
+            @if (modelImport != null)
+            {
+                <li class="license__item license__item--green">
+                    <a class="license__link" href="#">Ліцензія на імпорт</a>
+                </li>
+            }
+            else
+            {
+                <li class="license__item license__item--red">
+                    <a class="license__link" href="#">Ліцензія на імпорт</a>
+                </li>
+            }
+            @if (modelCommerce != null)
+            {
+                <li class="license__item license__item--green">
+                    <a class="license__link" href="#">Ліцензія на торгівлю</a>
+                </li>
+            }
+            else
+            {
+                <li class="license__item license__item--red">
+                    <a class="license__link" href="#">Ліцензія на торгівлю</a>
+                </li>
+            }
+
+            @*<li class="license__item license__item--green">
+                    <a class="license__link" href="#">Ліцензія на імпорт</a>
+                </li>
+    </ul>
+    <div class="widget__container">
+        <div class="info-update">
+            <header class="info-update__header">
+                <span class="info-update__header-mark">!</span>
+                <span class="info-update__header-text">Заяви, що потребують оновлення інформації</span>
+            </header>
+            <div class="info-update__row">
+                <div class="info-update__row-left">
+                    <a href="#" class="info-update__btn"><img class="info-update__btn-edit" src="~/images/icons/buttons/icon-pencil-green.svg" alt="EDIT"></a>
+                    <span class="info-update__text-main">Заява про отримання ліцензії на виробництво</span>
+                </div>
+                <div class="info-update__row-right">
+                    <span class="info-update__text-reject">До відхилення:</span>
+                    <span class="info-update__text-timer">23</span>
+                    <span class="info-update__text-label">год.</span>
+                </div>
+            </div>
+            <div class="info-update__row">
+                <div class="info-update__row-left">
+                    <a href="#" class="info-update__btn"><img class="info-update__btn-edit" src="~/images/icons/buttons/icon-pencil-green.svg" alt="EDIT"></a>
+                    <span class="info-update__text-main">Заява про внесення до ЄДР відомостей про МПД</span>
+                </div>
+                <div class="info-update__row-right">
+                    <span class="info-update__text-reject">До відхилення:</span>
+                    <span class="info-update__text-timer">3</span>
+                    <span class="info-update__text-label">год.</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="data-diff">
+            <header class="data-diff__header">
+                <span class="data-diff__header-mark">!</span>
+                <span class="data-diff__header-text">Розбіжності в даних щодо ліцензій</span>
+            </header>
+            <div class="data-diff__row">
+                <span class="data-diff__text">Керівник ліцензіата</span>
+            </div>
+            <div class="data-diff__row">
+                <span class="data-diff__text">Місцезнаходження юридичної особи</span>
+            </div>
+            <div class="data-diff__row">
+                <span class="data-diff__text">Адреса місця провадження діяльності</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="widget__container">
+        <div class="app__status">
+            <div class="app__status--header header-collapced">Статус поданих заяв щодо ліцензування</div>
+
+            <div class="app__status--row">
+                <span class="app__status--subtitle">Заяви щодо ліцензування виробництва (пром.)</span>
+                <div class="app__status--item">
+                    <div class="app__item--num">@manufactureSent</div>
+                    <div class="app__item--label">Подано</div>
+                </div>
+
+                <div class="app__status--item">
+                    <div class="app__item--num">@manufactureReview</div>
+                    <div class="app__item--label">На розгляді</div>
+                </div>
+            </div>
+            <div class="app__status--row">
+                <span class="app__status--subtitle">Заяви щодо ліцензування імпорту</span>
+                <div class="app__status--item">
+                    <div class="app__item--num">@importProj</div>
+                    <div class="app__item--label">Подано</div>
+                </div>
+
+                <div class="app__status--item">
+                    <div class="app__item--num">@importReview</div>
+                    <div class="app__item--label">На розгляді</div>
+                </div>
+            </div>
+            <div class="app__status--row">
+                <span class="app__status--subtitle">Заяви щодо ліцензування торгівлі</span>
+                <div class="app__status--item">
+                    <div class="app__item--num">@commerceProj</div>
+                    <div class="app__item--label">Подано</div>
+                </div>
+
+                <div class="app__status--item">
+                    <div class="app__item--num">@commerceReview</div>
+                    <div class="app__item--label">На розгляді</div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="app__conclusion">
+            <div class="app__conclusion--header header-collapced">Очікує висновків</div>
+
+            <div class="app__conclusion--row">
+                <span class="app__conclusion--subtitle">Лікарських засобів (постанова 902)</span>
+                <div class="app__conclusion--item">
+                    <div class="app__item--num">0</div>
+                    <div class="app__item--label">Подано</div>
+                </div>
+
+                <div class="app__conclusion--item">
+                    <div class="app__item--num">0</div>
+                    <div class="app__item--label">На розгляді</div>
+                </div>
+            </div>
+            <div class="app__conclusion--row">
+                <span class="app__conclusion--subtitle">МІБП (постанова 698)</span>
+                <div class="app__conclusion--item">
+                    <div class="app__item--num">0</div>
+                    <div class="app__item--label">Подано</div>
+                </div>
+
+                <div class="app__conclusion--item">
+                    <div class="app__item--num">0</div>
+                    <div class="app__item--label">На розгляді</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @section Scripts {
+        <script>
+            $(".app__status--header").on("click", function () {
+                $(this).toggleClass("header-collapced");
+                $(".app__status--row").toggleClass("collapced");
+            });
+        </script>
+
+        <script>
+            $(".app__conclusion--header").on("click", function () {
+                $(this).toggleClass("header-collapced");
+                $(".app__conclusion--row").toggleClass("collapced");
+            });
+        </script>
+    }
+
+
+*@

@@ -1,0 +1,368 @@
+@import "../abstracts/_bundle";
+
+.btn {
+  display: flex;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  height: @btn-height;
+  padding-right: @xl;
+  padding-left: @xl;
+  border-radius: @btn-radius;
+  opacity: 1;
+  text-transform: uppercase;
+  cursor: pointer;
+  .material-transition;
+
+  &.not-active,
+  &.not-active:hover,
+  &.not-active:focus {
+    opacity: .35;
+    cursor: inherit;
+  }
+
+  //size
+  &-square {
+    width: @btn-height;
+    padding-right: 0;
+    padding-left: 0;
+    border-width: @btn-border-width;
+    border-style: solid;
+  }
+
+  &-round {
+    width: @btn-tiny*1.1;
+    height: @btn-tiny*1.1;
+    padding-right: 0;
+    padding-left: 0;
+    border: none;
+    border-radius: 50%;
+    background-color: @bg-secondary;
+    color: @font-white;
+    font-size: @font-size-main;
+    margin: 0;
+    .material-shadow(1);
+
+    &:hover {
+      .material-shadow(2);
+    }
+  }
+
+  &-tiny {
+    width: @btn-tiny;
+    height: @btn-tiny;
+    padding-right: 0;
+    padding-left: 0;
+    border-width: @btn-border-width/2;
+  }
+
+  &-disabled {
+    border: none;
+    background-color: @bg-dark;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  //container
+  &-holder {
+    width: auto;
+    margin: auto;
+
+    .btn {
+      margin-right: @sm;
+      margin-left: @sm;
+      // &:last-of-type {
+      // 	margin-right: 0;
+      // }
+    }
+
+    &.btn-holder-right {
+      justify-content: flex-end;
+
+      .btn {
+        margin-right: 0;
+        margin-left: @sm;
+      }
+    }
+  }
+}
+
+.content-upload-delete,
+.content-upload-save {
+  .btn {
+    margin: 0;
+  }
+}
+
+.btn {
+  &-primary {
+    &.btn {
+      &-text {
+        color: @bg-primary;
+      }
+
+      &-outline {
+        color: @bg-primary;
+      }
+
+      &-fill {
+        background-color: @bg-primary;
+        color: @font-white;
+      }
+    }
+  }
+
+  &-secondary {
+    .material-transition;
+
+    &.btn {
+      &-text {
+        color: @bg-secondary;
+      }
+
+      &-outline {
+        color: @bg-secondary;
+
+        &:hover,
+        &:focus,
+        &:active {
+          color: @font-white;
+          background-color: @bg-secondary;
+          border-color: @bg-secondary;
+        }
+      }
+
+      &-fill {
+        background-color: @bg-secondary;
+        color: @font-white;
+      }
+    }
+  }
+
+  &-success {}
+
+  &-danger {
+    .material-transition;
+
+    &.btn {
+      &-text {
+        color: @bg-danger;
+      }
+
+      &-outline {
+        color: @bg-danger;
+
+        &:hover,
+        &:focus,
+        &:active {
+          color: @font-white;
+          background-color: @bg-danger;
+          border-color: @bg-danger;
+        }
+      }
+
+      &-fill {
+        background-color: @bg-danger;
+        color: @font-white;
+      }
+    }
+  }
+
+  &.disabled {
+    border-color: transparent;
+    opacity: 1;
+    background-color: transparent;
+    box-shadow: unset;
+    color: @font-color-lightest;
+    font-size: @font-size-small;
+    font-weight: @semibold;
+    pointer-events: none;
+
+    &:hover,
+    &:focus,
+    &:active {
+      .material-shadow(1);
+      border-color: transparent;
+      opacity: 1;
+      background-color: transparent;
+      box-shadow: unset;
+      color: @font-color-lightest;
+      pointer-events: none;
+    }
+  }
+
+  &-icon {
+    border: none;
+    background-color: transparent;
+    box-shadow: unset;
+
+    &.icon {
+
+      &-eye,
+      &-delete,
+      &-remove,
+      &-edit-line,
+      &-files,
+      &-add {
+        border: none;
+        background-color: transparent;
+        color: @font-color-lightest;
+      }
+
+      &-add {
+        border: none;
+        background-color: transparent;
+        color: @bg-primary;
+      }
+
+      &-eye {
+
+        &:hover,
+        &:focus,
+        &:active {
+          color: @bg-secondary;
+        }
+      }
+
+      &-delete,
+      &-remove {
+
+        &:hover,
+        &:focus,
+        &:active {
+          color: @bg-danger;
+        }
+      }
+
+      &-edit-line {
+
+        &:hover,
+        &:focus,
+        &:active {
+          color: @bg-primary;
+        }
+      }
+
+      &-add {
+
+        &:hover,
+        &:focus,
+        &:active {
+          color: @bg-success;
+        }
+      }
+
+      &-files {
+
+        &:hover,
+        &:focus,
+        &:active {
+          color: @bg-success;
+        }
+      }
+    }
+  }
+
+  &-text {
+    border: none;
+    background-color: transparent;
+    box-shadow: none;
+    font-size: @font-size-small;
+    font-weight: @semibold;
+  }
+
+  &-outline {
+    border: @input-border-width solid @border-color;
+    font-size: @font-size-small;
+    font-weight: @semibold;
+  }
+
+  &-fill {
+    border: none;
+    font-size: @font-size-small;
+    font-weight: @semibold;
+    .material-shadow(1);
+
+    &:hover,
+    &:focus,
+    &:active {
+      .material-shadow(2);
+    }
+
+    &.active {
+      border: @btn-border-width solid @bg-secondary;
+      background-color: transparent;
+      color: @bg-secondary;
+      .material-shadow(2);
+    }
+  }
+
+  &-tab {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 !important;
+    padding: @xxs @xs;
+    border-radius: 0;
+    color: @font-black;
+    font-size: @font-size-small;
+    text-align: center;
+    text-transform: lowercase;
+    background-color: @bg-dark;
+    .material-transition;
+    border-right: @input-border-width solid @border-color;
+
+    h2 {
+      margin: @xxxs 0;
+      font-size: @font-size-small;
+      text-transform: lowercase;
+    }
+
+    &.active {
+      background-color: @bg-secondary;
+      color: @font-white;
+    }
+
+    &:hover {
+      background-color: @bg-secondary;
+      color: @font-white;
+    }
+  }
+
+  &-panel {
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    align-items: center;
+    justify-content: center;
+    justify-content: center;
+    width: 100%;
+    padding: @xs @xxs;
+    border-left: @active-li-border-width solid @bg-secondary;
+    border-radius: @btn-radius;
+    text-align: center;
+    background-color: fade(@bg-secondary, 5%);
+    text-transform: inherit;
+    height: auto;
+    .material-transition;
+    .material-shadow(1);
+
+    &:hover {
+      .material-shadow(2);
+
+      span {
+        color: @bg-primary;
+      }
+    }
+
+    span {
+      margin: 0 @xxxs;
+    }
+  }
+
+  &-column-list {
+    cursor: pointer;
+  }
+}

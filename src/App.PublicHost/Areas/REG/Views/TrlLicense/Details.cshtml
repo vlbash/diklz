@@ -1,0 +1,89 @@
+﻿@model App.Data.DTO.TRL.TrlLicenseRegisterDetailDTO
+@{
+    ViewData["Title"] = "Лiцензiя з торгівлі ЛЗ";
+}
+
+<div class="content-item-holder">
+
+    <div class="content-item">
+        <div class="content-item-header">
+            <i class="icon icon-xlg icon-doc-signed"></i>
+            <h2>Інформація щодо ліцензії</h2>
+        </div>
+        <div class="content-item-details">
+            <div class="content-item-inner content-details-wrapper col-2">
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.EDRPOU)</label>
+                        <p>@Html.DisplayFor(model => model.EDRPOU)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.OrgName)</label>
+                        <p>@Html.DisplayFor(model => model.OrgName)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.LicenseDate)</label>
+                        <p>@Html.DisplayFor(model => model.LicenseDate)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.OrderNumber)</label>
+                        <p>@Html.DisplayFor(model => model.OrderNumber)</p>
+                    </div>
+                </div>
+
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.OrderDate)</label>
+                        <p>@Html.DisplayFor(model => model.OrderDate)</p>
+                    </div>
+                </div>
+
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.Address)</label>
+                        <p>@Html.DisplayFor(model => model.Address)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.PhoneNumber)</label>
+                        <p>@Html.DisplayFor(model => model.PhoneNumber)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.FaxNumber)</label>
+                        <p>@Html.DisplayFor(model => model.FaxNumber)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.Email)</label>
+                        <p>@Html.DisplayFor(model => model.Email)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.LicState)</label>
+                        <p>@Html.DisplayFor(model => model.LicState)</p>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <div class="content-item">
+        <div class="content-item-header">
+            <i class="icon icon-xlg icon-timeline-pin"></i>
+            <h2>Місця провадження діяльності</h2>
+        </div>
+        <div class="content-partial" data-tab-container-url="@Url.Action("List", "Branch", new {Area = "BRN"})?ApplicationId=@Model.BaseApplicationId"></div>
+    </div>
+</div>

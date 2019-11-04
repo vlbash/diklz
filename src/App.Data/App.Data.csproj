@@ -1,0 +1,494 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <AssemblyName>App.Data</AssemblyName>
+    <RootNamespace>App.Data</RootNamespace>
+    <LangVersion>7.3</LangVersion>
+    <!--<TargetFramework>netstandard2.0</TargetFramework>-->
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Models\POCO\**" />
+    <EmbeddedResource Remove="Models\POCO\**" />
+    <None Remove="Models\POCO\**" />
+    <None Remove="DTO\APP\AppAssigneeDetailDTO.sql" />
+    <None Remove="DTO\APP\AppAssigneeListDTO.sql" />
+    <None Remove="DTO\APP\AppDecisionDTO.sql" />
+    <None Remove="DTO\APP\AppLicenseMessageDTO.sql" />
+    <None Remove="DTO\APP\AppOrganizationExtFullDTO.sql" />
+    <None Remove="DTO\APP\AppOrganizationExtMediumDTO.sql" />
+    <None Remove="DTO\APP\AppOrganizationExtShortDTO.sql" />
+    <None Remove="DTO\APP\AppPreLicenseCheckDTO.sql" />
+    <None Remove="DTO\APP\AppStateDTO.sql" />
+    <None Remove="DTO\ATU\AtuCityDTO.sql" />
+    <None Remove="DTO\ATU\AtuStreetDTO.sql" />
+    <None Remove="DTO\ATU\AtuSubjectAddressDTO.sql" />
+    <None Remove="DTO\BRN\BranchAltDetailsDTO.sql" />
+    <None Remove="DTO\BRN\BranchAltListDTO.sql" />
+    <None Remove="DTO\BRN\BranchDetailsDTO.sql" />
+    <None Remove="DTO\BRN\BranchListForLicenseDTO.sql" />
+    <None Remove="DTO\BRN\BranchListMsgDTO.sql" />
+    <None Remove="DTO\BRN\BranchRegisterListDTO.sql" />
+    <None Remove="DTO\Common\CurrentLicenseDTO.sql" />
+    <None Remove="DTO\Common\EntityEnumDTO.sql" />
+    <None Remove="DTO\Common\FileStoreDTO.sql" />
+    <None Remove="DTO\Common\ProtocolDTO.sql" />
+    <None Remove="DTO\Common\ProtocolListDTO.sql" />
+    <None Remove="DTO\Common\UserAreaOrgDetailDTO.sql" />
+    <None Remove="DTO\Common\UserAreaPersonDetailDTO.sql" />
+    <None Remove="DTO\Common\WidgetBackDTO.sql" />
+    <None Remove="DTO\Common\Widget\WidgetPaymentDTO.sql" />
+    <None Remove="DTO\CRV\LimsDetailsRPDTO.sql" />
+    <None Remove="DTO\CRV\LimsListRPDTO.sql" />
+    <None Remove="DTO\CRV\LimsRPMinDTO.sql" />
+    <None Remove="DTO\DOS\EDocumentDetailsDTO.sql" />
+    <None Remove="DTO\DOS\EDocumentDetailsMsgDTO.sql" />
+    <None Remove="DTO\DOS\EDocumentListDTO.sql" />
+    <None Remove="DTO\DOS\EDocumentPaymentListDTO.sql" />
+    <None Remove="DTO\DOS\RegisterEDocumentListDTO.sql" />
+    <None Remove="DTO\IML\ImlAppDetailDTO.sql" />
+    <None Remove="DTO\IML\ImlAppExpertiseDTO.sql" />
+    <None Remove="DTO\IML\ImlAppListDTO.sql" />
+    <None Remove="DTO\IML\ImlLicenseDetailDTO.sql" />
+    <None Remove="DTO\IML\ImlLicenseListDTO.sql" />
+    <None Remove="DTO\IML\ImlLicenseRegisterDetailDTO.sql" />
+    <None Remove="DTO\IML\ImlLicenseRegisterListDTO.sql" />
+    <None Remove="DTO\IML\ImlMedicineDetailDTO.sql" />
+    <None Remove="DTO\IML\ImlMedicineListDTO.sql" />
+    <None Remove="DTO\IML\ImlMedicineListMsgDTO.sql" />
+    <None Remove="DTO\IML\ImlMedicineMinDTO.sql" />
+    <None Remove="DTO\IML\ImlMedicineRegisterListDTO.sql" />
+    <None Remove="DTO\IML\ImlOrganizationExtFullDTO.sql" />
+    <None Remove="DTO\IML\ImlOrganizationExtMediumDTO.sql" />
+    <None Remove="DTO\IML\ImlOrganizationExtShortDTO.sql" />
+    <None Remove="DTO\LIMS\ExecuteAttachFilesInsert.sql" />
+    <None Remove="DTO\LIMS\ExecuteAttachInsert.sql" />
+    <None Remove="DTO\LIMS\ExecuteAttachInsertMPD.sql" />
+    <None Remove="DTO\LIMS\ExecuteGetId.sql" />
+    <None Remove="DTO\LIMS\ExecuteImlAppBranchAdd.sql" />
+    <None Remove="DTO\LIMS\ExecuteImlAppBranchRem.sql" />
+    <None Remove="DTO\LIMS\ExecuteImlCheckDelete.sql" />
+    <None Remove="DTO\LIMS\ExecuteImlCheckInsert.sql" />
+    <None Remove="DTO\LIMS\ExecuteImlInsertApplication.sql" />
+    <None Remove="DTO\LIMS\ExecuteImlInsertBranch.sql" />
+    <None Remove="DTO\LIMS\ExecuteImlNoticeInsert.sql" />
+    <None Remove="DTO\LIMS\ExecuteInsertAppDrugIML.sql" />
+    <None Remove="DTO\LIMS\ExecuteNewImlLicenseProcessRun.sql" />
+    <None Remove="DTO\LIMS\ExecuteNewPrlLicenseProcessRun.sql" />
+    <None Remove="DTO\LIMS\ExecuteNewTrlLicenseProcessRun.sql" />
+    <None Remove="DTO\LIMS\ExecutePrlAppBranchAdd.sql" />
+    <None Remove="DTO\LIMS\ExecutePrlAuthUpdate.sql" />
+    <None Remove="DTO\LIMS\ExecutePrlAuthUpdateIML.sql" />
+    <None Remove="DTO\LIMS\ExecutePrlAuthUpdateIMLPerson.sql" />
+    <None Remove="DTO\LIMS\ExecutePrlAuthUpdateLicense.sql" />
+    <None Remove="DTO\LIMS\ExecutePrlAuthUpdatePRL.sql" />
+    <None Remove="DTO\LIMS\ExecutePrlCheckDelete.sql" />
+    <None Remove="DTO\LIMS\ExecutePrlCheckInsert.sql" />
+    <None Remove="DTO\LIMS\ExecutePrlInsertApplication.sql" />
+    <None Remove="DTO\LIMS\ExecutePrlInsertBranch.sql" />
+    <None Remove="DTO\LIMS\ExecutePrlLicenseProcessRun.sql" />
+    <None Remove="DTO\LIMS\ExecutePrlNoticeInsert.sql" />
+    <None Remove="DTO\LIMS\ExecuteSgdRepDrugInsert.sql" />
+    <None Remove="DTO\LIMS\ExecuteSgdRepDrugUpdate.sql" />
+    <None Remove="DTO\LIMS\ExecuteTrlAppBranchAdd.sql" />
+    <None Remove="DTO\LIMS\ExecuteTrlCheckCreate.sql" />
+    <None Remove="DTO\LIMS\ExecuteTrlCheckDelete.sql" />
+    <None Remove="DTO\LIMS\ExecuteTrlCheckDivAdd.sql" />
+    <None Remove="DTO\LIMS\ExecuteTrlCheckInsert.sql" />
+    <None Remove="DTO\LIMS\ExecuteTrlCheckSelect.sql" />
+    <None Remove="DTO\LIMS\ExecuteTrlDecisionUpdate.sql" />
+    <None Remove="DTO\LIMS\ExecuteTrlInsertApplication.sql" />
+    <None Remove="DTO\LIMS\ExecuteTrlInsertBranch.sql" />
+    <None Remove="DTO\LIMS\ExecuteTrlNoticeInsert.sql" />
+    <None Remove="DTO\LIMS\GetPendingChanges - Copy.sql" />
+    <None Remove="DTO\LIMS\GetPendingChanges.sql" />
+    <None Remove="DTO\LIMS\GetPendingChangesToInsert.sql" />
+    <None Remove="DTO\LIMS\ImlDecisionUpdate.sql" />
+    <None Remove="DTO\LIMS\ImlUpdatePersonIds.sql" />
+    <None Remove="DTO\LIMS\ImportLimsCheck.sql" />
+    <None Remove="DTO\LIMS\ImportLimsDepartmentalSubordination.sql" />
+    <None Remove="DTO\LIMS\ImportLimsEndLicCheck.sql" />
+    <None Remove="DTO\LIMS\ImportLimsNotice.sql" />
+    <None Remove="DTO\LIMS\ImportLimsProtocols.sql" />
+    <None Remove="DTO\LIMS\ImportLimsRP.sql" />
+    <None Remove="DTO\LIMS\License.sql" />
+    <None Remove="DTO\LIMS\PrlAppSetStatus.sql" />
+    <None Remove="DTO\LIMS\PrlDecisionUpdate.sql" />
+    <None Remove="DTO\LIMS\PrlExpertiseUpdate.sql" />
+    <None Remove="DTO\LIMS\PrlUpdatePersonIds.sql" />
+    <None Remove="DTO\LOG\LogAuditEntryListDTO.sql" />
+    <None Remove="DTO\LOG\LogAuditListOfChangesDTO.sql" />
+    <None Remove="DTO\MSG\AnotherEventMessageDTO.sql" />
+    <None Remove="DTO\MSG\LeaseAgreementChangeMessageDTO.sql" />
+    <None Remove="DTO\MSG\MessageListDTO.sql" />
+    <None Remove="DTO\BRN\BranchListDTO.sql" />
+    <None Remove="DTO\MSG\MPDActivityRestorationMessageDTO.sql" />
+    <None Remove="DTO\MSG\MPDActivitySuspensionMessageDTO.sql" />
+    <None Remove="DTO\MSG\MPDClosingForSomeActivityMessageDTO.sql" />
+    <None Remove="DTO\MSG\MPDLocationRatificationMessageDTO.sql" />
+    <None Remove="DTO\MSG\MPDRestorationAfterSomeActivityMessageDTO.sql" />
+    <None Remove="DTO\MSG\MsgShortDTO.sql" />
+    <None Remove="DTO\MSG\OrgFopLocationChangeMessageDTO.sql" />
+    <None Remove="DTO\MSG\PharmacyAreaChangeMessageDTO.sql" />
+    <None Remove="DTO\MSG\PharmacyHeadReplacementMessageDTO.sql" />
+    <None Remove="DTO\MSG\PharmacyNameChangeMessageDTO.sql" />
+    <None Remove="DTO\MSG\ProductionDossierChangemessageDTO.sql" />
+    <None Remove="DTO\MSG\SgdChiefNameChangeMessageDTO.sql" />
+    <None Remove="DTO\MSG\SgdNameChangeMessageDTO.sql" />
+    <None Remove="DTO\MSG\SupplierChangeMessageDTO.sql" />
+    <None Remove="DTO\MTR\MtrAppListDTO.sql" />
+    <None Remove="DTO\NTF\NotificationRecipientDTO.sql" />
+    <None Remove="DTO\ORG\EmployeeExtDetailDTO.sql" />
+    <None Remove="DTO\P902\AppConclusionDetailDTO.sql" />
+    <None Remove="DTO\P902\AppConclusionListDTO.sql" />
+    <None Remove="DTO\P902\ResultInputControlDetailsDTO.sql" />
+    <None Remove="DTO\P902\ResultInputControlListDTO.sql" />
+    <None Remove="DTO\PRL\AppShortDTO.sql" />
+    <None Remove="DTO\PRL\PrlAppDetailDTO.sql" />
+    <None Remove="DTO\PRL\PrlAppExpertiseDTO.sql" />
+    <None Remove="DTO\PRL\PrlAppListDTO.sql" />
+    <None Remove="DTO\PRL\PrlContractorDetailDTO.sql" />
+    <None Remove="DTO\PRL\PrlContractorListDTO.sql" />
+    <None Remove="DTO\PRL\PrlLicenseDetailDTO.sql" />
+    <None Remove="DTO\PRL\PrlLicenseListDTO.sql" />
+    <None Remove="DTO\PRL\PrlLicenseRegisterDetailDTO.sql" />
+    <None Remove="DTO\PRL\PrlLicenseRegisterListDTO.sql" />
+    <None Remove="DTO\PRL\PrlOrganizationExtFullDTO.sql" />
+    <None Remove="DTO\PRL\PrlOrganizationExtMediumDTO.sql" />
+    <None Remove="DTO\PRL\PrlOrganizationExtShortDTO.sql" />
+    <None Remove="DTO\RPT\LicenseRptMinDetailOrgFopLocation.sql" />
+    <None Remove="DTO\RPT\LicenseRptMinDetailSgdChiefName.sql" />
+    <None Remove="DTO\RPT\MessageTypeDTO.sql" />
+    <None Remove="DTO\RPT\MPDAddressRptMinDetail.sql" />
+    <None Remove="DTO\RPT\NotificationDetailsDTO.sql" />
+    <None Remove="DTO\RPT\NotificationListDTO.sql" />
+    <None Remove="DTO\RPT\OrgInnEdrpouRptMinDetail.sql" />
+    <None Remove="DTO\RPT\OrgRptNameField.sql" />
+    <None Remove="DTO\RPT\OrgUnitRptMinDetail.sql" />
+    <None Remove="DTO\RPT\ReportBranchFullDetailsDTO.sql" />
+    <None Remove="DTO\FDB\FeedBackDetailsDTO.sql" />
+    <None Remove="DTO\SEC\ApplicationRowLevelRightDTO.sql" />
+    <None Remove="DTO\SEC\FieldRightListDTO.sql" />
+    <None Remove="DTO\SEC\ProfileDetailDTO.sql" />
+    <None Remove="DTO\SEC\ProfileEmployeeListDTO.sql" />
+    <None Remove="DTO\SEC\ProfileEmployeeListMinDTO.sql" />
+    <None Remove="DTO\SEC\ProfileListDTO.sql" />
+    <None Remove="DTO\SEC\ProfileRightListDTO.sql" />
+    <None Remove="DTO\SEC\ProfileRoleListDTO.sql" />
+    <None Remove="DTO\SEC\ProfileRowLevelRightDTO.sql" />
+    <None Remove="DTO\SEC\ProfileRowLevelRightListDTO.sql" />
+    <None Remove="DTO\SEC\RightDetailDTO.sql" />
+    <None Remove="DTO\SEC\RightListDTO.sql" />
+    <None Remove="DTO\SEC\RoleListDTO.sql" />
+    <None Remove="DTO\SEC\RoleRightListDTO.sql" />
+    <None Remove="DTO\TRL\TrlAppDetailDTO.sql" />
+    <None Remove="DTO\TRL\TrlAppExpertiseDTO.sql" />
+    <None Remove="DTO\TRL\TrlAppListDTO.sql" />
+    <None Remove="DTO\TRL\TrlLicenseDetailDTO.sql" />
+    <None Remove="DTO\TRL\TrlLicenseListDTO.sql" />
+    <None Remove="DTO\TRL\TrlLicenseRegisterDetailDTO.sql" />
+    <None Remove="DTO\TRL\TrlLicenseRegisterListDTO.sql" />
+    <None Remove="DTO\TRL\TrlOrganizationExtFullDTO.sql" />
+    <None Remove="DTO\TRL\tRLOrganizationExtMediumDTO.sql" />
+    <None Remove="DTO\TRL\TrlOrganizationExtShortDTO.sql" />
+    <None Remove="DTO\USER\UserAreaOrgDetailDTO.sql" />
+    <EmbeddedResource Include="DTO\APP\AppAssigneeDetailDTO.sql">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTO\APP\AppLicenseMessageDTO.sql">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTO\APP\AppPreLicenseCheckDTO.sql">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTO\APP\AppDecisionDTO.sql">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTO\APP\AppAssigneeListDTO.sql">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTO\APP\AppStateDTO.sql" />
+    <EmbeddedResource Include="DTO\APP\AppOrganizationExtMediumDTO.sql" />
+    <EmbeddedResource Include="DTO\APP\AppOrganizationExtShortDTO.sql" />
+    <EmbeddedResource Include="DTO\APP\AppOrganizationExtFullDTO.sql" />
+    <EmbeddedResource Include="DTO\ATU\AtuSubjectAddressDTO.sql" />
+    <EmbeddedResource Include="DTO\ATU\AtuStreetDTO.sql" />
+    <EmbeddedResource Include="DTO\ATU\AtuCityDTO.sql" />
+    <EmbeddedResource Include="DTO\BRN\BranchAltDetailsDTO.sql" />
+    <EmbeddedResource Include="DTO\BRN\BranchListForLicenseDTO.sql" />
+    <EmbeddedResource Include="DTO\BRN\BranchRegisterListDTO.sql" />
+    <EmbeddedResource Include="DTO\BRN\BranchDetailsDTO.sql" />
+    <EmbeddedResource Include="DTO\BRN\BranchAltListDTO.sql" />
+    <EmbeddedResource Include="DTO\BRN\BranchListMsgDTO.sql" />
+    <EmbeddedResource Include="DTO\Common\CurrentLicenseDTO.sql">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTO\Common\EntityEnumDTO.sql">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTO\Common\FileStoreDTO.sql">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTO\Common\ProtocolListDTO.sql" />
+    <EmbeddedResource Include="DTO\Common\ProtocolDTO.sql" />
+    <EmbeddedResource Include="DTO\Common\Widget\WidgetPaymentDTO.sql" />
+    <EmbeddedResource Include="DTO\Common\Widget\WidgetBackDTO.sql" />
+    <EmbeddedResource Include="DTO\CRV\LimsRPMinDTO.sql" />
+    <EmbeddedResource Include="DTO\IML\ImlAppDetailDTO.sql" />
+    <EmbeddedResource Include="DTO\IML\ImlLicenseRegisterListDTO.sql" />
+    <EmbeddedResource Include="DTO\IML\ImlMedicineRegisterListDTO.sql" />
+    <EmbeddedResource Include="DTO\IML\ImlMedicineListMsgDTO.sql" />
+    <EmbeddedResource Include="DTO\IML\ImlMedicineMinDTO.sql" />
+    <EmbeddedResource Include="DTO\IML\ImlMedicineListDTO.sql" />
+    <EmbeddedResource Include="DTO\IML\ImlMedicineDetailDTO.sql" />
+    <EmbeddedResource Include="DTO\IML\ImlLicenseRegisterDetailDTO.sql" />
+    <EmbeddedResource Include="DTO\LIMS\ExecuteAttachInsertMPD.sql" />
+    <EmbeddedResource Include="DTO\LIMS\ExecuteSgdRepDrugUpdate.sql" />
+    <EmbeddedResource Include="DTO\LIMS\ExecuteSgdRepDrugInsert.sql" />
+    <EmbeddedResource Include="DTO\LIMS\ExecuteGetId.sql" />
+    <EmbeddedResource Include="DTO\LIMS\ExecuteTrlCheckCreate.sql" />
+    <EmbeddedResource Include="DTO\LIMS\ExecuteTrlCheckSelect.sql" />
+    <EmbeddedResource Include="DTO\LIMS\ExecuteTrlCheckDivAdd.sql" />
+    <EmbeddedResource Include="DTO\LIMS\ExecuteImlAppBranchRem.sql" />
+    <EmbeddedResource Include="DTO\LIMS\ExecuteNewTrlLicenseProcessRun.sql" />
+    <EmbeddedResource Include="DTO\LIMS\ExecuteTrlAppBranchAdd.sql" />
+    <EmbeddedResource Include="DTO\LIMS\ExecuteTrlNoticeInsert.sql" />
+    <EmbeddedResource Include="DTO\LIMS\ExecuteTrlCheckInsert.sql" />
+    <EmbeddedResource Include="DTO\LIMS\ExecuteTrlCheckDelete.sql" />
+    <EmbeddedResource Include="DTO\LIMS\ExecuteTrlInsertBranch.sql" />
+    <EmbeddedResource Include="DTO\LIMS\ExecuteTrlInsertApplication.sql" />
+    <EmbeddedResource Include="DTO\LIMS\ExecuteImlInsertApplication.sql" />
+    <EmbeddedResource Include="DTO\LIMS\ExecuteImlInsertBranch.sql" />
+    <EmbeddedResource Include="DTO\LIMS\ExecuteNewImlLicenseProcessRun.sql" />
+    <EmbeddedResource Include="DTO\LIMS\ExecuteImlAppBranchAdd.sql" />
+    <EmbeddedResource Include="DTO\LIMS\ExecutePrlAuthUpdateIMLPerson.sql" />
+    <EmbeddedResource Include="DTO\LIMS\ExecutePrlAuthUpdateLicense.sql" />
+    <EmbeddedResource Include="DTO\LIMS\ExecutePrlAuthUpdateIML.sql" />
+    <EmbeddedResource Include="DTO\LIMS\ExecuteImlNoticeInsert.sql" />
+    <EmbeddedResource Include="DTO\LIMS\ExecuteImlCheckDelete.sql" />
+    <EmbeddedResource Include="DTO\LIMS\ExecuteImlCheckInsert.sql" />
+    <EmbeddedResource Include="DTO\LIMS\ExecuteInsertAppDrugIML.sql" />
+    <EmbeddedResource Include="DTO\LIMS\ExecuteTrlDecisionUpdate.sql" />
+    <EmbeddedResource Include="DTO\LIMS\ImlDecisionUpdate.sql" />
+    <EmbeddedResource Include="DTO\LIMS\ImlUpdatePersonIds.sql" />
+    <EmbeddedResource Include="DTO\LIMS\ImportLimsDepartmentalSubordination.sql" />
+    <EmbeddedResource Include="DTO\LIMS\PrlUpdatePersonIds.sql" />
+    <EmbeddedResource Include="DTO\IML\ImlAppExpertiseDTO.sql" />
+    <EmbeddedResource Include="DTO\IML\ImlAppListDTO.sql" />
+    <EmbeddedResource Include="DTO\IML\ImlLicenseDetailDTO.sql" />
+    <EmbeddedResource Include="DTO\IML\ImlLicenseListDTO.sql" />
+    <EmbeddedResource Include="DTO\IML\ImlOrganizationExtFullDTO.sql" />
+    <EmbeddedResource Include="DTO\IML\ImlOrganizationExtMediumDTO.sql" />
+    <EmbeddedResource Include="DTO\IML\ImlOrganizationExtShortDTO.sql" />
+    <EmbeddedResource Include="DTO\CRV\LimsDetailsRPDTO.sql" />
+    <EmbeddedResource Include="DTO\CRV\LimsListRPDTO.sql" />
+    <EmbeddedResource Include="DTO\LIMS\ExecutePrlAuthUpdatePRL.sql" />
+    <EmbeddedResource Include="DTO\LIMS\GetPendingChangesToInsert.sql" />
+    <EmbeddedResource Include="DTO\LIMS\ImportLimsRP.sql" />
+    <EmbeddedResource Include="DTO\MSG\MPDActivityRestorationMessageDTO.sql">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTO\NTF\NotificationRecipientDTO.sql" />
+    <EmbeddedResource Include="DTO\DOS\EDocumentPaymentListDTO.sql" />
+    <EmbeddedResource Include="DTO\P902\AppConclusionDetailDTO.sql" />
+    <EmbeddedResource Include="DTO\P902\ResultInputControlDetailsDTO.sql" />
+    <EmbeddedResource Include="DTO\P902\AppConclusionListDTO.sql" />
+    <EmbeddedResource Include="DTO\P902\ResultInputControlListDTO.sql" />
+    <EmbeddedResource Include="DTO\PRL\PrlLicenseRegisterDetailDTO.sql" />
+    <EmbeddedResource Include="DTO\PRL\PrlLicenseRegisterListDTO.sql" />
+    <EmbeddedResource Include="DTO\RPT\LicenseRptMinDetailOrgFopLocation.sql" />
+    <EmbeddedResource Include="DTO\RPT\LicenseRptMinDetailSgdChiefName.sql" />
+    <EmbeddedResource Include="DTO\RPT\MessageTypeDTO.sql" />
+    <EmbeddedResource Include="DTO\RPT\MPDAddressRptMinDetail.sql" />
+    <EmbeddedResource Include="DTO\RPT\OrgRptNameField.sql" />
+    <EmbeddedResource Include="DTO\RPT\OrgInnEdrpouRptMinDetail.sql" />
+    <EmbeddedResource Include="DTO\RPT\OrgUnitRptMinDetail.sql" />
+    <EmbeddedResource Include="DTO\SEC\ApplicationRowLevelRightDTO.sql" />
+    <EmbeddedResource Include="DTO\SEC\FieldRightListDTO.sql" />
+    <EmbeddedResource Include="DTO\SEC\ProfileDetailDTO.sql" />
+    <EmbeddedResource Include="DTO\SEC\ProfileEmployeeListDTO.sql" />
+    <EmbeddedResource Include="DTO\SEC\ProfileEmployeeListMinDTO.sql" />
+    <EmbeddedResource Include="DTO\SEC\ProfileListDTO.sql" />
+    <EmbeddedResource Include="DTO\SEC\ProfileRightListDTO.sql" />
+    <EmbeddedResource Include="DTO\SEC\ProfileRoleListDTO.sql" />
+    <EmbeddedResource Include="DTO\SEC\ProfileRowLevelRightDTO.sql" />
+    <EmbeddedResource Include="DTO\SEC\ProfileRowLevelRightListDTO.sql" />
+    <EmbeddedResource Include="DTO\SEC\RightDetailDTO.sql" />
+    <EmbeddedResource Include="DTO\SEC\RightListDTO.sql" />
+    <EmbeddedResource Include="DTO\SEC\RoleListDTO.sql" />
+    <EmbeddedResource Include="DTO\SEC\RoleRightListDTO.sql" />
+    <EmbeddedResource Include="DTO\TRL\TrlLicenseRegisterDetailDTO.sql" />
+    <EmbeddedResource Include="DTO\TRL\TrlLicenseRegisterListDTO.sql" />
+    <EmbeddedResource Include="DTO\TRL\TrlLicenseDetailDTO.sql" />
+    <EmbeddedResource Include="DTO\TRL\TrlLicenseListDTO.sql" />
+    <EmbeddedResource Include="DTO\TRL\TrlAppExpertiseDTO.sql" />
+    <EmbeddedResource Include="DTO\TRL\TrlAppDetailDTO.sql" />
+    <EmbeddedResource Include="DTO\TRL\TrlOrganizationExtFullDTO.sql" />
+    <EmbeddedResource Include="DTO\TRL\TrlOrganizationExtMediumDTO.sql" />
+    <EmbeddedResource Include="DTO\TRL\TrlAppListDTO.sql" />
+    <EmbeddedResource Include="DTO\TRL\TrlOrganizationExtShortDTO.sql" />
+    <EmbeddedResource Include="DTO\USER\UserAreaEmployeeDetailDTO.sql" />
+    <EmbeddedResource Include="DTO\USER\UserAreaOrgDetailDTO.sql" />
+    <EmbeddedResource Include="DTO\USER\UserAreaPersonDetailDTO.sql" />
+    <EmbeddedResource Include="DTO\Common\UserDetailsDTO.sql" />
+    <EmbeddedResource Include="DTO\DOS\EDocumentDetailsDTO.sql" />
+    <EmbeddedResource Include="DTO\DOS\EDocumentDetailsMsgDTO.sql" />
+    <EmbeddedResource Include="DTO\DOS\RegisterEDocumentListDTO.sql" />
+    <EmbeddedResource Include="DTO\LIMS\ExecuteAttachFilesInsert.sql" />
+    <EmbeddedResource Include="DTO\LIMS\ExecuteNewPrlLicenseProcessRun.sql" />
+    <EmbeddedResource Include="DTO\LIMS\ExecutePrlAppBranchAdd.sql" />
+    <EmbeddedResource Include="DTO\LIMS\ExecutePrlAuthUpdate.sql" />
+    <EmbeddedResource Include="DTO\LIMS\ExecutePrlCheckInsert.sql" />
+    <EmbeddedResource Include="DTO\LIMS\ExecuteAttachInsert.sql" />
+    <EmbeddedResource Include="DTO\LIMS\ExecutePrlLicenseProcessRun.sql" />
+    <EmbeddedResource Include="DTO\LIMS\ExecutePrlCheckDelete.sql" />
+    <EmbeddedResource Include="DTO\LIMS\ImportLimsEndLicCheck.sql" />
+    <EmbeddedResource Include="DTO\LIMS\License.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTO\LIMS\PrlAppSetStatus.sql" />
+    <EmbeddedResource Include="DTO\LIMS\GetPendingChanges.sql" />
+    <EmbeddedResource Include="DTO\LIMS\ImportLimsNotice.sql" />
+    <EmbeddedResource Include="DTO\LIMS\ImportLimsCheck.sql" />
+    <EmbeddedResource Include="DTO\LIMS\ImportLimsProtocols.sql" />
+    <EmbeddedResource Include="DTO\LIMS\ExecutePrlInsertBranch.sql" />
+    <EmbeddedResource Include="DTO\LIMS\ExecutePrlInsertApplication.sql" />
+    <EmbeddedResource Include="DTO\LIMS\PrlDecisionUpdate.sql" />
+    <EmbeddedResource Include="DTO\LIMS\ExecutePrlNoticeInsert.sql" />
+    <EmbeddedResource Include="DTO\LOG\LogAuditEntryListDTO.sql" />
+    <EmbeddedResource Include="DTO\LOG\LogAuditListOfChangesDTO.sql" />
+    <EmbeddedResource Include="DTO\MSG\AnotherEventMessageDTO.sql">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTO\MSG\MsgShortDTO.sql" />
+    <EmbeddedResource Include="DTO\MSG\SupplierChangeMessageDTO.sql">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTO\MSG\ProductionDossierChangeMessageDTO.sql">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTO\MSG\LeaseAgreementChangeMessageDTO.sql">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTO\MSG\PharmacyNameChangeMessageDTO.sql">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTO\MSG\PharmacyAreaChangeMessageDTO.sql">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTO\MSG\PharmacyHeadReplacementMessageDTO.sql">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTO\MSG\MPDLocationRatificationMessageDTO.sql">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTO\MSG\MPDRestorationAfterSomeActivityMessageDTO.sql">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTO\MSG\MPDClosingForSomeActivityMessageDTO.sql">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTO\MSG\MPDActivitySuspensionMessageDTO.sql">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTO\MSG\OrgFopLocationChangeMessageDTO.sql">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTO\MSG\SgdNameChangeMessageDTO.sql" />
+    <EmbeddedResource Include="DTO\MSG\SgdChiefNameChangeMessageDTO.sql" />
+    <EmbeddedResource Include="DTO\BRN\BranchListDTO.sql" />
+    <EmbeddedResource Include="DTO\MSG\MessageListDTO.sql" />
+    <EmbeddedResource Include="DTO\MTR\MtrAppListDTO.sql">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTO\ORG\EmployeeExtDetailDTO.sql" />
+    <None Remove="DTO\ORG\OrganizationExtDetailDTO.sql" />
+    <EmbeddedResource Include="DTO\ORG\OrganizationExtDetailDTO.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="DTO\APP\ApplicationListDTO.sql" />
+    <None Remove="Migrations\Sql\v1.1.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="DTO\LIMS\PrlExpertiseUpdate.sql" />
+    <EmbeddedResource Include="DTO\NTF\NotificationDetailsDTO.sql" />
+    <EmbeddedResource Include="DTO\NTF\NotificationListDTO.sql" />
+    <EmbeddedResource Include="DTO\FDB\FeedBackDetailsDTO.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Antiforgery" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis" Version="2.10.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Analyzers" Version="2.2.2" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.2.0" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="2.2.0" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.5.0" />
+    <!--<PackageReference Include="Z.EntityFramework.Plus.Audit.EFCore" Version="1.8.5" />-->
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="DTO\APP\ApplicationListDTO.sql">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTO\PRL\PrlAppExpertiseDTO.sql" />
+    <EmbeddedResource Include="DTO\PRL\PrlAppListDTO.sql" />
+    <EmbeddedResource Include="DTO\PRL\PrlLicenseListDTO.sql" />
+    <EmbeddedResource Include="DTO\PRL\PrlOrganizationExtMediumDTO.sql" />
+    <EmbeddedResource Include="DTO\PRL\PrlOrganizationExtFullDTO.sql" />
+    <EmbeddedResource Include="DTO\PRL\PrlOrganizationExtShortDTO.sql" />
+    <EmbeddedResource Include="DTO\PRL\PrlLicenseDetailDTO.sql" />
+    <EmbeddedResource Include="DTO\APP\AppShortDTO.sql" />
+    <EmbeddedResource Include="DTO\PRL\PrlContractorListDTO.sql" />
+    <EmbeddedResource Include="DTO\PRL\PrlContractorDetailDTO.sql" />
+    <EmbeddedResource Include="DTO\RPT\ReportBranchFullDetailsDTO.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Models\MSG\" />
+    <Folder Include="Models\PRL\" />
+    <Folder Include="Models\TRL\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\submodule\App.Core\src\App.Core.Business\App.Core.Business.csproj" />
+    <ProjectReference Include="..\..\submodule\App.Core\src\App.Core.Common\App.Core.Common.csproj" />
+    <ProjectReference Include="..\..\submodule\App.Core\src\App.Core.Data\App.Core.Data.csproj" />
+    <ProjectReference Include="..\..\submodule\App.Core\src\App.Core.ReportManager\App.Core.ReportManager.csproj" />
+    <ProjectReference Include="..\..\submodule\App.Core\src\App.Core.Security\App.Core.Security.csproj" />
+    <ProjectReference Include="..\..\submodule\App.Core\src\App.Core.Utils\App.Core.Utils.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Microsoft.AspNetCore.Http.Abstractions">
+      <HintPath>..\..\..\..\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.aspnetcore.http.abstractions\2.0.1\lib\netstandard2.0\Microsoft.AspNetCore.Http.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Mvc.Core">
+      <HintPath>..\..\..\..\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.aspnetcore.mvc.core\2.0.0\lib\netstandard2.0\Microsoft.AspNetCore.Mvc.Core.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="DTO\PRL\PrlAppDetailDTO.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="DTO\DOS\EDocumentListDTO.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="DTO\FDB\FeedBackDetailsDTO.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+  </ItemGroup>
+</Project>

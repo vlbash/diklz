@@ -1,0 +1,88 @@
+﻿@model App.Data.DTO.IML.ImlMedicineDetailDTO
+
+@{
+    ViewData["Title"] = "Лікарський засіб";
+}
+
+<div class="content-item-holder">
+    <div class="content-item">
+        <div class="content-item-header">
+            <i class="icon icon-xlg icon-person-edit-bold"></i>
+            <h2>Лікарський засіб</h2>
+        </div>
+        <div class="content-item-details">
+            <div class="content-item-inner content-details-wrapper col-2">
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.MedicineName)</label>
+                        <p>@Html.DisplayFor(model => model.MedicineName)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.FormName)</label>
+                        <p>@Html.DisplayFor(model => model.FormName)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.DoseInUnit)</label>
+                        <p>@Html.DisplayFor(model => model.DoseInUnit)</p>
+                    </div>
+                </div>
+
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.NumberOfUnits)</label>
+                        <p>@Html.DisplayFor(model => model.NumberOfUnits)</p>
+                    </div>
+                </div><div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.MedicineNameEng)</label>
+                        <p>@Html.DisplayFor(model => model.MedicineNameEng)</p>
+                    </div>
+                </div><div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.RegisterNumber)</label>
+                        <p>@Html.DisplayFor(model => model.RegisterNumber)</p>
+                    </div>
+                </div><div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.AtcCode)</label>
+                        <p>@Html.DisplayFor(model => model.AtcCode)</p>
+                    </div>
+                </div><div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.ProducerName)</label>
+                        <p>@Html.DisplayFor(model => model.ProducerName)</p>
+                    </div>
+                </div><div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.ProducerCountry)</label>
+                        <p>@Html.DisplayFor(model => model.ProducerCountry)</p>
+                    </div>
+                </div><div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.SupplierName)</label>
+                        <p>@Html.DisplayFor(model => model.SupplierName)</p>
+                    </div>
+                </div><div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.SupplierCountry)</label>
+                        <p>@Html.DisplayFor(model => model.SupplierCountry)</p>
+                    </div>
+                </div><div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.SupplierAddress)</label>
+                        <p>@Html.DisplayFor(model => model.SupplierAddress)</p>
+                    </div>
+                </div><div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.Notes)</label>
+                        <p>@Html.DisplayFor(model => model.Notes)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

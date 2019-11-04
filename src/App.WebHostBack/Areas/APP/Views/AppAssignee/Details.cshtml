@@ -1,0 +1,195 @@
+﻿@model App.Data.DTO.APP.AppAssigneeDetailDTO
+
+@{
+    if (Model.AppType == "TRL")
+    {
+        ViewData["Title"] = "Завідувачі/Уповноважені особи";
+    }
+    else
+    {
+        ViewData["Title"] = "Уповноважена особа";
+    }
+}
+
+<div class="content-item-holder">
+    <div class="content-item">
+        <div class="content-item-header">
+            <i class="icon icon-xlg icon-person-edit-bold"></i>
+
+            @if (Model.AppType == "TRL")
+            {
+                <h2>Завідувачі/Уповноважені особи</h2>
+            }
+            else
+            {
+                <h2>Уповноважена особа</h2>
+            }
+            
+        </div>
+        <div class="content-item-details">
+            <div class="content-item-inner content-details-wrapper col-2">
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.LastName)</label>
+                        <p>@Html.DisplayFor(model => model.LastName)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.Name)</label>
+                        <p>@Html.DisplayFor(model => model.Name)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.MiddleName)</label>
+                        <p>@Html.DisplayFor(model => model.MiddleName)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.IPN)</label>
+                        <p>@Html.DisplayFor(model => model.IPN)</p>
+                    </div>
+                </div>
+                @if (ViewBag.appType == "TRL")
+                {
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.AssigneTypeName)</label>
+                        <p>@Html.DisplayFor(model => model.AssigneTypeName)</p>
+                    </div>
+                </div>
+                }
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.Birthday)</label>
+                        <p>@Html.DisplayFor(model => model.Birthday)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.EducationInstitution)</label>
+                        <p>@Html.DisplayFor(model => model.EducationInstitution)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.YearOfGraduation)</label>
+                        <p>@Html.DisplayFor(model => model.YearOfGraduation)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.NumberOfDiploma)</label>
+                        <p>@Html.DisplayFor(model => model.NumberOfDiploma)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.DateOfGraduation)</label>
+                        <p>@Html.DisplayFor(model => model.DateOfGraduation)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.Speciality)</label>
+                        <p>@Html.DisplayFor(model => model.Speciality)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.WorkExperience)</label>
+                        <p>@Html.DisplayFor(model => model.WorkExperience)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.NumberOfContract)</label>
+                        <p>@Html.DisplayFor(model => model.NumberOfContract)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.OrderNumber)</label>
+                        <p>@Html.DisplayFor(model => model.OrderNumber)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.DateOfContract)</label>
+                        <p>@Html.DisplayFor(model => model.DateOfContract)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.DateOfAppointment)</label>
+                        <p>@Html.DisplayFor(model => model.DateOfAppointment)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.NameOfPosition)</label>
+                        <p>@Html.DisplayFor(model => model.NameOfPosition)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.ContactInformation)</label>
+                        <p>@Html.DisplayFor(model => model.ContactInformation)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.Comment)</label>
+                        <p>@Html.DisplayFor(model => model.Comment)</p>
+                    </div>
+                </div>
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.IPN)</label>
+                        <p>@Html.DisplayFor(model => model.IPN)</p>
+                    </div>
+                </div>
+                @if (Model.AppType == "TRL")
+                {
+                    if (Model.OrgPositionType == "Manager")
+                    {
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.BranchName)</label>
+                        <p>@Html.DisplayFor(model => model.BranchName)</p>
+                    </div>
+                </div>
+                    }
+                    else
+                    {
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.ListOfBranchsNames)</label>
+
+                        @foreach (var br in Model.ListOfBranchsNames)
+                                {
+                        <p>@Html.Raw(br)</p>
+                                }
+                    </div>
+                </div>
+                    }
+                }
+                else
+                {
+                <div class="content-details">
+                    <div class="content-details-group">
+                        <label>@Html.DisplayNameFor(model => model.ListOfBranchsNames)</label>
+
+                        @foreach (var br in Model.ListOfBranchsNames)
+                            {
+                        <p>@Html.Raw(br)</p>
+                            }
+                    </div>
+                </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

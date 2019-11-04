@@ -1,0 +1,56 @@
+@import "../abstracts/_bundle";
+
+.pagination {
+  flex-direction: row;
+  width: 100%;
+  margin: @lg 0;
+
+  span {
+    display: flex;
+    align-content: center;
+  }
+
+  >li,
+  >span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    min-width: @btn-tiny;
+    height: @btn-tiny;
+    margin-right: @xxxs;
+    padding-right: @xxxs;
+    padding-left: @xxxs;
+    border-radius: @btn-radius;
+    border: none;
+    background-color: @input-readonly;
+    color: @bg-secondary;
+    cursor: pointer;
+    .material-transition;
+
+    &.active,
+    &:hover {
+      background-color: @bg-secondary;
+      color: @font-color-secondary;
+    }
+
+    [aria-hidden],
+    &.jsgrid-pager-nav-button a {
+      position: relative;
+      top: -.05em;
+    }
+
+    >a {
+      align-items: center;
+      height: 100%;
+      margin-right: -@sm;
+      margin-left: -@sm;
+      padding-right: @sm;
+      padding-left: @sm;
+    }
+  }
+
+  .jsgrid-pager-nav-inactive-button {
+    display: none;
+  }
+}

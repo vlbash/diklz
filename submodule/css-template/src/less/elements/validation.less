@@ -1,0 +1,37 @@
+.js-validation,
+.asp-validation {
+  position: absolute;
+  top: -@xxs;
+  right: @sm;
+  max-width: 100%;
+  overflow: hidden;
+  color: @font-danger;
+  font-size: @font-size-small;
+  white-space: nowrap;
+  .material-transition;
+
+  &:empty,
+  &:not(.active) {
+    max-width: 0;
+  }
+}
+
+.asp-validation {
+  &.field-validation-error {
+    max-width: 100%;
+  }
+
+}
+
+.validation-summary-errors {
+  ul {
+    flex-direction: column;
+    padding: 0 @sm;
+    color: @font-danger;
+    font-size: @font-size-small;
+  }
+}
+
+.ajax-form {
+  flex-direction: column;
+}

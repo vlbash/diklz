@@ -1,0 +1,16 @@
+sudo: required
+services:
+  - docker
+
+branches:
+  only:
+    - master
+  
+script:
+  - docker build -t diklz.portal .
+  - docker ps
+  - docker ps -a
+  - docker images
+  - bash docker_push
+
+

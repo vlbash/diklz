@@ -1,0 +1,92 @@
+﻿@using ReflectionIT.Mvc.Paging
+@model ReflectionIT.Mvc.Paging.PagingList<App.Data.DTO.LOG.LogAuditListOfChangesDTO>
+@addTagHelper *, ReflectionIT.Mvc.Paging
+
+<div class="content-list-wrapper font-sm" data-pgparams="@ViewBag.FormParamList">
+    <div class="content-list content-list-header">
+        <div class="content-list-edit"></div>
+        <div class="content-list-item grid-container">
+
+            <div class="grid" data-grid="1">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.SortableHeaderFor(model => model.PropertyName)
+                    </p>
+                </div>
+            </div>
+            <div class="grid" data-grid="1">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.SortableHeaderFor(model => model.OldValueFormatted)
+                    </p>
+                </div>
+            </div>
+            <div class="grid" data-grid="1">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.SortableHeaderFor(model => model.NewValueFormatted)
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="content-list-delete"></div>
+    </div>
+
+    @foreach (var item in Model)
+    {
+        <div class="content-list">
+            <a class="content-list-link">
+                <div class="content-list-item grid-container-nested">
+                    <div class="grid">
+                        <div class="grid-inner">
+                            <p>@Html.DisplayFor(modelItem => item.PropertyDisplayName) (@Html.DisplayFor(modelItem => item.PropertyName))</p>
+                        </div>
+                    </div>
+                    <div class="grid">
+                        <div class="grid-inner">
+                            <p>@Html.DisplayFor(modelItem => item.OldValueFormatted)</p>
+                        </div>
+                    </div>
+                    <div class="grid">
+                        <div class="grid-inner">
+                            <p>@Html.DisplayFor(modelItem => item.NewValueFormatted)</p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    }
+
+</div>
+
+<div class="content-item-details">
+    <div class="content-item-inner content-details-wrapper col-2">
+        <div class="content-edit-wide">
+            <div class="select-group">
+                <select id="filterDate"
+                        class="select"
+                        asp-items='@ViewBag.listOfDate'
+                        autocomplete="off">
+                    <option></option>
+                </select>
+                <label for="filterDate">Історія змін</label>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#filterDate').change(function() {
+            var auditId = $('#filterDate option:selected').val();
+            console.log(auditId);
+            if (auditId === '')
+                return;
+            window.location.replace('@Url.Action("Details", "Audit", new {Area = "AUD"})' + '?auditId=' + auditId);
+        });
+    });
+</script>
+
+
+
+

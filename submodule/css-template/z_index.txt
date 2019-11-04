@@ -1,0 +1,47 @@
+-1  - .visually-hidden
+     - .data-tab.open  .btn:not(.data-tab-visible) 
+     - .input-file 
+
+
+1 - html,body
+
+5 - .wrapper-content
+     - .multiselect-group .fstElement
+
+
+10 - .content-search wrapper
+     .fstSingleMode.fstActive .fstResults
+     .fstMultipleMode.fstActive .fstResults
+
+20 - .content-search-form
+
+30 - .content-search-switcher-wrapper
+
+100 - .jsgrid-header
+     .fstSingleMode.fstActive
+     .ui-front
+
+200 !important - #ui-datepicker-div 
+
+500 - .footer-wrapper 
+
+600 - .aside-wrapper
+
+650 - .menu-item-wrapper 
+
+677 - .aside-menu:before
+
+
+800 - .grid-inner
+     -    .header-wrapper
+
+850 - .select-list
+
+899 - .aside-switcher
+
+900 - .dialog-wrapper
+          .modal-wrapper 
+          .modal-container
+
+
+9999 - .ui-tooltip

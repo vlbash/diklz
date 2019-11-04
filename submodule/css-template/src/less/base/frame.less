@@ -1,0 +1,65 @@
+@import "../abstracts/_bundle";
+
+
+.frame-wrapper {
+  position: absolute;
+  right: -80%;
+  width: 80%;
+  max-width: 0;
+  height: 590px;
+  overflow: hidden;
+  background: @font-white;
+  .shadow-round;
+
+}
+
+.frame-wrapper:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: @huge;
+  background: @bg-secondary ;
+  cursor: move;
+}
+
+.frame-wrapper iframe {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: transparent;
+}
+
+.frame-close {
+  position: absolute;
+  top: @xs;
+  right: @sm;
+  width: @lg;
+  height: @lg;
+  transition: .5s;
+  opacity: 0.3;
+  cursor: pointer;
+}
+
+.frame-close:hover {
+  opacity: 1;
+}
+
+.frame-close:before,
+.frame-close:after {
+  content: ' ';
+  position: absolute;
+  left: @sm;
+  width: 2px;
+  height: @lg;
+  background-color: @font-white;
+}
+
+.frame-close:before {
+  transform: rotate(45deg);
+}
+
+.frame-close:after {
+  transform: rotate(-45deg);
+}

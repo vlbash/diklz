@@ -1,0 +1,192 @@
+﻿@using ReflectionIT.Mvc.Paging
+@model ReflectionIT.Mvc.Paging.PagingList<App.Data.DTO.IML.ImlAppListDTO>
+@addTagHelper *, ReflectionIT.Mvc.Paging
+
+<div class="content-list-wrapper font-sm" data-pgparams="@ViewBag.FormParamList">
+    <div class="content-list content-list-header">
+        <div class="content-list-edit"></div>
+        <div class="content-list-item grid-container">
+            <div class="grid" data-grid="1">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.SortableHeaderFor(model => model.BackOfficeAppState)
+                    </p>
+                </div>
+            </div>
+            <div class="grid" data-grid="1">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.SortableHeaderFor(model => model.IsCreatedOnPortalDate)
+                    </p>
+                </div>
+            </div>
+            <div class="grid" data-grid="1">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.SortableHeaderFor(model => model.RegDate)
+                    </p>
+                </div>
+            </div>
+            <div class="grid" data-grid="1">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.SortableHeaderFor(model => model.AppSort)
+                    </p>
+                </div>
+            </div>
+            <div class="grid" data-grid="1">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.SortableHeaderFor(model => model.NameOrg)
+                    </p>
+                </div>
+            </div>
+            <div class="grid" data-grid="1">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.SortableHeaderFor(model => model.CityName)
+                    </p>
+                </div>
+            </div>
+            <div class="grid" data-grid="1">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.SortableHeaderFor(model => model.OrderDate)
+                    </p>
+                </div>
+            </div>
+            <div class="grid" data-grid="1">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.SortableHeaderFor(model => model.ExpertiseResult)
+                    </p>
+                </div>
+            </div>
+            <div class="grid" data-grid="1">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.SortableHeaderFor(model => model.ResultOfCheck)
+                    </p>
+                </div>
+            </div>
+            <div class="grid" data-grid="1">
+                <div class="grid-inner">
+                    <p class="content-list-sortable">
+                        @Html.SortableHeaderFor(model => model.PaymentStatus)
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="content-list-delete"></div>
+    </div>
+
+    @foreach (var item in Model)
+    {
+    <div class="content-list">
+        <div class="content-list-edit">
+            <a asp-area="Iml" asp-controller="Application" asp-action="Details" class="btn-link btn btn-icon btn-square icon-md icon-eye"
+               asp-route-id="@item.Id"
+               data-title="Перегляд"
+               data-tooltipright='1'>
+            </a>
+        </div>
+        <a class="content-list-link">
+            <div class="content-list-item grid-container-nested">
+                <div class="grid">
+                    <div class="grid-inner">
+                        <p class="col">
+                            @if (item.DecisionTypeEnum == "Denied")
+                            {
+                            <i class="icon icon-xs icon-close mb-sm danger-font"></i>
+                            }
+                            else if (item.ReturnCheck == true)
+                            {
+                                <i class="icon icon-xs icon-close mb-sm danger-font"></i>
+                            }
+                            else if (item.DecisionTypeEnum == "Accepted")
+                            {
+                            <i class="icon icon-sm icon-check mb-sm success-font"></i>
+                            }
+                            else if(item.DecisionTypeEnum == "WithoutConsideration")
+                            {
+                            <i class="icon icon-xs icon-close mb-sm" style="color: orange;"></i>
+                            }
+                            else
+                            {
+                            <i class="icon icon-sm icon-wait mb-sm info-font"></i>
+                            }
+                            @Html.DisplayFor(modelItem => item.BackOfficeAppState)
+                        </p>
+                    </div>
+                </div>
+                <div class="grid">
+                    <div class="grid-inner">
+                        <p>@Html.DisplayFor(modelItem => item.IsCreatedOnPortalDate)</p>
+                    </div>
+                </div>
+                <div class="grid">
+                    <div class="grid-inner">
+
+                        <p>@Html.DisplayFor(modelItem => item.RegDateNumber)</p>
+                    </div>
+                </div>
+                <div class="grid">
+                    <div class="grid-inner">
+                        <p title="@item.AppSortFull">@Html.DisplayFor(modelItem => item.AppSort)</p>
+                    </div>
+                </div>
+                <div class="grid">
+                    <div class="grid-inner">
+                        <p>@Html.DisplayFor(modelItem => item.NameOrgIPN)</p>
+                    </div>
+                </div>
+                <div class="grid">
+                    <div class="grid-inner">
+                        <p>@Html.DisplayFor(modelItem => item.CityName)</p>
+                    </div>
+                </div>
+                <div class="grid">
+                    <div class="grid-inner">
+                        <p>@Html.DisplayFor(modelItem => item.OrderDateNumber)</p>
+                    </div>
+                </div>
+                <div class="grid">
+                    <div class="grid-inner">
+                        <p>@Html.DisplayFor(modelItem => item.ExpertiseResult)</p>
+                    </div>
+                </div>
+                <div class="grid">
+                    <div class="grid-inner">
+                        <p>@Html.DisplayFor(modelItem => item.ResultOfCheckString)</p>
+                    </div>
+                </div>
+                <div class="grid">
+                    <div class="grid-inner">
+                        <p>@Html.DisplayFor(modelItem => item.PaymentStatus)</p>
+                    </div>
+                </div>
+            </div>
+        </a>
+        @if (item.BackOfficeAppStateEnum == "Project")
+        {
+        <div class="content-list-delete">
+            <a asp-area="Iml" asp-controller="ImlAppAlt" asp-action="Delete"
+               asp-route-id="@item.Id"
+               class="btn-link btn btn-icon btn-square icon-md icon-remove">
+            </a>
+        </div>
+        }
+
+    </div>
+    }
+
+</div>
+
+<nav>
+    <vc:pager paging-list="@Model" />
+</nav>
+
+
+
+
+
